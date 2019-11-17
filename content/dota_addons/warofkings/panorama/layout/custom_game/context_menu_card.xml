@@ -1,0 +1,19 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/dotastyles.css" />
+    <include src="file://{resources}/styles/custom_game/custom_hud.css" />
+    <include src="s2r://panorama/styles/context_menus/context_menu_base.vcss_c" />
+    <include src="s2r://panorama/styles/hud/context_menu_inventory_item.vcss_c" />
+  </styles>
+  <Panel class="ItemMenu">
+    <Button class="ItemMenuButton" id="Sell">
+      <Label text="Sell" />
+    </Button>
+    <Button class="ItemMenuButton" id="UpgradeCard">
+      <Label text="Upgrade Card" />
+    </Button>
+    <Button class="ItemMenuButton" id="expose">
+      <Label text="Expose Card" />
+    </Button>
+  </Panel>
+</root>

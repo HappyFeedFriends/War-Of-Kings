@@ -1,0 +1,81 @@
+<root>
+  <styles>
+    <include src="s2r://panorama/styles/dotastyles.css" />
+    <include src="s2r://panorama/styles/dashboard_page_hero_new.vcss_c" />
+    <include src="s2r://panorama/styles/hud/dota_hud_level_stats_frame.vcss_c" />
+    <include src="s2r://panorama/styles/hud/dota_hud_xp.vcss_c" />
+    <include src="s2r://panorama/styles/hero_stat_icons.vcss_c" />
+    <include src="s2r://panorama/styles/hud/dota_hud_ability_panel.vcss_c" />
+    <include src="file://{resources}/styles/custom_game/keyframes.css" />
+    <include src="file://{resources}/styles/custom_game/custom_hud.css" /> 
+  </styles>
+    <snippets>
+      <snippet name="HealthBar">
+          <Panel class="HealthBarTest" >
+            <Panel id="MidasTowerBar" >
+              <Panel id="MidasIcon" >
+                <Panel id="CooldownMidas" />
+              </Panel>
+              <Label id="CooldownText" text="32.1s" />
+            </Panel>
+            <Panel id="IsUpgrades" /> 
+            <Panel id="Stars" >
+              <Panel class="star" />
+              <Panel class="star" />
+              <Panel class="star" />
+              <Panel class="star" />
+              <Panel class="star" />
+              <Panel class="star" />
+              <Panel class="star" />
+            </Panel>
+            <Label id="UnitName" text="" />
+            <Panel id="BarContent" >
+              <Panel id="ProgressBars" >
+                <ProgressBar id="ProgressBarHealthWorld" max="100" min="0" value="0" >
+                  <Panel id="Shield" />
+                </ProgressBar>
+                <ProgressBar id="ProgressBarManaWorld" max="100" min="0" value="0" />
+              </Panel>
+              <CircularProgressBar id="CircularXPProgress" max="0" min="0" value="0" >
+                <Label id="LevelUnit" text="" />
+              </CircularProgressBar>
+            </Panel>
+          </Panel>
+      </snippet>
+      <snippet name="HealthBarChest" >
+      <Panel class="HealthBarChest" > 
+        <Panel id="DamageTakenContainer" >
+          <Label id="DamageTaken" text="0" /> <!-- Damage Taken -->
+          <Panel id="DamageIcon" />
+        </Panel>
+        <Panel id="GoldDrop" > 
+          <Label id="GoldNumber" text="0" /> <!-- Gold Drop -->
+          <Panel id="GoldIcon" />
+        </Panel> 
+      </Panel>
+      </snippet>
+
+      <snippet name="HealthBarGodness" >
+      <Panel class="HealthBarGodness" >
+        <Panel id="ProgressBars"  >
+          <ProgressBar id="ProgressBarHealthWorld" max="100" min="0" value="25" />
+        </Panel>
+      </Panel>
+      </snippet>
+
+      <snippet name="HealthBarLastBoss" >
+        <Panel class="LastBoss" >
+          <Panel id="LastBossPB">
+            <Panel id="Amount" />
+            <Panel id="Shield" />
+          </Panel>
+          <Panel id="LastBossMana">
+            <Panel id="Amount" />
+          </Panel>
+        </Panel>
+      </snippet>
+    </snippets>
+      <Panel class="root" >
+        <!-- <Panel id="HeroBarsContainer" hittest="false" /> -->
+      </Panel>
+</root>

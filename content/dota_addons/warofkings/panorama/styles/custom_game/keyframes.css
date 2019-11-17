@@ -1,0 +1,57 @@
+
+@keyframes 'AnimationBorderAnim_mythical'
+{
+    0%
+    {
+    	opacity: 1;
+        border : 1px solid #8B00FF;
+    }
+    50%
+    {
+    	opacity: .3;
+        border : 1px solid #9400D3;
+    }
+    100%
+    {
+    	opacity: 1;
+        border : 1px solid #8B00FF;
+    }
+}
+
+@keyframes 'AnimationBorderAnim_rare'
+{
+    0%
+    {
+    	opacity: 1;
+        border : 1px solid #06266F;
+    }
+    50%
+    {
+    	opacity: .3;
+        border : 1px solid #1240AB;
+    }
+    100%
+    {
+    	opacity: 1;
+        border : 1px solid #06266F;
+    }
+}
+
+@keyframes 'AnimationBorderAnim_legendary'
+{
+    0%
+    {
+    	opacity: 1;
+        border : 2px solid #FF7C00;
+    }
+    50%
+    {
+    	opacity: .3;
+        border : 2px solid #FF9D40;
+    }
+    100%
+    {
+    	opacity: 1;
+        border : 2px solid #FF7C00;
+    }
+}

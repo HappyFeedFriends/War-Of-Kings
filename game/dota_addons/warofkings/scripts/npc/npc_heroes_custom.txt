@@ -1,0 +1,25 @@
+// Dota Heroes File
+// NOTE: This is not for creating new heroes, this is for taking a currently existing hero as a template and overriding
+// the specified key-value combinations.  Use override_hero <hero_to_override> for this.
+"DOTAHeroes"
+{
+	"npc_dota_hero_wisp"
+	{
+		"StatusHealth"				"100"	
+		"StatusHealthRegen"			"0"		
+		"DisableWearables"	"1"
+		"Ability1"	"ability_remove_unit"
+		"Ability2"	"ability_card_refresh1"
+		"Ability3"	"ability_card_refresh2"
+		"Ability6"	"ability_card_refresh3"
+		"Ability4"	"ability_bonus_physical_damage"
+		"Ability5"	"ability_bonus_magical_damage"
+		"Ability7"	"ability_bonus_life"
+		"AttributeBaseStrength"		"0"
+		"AttributeStrengthGain"		"0"
+		"AttributeBaseIntelligence"		"0"
+		"AttributeIntelligenceGain"		"0"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0"
+	}
+}

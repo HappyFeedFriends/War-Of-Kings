@@ -1,0 +1,1415 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.css" />
+		<include src="s2r://panorama/styles/dashboard_page_hero_new.vcss_c" />
+		<include src="s2r://panorama/styles/hud/dota_hud_level_stats_frame.vcss_c" />
+		<include src="s2r://panorama/styles/hud/dota_hud_xp.vcss_c" />
+		<include src="s2r://panorama/styles/hero_stat_icons.vcss_c" />
+		<include src="s2r://panorama/styles/hud/dota_hud_ability_panel.vcss_c" />
+		<include src="s2r://panorama/styles/dashboard_page_shared.vcss_c" />
+		<include src="s2r://panorama/styles/dashboard_page_store_browse.vcss_c" />
+		<include src="file://{resources}/styles/custom_game/keyframes.css" />
+		<include src="s2r://panorama/styles/hud/dota_hud_shop_search_results.vcss_c" />
+		<include src="file://{resources}/styles/custom_game/custom_shop.css" />
+		<include src="file://{resources}/styles/custom_game/custom_hud.css" /> 
+		<include src="file://{resources}/styles/custom_game/custom_toast.css" />
+	</styles> 
+	<scripts> 
+		<include src="file://{resources}/scripts/custom_game/util.js" />
+		<include src="file://{resources}/scripts/custom_game/custom_shop.js" />
+		<include src="file://{resources}/scripts/custom_game/custom_hud.js" />
+		<include src="file://{resources}/scripts/building_helper.js" />
+		<include src="file://{resources}/scripts/unit_health_bar.js" /> 
+		<include src="file://{resources}/scripts/custom_game/custom_toast.js" />
+	</scripts>
+   <snippets> 
+		<snippet name="SearchResult">
+			<Button class="SearchResult" > 
+				<Panel id="ShopItemContainer" hittest="false" />
+				<Label id="ItemName" html="true" text="{s:item_name}" hittest="false" />
+				<Label id="ItemCost" text="{s:item_cost}" hittest="false" />
+			</Button>
+		</snippet>
+		<snippet name="SmallItem">
+			<Panel class="MainShopItem">
+				<Button id="SmallItemButton">
+					<DOTAItemImage hittest="false" id="SmallItemImage" />
+					<Label hittest="false" id="SmallItemStock"/>
+					<Label hittest="false" id="StockTimer" />
+					<Panel hittest="false" id="StockOverlay" />
+					<Panel hittest="false" id="OwnedTick" />   
+				</Button>
+			</Panel>
+		</snippet>
+		<snippet name="ShopItemsLayout">
+			<Panel class="ShopItemRowContainer">
+				<Label id="ShopItemsHeader" text="{s:shop_row_title}" /> 
+				<Panel id="ShopItemsContainer" />
+			</Panel>
+		</snippet>
+   		<snippet name="InventorySlot" >
+			<RadioButton class="ShopSlot InventorySlot" group="InventoryCourier" >
+				<Panel id="CheckSpray" >
+					<Panel id="CheckSprayContent" >
+						<Label text="Вы действительно хотите распылить {s:name_spray}?" />
+						<Panel id="ButtonContainerSpray" >
+							<Button id="CancelSpray">
+								<Label text="Cancel" />
+							</Button>
+							<Button id="SprayItem">
+								<Label text="DIFFUSE" />
+							</Button>
+						</Panel>
+					</Panel>
+				</Panel>
+				<Panel id="MainContentItemSlot" >
+					<Panel id="ItemImageContainer" />
+					<Label text="{s:name}" />
+					<Panel id="ItemType" >
+						<Label id="ItemTypeLabel" text="{s:ItemTypeLabel}" />
+					</Panel>
+					<Panel id="ButtonsContainer" >
+						<Button id="PurchaseButton" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( UI_SPRAY_ITEM )" >
+							<Label text="DIFFUSE" />
+						</Button>
+						<Label id="Amountitems" text="x{s:amount}" />
+					</Panel>
+				</Panel>
+			</RadioButton>
+   		</snippet>
+   		<snippet name="player_row_leaderboards" >
+			<Panel class="Player_row_ranking" >
+				<Panel id="LeaderRankContainer" class="leader_rank" >
+					<!-- <Label text="1" /> -->
+					<!-- <Panel id="LeaderIcon" class="leader_1" /> -->
+				</Panel>
+				<Panel class="leader_player" id="PlayerLeader" >
+					<DOTAAvatarImage id="PlayerImageLeader" steamid="local" />
+					<!-- <DOTAUserName steamid="local" id="PlayerNameLabel" /> -->
+				</Panel>
+				<Panel class="leader_alive" id="PlayerAliveLeader" >
+					<Label text="{s:round_alive}" />
+				</Panel>
+			</Panel>
+   		</snippet>
+   		<snippet name="ShopSlot" >
+			<Panel class="ShopSlot" >
+				<Panel id="ItemImageContainer" />
+				<Label text="{s:name}" />
+				<Panel id="ItemType" >
+					<Label id="ItemTypeLabel" text="{s:ItemTypeLabel}" />
+				</Panel>
+					<Button id="PurchaseButton" >
+						<Panel id="PurchaseButton-content">
+							<Image src="file://{images}/war_of_kings/crown.png" />
+							<Label text="{s:CostPurchase}" />
+						</Panel>
+					</Button>
+			</Panel>
+   		</snippet>
+   		<snippet name="CardSandBoxSelection" >
+			<Panel class="CardSandBoxSelection" >
+				<Image id="BackgroundSandBoxSelection" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_beast.png" />
+				<Panel id="footerCard" >
+					<Label text="{s:cardName}" />
+				</Panel>
+			</Panel>
+   		</snippet>
+		<snippet name="QuestRow">
+			<Panel class="questRowContainer" >
+				<Panel id="IsComplete" >
+					<Label text="QUEST COMPLETE" />
+				</Panel>
+				<Panel id="IsLose" >
+					<Label text="QUEST LOSE" />
+				</Panel>
+				<Panel class="questRow"  >
+					<Label text="{s:descriptionQuest}" />
+					<ProgressBar id="ProgressBarQuest" value="0" max="0" min="0" />
+					<Panel id="Drop" >
+						<Label text="{s:drop}" />
+						<Panel id="IconDrop" />
+					</Panel>
+				</Panel>
+			</Panel>
+		</snippet>
+		<snippet name="ToastPanel">
+			<Panel class="ToastPanel">
+				<Panel id="SlashContainer" hittest="false" hittestchildren="false">
+					<Panel id="TeamColorBar" />
+				</Panel>
+				<Panel id="ToastElements" >
+					<DOTAAvatarImage id="PlayerAvatarToast" steamid="local"  />
+					<Label id="ToastLabel" html="true" />
+				</Panel>
+			</Panel> 
+		</snippet> 
+   		<snippet name="RowEndScreen" >
+			<Panel class="PlayerRowScreen">
+				<Panel id="SpinnerInGame">
+					<Panel id="DarkBg" /> 
+					<Panel id="TextSpinner" >
+						<Panel id="Spinner_anim" />
+						<Label text="Player_Alive" />
+					</Panel>
+				</Panel> 
+				<Panel id="PlayerRow" class="PlayerRowEndScreen" >
+					<Panel class="personalProfile" >
+						<Panel class="columnEndScreenPlayer" >
+							<Label class="rank" text="{s:rank}" />
+							<Panel id="AccountName" class="account" >
+								<DOTAAvatarImage id="PlayerAvatarImage" steamid="local" />
+								<Label id="PlayerNameLabel" text="{s:player_name}" />
+							</Panel>
+							<ProgressBar  id="ProgressBarPlayerDeath" class="XpGameEndBar" value="25" min="0" max="50" >
+								<Label text="{s:value} / {s:max_lvl}" /> 
+							</ProgressBar>
+						</Panel>
+					</Panel> 
+					<Panel class="statistics" >
+						<Panel class="columnEndScreenPlayer" >
+							<Label class="round" text="{s:round}" />
+							<Label class="endlessmode" text="{s:endless_round}" />
+							<Label class="damage" text="{s:damage}" />
+							<Label class="golddrop" text="{s:gold}" />
+							<Label class="crystaldrop" text="{s:crystal_drop}" />
+						</Panel>
+					</Panel>
+					<!--<Panel class="courier" >
+						<Image src="file://{images}/war_of_kings/couriers/courier_1.png" />
+					</Panel> -->
+					<Panel id="TowerSlots" class="towersEndScreen" >
+						<Panel class="TowerSlot" />
+						<Panel class="TowerSlot" />
+						<Panel class="TowerSlot" />
+						<Panel class="TowerSlot" />
+						<Panel class="TowerSlot" />
+						<Panel class="TowerSlot" />
+						<Panel class="TowerSlot" />
+						<Panel class="TowerSlot" />
+						<Panel class="TowerSlot bonus_slot" />
+					</Panel>
+				</Panel>
+			</Panel>
+   		</snippet>
+   		<snippet name="RowDescription" >
+			<Panel class="RowDescription" >
+				<DOTAAbilityImage onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( devourer_upgrade_1 )" id="AbilityImage" abilityname="obsidian_destroyer_sanity_eclipse" />
+				<Panel id="DescriptionLabels" >
+					<Label id="AbilityName"  text="Dota_tooltip_ability_obsidian_destroyer_sanity_eclipse" />
+					<!--<Panel id="LabelDescription_1" class="LabelDescription" >
+						<Image class="HeroImageDescription" src="file://{images}/heroes/npc_dota_hero_obsidian_destroyer.png" />
+						<Label id="plusDescription" text="+" /> 
+						<Image class="HeroImageDescription" src="file://{images}/heroes/npc_dota_neutral_harpy_scout.png" />
+					</Panel> -->
+				</Panel>
+			</Panel>
+   		</snippet>
+        <snippet name="CreepIsChampion" >
+			<Panel class="Champion" >
+				<ProgressBar id="Health" value="0" max="100" min="0">
+					<Panel id="Shield" />
+				</ProgressBar>
+			</Panel>
+        </snippet>
+        <snippet name="Card">
+			<Panel class="CardButton" > 
+				<!-- <DOTAScenePanel antialias="true" hittest="false" id="BackgroundCard" map="maps/backgrounds/pregame_phase.vmap" particleonly="false" /> -->
+				<Panel id="HeaderCard" >
+					<Panel id="HeaderCardBg" />
+					<Image id="HeroIcon" scaling="stretch-to-cover-preserve-aspect" /> 
+					<Panel id="HeaderContent" >
+						<Panel id="HeaderTop" >
+							<Panel id="primarystats" />
+							<!--<Panel id="ClassIcons"/>
+							<Panel id="RaceIcons"/> -->
+						</Panel>
+						<Label id="CardNameHeader" text="" />
+					</Panel>
+				</Panel> 
+				<Panel id="ScenePanel" />
+				<Panel id="FooterCard" >
+					<Panel id="HeaderCardBg" />
+					<Panel id="AbilityList" />
+				</Panel>
+			</Panel>
+        </snippet>
+        <snippet name="PlayerRow" >
+				<Panel class="PlayerRow">
+					<DOTAScenePanel antialias="true" hittest="false" class="BlockInfoDifficulty" map="maps/scenes/hud/levelupburst.vmap" particleonly="false" />
+					<Panel id="ContainerPlayerRow" >
+						<Panel id="MainContent" >
+							<Panel id="Avatar"> 
+								<DOTAAvatarImage id="PlayerAvatar" steamid="local" class="Player" />
+								<Panel id="DisconnectIconPlayer" />
+							</Panel>
+							<Panel id="PlayerData" >
+								<DOTAUserName id="PlayerName" steamid="local" />
+								<Panel id="ProgressBarContainer" >
+									<Panel id="ProgressBarDamageAllPlayer" >
+										<Panel id="Circle" />
+										<Panel id="bar" />
+									</Panel>
+									<Label id="DamageAll" text="0" />
+								</Panel>
+							</Panel>
+							<Label id="kills" text="0" />
+						</Panel>
+						<Label text="{s:towerAmount}/{s:towerMax}" />
+					</Panel>
+				</Panel>
+        </snippet>
+        <snippet name="TooltipCard">
+        	<Panel >
+				<Panel id="CardTooltipDescription" >
+					<Panel class="DescriptionType" >
+						<Label id="descriptionCard" text="CLASS:" />
+						<Label html="true" text="{s:class}" />
+					</Panel>
+					<!--<Panel class="DescriptionType" >
+						<Label id="descriptionCard" text="РАСА:" />
+						<Label html="true" text="{s:racial}" />
+					</Panel> -->
+				</Panel>
+				<Panel class="HeroStatsSection">
+					<Label class="HeroStatsHeader" text="#DOTA_HeroStats_Castegory_Attack" />
+					<Panel class="HeroStatsRow">
+						<Panel class="HeroStatsIcon DamageIcon" />
+						<Label class="MonoNumbersFont" id="damage" text="{s:damageMin} - {s:damageMax}" />
+					</Panel>
+					<Panel class="HeroStatsRow">
+						<Panel class="HeroStatsIcon AttackRateIcon" />
+						<Label class="MonoNumbersFont" text="{s:attackRate}" />
+					</Panel>
+					<Panel class="HeroStatsRow">
+						<Panel class="HeroStatsIcon AttackRangeIcon" />
+						<Label class="MonoNumbersFont" text="{s:AttackRange}" />
+					</Panel>
+				</Panel>
+			</Panel>
+        </snippet>
+    </snippets>
+	<Panel class="Root" hittest="false">
+		<Panel id="GlobalBgDark" />
+		<Panel id="TopbarButtons" hittest="false" require-composition-layer="true" always-cache-composition-layer="true" >
+			<Button id="CardInfoButton" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( UI_CardInfoPanel )" onactivate="ToggleVisiblePanel('CardMenuContainer')" />
+			<Button id="CardAssemblyInfo" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( UI_cardAssembly )" onactivate="ToggleVisiblePanel('CardAssemblyContainer')" />
+			 <Button id="CardInfoPanels" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( UI_cardinfo_panel )" onactivate="ToggleVisiblePanel('InfoPanelCards')" />  
+			 <Button id="Settings" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( Setting )" onactivate="ToggleVisiblePanel('SettingContainer')" /> 
+			 <Button id="ShopButton" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( ShopButton )" onactivate="ToggleVisiblePanel('ShopContainerRoot')" />
+			 <Button id="leaderboards" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( leaderboards )" onactivate="ToggleVisiblePanel('leaderboardsContainer')" />
+		</Panel>
+		<Panel id="PickedCardContainer"  >
+			<!--<Panel id="left_flare" /> -->
+			<Panel id="SelectCardContainer" >
+				<!--<Panel id="BackgroundSelection" />-->
+				<Panel id="MainContainerSelectCard" />
+				<Panel id="Discard" onactivate="DiscardCard()"  onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( Discard_tooltip )" >
+					<Label text="Discard" />
+				</Panel>
+			</Panel>
+			<!--<Panel id="right_flare" />-->
+		</Panel>
+		<Panel id="CardMenuContainer" hittest="false"  >
+			<Panel id="SettingsSearch" >
+		        <Panel class="SearchBox">
+		            <TextEntry ontextentrychange="OnInputSubmitEntry()" id="ItemSearchTextEntry" class="SearchTextEntry" placeholder="#DOTA_Search"/>
+					<Button class="ClearSearchButton CloseButton" />
+		        </Panel> 
+		        <Button id="QuitButton" class="vertical-align" onactivate="$('#CardMenuContainer').RemoveClass('Visible')"/>
+				<!--<Panel id="ArrangeContainer">
+					<Label class="FilterCategoryTitle" text="#DOTA_HeroGrid_Sort_By" />
+					<DropDown id="ArrangeButton" oninputsubmit="OnClickDropDown()" menuclass="SortDropdownMenu">
+						<Label id="racial" text="РАСА"  />
+						<Label id="className" text="КЛАСС"  />
+					</DropDown>
+				</Panel> -->
+			</Panel>
+			<Panel id="ContainerMenu" />
+		</Panel>
+		<Panel id="CardAssemblyContainer" hittest="false"  >
+			<Panel id="SettingsSearch" >
+		        <Panel class="SearchBox">
+		            <TextEntry ontextentrychange="SearchAssembly()" id="ItemSearchTextEntryAssembly" class="SearchTextEntry" placeholder="#DOTA_Search"/>
+					<Button class="ClearSearchButton CloseButton" />
+		        </Panel> 
+		        <Button id="QuitButton" class="vertical-align" onactivate="$('#CardAssemblyContainer').RemoveClass('Visible')"/>
+			</Panel>
+			<Panel id="CardAssemblyMain" />
+		</Panel>
+		<Panel id="HeroBarsContainer" hittest="false" />
+		<Panel id="InfoPanelCards" hittest="false"  >
+			<Panel id="MainContainer" >  
+				<Panel id="StepInfoCards" >
+					<Label text="#Quick_start" />
+					<Panel id="Step1" class="Step rectangle" >
+						<Panel id="LabelStepContainer" >
+							<Label html="true" id="StepLabel" text="step_1" />
+							<Label html="true" text="step_1_description" />
+						</Panel> 
+						<Panel id="StepMovieContainer" onmouseout="OnDeleteVideo('Step1')" onmouseover="OnOpenVideo('Step1');" > 
+							<Panel id="BgStepMovie" > 
+								<Panel id="CursorBg" />
+							</Panel>  
+							<!-- <MoviePanel class="VideoPanel" src="file://{resources}/videos/step_1.webm" controls="none" repeat="true" autoplay="onload"  /> -->
+						</Panel>
+					</Panel>
+					<Panel id="Step-container" >
+						<Panel id="Step2" class="Step square" >
+							<Panel id="LabelStepContainer" >
+								<Label html="true" id="StepLabel" text="step_2" />
+								<Label html="true" text="step_2_description" />
+							</Panel>
+							<Panel id="StepMovieContainer" onmouseout="OnDeleteVideo('Step2')" onmouseover="OnOpenVideo('Step2');" > 
+								<Panel id="BgStepMovie" > 
+									<Panel id="CursorBg" />
+								</Panel>     
+								<!-- <MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_2.webm" controls="none" repeat="true" autoplay="onload"  /> -->
+							</Panel>
+						</Panel>
+						<Panel id="Step3" class="Step square" >
+							<Panel id="LabelStepContainer" >
+								<Label html="true" id="StepLabel" text="step_3" />
+								<Label html="true" text="step_3_description" />
+							</Panel>
+							<Panel id="StepMovieContainer" onmouseout="OnDeleteVideo('Step3')" onmouseover="OnOpenVideo('Step3');" >
+								<Panel id="BgStepMovie" > 
+									<Panel id="CursorBg" />
+								</Panel>      
+								<!-- <MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_3.webm" controls="none" repeat="true" autoplay="onload"  /> -->
+							</Panel>
+						</Panel>
+						<Panel id="Step4" class="Step square" >
+							<Panel id="LabelStepContainer" >
+								<Label html="true" id="StepLabel" text="step_4" />
+								<Label html="true" text="step_4_description" />
+							</Panel>
+							<Panel id="StepMovieContainer" onmouseout="OnDeleteVideo('Step4')" onmouseover="OnOpenVideo('Step4');" >   
+								<Panel id="BgStepMovie" > 
+									<Panel id="CursorBg" />
+								</Panel> 
+								<!-- <MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_4.webm" controls="none" repeat="true" autoplay="onload"  /> -->
+							</Panel>
+						</Panel>
+						<Panel id="Step5" class="Step square" >
+							<Panel id="LabelStepContainer" >
+								<Label html="true" id="StepLabel" text="step_5" />
+								<Label html="true" text="step_5_description" />
+							</Panel> 
+							<Panel id="StepMovieContainer" onmouseout="OnDeleteVideo('Step5')" onmouseover="OnOpenVideo('Step5');" > 
+								<Panel id="BgStepMovie" > 
+									<Panel id="CursorBg" />
+								</Panel>   
+								<!-- <MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_5.webm" controls="none" repeat="true" autoplay="onload"  /> -->
+							</Panel>
+						</Panel>
+					</Panel>
+				</Panel>
+				<Panel id="TowerInfo" >
+					<Panel class="ClassInfo" >
+						<Label html="true" text="#UI_rarity_tower_and_value" />
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="Common" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_max_star_common" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_bonus_damage_common" />
+							</Panel>
+						</Panel>
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="uncommon" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_max_star_uncommon" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_bonus_damage_uncommon" />
+							</Panel>
+						</Panel>
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="rare" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_max_star_rare" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_bonus_damage_rare" />
+							</Panel>
+						</Panel>
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="mythical" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_max_star_mythical" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_bonus_damage_mythical" />
+							</Panel>
+						</Panel> 
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="legendary" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_max_star_legendary" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_bonus_damage_legendary" />
+							</Panel>
+						</Panel> 
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="Godness" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_max_star_Godness" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_bonus_damage_Godness" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_bonus_damage_Godness_special" />
+							</Panel>
+						</Panel>
+					</Panel>
+					<Panel class="ClassInfo" >
+						<Label html="true" text="#UI_classes_and_bonuses" />
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="Warrior" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_warrior_1" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_warrior_special" />
+							</Panel>
+						</Panel>
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="shaman" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_shaman_1" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_shaman_special" />
+							</Panel>
+						</Panel>
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="guardian" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_guardian_1" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_guardian_special" />
+							</Panel>
+						</Panel>
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="mage" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_mage_1" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_mage_special" />
+							</Panel>
+						</Panel>
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="rogue" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_rogue_1" />
+							</Panel>  
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_rogue_special" />
+							</Panel>
+						</Panel>
+						<Panel class="DataTowerUpgrade" >
+							<Label html="true" text="archer" />
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_archer_1" />
+							</Panel>
+							<Panel class="RowTower" >
+								<Panel class="Dot" />
+								<Label html="true" text="#UI_archer_special" />
+							</Panel>
+						</Panel>
+					</Panel>
+				</Panel> 
+				<Panel id="CreepInfo" >
+					<Panel class="ClassInfo" >
+						<Label html="true" text="#creep_data" />
+						<Panel id="CreepDataContainer" >
+							<Panel class="DataCreep" >
+								<Label html="true" text="Normal_Creep" />
+								<Panel class="RowTower" >
+									<Panel class="Dot" />
+									<Label html="true" text="#UI_low_defense" />
+								</Panel>
+								<Panel class="RowTower" >
+									<Panel class="Dot" />
+									<Label html="true" text="#UI_bonus_crystal_drop" />
+								</Panel>
+							</Panel>
+							<Panel class="DataCreep" >
+								<Label html="true" text="Mutant_Creep" />
+								<Panel class="RowTower" >
+									<Panel class="Dot" />
+									<Label html="true" text="#UI_Not_damage_towers" />
+								</Panel>
+								<Panel class="RowTower" >
+									<Panel class="Dot" />
+									<Label html="true" text="#UI_low_defense" />
+								</Panel>
+								<Panel class="RowTower" >
+									<Panel class="Dot" />
+									<Label html="true" text="#UI_bonus_crystal_drop" />
+								</Panel>
+								<Panel class="RowTower" >
+									<Panel class="Dot" />
+									<Label html="true" text="#UI_mutant_spawn" />
+								</Panel>
+								<Panel class="RowTower" >
+									<Panel class="Dot" />
+									<Label html="true" text="#UI_mutant_color" />
+								</Panel>
+							</Panel> 
+							<Panel class="DataCreep" >
+								<Label html="true" text="Champion" />
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_champion_bonus_damage" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_health_bonus_creep" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_bonus_movespeed_creep" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_bonus_crystal_and_gold" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_champion_unique" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_champion_unique_2" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_chance_spawn_creep" />
+									</Panel>
+							</Panel>
+							<Panel class="DataCreep" >
+								<Label html="true" text="Ancient" />  
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_damage_creep_towers" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_magic_immune_creep" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_bonus_health_creep_base" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_ancient_movespeed" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_bonus_crystal_and_gold" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_chance_spawn_mutant" />
+									</Panel>
+							</Panel>
+							<Panel class="DataCreep" >
+									<Label html="true" text="MiniBoss" />
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_damage_creep_towers" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_standart_drop_creep" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_chance_free_card" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_spawn_interval" />
+									</Panel>
+							</Panel>
+							<Panel class="DataCreep" >
+									<Label html="true" text="Boss" />
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_damage_creep_towers" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_standart_drop_creep" />
+									</Panel>
+									<Panel class="RowTower" >
+										<Panel class="Dot" />
+										<Label html="true" text="#UI_boss_endless" />
+									</Panel>
+							</Panel>
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+			<Button id="QuitButton" onactivate="$('#InfoPanelCards').RemoveClass('Visible')"/>
+		</Panel>  
+		<Panel id="TotalDamageTowers" hittest="false"  >
+			<Panel id="ArrowOpenStatic" >
+				<Panel id="ArrowIcon"/>
+				<Label id="ArrowText" text="#ROUND_DAMAGE" />
+			</Panel>
+			<Panel id="TowersDamage" />
+		</Panel>
+		<Panel id="PlayerList"  >
+			<Panel id="PlayerListHeader" >
+				<Label  text="{s:Mode} / {s:difficulty}" />
+				<Label  id="killsHeader" text="Kills" />
+			</Panel>
+			<Panel id="PlayerRowContainer" />
+		</Panel>
+	<Panel id="DifficultyGamePlayer" hittest="true" > 
+			<Panel id="Timer" >
+				<CircularProgressBar id="TimerRing" max="30" value="0" min="0" />
+				<Label id="TimeNumber" text="0" />
+				<Label id="LabelStart" text="#UI_StartTime" />
+			</Panel>
+			<Panel id="PickAndUniqueContainer" >
+				<Panel id="PickDifficulty" > 
+					<Label text="#SelectionDifficuil" />   
+					<Panel id="ContainerDiff" class="ContainerPickedDifficulty" >
+						<Panel id="sandbox" class="PickDifficulty sandbox" >
+							<Panel id="DisabledPanel" hittest="false"/>
+							<Panel id="BackgroundPickDif" hittest="false"/>
+							<Label id="NameDifficulty" text="SANDBOX" />
+							<Panel id="BlockInfoDifficulty" >
+								<Label id="DescriptionDifficulty" text="#Difficuilt_tooltip_sandbox" />
+							</Panel>
+						</Panel> 
+						<Panel id="simple" class="PickDifficulty simple" >
+							<Panel id="BackgroundPickDif" hittest="false"/>
+							<Label id="NameDifficulty" text="Simple" />
+							<Panel id="BlockInfoDifficulty" >
+								<Label id="DescriptionDifficulty" text="#Difficuilt_tooltip_simple" />
+							</Panel>
+						</Panel>
+						<Panel id="normal" class="PickDifficulty normal" >
+							<Panel id="BackgroundPickDif" hittest="false"/>
+							<Label id="NameDifficulty" text="normal" />
+							<Panel id="BlockInfoDifficulty" >
+								<Label id="DescriptionDifficulty" text="#Difficuilt_tooltip_normal" />
+							</Panel>
+						</Panel>
+						<Panel id="hard" class="PickDifficulty hard" >
+							<Panel id="BackgroundPickDif" hittest="false" />
+							<Label id="NameDifficulty" text="hard" />
+							<Panel id="BlockInfoDifficulty" >
+								<Label id="DescriptionDifficulty" text="#Difficuilt_tooltip_hard" />
+							</Panel>
+						</Panel>
+					</Panel>   
+					<Panel id="ContainerDiffRow2" class="ContainerPickedDifficulty" >
+						<Panel id="Impossible" class="PickDifficulty impossible" >
+							<Panel id="BackgroundPickDif" hittest="false"/>
+							<Label id="NameDifficulty" text="impossible" />
+							<Panel id="BlockInfoDifficulty" >
+								<Label id="DescriptionDifficulty" text="#Difficuilt_tooltip_impossible" />
+							</Panel>
+						</Panel>
+						<!-- class NotWorking -->
+						<Panel id="hell" class="PickDifficulty Hell" >
+							<Panel id="DisabledPanel" hittest="false" />
+							<Panel id="BackgroundPickDif" hittest="false" />
+							<Label id="NameDifficulty" text="Hell" />
+							<Panel id="BlockInfoDifficulty" >
+							<DOTAScenePanel antialias="true" hittest="false" class="BlockInfoDifficulty" map="maps/scenes/hud/levelupburst.vmap" particleonly="false" />
+								<Label id="DescriptionDifficulty" text="#Difficuilt_tooltip_hell" />
+							</Panel>
+						</Panel>
+					</Panel>
+				</Panel>
+				<Panel id="PickUniqueBonus" > 
+					<Label text="#SelectionUnique" />
+					<Panel class="UniqueBonusContainer" id="ContainerSelectionUnique" >
+						<Button class="UniqueBonusPanel warrior1" id="Unique_warrior" >
+							<Panel id="DisabledPanel" />
+							<Panel class="UniqueBonusBackgroundIcon" />
+							<Panel id="UniqueBonusContent">
+								<Label text="#UI_warrior_unique" /> 
+							</Panel>
+						</Button>
+						<Panel class="UniqueBonusPanel mage1" id="Unique_mage" >
+							<Panel id="DisabledPanel" />
+							<Panel class="UniqueBonusBackgroundIcon" />
+							<Panel id="UniqueBonusContent">
+								<Label text="#UI_mage_unique" />
+							</Panel>
+						</Panel>
+						<Panel class="UniqueBonusPanel health1" id="Unique_health" >
+							<Panel id="DisabledPanel" />
+							<Panel class="UniqueBonusBackgroundIcon" />
+							<Panel id="UniqueBonusContent">
+								<Label text="#UI_health_unique" />
+							</Panel>
+						</Panel>
+						<Panel class="UniqueBonusPanel midas1" id="Unique_midas">
+							<Panel id="DisabledPanel" />
+							<Panel class="UniqueBonusBackgroundIcon" />
+							<Panel id="UniqueBonusContent">
+								<Label text="#UI_midas_unique" />
+							</Panel>
+						</Panel>   
+						<Panel class="UniqueBonusPanel gold_per_kill1" id="Unique_gold_per_kill">
+							<Panel id="DisabledPanel" />
+							<Panel class="UniqueBonusBackgroundIcon" />
+							<Panel id="UniqueBonusContent">
+								<Label text="#UI_gold_per_kill_unique" />
+							</Panel>
+						</Panel>
+						<Panel class="UniqueBonusPanel tower1"  id="Unique_tower">
+							<Panel id="DisabledPanel" />
+							<Panel class="UniqueBonusBackgroundIcon" />
+							<Panel id="UniqueBonusContent">
+								<Label text="#UI_tower_unique" />
+							</Panel>      
+						</Panel>
+						<Panel class="UniqueBonusPanel tower_levelup"  id="Unique_tower_level">
+							<Panel id="DisabledPanel" />
+							<Panel class="UniqueBonusBackgroundIcon" />
+							<Panel id="UniqueBonusContent">
+								<Label text="#UI_tower_level" />
+							</Panel>      
+						</Panel>  
+						<Panel class="UniqueBonusPanel drop_chance" id="Unique_drop_chance">
+							<Panel id="DisabledPanel" />
+							<Panel class="UniqueBonusBackgroundIcon" />
+							<Panel id="UniqueBonusContent">
+								<Label text="#UI_drop_chance_unique" />
+							</Panel>
+						</Panel>  
+						<Panel class="UniqueBonusPanel creep_not_use" id="Unique_creep_not_use">
+							<Panel id="DisabledPanel" />
+							<Panel class="UniqueBonusBackgroundIcon" />
+							<Panel id="UniqueBonusContent">
+								<Label text="#UI_creeps_not_use_ability" />
+							</Panel>
+						</Panel> 
+						<Panel class="UniqueBonusPanel close1" id="Unique_close">
+							<Panel id="DisabledPanel" />
+							<Panel class="UniqueBonusBackgroundIcon" />
+							<Panel id="UniqueBonusContent">
+								<Label text="#UI_close_unique" />
+							</Panel>
+						</Panel>
+					</Panel>
+				</Panel>
+<!-- 				<Panel id="SelectedUniqueCards" >
+					<Panel id="SelectionMenu" >
+						<Panel class="row" >
+							<Panel class="SelectCardMenu" />
+							<Panel class="SelectCardMenu" />
+							<Panel class="SelectCardMenu" />
+						</Panel>
+						<Panel class="row" >
+							<Panel class="SelectCardMenu" />
+							<Panel class="SelectCardMenu" />
+						</Panel>
+					</Panel>
+					<Panel id="SelectionCardMenu" >
+						<Panel class="CardSelectionPlayer" >
+							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
+							<Panel id="DescriptionContainer" >
+								<Label text="РЈСЂРѕРЅ +20" />
+							</Panel>
+							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
+						</Panel>
+						<Panel class="CardSelectionPlayer" >
+							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
+							<Panel id="DescriptionContainer" >
+								<Label text="РЈСЂРѕРЅ +20" />
+							</Panel>
+							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
+						</Panel>
+						<Panel class="CardSelectionPlayer" >
+							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
+							<Panel id="DescriptionContainer" >
+								<Label text="РЈСЂРѕРЅ +20" />
+							</Panel>
+							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
+						</Panel>
+						<Panel class="CardSelectionPlayer" >
+							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
+							<Panel id="DescriptionContainer" >
+								<Label text="РЈСЂРѕРЅ +20" />
+							</Panel>
+							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
+						</Panel>
+						<Panel class="CardSelectionPlayer" >
+							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
+							<Panel id="DescriptionContainer" >
+								<Label text="РЈСЂРѕРЅ +20" />
+							</Panel>
+							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
+						</Panel>
+						<Panel class="CardSelectionPlayer" >
+							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
+							<Panel id="DescriptionContainer" >
+								<Label text="РЈСЂРѕРЅ +20" />
+							</Panel>
+							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
+						</Panel>
+					</Panel>
+				</Panel> -->
+			</Panel>
+			<Panel id="TogglesPicks" >
+				<Panel id="Toggle-1" class="Toggle IsOpen" >
+					<Label text="1" />
+				</Panel>
+				<Panel id="BarToggle" />
+				<Panel id="Toggle-2" class="Toggle" >
+					<Label text="2" />
+				</Panel>
+<!-- 				<Panel id="Toggle-3" class="Toggle" >
+					<Label text="3" />
+				</Panel> -->
+			</Panel>
+			<Panel id="XpPlayerContainer" >
+				<Label text="Level {s:player_level}" />
+				<Panel id="XpAndLevel" >
+					<Panel id="XpIcon" />
+					<ProgressBar id="XpBar" value="0" max="0" min="0" >
+						<Label text="{s:xp_level} / {s:xp_max_level}" />
+					</ProgressBar>
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel id="SettingContainer" hittest="false" >
+			<ToggleButton id="IsTooltipOpen" >
+				<Label text="#UI_hidden_tooltip_towers" />
+			</ToggleButton>  
+			<ToggleButton onactivate="UpdateSetting()" id="IsAnimationCards" >
+				<Label text="#UI_settings_animations" />
+			</ToggleButton>
+			<Panel class="SliderContainer" >
+				<DOTASettingsSlider id="CameraDistanceSlider" text="#Settings_CameraDistance" min="1300" max="1520" default="1400" /> 
+			</Panel>
+		</Panel>
+		<Panel id="NotificationRoundContainer" hittest="false" >
+			<Panel id="StartRoundNotificaton" hittest="false" > 
+				<Label text="Start Round {s:roundStart}" /> 
+				<!-- <Label text="БЕСКОНЕЧНАЯ ВОЛНА 9" /> -->
+			</Panel> 
+		</Panel>
+		<Panel id="EndScreenContainer" hittest="false" >
+			<Panel id="EndScreenPlayer" > 
+				<Panel id="HeaderEndScreen" >
+					<Panel class="HeaderEndScreen personalProfile" >
+						<Label text="#Personal_profile" />
+						<Panel id="SubHeaderEndScreen" >
+							<Label class="rank" text="RANK" />
+							<Label class="account" text="ACCOUNT" />
+							<Label class="XpGameEndBar" text="EXPERIENCE" />
+						</Panel>
+					</Panel>
+					<Panel class="HeaderEndScreen statistics" >
+						<Label text="STATISTICS" />
+						<Panel id="SubHeaderEndScreen" >
+							<Label text="ROUND" class="round" />
+							<Label text="ENDLESS_ROUND" class="endlessmode" />
+							<Label text="DAMAGE" class="damage" />
+							<Label text="GOLD_DROP" class="golddrop" />
+							<Label text="CRYSTAL_DROP" class="crystaldrop" />
+						</Panel>
+					</Panel>
+					<!--<Panel class="HeaderEndScreen" >
+						<Label class="courier" text="COURIER" />
+					</Panel> -->
+					<Panel class="HeaderEndScreen" >
+						<Label class="towersEndScreen" text="TOWERS" />
+					</Panel>
+				</Panel>
+			</Panel>
+			<Panel id="Buttons" >
+				<Button onactivate="DOTAHUDGameDisconnect();">
+					<Panel id="BackgroundExit" />
+					<Label text="LEAVE_THE_GAME" />
+				</Button>
+			</Panel>
+		</Panel> 
+		<Panel id="PlayerInventory" >
+			<Panel id="PhysicalRune" class="InventoryButton" onactivate="UseAbility('ability_bonus_physical_damage')" onmouseout="DOTAHideAbilityTooltip();" onmouseover="DOTAShowAbilityTooltip( ability_bonus_physical_damage )" >
+				<Panel id="physical-rune-mask" >
+					<Panel id="double-rune-mask" class="rune-mask" />
+					<Panel class="BgButton Rapier" />
+				</Panel>
+				<Label text="x{s:rune_damage_count}" />
+			</Panel> 
+			<Panel id="MagicalRune" class="InventoryButton" onactivate="UseAbility('ability_bonus_magical_damage')" onmouseout="DOTAHideAbilityTooltip();" onmouseover="DOTAShowAbilityTooltip( ability_bonus_magical_damage )" >
+				<!-- <Panel class="BgButton Mage" /> -->
+				<Panel class="rune-mask" id="magical-rune-mask" />
+				<Panel id="magical-rune-mask" >
+					<Panel id="magic-rune-mask" class="rune-mask" />
+					<Panel class="BgButton Mage" />
+				</Panel>
+				<Label text="x{s:rune_magical_count}" />
+			</Panel> 
+			<Panel id="LifeRune" class="InventoryButton" onactivate="UseAbility('ability_bonus_life')" onmouseout="DOTAHideAbilityTooltip();" onmouseover="DOTAShowAbilityTooltip(ability_bonus_life)" >
+				<!-- <Panel class="BgButton Critical" /> -->
+				<Panel id="life-rune-mask" >
+					<Panel id="aegis-rune-mask" class="rune-mask" />
+					<Panel class="BgButton Critical" />
+				</Panel>
+				<Label text="x{s:rune_life_count}" />
+			</Panel> 
+		</Panel>
+		<Panel id="CustomToastManager" hittest="false" hittestchildren="true" />
+		<Panel id="QuestMainContainer" hittest="false" >
+			<Button id="BtnToggle" onactivate="ToggleQuestContainer()" />
+			<Panel id="QuestContainer" >
+				<Panel id="ButtonsQuest" >
+					<RadioButton onactivate="$('#QuestInfoContainer').RemoveClass('Visible'); $('#QuestDailyContainer').AddClass('Visible'); ">
+						<Label text="UI_QUEST_DAILY" />
+					</RadioButton>
+					<Label text="/" />
+					<RadioButton selected="true" onactivate="$('#QuestInfoContainer').AddClass('Visible'); $('#QuestDailyContainer').RemoveClass('Visible'); ">
+						<Label text="UI_QUEST_FOR_BATTLE" />
+					</RadioButton>
+				</Panel>
+				<Panel id="QuestsContainerDailyAndLocal" >
+					<Panel id="QuestInfoContainer" class="Visible" /> 
+					<Panel id="QuestDailyContainer" />
+				</Panel>
+			</Panel> 
+		</Panel> 
+		<Panel id="SandBoxMenu" hittest="false" >
+			<Panel id="ContainerMenuSettings" >
+				<Panel id="SelectionCardContainer" >
+					<Panel id="HeaderSelectionCardMenu" >
+				        <Panel class="SearchBox">
+				            <TextEntry ontextentrychange="SearchSandBoxCard()" id="SearchCardSelectionCard" class="SearchTextEntry" placeholder="#DOTA_Search"/>
+							<Button class="ClearSearchButton CloseButton" />
+				        </Panel>
+					</Panel>
+					<Panel id="SelectionCardSandBox" >
+					</Panel>
+				</Panel>
+				<Panel id="SelectionDifficultySandBox" >
+					<Panel id="ToggleButtonsContainer">
+						<RadioButton id="SimpleSandBoxPick" groupname="DifficultySandBox" >
+							<Label text="Simple" />
+						</RadioButton>
+						<RadioButton id="NormalSandBoxPick" groupname="DifficultySandBox" >
+							<Label text="Normal" />
+						</RadioButton>
+						<RadioButton id="HardSandBoxPick" groupname="DifficultySandBox" >
+							<Label text="Hard" />
+						</RadioButton>
+						<RadioButton id="ImpossibleSandBoxPick" groupname="DifficultySandBox" >
+							<Label text="Impossible" />
+						</RadioButton>
+						<RadioButton id="HellSandBoxPick" groupname="DifficultySandBox" >
+							<Label text="Hell" />
+						</RadioButton>
+					</Panel>
+				</Panel>
+			</Panel>
+			<Panel class="ControlPanelContainer">
+				<Panel id="Maximized">
+					<Panel id="MinimizeButton">
+						<Label text="SANDBOX SETTING" />
+					</Panel>
+					<Panel class="Category">
+						<Label text="CARDS"/>
+						<Panel class="Row">
+							<Button class="DemoButton" onactivate="OpenFunctionsSandBoxSetting('SelectionCardContainer')">
+								<Label text="Select Card"/>
+							</Button>
+						</Panel>
+						<Panel class="Row">
+							<Button class="DemoButton" onactivate="OnEventSandBox(2)">
+								<Label text="+10 lvl all towers"/>
+							</Button>
+						</Panel>
+						<Panel class="Row">
+							<Button class="DemoButton" onactivate="OnEventSandBox(3)">
+								<Label text="Grade Up All Tower"/>
+							</Button>
+						</Panel>
+						<Panel class="Row">
+							<Button class="DemoButton" onactivate="OnEventSandBox(4)">
+								<Label text="Max Grade All Tower"/>
+							</Button>
+						</Panel>
+						<Panel class="Row">
+							<ToggleButton class="DemoButton" onactivate="OnEventSandBox(5)" >
+								<Label text="Invulnerable towers"/>
+							</ToggleButton>
+						</Panel>
+					</Panel>
+					<Panel class="Category">
+						<Label text="SPAWN ROUND"/>
+						<Panel class="Row">
+							<Button class="DemoButton TextEntry" onactivate="OnEventSandBox(6)">
+								<Label text="Start Round"/>
+							</Button>
+							<TextEntry tabindex="0" textmode="numeric"  id="TextEntryRoundPick" placeholder="0" maxchars="2" />
+						</Panel>
+						<Panel class="Row">
+							<Button class="DemoButton" onactivate="OnEventSandBox(7)" >
+								<Label text="Kill All Creep"/>
+							</Button>
+						</Panel>
+						<Panel class="Row">
+							<Button class="DemoButton" onactivate="OpenFunctionsSandBoxSetting('SelectionDifficultySandBox')">
+								<Label text="Select Difficulty"/>
+							</Button>
+						</Panel>
+						<Panel class="Row">
+							<ToggleButton class="DemoButton" onactivate="OnEventSandBox(8)">
+								<Label text="All Creeps Champions"/>
+							</ToggleButton>
+						</Panel>
+					</Panel>
+					<Panel class="Category">
+						<Label text="QUIT"/>
+						<Panel class="QuitPausePanel">
+							<Button class="QuitButton" onactivate="DOTAHUDGameDisconnect();">
+								<Label text="LEAVE_THE_GAME"/>
+							</Button>
+						</Panel>
+					</Panel>
+
+				</Panel>
+			</Panel> 
+		</Panel>
+		<Panel id="ShopContainerRoot" hittest="false" >\
+			<Panel id="ToggleDonate" hittest="true"  onactivate="$('#BuyCoinsPanel').ToggleClass('Visible')">
+				<Panel id="IconDonate" />
+				<Label text="Donate" />
+			</Panel>
+			<Panel id="ShopMainContainer" >
+				<Panel id="ShopHeader" >
+					<Panel id="ContentButton" >
+						<RadioButton onactivate="$('#PlayerInventoryServer').RemoveClass('Visible'); $('#SearchResults').AddClass('Hidden');"> 
+							<Label text="INVENTORY" />
+						</RadioButton>
+						<RadioButton selected="true" onactivate="$('#PlayerInventoryServer').AddClass('Visible'); $('#SearchResults').RemoveClass('Hidden');">
+							<Label text="SHOP" />
+						</RadioButton>
+						<Panel id="RightHeader" >
+							<Button id="OpenCode" />
+							<Panel id="CoinsContainer" >
+								<Panel id="CoinsIcon" onactivate="$('#BuyCoinsPanel').ToggleClass('Visible')" />
+								<Label text="{s:Coins}" />
+							</Panel>
+							<Button id="QuitButton" class="vertical-align margin-left" onactivate="$('#ShopContainerRoot').RemoveClass('Visible')"/>
+						</Panel>
+					</Panel>
+				</Panel>
+				<Panel id="ShopPageContents" >
+					<Panel id="BgDarkBuyIng" hittest="true">
+						<Panel id="BgContainer" >
+							<Panel class="Spinner" />
+							<Label text="Loading Server..." />
+						</Panel>
+					</Panel>
+					<Panel id="NotifyServerContainer" >
+						<Label text="{s:NotifyServerContainer}" />
+					</Panel>
+	 				<Panel id="MainContents">
+					  <Panel id="SearchAndCategoriesContainer">
+						<Panel id="SearchOptionsContainer">
+							<Panel class="SearchOptionsTitle">
+								<Label text="#DOTA_Search" />
+							</Panel>
+
+							<Panel id="SearchContainer">
+								<Panel id="SearchBox">
+									<TextEntry id="SearchTextEntry" ontextentrychange="__OnTextEntryChargeShop()" placeholder="#DOTA_Search"/>
+									<Button id="ClearSearchButton" class="CloseButton" onactivate="$( '#SearchTextEntry' ).text = '';" />
+								</Panel>
+							</Panel>
+						</Panel>
+						<Panel id="CategoriesOptionsContainer">
+							<Panel class="SearchOptionsTitleCategories">
+								<Label text="#DOTA_Armory_Categories" />
+							</Panel>
+							<Panel id="SearchCategories">
+
+								<RadioButton class="SearchCategory" group="search_categories" selected="true" onactivate="StoreBrowserSelectCaterogy(0)">
+									<Label class="SearchCategoryName" text="#DOTA_Armory_Category_All" />
+								</RadioButton>
+
+								<RadioButton class="SearchCategory" group="search_categories" onactivate="StoreBrowserSelectCaterogy(1)">
+									<Label class="SearchCategoryName" text="#DOTA_Armory_Category_consumables" />
+								</RadioButton>
+
+								<RadioButton class="SearchCategory" group="search_categories" onactivate="StoreBrowserSelectCaterogy(2)">
+									<Label class="SearchCategoryName" text="#DOTA_Armory_Category_premiun" />
+								</RadioButton>	
+								<RadioButton class="SearchCategory" group="search_categories" onactivate="StoreBrowserSelectCaterogy(3)">
+									<Label class="SearchCategoryName" text="#DOTA_Armory_Category_couriers" />
+								</RadioButton>		
+							</Panel>
+						</Panel>
+						</Panel>
+
+						<Panel id="SearchResultsContainer">
+							<Panel id="SearchResults">
+								<!-- Dynamical Load -->
+							</Panel>
+							<Panel id="PlayerInventoryServer" class="Visible" >
+								<!-- Dynamical Load -->
+							</Panel>
+						</Panel>
+					</Panel>
+					<Panel id="BuyItemContainer" >
+						<Label id="HeaderBuyItem" text="#succes_buying" />
+						<Panel id="ItemBuyContent" >
+							<Panel id="ImageAndDescriptionContainer" >
+								<Panel id="ImageContainerBuy" >
+								</Panel>
+								<Label text="{s:ItemName}" />
+							</Panel> 
+							<Panel id="LabelsItem" />
+						</Panel>
+						<Panel id="FooterItemBuy" >   
+							<Panel id="SelectionDaysPremium" >
+								<Label text="Select Amount Days:" />
+								<DropDown  id="PickingDays" oninputsubmit="UpdateCostItem()" >
+									<Label id="one_label" text="7"  />
+									<Label id="two_label" text="30"  />
+									<Label id="three_label" text="365"  />
+								</DropDown>
+							</Panel>
+							<Panel id="SelectionCountItems" >
+							</Panel>
+							<Panel id="FullCost-Buttons-Buy-cancel" >
+								<Panel id="IconCrown-FullCost" >  
+									<Panel id="IconCrown" />
+									<Label text="{s:costCrown}" />
+								</Panel>
+								<Panel id="Buttons-Buy-cancel" >
+									<Button id="BuyItem" >
+										<Label text="BUY" />
+									</Button>
+									<Button id="CancelBuyItem" onactivate="OnClickCancelBuy()" >
+										<Label text="CANCEL" />
+									</Button>
+								</Panel>
+							</Panel>
+						</Panel>
+					</Panel> 
+				</Panel>
+			</Panel>
+			<Panel id="BuyCoinsPanel" >
+				<Panel id="QuitButton" class="" onactivate="$('#BuyCoinsPanel').RemoveClass('Visible')"/>
+				<Panel id="BuyUrlContainerRoot" >
+					<Label id="h2-header" text="UI_payment_methods" />
+					<Panel id="BuyUrlContainer" >
+						<Button class="BuyUrl disabled" id="Yandex" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( YANDEX_DESCRIPTION )" />
+						<Button onactivate="ExternalBrowserGoToURL( https://www.patreon.com/user?u=21983828 )" class="BuyUrl" id="Patreon" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( PATREON_DESCRIPTION )"/>
+						<Button onactivate="ExternalBrowserGoToURL( https://discord.gg/xBATxh8 )" class="BuyUrl" id="Discord" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( DISCORD_DESCRIPTION )"/>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel id="RoundBoard"  >
+			<Panel id="RoundBoardContainer" >
+				<Label id="RoundLabel" text="144" />
+				<Panel id="InfinityIcon" />
+			</Panel>
+		</Panel> 
+		<Panel id="leaderboardsContainer" hittest="false" >
+			<Button id="QuitButton"  onactivate="$('#leaderboardsContainer').RemoveClass('Visible')"/>
+			<Panel id="ButtonToggleLeaderPage" hittest="false" >
+				<RadioButton group="toggle_leader" selected="true" onactivate="$('#GlobalLeader').AddClass('Visible');$('#FriendLeader').RemoveClass('Visible');">
+					<Label text="GLOBAL" />
+				</RadioButton>
+				<RadioButton group="toggle_leader" onactivate="$('#FriendLeader').AddClass('Visible');$('#GlobalLeader').RemoveClass('Visible');">
+					<Label text="FRIEND" />
+				</RadioButton>
+			</Panel>
+			<Panel id="GlobalLeader" class="Visible">
+				<Label class="leader_header" text="GLOBAL_RANKING" />
+				<Panel id="ButtonTypeLeaders" >
+					<RadioButton selected="true" onactivate="$('#Ranking_global_impossible').AddClass('Visible');$('#Ranking_global_hell').RemoveClass('Visible');" group="global_leader" >
+						<Label text="IMPOSSIBLE" />
+					</RadioButton>
+					<RadioButton group="global_leader" onactivate="$('#Ranking_global_hell').AddClass('Visible');$('#Ranking_global_impossible').RemoveClass('Visible');" >
+						<Label text="HELL" />
+					</RadioButton>
+				</Panel>
+				<Panel id="HeaderLeaderBoard" >
+					<Label class="leader_rank" text="RANK" />
+					<Label class="leader_player" text="PLAYER" />
+					<Label class="leader_alive" text="ALIVE ROUND" />
+				</Panel>
+				<Panel id="RankingPlayerContent" >
+					<Panel id="Ranking_global_impossible" class="Visible" >
+						<!-- Dynamic load -->
+					</Panel>
+					<Panel id="Ranking_global_hell" >
+						<!-- Dynamic load -->
+					</Panel>
+				</Panel>
+			</Panel>
+			<Panel id="FriendLeader"  >
+				<Label class="leader_header" text="FRIENDS_RANKING" />
+				<Panel id="ButtonTypeLeaders" >
+					<RadioButton selected="true" group="friend_leader" onactivate="$('#Ranking_friends_impossible').AddClass('Visible');$('#Ranking_friends_hell').RemoveClass('Visible');" >
+						<Label text="IMPOSSIBLE" />
+					</RadioButton>
+					<RadioButton group="friend_leader" onactivate="$('#Ranking_friends_hell').AddClass('Visible');$('#Ranking_friends_impossible').RemoveClass('Visible');" >
+						<Label text="HELL" />
+					</RadioButton>
+				</Panel>
+				<Panel id="HeaderLeaderBoard" >
+					<Label class="leader_rank" text="RANK" />
+					<Label class="leader_player" text="PLAYER" />
+					<Label class="leader_alive" text="ALIVE ROUND" />
+				</Panel>
+				<Panel id="RankingPlayerContent" >
+					<Panel id="Ranking_friends_impossible" class="Visible" >
+						<!-- Dynamic load -->
+					</Panel>
+					<Panel id="Ranking_friends_hell" >
+						<!-- Dynamic load -->
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel> 
+		<Panel id="EndlessModeOn" >
+			<Label html="true" text="ENDLESS_MODE_ON" />
+		</Panel>
+		<Panel  id="ChestTimeAlive" >
+			<Panel id="CourierIcon" />
+			<Label text="{s:time_gold_chest}s" />
+		</Panel> 
+		<Panel hittest="false" class="ShowMainShop ShopLarge" id="shop" require-composition-layer="true" always-cache-composition-layer="true">
+			<Button id="GuidesButton" onactivate="ToggleStyle( 'GuideFlyout', 'HideGuide' ); ToggleStyle( 'GuidesButton', 'HideGuide' )">
+				<Panel id="GuidesButtonIcon"/>
+			</Button>
+			<Panel id="GuideFlyout">
+				<Panel id="GuideFlyoutContainer" />
+		      	<Panel id="CustomShop" class="CustomShopContainer" >
+		        	<Panel id="CrystalContainer" >
+		          		<Panel id="CrystalIcon" />
+		          		<Label id="CrystalCount" text="0" /> 
+		        	</Panel>
+		        	<Panel id="ShopContainer" />
+		      </Panel>
+			</Panel>
+			<Panel id="Main">
+
+				<Panel id="ItemCombinesAndBasicItemsContainer">
+					<DOTAHUDCommonItems id="CommonItems" />
+					<Panel id="ItemCombines" >
+						<Panel id="ConnectorsContainer" />
+						<Panel id="ItemsContainer">
+							<Panel id="ItemContainer_1" />
+							<Panel id="ItemContainer_2" />
+							<Panel id="ItemContainer_3" />
+						</Panel>
+					</Panel>
+				</Panel>
+				<Panel id="HeightLimiter" >
+<!-- 					<Panel id="SearchResultDotaShop">
+						<Panel id="result0" class="SearchResultDotaShopResult"/>
+						<Panel id="result1" class="SearchResultDotaShopResult"/>
+						<Panel id="result2" class="SearchResultDotaShopResult"/>
+						<Panel id="result3" class="SearchResultDotaShopResult"/>
+						<Panel id="result4" class="SearchResultDotaShopResult"/>
+						<Panel id="result5" class="SearchResultDotaShopResult"/>
+						<Panel id="result6" class="SearchResultDotaShopResult"/>
+						<Panel id="result7" class="SearchResultDotaShopResult"/>
+						<Panel id="result8" class="SearchResultDotaShopResult"/>
+						<Panel id="result9" class="SearchResultDotaShopResult"/>
+						<Panel id="result10" class="SearchResultDotaShopResult"/>
+						<Panel id="result11" class="SearchResultDotaShopResult"/>
+						<Panel id="result12" class="SearchResultDotaShopResult"/>
+					</Panel> -->
+					<Panel id="SearchResultDotaShop" hittest="false">
+						<Label id="SearchResultsTitle" text="#DOTA_Shop_Search_Results_Title" />
+						<Panel id="SearchResultsContents">
+							<!-- SearchResult instances added by code -->
+						</Panel>
+						<Label class="SearchResultsNoMatches" text="#DOTA_Shop_Search_No_Results" />
+					</Panel>
+					<Panel id="HeightLimiterContainer"/>
+					<Panel id="GridMainShop" class="ShowPopular ShowHilight">
+						<Panel id="GridShopHeaders" hittest="false">
+							<Panel id="SearchAndToggleContainer">
+								<Panel id="SearchContainer" onfocus="DropInputFocus()">
+									<Panel id="SearchBox">
+										<Panel id="ShopSearchIcon" onactivate="SetSearchFocus();" />
+										<DOTAHUDShopTextEntry  ontextentrychange="OnInputSearchShop()" id="SearchTextEntryShop" placeholder="#DOTA_Search" />
+										<Button id="ClearSearchButton" class="CloseButton" onactivate="$('#SearchTextEntryShop').text=''" />
+									</Panel>
+								</Panel>
+							</Panel>
+							<Panel id="NonSearchHeaderContainer">
+								<Panel id="GridMainTabs" hittest="false" >
+									<RadioButton onactivate="TogglePageInventory('GridBasicItemsCategory')" id="GridBasicTab" group="ShopGridTab">
+										<Label text="#DOTA_Shop_Category_Basics"/>	
+									</RadioButton>
+									<RadioButton onactivate="TogglePageInventory('GridUpgradesCategory')" id="GridModeUpgradesTab" group="ShopGridTab">
+										<Label text="#DOTA_Shop_Category_Upgrades"/>
+									</RadioButton>
+									<RadioButton onactivate="TogglePageInventory('GridUniqueCategory')" id="GridModeСustomTab" group="ShopGridTab">
+										<Label text="UNIQUE_TAG"/>
+									</RadioButton>
+								</Panel>
+							</Panel> 
+						</Panel>
+						<Panel id="GridMainShopContents" hittest="false" >
+							<Panel id="GridBasicItemsCategory" class="ShopItemsCategory Visible" >
+								<Panel id="GridBasicItems" class="ShopItemsRows" />
+							</Panel>
+
+							<Panel id="GridUpgradesCategory" class="ShopItemsCategory">
+								<Panel id="GridUpgradeItems" class="ShopItemsRows" />
+							</Panel>
+
+							<Panel id="GridUniqueCategory" class="ShopItemsCategory">
+								<Panel id="GridUniqueItems" class="ShopItemsRows" />
+							</Panel>
+
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel> 
+</root> 

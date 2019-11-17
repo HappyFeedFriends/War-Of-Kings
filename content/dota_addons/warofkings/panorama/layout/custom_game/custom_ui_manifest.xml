@@ -1,0 +1,89 @@
+<root>
+	<script>										
+		GameUI.CustomUIConfig().team_colors = {}
+		GameUI.CustomUIConfig().team_colors[DOTATeam_t.DOTA_TEAM_GOODGUYS] = "#246fd1";
+		GameUI.CustomUIConfig().team_colors[DOTATeam_t.DOTA_TEAM_BADGUYS] = "#f00e0e"; 
+		
+		GameUI.CustomUIConfig().team_names = {};
+		GameUI.CustomUIConfig().team_names[DOTATeam_t.DOTA_TEAM_GOODGUYS] = $.Localize('#DOTA_GoodGuys');
+		GameUI.CustomUIConfig().team_names[DOTATeam_t.DOTA_TEAM_BADGUYS] = $.Localize('#DOTA_BadGuys');
+		
+	</script> 
+	<scripts> 
+		<include src="file://{resources}/scripts/libraries/CustomKeyBind.js" />
+		<include src="file://{resources}/scripts/libraries/lodash.min.js" />
+	</scripts>
+	<Panel>    
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_beast.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_bounty_hunter.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_undying.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_centaur.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_centaur_warruner.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_crystal_maiden.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_death_prophet.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_drow_ranged.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_enigma.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_ghost.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_gnoll.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_sniper.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_clinkz.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_juggernaut.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_sven.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_golem.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_tiny.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_keeper_of_the_light.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_leshrac.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_mars.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_medusa.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_outworld_devourer.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_ogre.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_puck.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_pugna.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_satyr.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_huskar.png" />
+
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_wraith_king.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_luna.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_viper.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_gyrocopter.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_lina.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_queen_of_pain.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_demon.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_forge.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_bear.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_creep_bed.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_creep_good.png" />      
+
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_satyr_big.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_shadow_shaman.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_Kings_special_boss_archer_building.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_Kings_special_boss_guardian_building.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_Kings_special_boss_mage_building.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_Kings_special_boss_rogue_building.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_Kings_special_boss_shaman_building.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_Kings_special_boss_warrior_building.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_templar_assasin.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_phantom_assasin.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_tidehunter.png" />
+
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_troll_shaman.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_tusk.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_ursa.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_worg.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_zeus.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_dragon.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_creep_badguys_melee.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/heroes/npc_dota_creep_goodguys_melee.png" />
+
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_bloodseeker.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_abaddon.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_ogre_mage.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_lion.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_lycan.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_necrophos.png" />
+ 
+	    <CustomUIElement type="Hud"  layoutfile="file://{resources}/layout/custom_game/custom_hud.xml" /> 
+	</Panel> 
+</root>
+
+

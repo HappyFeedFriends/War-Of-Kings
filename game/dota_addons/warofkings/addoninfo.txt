@@ -1,0 +1,11 @@
+"AddonInfo"
+{
+  	"TeamCount" "2"
+  	"maps"      "war_of_kings"
+  	"IsPlayable"  "1"
+
+	"war_of_kings"
+	{
+		"MaxPlayers"                    "4"
+	}	
+}

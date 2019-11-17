@@ -1,0 +1,1 @@
+item_monkey_king_bar_godness = class({})

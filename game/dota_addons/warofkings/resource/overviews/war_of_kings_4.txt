@@ -1,0 +1,8 @@
+war_of_kings_4
+{
+	material materials/overviews/war_of_kings_4.vmat
+	pos_x -3072
+	pos_y 3072
+	scale 6.000
+}
+

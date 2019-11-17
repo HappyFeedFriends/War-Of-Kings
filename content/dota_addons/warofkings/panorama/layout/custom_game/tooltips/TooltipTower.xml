@@ -1,0 +1,38 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.css" />
+		<include src="s2r://panorama/styles/dashboard_page_hero_new.vcss_c" />
+		<include src="file://{resources}/styles/custom_game/keyframes.css" />
+		<include src="s2r://panorama/styles/hud/dota_hud_xp.vcss_c" />
+		<include src="file://{resources}/styles/custom_game/custom_hud.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/util.js" />
+		<include src="file://{resources}/scripts/custom_game/tooltip.js" />
+	</scripts>
+		<Panel class="TooltipTower" ontooltiploaded="OnLoadTooltipEndTower()" >
+			<CircularProgressBar id="CircularXPProgress" max="0" min="0" value="0" >
+				<Label id="LevelUnit" text="{s:level}" />
+			</CircularProgressBar>
+			<Panel id="LeftContainer" >
+				<Label text="TOTAL DAMAGE: {s:total_damage}" />
+				<Panel id="TooltipStars" >
+					<Label text="GRADE:" />
+					<Panel class="star Visible" />
+					<Panel class="star Visible" />
+					<Panel class="star Visible" />
+					<Panel class="star Visible" />
+					<Panel class="star Visible" />
+					<Panel class="star Visible" />
+				</Panel>
+				<Panel id="InventoryTower" >
+					<Panel class="TowerSlot" />
+					<Panel class="TowerSlot" />
+					<Panel class="TowerSlot" />
+					<Panel class="TowerSlot" />
+					<Panel class="TowerSlot" />
+					<Panel class="TowerSlot" />
+				</Panel>
+			</Panel>
+		</Panel>
+</root>

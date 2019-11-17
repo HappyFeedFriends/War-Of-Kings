@@ -1,0 +1,5256 @@
+.root,
+.Root{
+	width: 100%;
+	height: 100%;
+}
+#Contents Button{
+	visibility: visible;
+}
+
+#ConnectorsContainer
+{
+	width: 100%;
+	height: 100%;
+	overflow: clip;
+}
+#ItemsContainer{
+	overflow: clip;
+
+	align:center center;
+	width: 100%;
+}
+#ItemsContainer{
+	flow-children:down;
+}
+#ItemsContainer > Panel{
+	transition-property: opacity, brightness, position;
+	transition-duration: .2s;
+	/*horizontal-align:center;*/
+	/*flow-children:right;*/
+	/*width: 100%;*/
+	horizontal-align:center;
+	vertical-align: top;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	opacity:0; 
+	brightness:0;
+	flow-children:right;
+}
+
+#ItemsContainer > Panel.Visible{
+	opacity:1; 
+	brightness:1;
+	transition-property: position;
+}
+
+#ItemsContainer > Panel > Panel{
+	width: 40px;
+	/*margin: 2px;*/
+}
+#ItemCombines
+{
+	background-image: url("s2r://panorama/images/hud/reborn/bg_item_breakdown_recessed_psd.vtex");
+    background-size: cover;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+#QuitButton.vertical-align{
+	vertical-align: center;
+}
+
+#QuitButton.margin-left{
+	margin-left: 15px;
+}
+#ChestTimeAlive{
+	align:center top;
+	margin-top: 100px;
+	flow-children:right;
+	opacity: 0;
+	transition-duration: 0.35s;
+	transition-property: opacity;
+}
+#ChestTimeAlive.Visible{
+	opacity: 1;
+}
+#CourierIcon{
+	width: 110px;
+	height: 80px;
+	background-image: url('file://{images}/war_of_kings/gold_chest.png');
+	background-size: 100% 100%;
+}
+
+#ChestTimeAlive > Label{
+	font-size: 40px;
+	letter-spacing: 1px;
+	color: white;
+	align:center center;
+	text-align: center;
+	margin-left: 10px;
+}
+
+#QuitButton{
+	background-image: url("s2r://panorama/images/control_icons/x_close_png.vtex");
+	width: 30px;
+	height: 30px;
+	wash-color:#bd5e2d;
+	background-size: 100%;
+	transition-property: background-color, wash-color;
+	transition-delay: 0.0s;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-out;
+	horizontal-align:right;
+	margin: 10px;
+	margin-top: 5px;
+	margin-left: 0px;
+	margin-right: 15px;
+	z-index: 200;
+
+}
+#QuitButton:Hover{
+	wash-color: #bd5e2daa;
+}
+
+
+#QuitButton:active
+{
+    sound: "ui.menu_quit";
+}
+
+#EndlessModeOn{
+	align:center center;
+	margin-bottom:200px;
+	opacity: 0;
+	transition-duration: .2s;
+	transition-property: opacity,pre-transform-scale2d;
+	pre-transform-scale2d:0;
+}
+#Step-container{
+	flow-children:right-wrap;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+#IconDrop #CoinsIcon{
+	width: 23px;
+	height: 23px;
+	margin-left: 3px;
+}
+#EndlessModeOn.Visible{
+	pre-transform-scale2d:1;
+	opacity: 1;	
+}
+.square #StepMovieContainer{
+	width: 75%;
+	height: width-percentage( 85% );
+	horizontal-align:center;
+}
+.square #LabelStepContainer Label{
+	letter-spacing: 0.3px;
+}
+#LabelStepContainer{
+	height: 120px;
+}
+.rectangle #StepMovieContainer{
+	width: 70%;
+	height: 300px;
+	horizontal-align:center;
+
+}
+#StepMovieContainer MoviePanel{
+	width: 100%;
+	height: 100%;
+	
+}
+#StepMovieContainer{
+	transition-property: pre-transform-scale2d;
+	transition-duration: .45s;
+	pre-transform-scale2d: 0.9;
+	box-shadow:#000000aa 0px 0px 8px 2px;
+}
+#StepMovieContainer:Hover{
+	pre-transform-scale2d: 1;
+}
+#BgStepMovie{
+	width: 100%;
+	z-index: 2;
+	height: 100%;
+	background-color: gradient( linear, 0% 0%, 0% 90%, from( #76706C  ), to( #32302F) );
+	transition-duration: 0.45s;
+	transition-property: opacity,pre-transform-scale2d;
+}
+
+#CursorBg{
+	width: 100px;
+	height: 100px;
+	background-image: url('file://{images}/war_of_kings/cursor.png');
+	background-size: 90% 90%;
+	align:center center;
+	border-radius: 50%;
+	background-position: center;
+	border: 1px solid white;
+}
+
+#StepMovieContainer:Hover > #BgStepMovie{
+	opacity: 0;
+	pre-transform-scale2d:4;
+}
+.square{
+	width: 540px;
+	height: 500px;
+}
+#Step-container{
+	height: 1000px;
+}
+#Step-container,
+.rectangle{
+	width: 100%;
+}
+.Step{
+
+	flow-children:down;
+}
+.Step Label{
+	align:center center;
+	font-size: 21px;
+	text-align: center;
+}
+#LabelStepContainer{
+	flow-children:down;
+	horizontal-align:center;
+	margin-bottom: 20px;
+}
+
+#StepLabel{
+	color: white;
+	font-size: 24px;
+	margin-bottom: 5px;
+}
+
+#LabelStepContainer Label{
+	letter-spacing: 1px;
+}
+.square Label{
+	font-size: 19px;
+}
+#StepInfoCards > Label{
+	horizontal-align:center;
+	font-size: 29px;
+	color: white;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+#StepInfoCards{
+	width: 100%;
+	flow-children:down;
+	padding: 10px;
+	/*height: 2000px;*/
+}
+
+#EndlessModeOn > Label{
+	color: white;
+	letter-spacing: 3px;
+	font-size: 60px;
+	text-shadow: 2px 2px 0px 1.0 #00000090;
+}
+#Discard{
+	vertical-align: bottom;
+	horizontal-align:center;
+	border-radius: 10px;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #c31432  ), to( #240b36) );
+	margin-bottom: 10px;
+	transition-property: brightness;
+	transition-duration: .35s;
+}
+#Discard:Hover{
+	brightness:3;
+}
+#Discard Label{
+	font-size: 25px;
+	color: white;
+	padding:6px;
+	text-overflow: shrink;
+	font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+	align:center center;
+	text-align: center;
+}
+
+/*#InventoryButton{
+	align:center center;
+	background-image: url("s2r://panorama/images/hud/reborn/shop_launcher_button_psd.vtex");
+	width: 160px;
+	height: 42px;
+	box-shadow:#000000aa 0px 0px 2px 2px;
+	brightness:1;
+	background-size: 100% 100%;
+	transition-duration: .25s;
+	transition-property: brightness;
+}
+
+#InventoryButton:Hover{
+	brightness:3;
+}
+
+#InventoryButton Label{
+	font-size: 22px;
+	color: white;
+	text-overflow: shrink;
+	font-family: monospaceNumbersFont;
+	align:center center;
+	text-align: center;
+}
+*/
+#CardInventory{
+	opacity: 0;
+	max-width: 265px;
+	flow-children:right-wrap;
+	align:right bottom;
+	margin-right: 600px;
+	margin-bottom: 150px;
+	background-image: url("s2r://panorama/images/hud/reborn/inventory_bg_psd.vtex");
+	background-size: 100% 100%;
+	border:1px solid #000e;
+	background-repeat: no-repeat;
+	transition-property: opacity,transform,pre-transform-scale2d;
+	transition-duration: .25s;
+	transform: translateX( 100px ) translateY( 90px );
+	pre-transform-scale2d: 0.6;
+}
+#CardInventory.Visible{
+	opacity: 1;
+	pre-transform-scale2d: 1;
+	transform: none;
+}
+.CardSlot{
+	width: 59px;
+	height: 40px;
+	margin: 2px;
+	background-color:#1a1c1d88;
+	background-image: url("s2r://panorama/images/items/emptyitembg_png.vtex");
+	box-shadow: inset #000000aa 2px 2px 4px 4px;
+	margin-right:3px;
+	margin-left:3px;
+	transition-property:opacity,saturation;
+	transition-duration: .15s;
+	opacity:0.8;
+	saturation:0;
+}
+.CardSlot.CardExist{
+	saturation:1;
+}
+
+.CardSlot Image{
+	width: 100%;
+	height: 100%;
+}
+.CardSlot:Hover{
+	 saturation:1;
+	 opacity: 1;
+}
+#TestPanelTooltip{
+	width: 400px;
+	height: 400px;
+	align:center center;
+	background-color: red;
+}
+.CardTooltip{
+	background-size: 100%;
+	background-image: url("s2r://panorama/images/hud/reborn/bg_tooltip_psd.vtex");
+}
+#Tooltip{
+	flow-children:down;
+	align:center center;
+	background-size: 100%;
+}
+
+#Tooltip #header{
+	margin: 5px;
+	flow-children:right;
+}
+
+#HeaderNameAndGold{
+	margin: 5px;
+	margin-top: 0;
+	flow-children:down;
+}
+
+#GoldNumberic{
+	flow-children:right;
+}
+#CardInfo{
+	border-top-color: #29353b;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-bottom-color: #29353b;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	width: 100%;
+	padding: 5px 0px 2px 8px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	flow-children:down;
+}
+#ContentTooltip{	
+	flow-children:down;
+}
+#CardInfo Label{
+	color: #596e89;
+	font-size: 17px;
+	font-weight: normal;
+	letter-spacing: 0px;
+}
+.gold,
+#GoldIcon{
+	width: 23px;
+	height: 23px;
+	background-image:url("s2r://panorama/images/hud/icon_gold_psd.vtex");
+	background-size: 100%;
+	margin-right: 3px;
+	margin-left: 4px;
+}
+#HeroStats{
+	flow-children:right-wrap;
+	align:center top;
+}
+#TierCard{
+	flow-children:right;
+	width: 100%;
+	visibility: collapse;
+}
+.star.Visible,
+#TierCard.Visible{
+	visibility: visible;
+}
+.star{
+	background-image: url('file://{images}/war_of_kings/star.png'); 
+	wash-color:white;
+	width: 17px;
+	height: 17px;
+	background-size: 100%;
+	vertical-align: center;
+	margin: 2px;
+	visibility: collapse;
+}
+
+.star7.shaman{ wash-color:#FF7640;  }
+.star6.shaman{ wash-color:#FF8500;  }
+.star5.shaman{ wash-color:#FF9400;  }
+.star4.shaman{ wash-color:#FFA100;  }
+.star3.shaman{ wash-color:#FFAB00;  }
+.star2.shaman{ wash-color:#FFB800;  }
+.star1.shaman{ wash-color:#FFC300;  }
+
+.star7.warrior{ wash-color:#66160D;  }
+.star6.warrior{ wash-color:#7F1A0F;  }
+.star5.warrior{ wash-color:#971E11;  }
+.star4.warrior{ wash-color:#B22213;  }
+.star3.warrior{ wash-color:#CD2514;  }
+.star2.warrior{ wash-color:#DE2411;  }
+.star1.warrior{ wash-color:#EE2D19;  }
+
+.star7.guardian{ wash-color:#391BE5;  }
+.star6.guardian{ wash-color:#4527EF;  }
+.star5.guardian{ wash-color:#442ADC;  }
+.star4.guardian{ wash-color:#4D37CD;  }
+.star3.guardian{ wash-color:#513FBB;  }
+.star2.guardian{ wash-color:#4F419F;  }
+.star1.guardian{ wash-color:#483D88;  }
+
+.mage.star7{ wash-color:#0F4555;  }
+.mage.star6{ wash-color:#115468;  }
+.mage.star5{ wash-color:#13637B;  }
+.mage.star4{ wash-color:#147794;  }
+.mage.star3{ wash-color:#158BAD;  }
+.mage.star2{ wash-color:#169DC4;  }
+.mage.star1{ wash-color:#1AB0DB;  }
+
+.rogue.star7{ wash-color:#1F581C;  }
+.rogue.star6{ wash-color:#256822;  }
+.rogue.star5{ wash-color:#297625;  }
+.rogue.star4{ wash-color:#2A8825;  }
+.rogue.star3{ wash-color:#289422;  }
+.rogue.star2{ wash-color:#22A21B;  }
+.rogue.star1{ wash-color:#13AD0B;  }
+
+.star7{ wash-color:#20552C;  }
+.star6{ wash-color:#266735;  }
+.star5{ wash-color:#2B783D;  }
+.archer.star4{ wash-color:#338E48;  }
+.archer.star3{ wash-color:#39A552;  }
+.archer.star2{ wash-color:#37BC56;  }
+.archer.star1{ wash-color:#23CD4B;  }
+
+#HeaderNameAndGold Label{
+	font-size: 18px;
+	color: #e1e1e1;
+	width: fill-parent-flow( 1.0 );
+	vertical-align: middle;
+	padding-left: 4px;
+	text-overflow: shrink;
+	letter-spacing: 0.5px;
+	text-shadow: 2px 2px 0px 1.0 #00000090;
+	margin-top: 6px;
+	font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+	text-transform: uppercase;
+	font-weight: semi-bold;
+}
+.HeroStatsHeader,
+.HeroStatsRow{
+	align:center center;
+}
+#UnitIconParent{
+	width: 69px;
+	height:49px;
+	margin-top: 4px;
+	margin-left: 4px;
+	margin-right: 8px;
+	margin-bottom: 6px;	
+	box-shadow: 0px 0px 8px black;
+}
+
+@keyframes 'AnimationBorderAnim_IsUpgrade4'
+{
+    0%
+    {
+
+        border : 3px solid gold;
+    }
+    50%
+    {
+        border : 3px solid orange;
+    }
+    100%
+    {
+        border : 3px solid gold;
+    }
+}
+
+.IsUpgrade{
+	animation-duration: 1.25s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: AnimationBorderAnim_IsUpgrade4;
+}
+#BorderAnim{
+	width: 100%;
+	height:100%;
+	border:1px solid gray;
+	animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+}
+
+#BorderAnim.rare{
+	animation-name: AnimationBorderAnim_rare;
+}
+
+#BorderAnim.legendary{
+	animation-name: AnimationBorderAnim_legendary;
+}
+
+#BorderAnim.mythical{
+	animation-name: AnimationBorderAnim_mythical;
+}
+
+#UnitIcon{
+	width: 100%;
+	height:100%;
+	z-index: -1;
+}
+
+#GoldNumberic Label{
+	color: #FFCC33;
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 3px;
+	text-shadow: 2px 2px 0px 1 #00000088;
+	font-family: RadianceM;
+}
+#Background_topbar{
+	background-image:url("s2r://panorama/images/hud/reborn/bg_shop_guide_psd.vtex");
+	background-size: 100% 100%;
+	background-position: 100% 100%;
+	box-shadow:#000000aa 0px 0px 8px 0px;
+	width: 100%;
+	height: 50%;
+	background-repeat: no-repeat; 
+	vertical-align: bottom;
+}
+
+#ContentTopBar{
+	margin-left:20px;
+	margin-right:20px;
+	flow-children:right;
+}
+#TopbarContainer{
+	flow-children:down;
+	horizontal-align:center; 
+}
+
+#TopBar{
+	//width: 60%;
+	background-repeat: no-repeat; 
+	horizontal-align:center;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+}
+
+#ContentTopBar Button{
+	width: 80px;
+	height: 60px;
+	background-image:url('file://{images}/war_of_kings/shop_card.png');
+	background-size: 100%;
+	wash-color:#CDF;
+	opacity:.5;
+	transition-duration: .25s;
+	transition-property: opacity;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+#EnemyPlayerLabel,
+#roundLabel{
+	text-align: center;
+	align:center center;
+}
+
+#roundLabel{
+	margin-top: 5px;
+	align:center top;
+}
+#EnemyPlayerLabel{
+	font-size: 20px;
+	text-overflow: shrink;
+	font-family: monospaceNumbersFont;
+	color: white;
+	vertical-align:bottom;
+	margin-bottom: 5px;
+}
+#Players,
+#Cards,
+#GameTimeAndInfo,
+#RoundAndEnemy{
+	margin-left: 10px;
+	margin-right: 10px;
+	flow-children:down;
+	text-align: center;
+	min-width: 150px;
+	height: 100%;
+}
+#GameTimeAndInfo{
+	width: 180px;
+}
+#GameTime,
+#InfoMain{
+	text-align: center;
+	height: 45%;
+	align:center center;
+}
+#PlayerHeader,
+#CardName,
+#GameTime{
+	margin-top: 5px;
+	align:center top;
+	text-transform: uppercase;
+}
+#IconAndCount2,
+#IconAndCount{
+	flow-children:right;
+}
+#IconAndCount2{
+	align:center center;
+}
+#CardIcon{
+	background-image: url('file://{images}/war_of_kings/cardCountIcon.png');
+	wash-color:white;
+	background-size: 100%;
+	width: 36px;
+	height: 36px;
+	margin-right:5px;
+	margin-left: 5px;
+}
+
+#PlayerIcon{
+	background-image: url('file://{images}/war_of_kings/cardCountIcon2.png');
+	wash-color:white;
+	background-size: 100%;
+	width: 36px;
+	height: 36px;
+	margin-right:5px;
+	margin-left: 5px;
+
+}
+#TimeToRound.Visible{
+	opacity: 1;
+	transform: none;
+}
+#TimeToRound{
+	transition-property: opacity,transform;
+	transition-duration: .45s;
+	transform: translateY( -100% );
+	opacity: 0;
+	align:center bottom;
+	font-size: 35px;
+	color: white;
+	font-weight: bold;
+	text-shadow: 2px 3px 0px 2.0 #00000090;
+}
+#CardName,
+#IconAndCount{
+	height: 45%;
+}
+#IconAndCount{
+	align:center center;
+}
+#PlayerCount,
+#CardCount,
+#InfoMain{
+	text-overflow: shrink;
+	font-family: monospaceNumbersFont;
+	font-size: 25px;
+}
+#PlayerCount,
+#CardCount{
+	align:center center;
+	margin-bottom: 0px;
+}
+#PlayerCount,
+#CardCount{
+	font-size: 22px;
+}
+#PlayerCount{
+	align:center bottom;
+}
+#ContentTopBar Button:Hover{
+	opacity:1;
+}
+
+#SelectionCard{
+	height: 99%;
+
+}
+
+@keyframes 'Spinner_animation_refreshCard5'
+{
+	0%
+	{
+        transform: rotateZ( 0deg );
+	}
+
+	100%
+	{
+		transform: rotateZ( 180deg );
+	}
+}
+
+#RefreshCard{
+	width: 40px;
+	height: 40px;
+	horizontal-align:right;
+	background-image: url('file://{images}/war_of_kings/card_refreshing.png');
+	background-size: 100%; 
+	vertical-align: bottom;
+	wash-color:white;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	opacity: 0.6;
+	z-index: 222;
+}
+#Spinner{
+	background-image: url('file://{images}/war_of_kings/card_refreshing.png');
+	background-size: 100%; 
+	width: 80px;
+	height: 80px;
+	align:center center;
+	opacity: 0;
+	transition-property: opacity;
+	z-index: -1;
+}
+#Spinner.Visible{
+	opacity: 1;
+}
+#RefreshCard.Animation,
+#Spinner{
+    animation-name: Spinner_animation_refreshCard5;
+    animation-duration: 1.0s;
+    animation-iteration-count: infinite;
+}
+
+#RefreshCard:Hover{
+	opacity: 1;
+}
+.CardParent{
+	vertical-align: bottom;
+	flow-children:down;
+}
+.ScenePanel{
+	width: 100%;
+	height: 100%;
+}
+#left_flare,
+#right_flare{
+	background-image: url("s2r://panorama/images/hud/reborn/side_flare_tall_psd.vtex");
+	width:52px;
+	height: 21%;
+	transform: scaleX(-1);
+	background-size: 100%;
+	vertical-align: bottom;
+}
+#left_flare{
+	transform:none;
+}
+#SelectionCard{
+	flow-children:right;
+}
+#CardNamePicked,
+#CardRacialAndClass{
+	font-size: 18px;
+	margin-top:5px;
+	text-align: center;
+	align:center center;
+}
+#IconAndCount2 #GoldIcon{
+	width: 26px;
+	height: 26px;
+}
+#GoldPrice{
+	text-shadow:0px 1px 0px 2.0 #00000077;
+	transition-property:color;
+	transition-duration: .1811s;
+	transition-timing-function:ease-in-out;
+	font-family: monospaceNumbersFont;
+	font-size: 22px;
+	font-weight: bold;
+	color: #ffcc33;
+	text-overflow:shrink;
+}
+
+
+@keyframes 'LentaActivate3'
+{
+	0%
+	{
+        transform: translateX( 110% );
+	}
+
+	100%
+	{
+		transform: translateX( -100% );
+	}
+}
+
+.Lenta{
+	width: 100%;
+	color: white;
+	animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: LentaActivate3;
+}
+
+.Lenta Label{
+	color: white;
+	font-size: 40px;
+}
+#HeroBarsContainer{
+	width: 100%;
+	height: 100%;
+	z-index: -1000;
+}
+#UnitName{
+	text-align: center;
+	text-transform: uppercase;
+	color: white; 
+	text-shadow: 1px 1px 0px 2 #00000066;
+	font-weight: bold;
+	letter-spacing: 2px;
+    font-size: 15px;
+	text-overflow: shrink;
+	horizontal-align:center;
+}
+#BarContent{
+	width: 100%;
+	flow-children:right;
+}
+.CircularProgressBarFG{
+	transition-duration: 0.35s;
+	transition-property: clip;
+}
+.HealthBarTest.Visible{
+	opacity: 1;
+}
+.HealthBarTest{
+	width: 150px;
+	flow-children:down;
+}
+#ProgressBars{
+	width: 80%;
+	flow-children:down;
+		vertical-align: center;
+}
+#ProgressBarManaWorld,
+#ProgressBarHealthWorld{
+	width: 100%;
+	height: 10px;
+	border-radius: 0;
+	border:1px solid black;
+	box-shadow:#000000aa 0px 0px 2px 2px;
+}
+#ProgressBarManaWorld{
+	height: 7px;
+}
+#ProgressBarHealthWorld #Shield{
+	width: 45%;
+	horizontal-align:right;
+	height: 100%;
+	background-color: #38BDC9;
+}
+#ProgressBarHealthWorld .ProgressBarLeft{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #425d25  ), color-stop( 0.2, #5BA539 ), color-stop( .5, #4D9030), to( #425d25) );
+}
+#ProgressBarHealthWorld .ProgressBarRight{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #17200d  ), color-stop( 0.2, #222e13 ), color-stop( .5, #1e2911), to( #17200d) );
+}
+
+#ProgressBarManaWorld .ProgressBarLeft{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #2b4287 ), color-stop( 0.2, #4165ce ), color-stop( .5, #4a73ea), to( #2b4287 ) );
+}
+#ProgressBarManaWorld .ProgressBarRight{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #101932 ), color-stop( 0.2, #172447 ), color-stop( .5, #162244), to( #101932 ) );
+}
+
+#CircularXPProgress{
+	width: 30px;
+	height: 30px;
+	vertical-align: center;
+}
+#CircularXPProgressBlur,
+#CircularXPProgress
+{
+	visibility: visible;
+}
+
+#LevelUnit
+{
+	font-weight: normal;
+    text-shadow: 0px 0px 3px 3.7 #EC780E24;
+    color: #E7D291;
+    text-align: center;
+    vertical-align: center;
+	font-size: 18px;
+	horizontal-align: center;
+    z-index: 50;
+    margin-right: 1px;
+}
+
+#Stars{
+	flow-children:right;
+	align:center center;
+}
+
+#GlobalBgDark{
+	background-color: black;
+	opacity: 0.9;
+	width: 100%;
+	height: 100%;
+	visibility: collapse;
+}
+#GlobalBgDark.Visible{
+	visibility: visible;
+}
+#PickedCardContainer{
+	height: 600px;
+	align:center center;
+	flow-children:right;
+	margin-bottom: 100px;
+	visibility: collapse;
+	transform: translateX( -500px ) translateY( -350px );
+	pre-transform-scale2d: 0.4;
+	transition-duration: 0.35s;
+	transition-property: transform,pre-transform-scale2d;
+	z-index: 2;
+}
+#BackgroundSelection{
+	background-image: url("s2r://panorama/images/hud/reborn/ability_bg_psd.vtex");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	height: 21%;
+	width: 100%;
+	vertical-align: bottom;
+}
+
+#SelectCardContainer{
+	height: 100%;
+}
+#MainContainerSelectCard{
+	flow-children:right;
+	vertical-align: bottom;
+	margin-bottom: 60px;
+}
+#PickedCardContainer.Visible{
+	visibility: visible;
+	transform: translateY(0);
+	pre-transform-scale2d: 1;
+}
+@keyframes 'wobble5'
+{
+	0%
+	{
+		transform: rotateX(5deg) rotateY(10deg) rotateZ(1deg);
+	}
+	50%
+	{
+		transform: rotateX(5deg) rotateY(-10deg) rotateZ(-1deg);
+	}
+	100%
+	{
+		transform: rotateX(5deg) rotateY(10deg) rotateZ(1deg);
+	}
+}
+#ScenePanel,
+#UnitModelCard{
+	width: 100%;
+	height: 100%;
+	horizontal-align: center;
+	vertical-align: center;
+	z-index: -2;
+}
+#CardBg{
+	width: 230px;
+	height: 350px;
+	z-index: 2;
+}
+
+#CardBg
+{
+	width: 258px;
+	height: 402px;
+	horizontal-align: center;
+	vertical-align: center;
+}
+.CardButton.legendary{ box-shadow: 0px 0px 11px #FF7C00; }
+.CardButton.rare{ box-shadow: 0px 0px 11px #3333ff; }
+.CardButton.Godness{ box-shadow: 0px 0px 11px #EB312C; }
+.CardButton.mythical{ box-shadow: 0px 0px 11px #9933ff; }
+.CardButton.common{ box-shadow: 0px 0px 11px #7d7f7d; }
+.CardButton.uncommon{ box-shadow: 0px 0px 11px #b1b3b1; }
+.CardButton{
+	horizontal-align: center;
+	vertical-align: center;
+	margin: 20px;
+	width: 240px;
+	height: 350px;
+	background-color: #000000aa;
+	overflow: noclip;
+	animation-name: wobble5;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	pre-transform-scale2d:0.85;
+	transition-property: transform, pre-transform-scale2d,box-shadow;
+	transition-duration: 0.1s;
+	border-radius: 5px;
+	//box-shadow: 0px 0px 11px orange;
+}
+#BackgroundCard{
+	width: 100%;
+	height: 100%;
+	z-index: -3;
+	opacity: 0;
+	transition-property: opacity;
+	transition-duration: 0.5s;
+}
+#HeaderCardBg{
+	background-image:url("s2r://panorama/images/hud/reborn/bg_mainshop_psd.vtex");
+	background-size: 100%;
+	width: 100%;
+	height: 100%;
+	opacity: .75;
+}
+#FooterCard,
+#HeaderCard{
+	width: 100%;
+	height: 20%;
+	opacity: 1; 
+	transition-property: opacity,transform;
+	transition-duration: 0.32s;
+	//transform:translateY(-20%);
+}
+.CardButton:Hover{
+	animation-name:none;
+	pre-transform-scale2d:1;
+}
+
+.CardButton:Hover #BackgroundCard{
+	opacity: 1;
+}
+#AbilityList{
+	flow-children:right;
+	align:center bottom;
+}
+.AbilityPanel{
+	width: 64px;
+	height: 64px;
+	transition-property:pre-transform-scale2d;
+	transition-duration: 0.15s;
+	transition-timing-function:ease-in;
+}
+.AbilityPanel DOTAAbilityImage{
+	height: 100%;
+	width: 100%;
+	margin:6px;
+	box-shadow: inset #000000aa 2px 2px 4px 4px;
+}
+
+.AbilityPanel #Bevel{
+	height: 100%;
+	width: 100%;
+	background-image: url("s2r://panorama/images/hud/reborn/ability_bevel_psd.vtex");
+	background-position:50% 50%;
+	background-color:gradient( linear, 0% 0%, 0% 100%, from( #00FF0000 ), to( #00FF0000 ) );
+	background-repeat: no-repeat;
+	background-size:contain;
+	margin:6px;
+}
+
+.AbilityPanel:Hover{
+	pre-transform-scale2d:1.1;
+
+}
+.CardButton:Hover #FooterCard,
+.CardButton:Hover #HeaderCard{
+	opacity: 1;
+	transform:translateY(0);
+}
+#FooterCard{
+	vertical-align: bottom;
+	//transform:translateY(20%);
+}
+#HeaderTop{
+	flow-children:right;
+}
+
+#HeroIcon{
+	horizontal-align:right;
+	border-radius: 50%;
+	background-color: black;
+	width: 40px;
+	height: 40px;
+	margin: 3px;
+	z-index: 2; 
+}
+#HeroIcon.legendary{
+	border:1px solid #FF7C00;
+}
+
+#HeroIcon.mythical{
+	border:1px solid #8B00FF;
+}
+#LevelUpBurstFX{
+	width: 100%;
+	height: 100%;
+}
+@keyframes 'GodnessRarityAnim'
+{
+	0%
+	{
+		border:1px solid #EB312C;
+	}
+	50%
+	{
+		border:1px solid  #B41915;
+	}
+	100%
+	{
+		border:1px solid  #EB312C;
+	}
+}
+
+#HeroIcon.Godness{
+	animation-name: GodnessRarityAnim;
+	animation-iteration-count: infinite;
+	animation-duration: 1s;
+}
+#HeroIcon.rare{
+	border:3px solid #06266F;
+}
+
+
+#HeaderContent{
+	flow-children:down;
+	padding:4px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.AgilityIcon,
+.IntellectIcon,
+.StrengthIcon,{
+	background-size: 100%;
+	width: 23px;
+	height: 23px;
+	margin: 3px;
+}
+.StrengthIcon{
+	background-image: url("s2r://panorama/images/primary_attribute_icons/primary_attribute_icon_strength_psd.vtex");
+}
+.IntellectIcon{
+	background-image: url("s2r://panorama/images/primary_attribute_icons/primary_attribute_icon_intelligence_psd.vtex");
+}
+.AgilityIcon{
+	background-image: url("s2r://panorama/images/primary_attribute_icons/primary_attribute_icon_agility_psd.vtex");
+}
+#primarystats.Invisible{
+	opacity: 0;
+}
+#CardNameHeader{
+	font-size: 18px;
+	/*color: gradient( linear, 0% 0%, 0% 100%, from( #cbcbcbff ), to( #a0a0a0a0 ) );*/
+	vertical-align: middle;
+	letter-spacing: 2px;
+	font-family: defaultFont;
+	margin-top: 6px;
+	text-transform: uppercase;
+}
+#TopbarButtons{
+	margin-top:12px;
+	flow-children:right;
+	margin-left:150px;
+}
+
+#TopbarButtons Button
+{
+	tooltip-position: bottom;
+	width: 30px;
+	height: 30px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 8px;
+    margin-right: 8px;
+    vertical-align: middle;
+    horizontal-align: center;
+    background-position: center;
+    opacity: 0.5;
+	wash-color: #CDF;
+    transition-property: opacity;
+    transition-duration: 0.2s;
+}
+
+#TopbarButtons Button:hover
+{
+    opacity: 1.0;
+}
+
+#TopbarButtons Button:active
+{
+    opacity: 1.0;
+}
+
+#CardInfoButton{
+	background-image: url('file://{images}/war_of_kings/cardInfoButton.png'); 
+}
+#CardInfoPanels{
+	background-image: url('file://{images}/war_of_kings/question.png'); 
+}
+#CardAssemblyInfo{
+	background-image: url("s2r://panorama/images/control_icons/icon_lan.png"); 
+}
+ 
+#ShopButton{
+	background-image: url('file://{images}/war_of_kings/shop_button.png'); 
+}
+#Settings{
+	background-image: url('file://{images}/war_of_kings/settings_icon.png'); 
+}
+#CardMenuContainer{
+	align:center center;
+	min-width: 1420px;
+	height: 900px;
+	background-image:url("s2r://panorama/images/backgrounds/gallery_background.png");
+	background-size: 100%;
+	flow-children:down;
+	opacity: 0;
+	transition-duration: .35s;
+	pre-transform-scale2d:0.8;
+	transform:translateX(-200px) translateY(-150px);
+	transition-property: opacity,pre-transform-scale2d,transform,box-shadow;
+	z-index: 10;
+}
+#CardMenuContainer.Visible{
+	opacity: 1;
+	pre-transform-scale2d:1;
+	transform:none;
+	box-shadow:#000000aa 0px 0px 8px 0px;
+}
+#SettingsSearch{
+	horizontal-align:right;
+	height: 50px;
+	flow-children:right;
+}
+
+#SettingsSearch ToggleButton{
+	margin-right: -4px;
+
+	tooltip-position: top;
+	tooltip-body-position: 50% 50%;
+
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	transition-property: pre-transform-scale2d;
+	transition-duration: 0.1s;
+	flow-children:right;
+}
+#SettingsSearch ToggleButton Label{
+	font-size: 18px;
+	text-overflow: shrink;
+	font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+	align:left center;
+	text-align: center;
+}
+.CardPanelData{
+	flow-children:right;
+}
+
+
+#ContainerMenu{
+	height: 100%;
+	flow-children:down;
+	overflow: noclip scroll;
+}
+#ContainerTopBar{
+	width: 95%;
+	height: 42px; 
+	background-color: gradient( linear, 77% 100%, 80% 0%, from( #000000dd ), color-stop( .8, #9933ff), to( #00000000 ) );
+}
+
+.ContainerRarity{
+	width: 1450px;
+	flow-children:down;
+	margin:15px;
+	margin-left:0px;
+	margin-top: 0px;
+	opacity: 1;
+	transition-duration: .35s;
+	transition-property: opacity;
+}
+.ContainerRarity.Invisible{
+	visibility: collapse;
+	opacity: 0;
+}
+#ContainerTopBar Label{
+	font-size: 25px;
+	color: white;
+	padding:6px;
+	padding-left:15px;
+	text-overflow: shrink;
+	font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+	align:left center;
+	text-align: center;
+}
+
+#CardList{
+	flow-children:right-wrap;
+	margin:15px;
+	width: 1450px;
+}
+
+#CardList .CardButton{
+	animation-name: none;
+	align:left top;
+	margin-right:0px;
+	margin-top:0px;
+	box-shadow: #000000 -5px -5px 10px 10px;
+}
+
+#CardList .CardButton #BackgroundCard{
+	opacity: 1;
+	transition-property: none;
+	width: 100%;
+}
+#CardList #FooterCard,
+#CardList #HeaderCard{
+	opacity: 1;
+	transform:translateY(0);
+}
+#CardList .CardButton:Hover #CardNameHeader{
+	brightness: 2.0;
+}
+.CardPanelData{ 
+	padding:20px;
+	opacity: 1;
+}
+.CardPanelData.Invisible{
+	visibility: collapse;
+	opacity: 0;
+	transition-property: opacity;
+	transition-duration: .35s;
+}
+DropDownMenu{
+	width: 300px;
+}
+
+#CardTooltip{
+	transform: translateX(-10%);
+	pre-transform-scale2d:0.9;
+	background-image: url("s2r://panorama/images/backgrounds/dashboard_vignette.png");
+	background-size: 210px 100%;
+	width: 0px;
+	opacity: 0;
+    transition-property: opacity,transform,width;
+    transition-duration: 0.2s;
+    z-index: -1;
+    vertical-align: center;
+    horizontal-align:center;
+    flow-children:down;
+
+}
+#CardTooltipDescription{
+	align:left top;
+	margin-top: 10px;
+	padding-bottom:10px;
+	margin-left:20px;
+	flow-children:down;
+}
+#CardTooltip.Visible{
+	transform: translateX(-10px);
+	opacity: 1;
+	width: 210px;
+}
+.Stats{
+	flow-children:down;
+}
+.HeroStatsSection{
+	margin:0;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top:10px;
+	padding-bottom:10px;
+	width:100%;
+	align:center top;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.DescriptionType{
+	margin-bottom: 3px;
+	margin-top: 3px;
+	flow-children:right;
+}
+
+.HeroStatsHeader{
+	text-transform:uppercase;
+	font-size:22px;
+	color:#ccc;
+}
+
+.MonoNumbersFont{
+	font-size:20px;
+}
+#ArrangeContainer
+{
+	flow-children: right;
+	vertical-align: center;
+	horizontal-align:center;
+}
+.FilterCategoryTitle
+{
+	text-transform: uppercase;
+	font-size: 15px;
+	letter-spacing: 1px;
+	color: #808fa6;
+	vertical-align: middle;
+	margin-right: 2px;
+}
+#ArrangeButton
+{
+	width: 300px;
+	height: 36px;
+	background-color: black;
+	context-menu-position: top;
+	flow-children: right;
+	border-radius: 4px;
+}
+
+#ArrangeButton:hover
+{
+	brightness: 2.0;
+}
+#ArrangeButton:active
+{
+	brightness: 1.5;
+}
+
+#ArrangeButton Label
+{
+	margin: 0;
+	font-size: 16px;
+	vertical-align: middle;
+	color: #b1ccec;
+	margin-left: 10px;
+	font-weight: semi-bold;
+	width: fill-parent-flow( 1.0 );
+	max-height: 22px;
+}
+
+#ArrangeButtonIcon
+{
+	width: 16px;
+	height: 16px;
+
+	margin-right: 8px;
+	vertical-align: middle;
+
+	background-image: url("s2r://panorama/images/control_icons/arrow_solid_down_png.vtex");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+
+	wash-color: #b1ccec;
+}
+.SearchBox
+{
+	flow-children: right;
+	width: 300px;
+	background-color: black;
+	horizontal-align:right;
+	margin-right: 40px;
+	vertical-align: center;
+}
+
+.SearchBox TextEntry
+{
+	width: fill-parent-flow( 1.0 );
+	border: 0px solid transparent;
+	background-color: none;
+}
+
+.SearchBox TextEntry #PlaceholderText
+{
+	margin-top: 2px;
+	color: #8a8a8a;
+}
+
+.SearchBox Button
+{
+	background-image: url("s2r://panorama/images/control_icons/icon_search_png.vtex");
+	background-repeat: no-repeat;
+	background-size: contain;
+
+	width: 27px;
+	height: 27px;
+	margin: 0px 8px;
+	vertical-align: middle;
+
+	wash-color: #4f4f4f;
+
+	transition-property: wash-color;
+	transition-duration: 0.1s;
+}
+
+.SearchBox Button:hover
+{
+	wash-color: #cccccc;
+}
+
+.SearchBox Button:active
+{
+	wash-color: #ffffff;
+}
+
+#CardAssemblyContainer{
+	align:center center;
+	width: 1100px;
+	height: 700px;
+	background-image:url("s2r://panorama/images/backgrounds/gallery_background.png");
+	background-size: 100%;
+	flow-children:down;
+	opacity: 0;
+	transition-duration: .35s;
+	pre-transform-scale2d:0.8;
+	transform:translateX(-200px) translateY(-150px);
+	transition-property: opacity,pre-transform-scale2d,transform,box-shadow;
+}
+#SettingContainer.Visible,
+#CardAssemblyContainer.Visible{
+	opacity: 1;
+	pre-transform-scale2d:1;
+	transform:none;
+	box-shadow:#000000aa 0px 0px 8px 0px;
+}
+
+#CardAssemblyMain{
+	width: 100%;
+	height: 100%;
+	flow-children:down;
+	padding:10px;
+	overflow: noclip scroll;
+}
+#HeroIconAssembly{
+	width:88px;
+	height: width-percentage( 56.25% );
+}
+#AbilityImage{
+	width: 64px;
+	height: 64px;
+	margin:5px;
+	margin-bottom: 10px;
+	tooltip-position:left;
+}
+#AbilityImage:Hover{
+	pre-transform-scale2d:1.15;
+}
+#DescriptionLabels{
+	flow-children:down;
+	margin-left: 10px;
+}
+#HeroAssemblyContent{
+	flow-children:down;
+	margin-top: 50px;
+}
+
+#AbilityName{
+	letter-spacing: 1px;
+	color: white;
+	text-transform: uppercase;
+}
+.Dot{
+	width: 8px;
+	height: 8px;
+	vertical-align: top;
+	background-color: #aaa;
+	border-radius: 50%;
+	margin:6px 6px 4px 0px;
+}
+
+.HeroImageDescription{
+	width: 69px;
+	//height: 45px;
+	height: width-percentage( 60.25% );
+	vertical-align: center;
+}
+.RowDescription,
+.HeroDetalies{
+	flow-children:right;
+}
+.RowDescription.InVisible{
+	opacity: 0.2;
+}
+#CardNameAssembly{
+	color:white;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+	font-size:24px;
+	letter-spacing: 1px;
+}
+
+.HeroSlot{
+	flow-children:down;
+	opacity: 1;
+	visibility: visible;
+}
+.HeroSlot.Invisible{
+	opacity: 0;
+	visibility: collapse;
+}
+.LabelDescription{
+	margin-top: 5px;
+	margin-bottom: 15px;
+	flow-children:right;
+}
+
+#plusDescription{
+	font-size: 32px;
+	horizontal-align:center;
+	vertical-align: center;
+	text-align: center;
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 32px;
+}
+
+#NeedGradePanel{
+	margin:6px;
+	width: 100%;
+	height: 100%;
+}
+
+#NeedGradePanel .star{
+	visibility: visible;
+	width: 50%;
+	height: 50%;
+	align:center center;
+}
+
+#InfoPanelCards{
+	align:center center;
+	width: 1100px;
+	height: 700px;
+	background-image:url("s2r://panorama/images/backgrounds/gallery_background.png");
+	background-size: 100%;
+	transition-duration: .35s;
+	pre-transform-scale2d:0.8;
+	opacity: 0;
+	transform:translateX(-200px) translateY(-150px);
+	transition-property: opacity,pre-transform-scale2d,transform,box-shadow;
+}
+
+#InfoPanelCards.Visible{
+	opacity: 1;
+	pre-transform-scale2d:1;
+	transform:none;
+	box-shadow:#000000aa 0px 0px 8px 0px;
+}
+#ButtonToggleContainer{
+	width: 100%;
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #00000000 ), color-stop( 0.5, #000000aa ), to( #00000000 ) );
+}
+#ButtonTogglePanels{
+	horizontal-align:middle;
+	flow-children:right;
+}
+
+#ButtonTogglePanels > RadioButton > .RadioBox{
+	visibility: collapse;
+}
+#ButtonTogglePanels RadioButton{
+	margin:10px;
+	min-width: 140px;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+#ButtonTogglePanels RadioButton:selected  Label,
+#ButtonTogglePanels RadioButton:Hover  Label{
+	text-shadow:0px 0px 4px #5d7070;
+	color:white;
+}
+#ButtonTogglePanels RadioButton  Label{
+	font-size: 20px;
+	margin: 3px;
+	text-transform: uppercase;
+	font-weight: semi-bold;
+	margin-left: 8px;
+	margin-right: 8px;
+	align:center center;
+	color: #768e8d;
+	transition-property: text-shadow,color;
+	transition-duration: .15s;
+}
+
+#ButtonTogglePanels .Label{
+	vertical-align: center;
+	font-size: 18px;
+	color: #768e8d;
+}
+.RaceIcon,
+.ClassIcon{
+	width: 26px;
+	height: 26px;
+	background-size: 100%;
+	vertical-align: center;
+}
+/*.warrior{background-image: url('file://{images}/war_of_kings/class/warrior.png');}
+.rogue{background-image: url('file://{images}/war_of_kings/class/rogue.png');}
+.mage{background-image: url('file://{images}/war_of_kings/class/mage.png');}
+.shaman{background-image: url('file://{images}/war_of_kings/class/shaman.png');}
+.archer{background-image: url('file://{images}/war_of_kings/class/archer.png');}
+.guardian{background-image: url('file://{images}/war_of_kings/class/guardian.png');}
+*/
+.orc{background-image: url('file://{images}/war_of_kings/race/orc.png');}
+.goblin{background-image: url('file://{images}/war_of_kings/class/goblin.png');}
+.spirit{background-image: url('file://{images}/war_of_kings/race/spirit.png');}
+.beast{background-image: url('file://{images}/war_of_kings/class/beast.png');}
+.dragon{background-image: url('file://{images}/war_of_kings/race/dragon.png');}
+.troll{background-image: url('file://{images}/war_of_kings/class/troll.png');}
+.human{background-image: url('file://{images}/war_of_kings/race/human.png');}
+.element{background-image: url('file://{images}/war_of_kings/class/element.png');}
+.elf{background-image: url('file://{images}/war_of_kings/race/elf.png');}
+.god{background-image: url('file://{images}/war_of_kings/class/god.png');}
+.demon{background-image: url('file://{images}/war_of_kings/race/demon.png');}
+#CreepInfo,
+#TowerInfo{
+	width: 100%;
+}
+#CreepDataContainer{
+	flow-children:right-wrap;
+	width: 1300px;
+}
+.DataCreep{
+	flow-children:down;
+	margin: 20px;
+	margin-right: 0;
+	width: 520px;
+	min-height: 180px;
+}
+#CreepInfo{
+	margin-top: 30px;
+}
+#CreepInfo > .ClassInfo{
+	width: 100%;
+	horizontal-align:center;
+}
+#CreepInfo > .ClassInfo > Label{
+	font-size: 29px;
+	horizontal-align:center;
+}
+#MainContainer{
+	width: 100%;
+	height: 100%;
+}
+#MainContainer{
+	overflow: noclip scroll;
+	flow-children:down;
+}
+#TowerInfo{
+	flow-children:right;
+}
+#TotalDamageTowers{
+	z-index: -100;
+	align:right bottom;
+	margin-bottom: 110px;
+	flow-children:down;
+	width: 300px;
+}
+#ArrowOpenStatic{
+	width: 100%;
+	flow-children:left;
+	padding-left: 15px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	height: 50px;
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #00000000 ), color-stop( 0.4, #000000aa ), to( black ) );
+}
+#ArrowIcon{
+	background-image: url('file://{images}/war_of_kings/arrow.png');
+	width: 25px;
+	height: 25px;
+	background-size: 100%;
+	vertical-align: center;
+	margin:5px;
+	transition-duration: 0.3s;
+	transition-property: transform;
+	margin-left:10px; 
+
+}
+#ArrowOpenStatic:Hover #ArrowIcon{
+	transform: rotateZ(90deg);
+}
+#ArrowText{
+	font-size: 18px;
+	letter-spacing: 1px;
+	vertical-align: center;
+	color: white;
+	font-family: monospaceNumbersFont;
+	text-align: right;
+	margin-top: 2px;
+}
+@keyframes 'HeroRowBuildingDamage'
+{
+	0%
+	{
+		transform: translateX(100%);
+		opacity: 0;
+	}
+	100%
+	{
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+#HeroIconDamage{
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	margin-left:5px;
+}
+.HeroIconDamage{
+	background-position: 50%;
+	background-size: cover;
+}
+.HeroBarProgress{
+	horizontal-align:right;
+	flow-children:left;
+	margin-top:5px;
+	animation-duration: .45s;
+	animation-name: HeroRowBuildingDamage;
+}
+#ProgressBarTowerDamage{
+	width: 200px;
+	min-width:25px;
+	horizontal-align:right;
+	vertical-align: center;
+
+}
+#ProgressBarLabel{
+	z-index: 1000;
+	horizontal-align:right;
+	font-size: 18px;
+	color: #e1e1e1;
+	text-overflow: shrink;
+	font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+	align:center center;
+	text-align: center;
+	margin-right: 5px;
+	letter-spacing: 1px;
+}
+#TowersDamage{
+	flow-children:down;
+	transition-duration: 0.25s;
+	transition-property: transform,opacity;
+}
+
+#TowersDamage.hidden{
+	transform: translateY(100%);
+	opacity: 0;
+	visibility:collapse;
+}
+
+#ProgressBarDamageAllPlayer #Circle,
+#ProgressBarTowerDamage #Circle{
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	background-color: skyblue;
+	z-index: 100;
+	vertical-align: center;
+}
+#ProgressBarDamageAllPlayer #Circle{
+	horizontal-align:right;
+}
+#ProgressBarDamageAllPlayer #bar,
+#ProgressBarTowerDamage #bar{
+	height: 10px;
+	width:100%;
+	background-color: #009999;
+	border-radius: 5px;
+	vertical-align: center;
+}
+#PlayerList{
+	margin-top: 60px;
+	flow-children:down;
+	width: 500px;
+	z-index: -100;
+}
+#PlayerRowContainer{
+	flow-children:down;
+}
+#MainContent{
+	flow-children:right;
+}
+#SearchResultsContainer{
+	flow-children:none;
+}
+.PlayerRow{
+	border-left-color: #3375FFFF;
+	border-style: solid;
+	border-left-width: 4px;
+	border-bottom: 0;
+	background-color:gradient( linear, 0% 0%, 100% 0%, from( #000000aa ), color-stop( 0.8, #00000000 ), to( #00000000 ) );
+	margin-bottom: 5px;
+	transition-property: transform;
+	transition-duration: .25s;
+	transform:translateX(-100%);
+}
+
+#PlayerInventoryServer{
+	transition-duration: 0.3s;
+	transition-property: transform,opacity;
+	transform: none;
+	flow-children:right-wrap;
+	overflow: squish scroll;
+	width: 100%;
+	height: fill-parent-flow( 1.0 );
+
+}
+#PlayerInventoryServer.Visible{
+	transform: translateX(-100%);
+	opacity: 0;
+}
+#SearchResults{
+	transition-duration: 0.3s;
+	transition-property: transform;
+}
+#SearchResults.Hidden{
+	transform: translateX(100%);
+}
+
+.PlayerRow > .BlockInfoDifficulty{
+	transform: rotateZ(180deg);
+	visibility: collapse;
+}
+#ContainerPlayerRow{
+	flow-children:down;
+	margin: 5px;
+}
+.PlayerRow.Premium_3 > .BlockInfoDifficulty{
+	visibility: visible;
+}
+.Premium_3,
+.PlayerRow.Premium_3{
+	background-color:gradient( linear, 0% 0%, 100% 0%, from( #2F26AC ), color-stop( 0.8, #00000000 ), to( #00000000 ) );
+}
+.Premium_2,
+.PlayerRow.Premium_2{
+	background-color:gradient( linear, 0% 0%, 100% 0%, from( #12DA9A ), color-stop( 0.8, #00000000 ), to( #00000000 ) );
+}
+.Premium_1,
+.PlayerRow.Premium_1{
+	background-color:gradient( linear, 0% 0%, 100% 0%, from( #CCA42C ), color-stop( 0.8, #00000000 ), to( #00000000 ) );
+}
+
+#PlayerData{
+	width:250px;
+	flow-children:down;
+	vertical-align: center;
+}
+#ContainerPlayerRow > Label{
+	text-align: center;
+	font-size: 22px;
+	text-shadow: 1px 1px 0px 0.5 #00000090;
+	margin-top: 4px;
+	margin-left: 2px;
+}
+.Player{
+	width: 55px;
+	height: 55px;
+	border-radius: 50%;
+	border:1px solid royalblue;
+}
+#DisconnectIconPlayer{
+	background-image:url("s2r://panorama/images/hud/reborn/icon_disconnect_png.vtex");
+	background-size: 55px 25px;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	z-index:20;
+	border-radius: 50%;
+	opacity: 0;
+	transition-duration: .45s;
+	transition-property: opacity;
+}
+#Avatar{
+	transition-property: brightness;
+	transition-duration: .35s;
+}
+#Avatar.IsDisconnect #DisconnectIconPlayer{
+	opacity: 1;
+}
+#Avatar.IsDisconnect{
+		brightness:0.4;
+}
+#DamageAll{
+	font-size: 17px;
+	font-weight: normal;
+	text-align:center;
+	vertical-align: center;
+	color: white;
+	padding-left: 9px;
+}
+#kills{
+	margin-top: 25px;
+	margin-left: 45px;
+}
+#kills,
+#PlayerData DOTAUserName Label{
+	text-overflow: shrink;
+	letter-spacing: 0.5px;
+	text-shadow: 1px 1px 0px 0.5 #00000090;
+	font-weight: semi-bold;
+	color: baseText;
+}
+#ProgressBarDamageAllPlayer{
+	horizontal-align:left;
+	width:100%; 
+	min-width:25px;
+	vertical-align: top;
+
+}
+#PlayerListHeader Label{
+	color: white;
+	font-size:22px;
+	vertical-align: center;
+	margin-left: 5px;
+}
+#PlayerListHeader{
+	width: 100%;
+	height: 50px;
+	flow-children:right;
+	margin-bottom: 2px;
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( black ), color-stop( 0.5, #000000aa ), to( #00000000 ) );
+}
+
+#killsHeader{
+	horizontal-align:right;
+	margin-right: 110px;
+}
+
+#ProgressBarContainer{
+	width: 100%;
+}
+#DamageTakenContainer,
+#GoldDrop{
+	flow-children:right;
+}
+
+.HealthBarChest{
+	flow-children:down;
+	width: 200px;
+}
+.HealthBarChest #GoldNumber,
+.HealthBarChest #DamageTaken{
+	horizontal-align:center;
+	margin-bottom: 4px;
+	font-size: 25px;
+	color: gold;
+	letter-spacing: 1px;
+	padding-left: 4px;
+	text-overflow: shrink;
+	letter-spacing: 0px;
+	text-shadow: 2px 2px 0px 1.0 black;
+	font-family: monospaceNumbersFont;
+	font-weight: semi-bold;
+}
+.HealthBarChest #DamageTaken{
+	color: #DC143C;
+}
+.HealthBarChest #GoldIcon{
+	width: 32px;
+	height: 32px;
+}
+
+#ProgressBarHealthChest{
+	border-radius: 0;
+	height: 17px;
+	box-shadow:#000000aa 0px 0px 2px 2px;
+	width: 180px;
+}
+#ProgressBarHealthChest .ProgressBarLeft{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #5D2E25  ), color-stop( 0.2, #A54E39 ), color-stop( .5, #904030), to( #5D2C25) );
+}
+
+#ProgressBarHealthChest .ProgressBarRight{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #2D1713  ), color-stop( 0.2, #391D18 ), color-stop( .5, #3C1E19), to( #2D1713) );
+}
+
+#DamageIcon{
+	background-image: url("s2r://panorama/images/hud/reborn/icon_damage_psd.vtex");
+	width: 32px;
+	height: 32px;	
+	background-size: 100%;
+	wash-color:#DC143C;
+}
+.HealthBarGodness Label{
+	align:center center;
+	text-align:center;
+}
+
+.HealthBarGodness{
+	width: 260px;
+}
+.HealthBarGodness #ProgressBarManaWorld,
+.HealthBarGodness #ProgressBarHealthWorld{
+	height: 18px;
+}
+.HealthBarGodness #ProgressBars{
+	width: 100%;
+}
+.HealthBarGodness #ProgressBarHealthWorld .ProgressBarLeft{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #5D2E25  ), color-stop( 0.2, #A54E39 ), color-stop( .5, #904030), to( #5D2C25) );
+}
+.HealthBarGodness #ProgressBarHealthWorld .ProgressBarRight{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #2D1713  ), color-stop( 0.2, #391D18 ), color-stop( .5, #3C1E19), to( #2D1713) );
+}
+
+#DifficultyGamePlayer{
+	align:center center;
+	width: 100%;
+	height: 100%;
+	background-color: gradient( linear, 25% 20%, 40% 65%, from( #66ACE2  ), to( #1F78BD) );
+	z-index: 99999;
+	transition-duration: .35s;
+	transition-property: opacity;
+	opacity: 1;
+	visibility: visible;
+}
+
+#DifficultyGamePlayer > DOTAScenePanel{
+	blur: gaussian( 2 );
+	brightness:2;
+}
+#SelectedUniqueCards,
+#PickUniqueBonus,
+#PickDifficulty{
+	horizontal-align:center;
+	padding: 100px;
+	flow-children:down;
+	margin-top: 50px;
+}
+#SelectedUniqueCards > Label,
+#PickUniqueBonus > Label,
+#PickDifficulty > Label{
+	horizontal-align:center;
+	color: white;
+	font-size: 36px;
+	text-shadow: 0px 0px 8px 1 white;
+}
+
+.ContainerPickedDifficulty{
+	margin-top: 100px;
+	flow-children:right;
+	margin:10px;
+	horizontal-align:center;
+}
+
+.PickDifficulty{
+	width: 400px;
+	height: 350px;
+	transition-property: pre-transform-scale2d;
+	transition-duration: .2s;
+	pre-transform-scale2d:0.8;
+
+}
+
+#BackgroundPickDif{
+	width: 270px;
+	height: 200px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	vertical-align: bottom;
+	horizontal-align:right;
+}
+.PickDifficulty.simple #BackgroundPickDif{
+	background-image: url('file://{images}/war_of_kings/simple.png');
+}
+#DisabledPanel{
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	wash-color:red;
+	background-image: url('file://{images}/hero_selection/banned_overlay.psd');
+	background-size: 100%;
+	z-index: 99999;
+	visibility: collapse;
+}
+.PickDifficulty:disabled,
+.PickDifficulty:disabled:Hover{
+	brightness:0.2;
+	pre-transform-scale2d:0.8;
+}
+
+.PickDifficulty:disabled #DisabledPanel{
+	visibility: visible;
+}
+
+.PickDifficulty:disabled:Hover .BlockInfoDifficulty{
+	opacity: 1;
+}
+.IsPickDiff,
+.PickDifficulty:Hover{
+	pre-transform-scale2d:1;
+}
+.IsPickDiff #DescriptionDifficulty,
+.PickDifficulty:Hover #DescriptionDifficulty{
+	color:white;
+	blur: gaussian( 0 );
+}
+
+.PickDifficulty.normal #BackgroundPickDif{
+	background-image: url('file://{images}/war_of_kings/medium.png'); 
+}
+.PickDifficulty.sandbox #BackgroundPickDif{
+	width: 220px;
+	height: 290px;
+	background-image: url('file://{images}/war_of_kings/sandbox.png'); 
+}
+.PickDifficulty.Hell #BackgroundPickDif{
+	background-image: url('file://{images}/war_of_kings/hell.png'); 
+}
+.PickDifficulty.hard #BackgroundPickDif{
+	width: 225px;
+	height: 250px;
+	background-image: url('file://{images}/war_of_kings/hard.png'); 
+}
+
+.PickDifficulty.impossible #BackgroundPickDif{
+	width: 290px;
+	height: 220px;
+	background-image: url('file://{images}/war_of_kings/impossible.png'); 
+}
+.IsPickDiff .BlockInfoDifficulty,
+.PickDifficulty:Hover .BlockInfoDifficulty{
+	opacity: 0;
+}
+.BlockInfoDifficulty{
+	width: 100%;
+	height: 100%;
+	align:center center;
+	transform: scaleY(-1);
+	transition-property: opacity;
+	transition-duration: .45s;
+	opacity: 1;
+}
+#BlockInfoDifficulty{
+	width: 215px;
+	height: 290px;
+	align:center center;
+	z-index: -1;
+}
+.PickDifficulty.simple #BlockInfoDifficulty{
+	background-color: gradient( linear, 0% 0%, 0% 90%, from( #3CA0D0  ), to( #7FA1C1 ) );
+	box-shadow:lime 0px 0px 12px 0px;
+}
+
+.PickDifficulty.normal #BlockInfoDifficulty{
+	background-color: gradient( linear, 0% 0%, 0% 90%, from( #5783CD  ), to( #7FA1C1 ) );
+	box-shadow:orange 0px 0px 12px 0px;
+}
+
+.PickDifficulty.sandbox #BlockInfoDifficulty{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #115BA3  ), to( #6A9FD1 ) );
+	box-shadow:royalblue 0px 0px 12px 0px;
+}
+.PickDifficulty.Hell #BlockInfoDifficulty{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #5017A5  ), to( #976ED2 ) );
+	box-shadow:#E40C32 0px 0px 12px 0px;
+}
+.PickDifficulty.hard #BlockInfoDifficulty{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #115BA3  ), to( #6A9FD1 ) );
+	box-shadow:#E1270F 0px 0px 12px 0px;
+}
+
+.PickDifficulty.impossible #BlockInfoDifficulty{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #361CA8  ), to( #8473D3 ) );
+	box-shadow:#921505 0px 0px 12px 0px;
+}
+
+#DescriptionDifficulty{
+	color:#F5E4E0;
+	margin: 10px;
+	transition-property: color,blur;
+	transition-duration: .25s;
+	blur: gaussian( 1 );
+}
+#NameDifficulty{
+	horizontal-align: center;
+	margin-top: 12px;
+	font-size: 27px;
+	color: white;
+	text-overflow: shrink;
+	font-family: monospaceNumbersFont;
+	text-transform: uppercase;
+}
+
+#ContainerCrossTick{
+	flow-children:down;
+}
+
+.rowTooltip{
+	flow-children:right;
+	width: 100%;
+	margin: 3px;
+}
+.rowTooltip > Label{
+	margin-right: 10px;
+	vertical-align: center;
+	text-align: left;
+	width: 80%;
+}
+#ContainerCrossTick{
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding: 5px;
+	width: 100%;
+}
+#iconCrossTick{
+	background-size:100%;
+	height: 22px;
+	width: 22px;
+	horizontal-align:right;
+	background-image: url('file://{images}/war_of_kings/tick.png'); 
+}
+#iconCrossTick.cross{
+	background-image: url('file://{images}/war_of_kings/cross.png'); 
+}
+#Tooltip > Label{
+	margin-bottom: 5px;
+	color: white;
+
+}
+#Tooltip{
+	max-width: 340px;
+	min-width: 260px;
+}
+#DropItems{
+	flow-children:right-wrap;
+	align:center center;
+}
+
+#DropItems EconItemImage{
+	width: 100px;
+	margin: 5px;
+	height: 60px;
+	box-shadow:#000000aa 0px 0px 2px 2px;
+}
+
+#Timer{
+	width: 108px;
+	height: 108px;
+	align:center top;
+	margin-top: 20px;
+}
+#TimerRing{
+	width: 100%;
+	height: 100%;
+	background-color: #ffffff;
+	opacity-mask : url("s2r://panorama/images/coaching/coach_rating_progress_mask_psd.vtex");
+}
+#LabelStart{
+	vertical-align: bottom;
+	horizontal-align:center;
+	font-size: 14px;
+	color:white;
+	text-align: center;
+}
+#TimerRing_FG
+{
+	width: 100%;
+	height: 100%;
+	transform: rotateZ(180deg);
+	background-color: skyblue;
+	transition-property: none;
+}
+#DifficultyGamePlayer.Invisible{
+	opacity: 0;
+	visibility: collapse;
+}
+#TimeNumber{
+	align:center center;
+	font-size: 36px;
+	color: white;
+	text-align: center;
+	text-overflow: shrink;
+	font-family: monospaceNumbersFont;
+	text-shadow: 2px 2px 0px 1.0 #00000090;
+}
+
+.ClassInfo{
+	flow-children:down;
+	margin: 10px;
+	width: 48%;
+}
+
+.ClassInfo > Label{
+	font-size: 20px;
+	color: white;
+}
+
+.DataTowerUpgrade{
+	flow-children:down;
+	margin-left: 20px;
+}
+
+.RowTower{
+	margin-left: 20px;
+	flow-children:right;
+}
+
+.RowTower Label{
+	font-size: 19px;
+}
+
+#StartRoundNotificaton{
+
+	padding: 10px;
+	opacity-mask: url('file://{images}/war_of_kings/backgroundNotification.png'); 
+	align:center center;
+	width: 500px;
+	height: 250px;
+	background-color: gradient( linear, 0% 10%, 50% 80%, from( #2E2E2E ), to( black ) );
+	transform: rotateX(2deg) rotateY(-6deg) rotateZ(-4deg);
+	background-size: 100%; 
+	transition-property: opacity,transform,pre-transform-scale2d;
+	transition-duration: .65s;
+	pre-transform-scale2d: 0;
+	//animation-name: AnimationNotification;
+	animation-iteration-count: infinite;
+	animation-duration: 2s;
+	opacity: 0;
+}
+
+#StartRoundNotificaton.Visible{
+	opacity: 0.75;
+	pre-transform-scale2d:1;
+
+}
+#NotificationRoundContainer{
+	align:center center;
+	z-index: -100;
+}
+#StartRoundNotificaton > Label{
+ 	color: white;
+ 	font-size: 31px;
+ 	text-align: center;
+	text-transform: uppercase;
+
+	font-weight: bold;
+	letter-spacing: 2px;
+ 	margin-bottom: 5px;
+ 	align:center center;
+ 	flow-children:down;
+ }
+
+#IsUpgrades{
+	flow-children:right;
+	align:center center;
+}
+#IsUpgrades Image,
+#IsUpgrades DOTAAbilityImage{
+	width: 23px;
+	margin: 2px;
+	height: 23px;
+	saturation: 0;
+	transition-property: saturation;
+	transition-duration: .35s;
+	box-shadow:#000000aa 0px 0px 2px 2px;
+}
+#IsUpgrades Image.IsActivate,
+#IsUpgrades DOTAAbilityImage.IsActivate{
+	saturation: 1;
+}
+#IsUpgrades Image{
+	width: 32px;
+}
+
+#SettingContainer{
+	background-image:url("s2r://panorama/images/backgrounds/gallery_background.png");
+	background-size: 100%;
+	align:center center;
+
+	transition-duration: .35s;
+	pre-transform-scale2d:0.8;
+	opacity: 0;
+	transform:translateX(-450px) translateY(-310px); 
+	transition-property: opacity,pre-transform-scale2d,transform,box-shadow;
+	padding: 40px;
+	flow-children:down;
+}
+#SettingContainer ToggleButton{
+	margin: 5px;
+}
+@keyframes 'AnimationNotification'
+{
+    0%
+    {
+
+        transform: rotateX(2deg) rotateY(-6deg) rotateZ(-4deg);
+    }
+    50%
+    {
+        transform: rotateX(2deg) rotateY(-6deg) rotateZ(4deg);
+    }
+    100%
+    {
+        transform: rotateX(2deg) rotateY(-6deg) rotateZ(-4deg);
+    }
+}
+
+#EndScreenPlayer{
+	background-color: black;
+	background-image: url("s2r://panorama/images/hud/reborn/bg_tooltip_psd.vtex");
+	background-size: 100% 460px;
+	background-repeat: no-repeat;
+	//min-width: 1080px;
+	align:center center;
+	flow-children:down;
+	box-shadow:skyblue 0px 0px 12px 0px;
+}
+.personalProfile{
+	width: 490px;
+	margin-right: 6px;
+	margin-left: 6px; 
+	vertical-align: center;
+}
+.statistics{
+	width: 550px;
+}
+
+.damage{
+	width: 85px;
+}
+
+.endlessmode{
+	width: 140px;
+}
+.XpGameEndBar{
+	width: 200px;
+	vertical-align: center;
+	border-radius: 0px;
+}
+
+.XpGameEndBar .ProgressBarLeft{ 
+/*	background-image: url('file://{images}/war_of_kings/exp_bg.png'); 
+	background-size: 200px; */
+	background-color: gradient( linear, 0% 0%, 200px 60%, from( #3375FFFF  ), to( #C234DC) );
+}
+
+.columnEndScreenPlayer > ProgressBar,
+.XpGameEndBar > .ProgressBarRight{
+	background-color: #000000aa;
+	/*background-color: gradient( linear, 0% 0%, 56% 60%, from( #DF771A  ), to( #ED430F) );*/
+}
+.columnEndScreenPlayer > ProgressBar{
+	height: 19px;
+}
+.columnEndScreenPlayer > ProgressBar > Label{
+	color: white;
+	text-align: center;
+	font-size: 16px;
+	align:center center;
+}
+.endlessmode.Disabled{
+	background-size: 32px;
+	height: 32px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url('file://{images}/war_of_kings/cross.png');
+}
+
+.golddrop{
+	width: 100px;
+}
+.crystaldrop{
+	width: 130px;
+}
+.round{
+	width: 65px;
+}
+.round,.crystaldrop,.golddrop,.endlessmode,.damage{ 
+	margin: 3px; 
+	text-align: center; 
+	font-size: 19px;
+}
+#AccountName{
+	flow-children:right;
+}
+.columnEndScreenPlayer Label{
+	vertical-align: center;
+}
+.columnEndScreenPlayer{
+	flow-children:right;
+
+	align:center center;
+	//border:1px solid skyblue;
+	//box-shadow:skyblue 0px 0px 7px 0px;
+}
+#AccountName DOTAAvatarImage{
+	height: 51px;
+	width: 51px;
+}
+.PlayerRowScreen{
+	width: 100%;
+	margin: 7px;
+}
+.PlayerRowEndScreen .statistics{
+	margin-right: 6px;
+	margin-left: 6px; 
+	height: 100%;
+}
+#AccountName Label{
+	vertical-align: center;
+	font-size: 19px;
+	margin-left: 7px;
+}
+.HeaderEndScreen{
+	flow-children:down;
+	//border:2px solid royalblue;
+	margin-right: 6px;
+	margin-left: 6px;
+	height: 100%;
+}
+
+#HeaderEndScreen{
+	margin: 7px;
+	height: 64px;
+	flow-children:right;
+	max-width: 100%;
+	border-bottom:2px solid gray;
+	//box-shadow:#000000aa 0px 0px 2px 2px;
+}
+
+#SpinnerInGame{
+	width: 100%;
+	height: 100%;
+	z-index: 3;
+	opacity: 0;
+	transition-property: opacity;
+	transition-duration: 1s;
+}
+#SpinnerInGame.Visible{
+	opacity: 1;
+}
+
+#Spinner_anim{
+	background-image: url("s2r://panorama/images/status_icons/loadingthrobber_round_psd.vtex");
+	background-size: 100%;
+	background-repeat: no-repeat;
+    width: 56px;
+    height: 56px;
+	animation-name: SpinnerRotate; 
+	animation-duration: 1.5s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+#statisticLabel{
+	width: 300px;
+}
+#SubHeaderEndScreen{
+	flow-children:right;
+	align:center center;
+}
+#TextSpinner{
+	flow-children:right;
+    vertical-align: center;
+    horizontal-align: center;
+}
+
+#TextSpinner Label{
+    vertical-align: center;
+    horizontal-align: center;
+    text-transform: uppercase;
+    margin: 5px;
+    color: white;	
+}
+
+#HeaderEndScreen  Label{
+	margin-right: 3px;
+	margin-left: 3px;
+	text-transform: uppercase;
+	font-size: 20px;
+	color: white;
+	letter-spacing: 1px;
+	text-shadow: 2px 2px 0px 1.0 #00000090;
+	font-family: monospaceNumbersFont;
+	text-transform: uppercase;
+	font-weight: semi-bold;
+	align:center center;
+	text-align: center;
+	min-width: 1px;
+}
+#SubHeaderEndScreen Label{
+	margin: 3px;
+	font-size: 16px;
+	color: baseText;
+}
+.PlayerRowEndScreen{
+	flow-children:right;
+	width: 100%;
+
+}
+.PlayerRowEndScreen.Hidden{
+	brightness:0.1;
+	opacity: 0.6;
+}
+.PlayerRowEndScreen > Label{
+	height: 40px;
+	border:1px solid black;
+	text-align: center;
+
+}
+#DarkBg{
+	background-color: #000000aa;
+	width: 100%;
+	height: 100%;
+}
+.account{
+	width: 240px;
+	margin-left: 5px;
+}
+.rank{
+	width: 70px;
+	align:center center;
+	text-align: center;
+}
+
+.courier{
+	width:100px;
+}
+
+.courier Image{
+	width: 90px;
+	height: 50px;
+	horizontal-align:center;
+}
+.towersEndScreen{
+	width: 342px;
+	horizontal-align:center;
+	flow-children:right-wrap;
+}
+.TowerSlot{
+	width: 62px;
+	height: 35px;
+	background-size: 100%;
+	overflow: noclip;
+	margin:3px;
+	background-color:#1a1c1d88;
+	background-image: url("s2r://panorama/images/hud/reborn/inventory_item_well_psd.vtex");
+	box-shadow:#000000aa 0px 0px 2px 2px;
+	tooltip-position:top;
+}
+.TowerSlot.bonus_slot{
+	brightness:3;
+}
+.TowerSlot DOTAItemImage{
+	width: 100%;
+	box-shadow:#000000aa 0px 0px 2px 2px;
+	height: 100%;
+}
+.TowerSlot Image{
+	width: 100%;
+	height: 100%;
+}
+
+#EndScreenContainer{
+	flow-children:down;
+	align:center center;
+	visibility: collapse;
+	z-index: 2000;
+}
+#EndScreenContainer.Visible{
+	visibility: visible;
+}
+#Buttons{
+	horizontal-align:right;
+	margin-top: 10px;
+}
+
+#Buttons Button{
+	width: 200px;
+	height: 40px;
+}
+#Buttons Button:Hover #BackgroundExit{
+	wash-color:#AD3235;
+}
+#Buttons Button:Hover Label{
+	color:white;
+}
+#BackgroundExit{
+	background-image: url("s2r://panorama/images/hud/reborn/shop_launcher_button_psd.vtex");
+	wash-color:red;
+	width: 100%;
+	height: 100%;
+	background-size: 100%;
+	transition-duration: .15s;
+	transition-property: wash-color;
+}
+#Buttons Button Label{
+	text-align: center;
+	align:center center;
+	transition-duration: .15s;
+	transition-property: color;
+}
+#TooltipStars{
+	flow-children:right;
+}
+.TooltipTower{
+	padding: 7px;
+	background-color: #252b30;
+	align:center center;
+}
+.TooltipTower #CircularXPProgress{
+	vertical-align: top;
+	horizontal-align:right;
+}
+#LeftContainer{
+	flow-children:down;
+	vertical-align: top;
+}
+
+.TooltipTower Label{
+
+}
+#InventoryTower{
+	flow-children:right-wrap;
+}
+.TooltipTower Image{
+	width: 100px;
+	height: 64px;
+}
+
+.CustomShopContainer{
+	width: 100%;
+	height: 100%;
+	horizontal-align: center;
+	flow-children:down;
+}
+
+#CrystalContainer{
+	margin: 10px;
+	width: 100%;
+	horizontal-align: center;
+	flow-children:right;
+}
+
+.crystal,
+#CrystalIcon{
+	width: 32px;
+	height: 32px;
+	background-image: url('file://{images}/war_of_kings/crystal.png');
+	background-size: 100%;
+}
+.crystal{
+	width: 23px;
+	height: 23px;
+}
+#CrystalContainer Label{
+	vertical-align: center;
+	font-size: 24px;
+	padding: 4px;
+	height: 100%;
+	width: 100%;
+	background-image: url("s2r://panorama/images/hud/reborn/active_ability_border_psd.vtex");
+}
+#ShopContainer{
+	padding: 20px;
+	horizontal-align:center;
+	flow-children:down;
+}
+#ShopContainer DOTAItemImage{
+	width: 80px;
+	height: 49px;
+	margin-bottom: 40px;
+	animation-name: GodnessRarityAnim;
+	animation-iteration-count: infinite;
+	animation-duration: 1s;
+	transition-property: saturation;
+	transition-duration: .35s;
+}
+
+#ShopContainer DOTAItemImage:disabled{
+	saturation:0;
+}
+#CrystalBgItem{
+	background-image: url('file://{images}/war_of_kings/crystalamount.png'); 
+	height: 20px;
+	align:right bottom;
+	background-position:0% 0%;
+	background-repeat:no-repeat;
+	flow-children:right;
+
+}
+#CrystalBgItem #CrystalIcon{
+	width: 14px;
+	height: 14px;
+	vertical-align: center;
+}
+#CrystalBgItem Label{
+	font-size: 14px;
+	text-shadow:0px 0px 3px 3.0 #000000;
+	align:left bottom;
+	color:#ff5500;
+}
+#PlayerInventory{
+	vertical-align: bottom;
+	horizontal-align:right;
+	margin-right: 630px;
+	margin-bottom: 150px;
+	flow-children:right;
+	z-index: -10;
+}
+.InventoryButton{
+	width: 61px;
+	height: 59px;
+	saturation:1;
+	tooltip-position:top;
+	transition-duration: .35s;
+	transition-property: saturation;
+} 
+
+.InventoryButton:disabled{
+	saturation:0.7;
+}
+.BgButton{
+	width: 100%;
+	height: 100%;   
+	background-size: 100%;	
+	horizontal-align:left;
+}
+
+.BgButton.Rapier{
+	background-image: url('file://{images}/war_of_kings/button.png');
+}
+
+.BgButton.Critical{
+	background-image: url('file://{images}/war_of_kings/life.png'); 
+}
+
+.BgButton.Mage{
+	background-image: url('file://{images}/war_of_kings/RuneMage.png');
+}
+
+.InventoryButton Label{
+	color: white;
+	font-size: 22px;
+	vertical-align: bottom;
+	horizontal-align:right;
+	text-shadow: 2px 2px 0px 1.0 #00000090;
+}
+
+#PlayerAvatarToast{
+	width: 32px;
+	height: 32px;
+	visibility: collapse;
+}
+.InventoryButton > Panel{
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+#PlayerAvatarToast.Visible{
+	visibility: visible;
+}
+
+#Test{
+	align:center center;
+	padding: 20px;
+}
+
+@keyframes 'unitRotate'{
+    0%
+    {
+
+        transform: rotateX(2deg) rotateY(-6deg) rotateZ(-4deg);
+        /*background-color: gradient( linear, 0% 0%, 56% 60%, from( #DF771A  ), to( #ED430F) );*/
+    }
+    50%
+    {
+        transform: rotateX(2deg) rotateY(-6deg) rotateZ(4deg);
+        /*background-color: gradient( linear, 0% 0%, 56% 60%, from( #EDA05B  ), to( #F66C42) );*/
+    }
+    100%
+    {
+        transform: rotateX(2deg) rotateY(-6deg) rotateZ(-4deg);
+        /*background-color: gradient( linear, 0% 0%, 56% 60%, from( #DF771A  ), to( #ED430F) );*/
+    }
+}
+
+.Champion{
+	animation-name: unitRotate;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	opacity-mask: url('file://{images}/war_of_kings/Champion.png');
+	width: 130px;
+	height: 25px;
+}
+.Champion #Health{
+	width: 100%;
+	height: 100%;
+	background-color: #CCC2C2;
+	border-radius: 0;
+}
+.Champion #Health > .ProgressBarLeft{
+	background-color: #D13838;
+}
+.Champion #Health > .ProgressBarRight{
+	background-color: #CCC2C2;
+}
+.Champion #Shield{
+	height: 100%;
+	width: 50%;
+	horizontal-align: right;
+	z-index: 200;
+	background-color: skyblue;
+}
+
+.Mutant{
+	padding: 20px;
+	animation-name: unitRotate;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	opacity-mask: url('file://{images}/war_of_kings/mutant.png');
+	background-color: gradient( linear, 0% 0%, 55% 0%, from( #07A039  ), to( #44C944) );
+	width: 80px;
+	height: 25px;
+}
+
+.LastBoss{
+	flow-children:down;
+}
+
+#LastBossPB{
+	opacity-mask: url('file://{images}/war_of_kings/health_bar.png');
+	box-shadow:none;
+	background-color: #000000aa;
+	border-radius: 0;
+	width: 210px;
+	height: 20px;
+}
+
+#LastBossMana{
+	opacity-mask: url('file://{images}/war_of_kings/mana_bar.png');
+	box-shadow:none;
+	background-color: #000000aa;
+	border-top: 1px solid #262020;
+	border-radius: 0;
+	width: 210px;
+	height: 20px;
+}
+#LastBossMana > #Amount{
+	background-image: url('file://{images}/war_of_kings/mana_bar.png');
+	background-size: 210px 100%;
+	background-repeat: no-repeat;
+	width: 56%;
+	height: 100%;
+}
+#LastBossPB  > #Amount{
+	background-image: url('file://{images}/war_of_kings/health_bar.png');
+	background-size: 210px 100%;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+}
+
+#LastBossPB > #Shield{
+	background-color: #2CB8F1;
+	horizontal-align:right;
+	width: 60%;
+	height: 100%;
+}
+
+.TooltipDescriptionAssembly{
+	min-width: 440px;
+	box-shadow:#00000066 -4px -4px 8px 8px;
+	background-color: #252b30;
+	padding: 12px;
+	border:2px solid black;
+	flow-children:down;
+}
+
+.TooltipDescriptionAssembly > Label{
+	width: 100%;
+	color: white;
+	border-bottom:1px solid white;
+}
+
+#AssemblyContentTooltip{
+	
+	flow-children:down;
+	padding-top: 10px;
+}
+
+#IsAssemblies{
+	width: 32px;
+	height: 32px;
+	align:right center;
+	background-size: 100%;
+	margin-left: 60px;
+}
+
+#IsAssemblies.passed{
+	background-image: url('file://{images}/war_of_kings/tick.png'); 
+}
+
+#IsAssemblies.cross{
+	background-image: url('file://{images}/war_of_kings/cross.png'); 
+}
+#QuestMainContainer{
+	align:right center;
+	flow-children:right;
+	transition-duration: 0.35s;
+	transform: translateX(510px);
+	transition-property: transform;
+	margin-bottom:25px;
+	z-index: -1;
+}
+#QuestMainContainer.Open{
+	transform: translateX(0px);
+}
+
+#QuestMainContainer.Hidden{
+	visibility: collapse;
+}
+
+#QuestContainer{
+	width: 500px;
+	height: 450px;
+	/*background-color: gradient( linear, 0% 0%, 65% 0%, from( #00000000 ), color-stop( 0.5, #000000aa ), to( white ) );*/
+	background-image: url('s2r://panorama/images/hud/reborn/main_shop_bg.psd');
+	background-size: 100%;
+	box-shadow:#000000aa 0px 0px 12px 0px;
+	margin-right: 6px;
+	flow-children:down;
+	z-index: -1;
+}
+#BtnToggle{
+	width: 44px;
+	height: 44px;
+	background-image: url('file://{images}/war_of_kings/arrow.png');
+	background-size: 100%;
+	margin-right: 4px;
+	transform: scaleX(-1);
+	transition-duration: 0.35s;
+	transition-property: transform;
+}
+#QuestMainContainer.Open #BtnToggle{
+	transform: scaleX(1);
+}
+#ButtonsQuest{
+	horizontal-align:center;
+	flow-children:right;
+	margin-top: 10px;
+	border-bottom: 1px solid white;
+}
+#ButtonsQuest > RadioButton {
+	margin:10px;
+}
+#ButtonsQuest > Label{
+	vertical-align: center;
+}
+#ButtonsQuest > Label,
+#ButtonsQuest > RadioButton > Label{
+	font-size: 20px;
+	margin-left:0;
+}
+
+#ButtonsQuest > RadioButton > .RadioBox{
+	visibility: collapse;
+}
+
+#QuestsContainerDailyAndLocal{
+	width: 100%;
+	height: 100%;
+	/*flow-children:right;*/
+}
+#QuestsContainerDailyAndLocal > Panel{
+	opacity: 0;
+	transition-duration: 0.2s;
+	transition-property: opacity,transform;
+	transform:translateX(100%);
+}
+
+#QuestsContainerDailyAndLocal > Panel.Visible{
+	transform:none;
+	opacity: 1;
+}
+
+#QuestDailyContainer,
+#QuestInfoContainer{
+
+	width: 100%;
+	horizontal-align:center;
+	vertical-align: top;
+	flow-children:down;
+	overflow: noclip scroll; 
+}
+.questRowContainer{
+	width: 100%;
+	margin-top: 15px;
+}
+.questRow{
+	flow-children:down;
+	width: 100%;
+	padding:15px;
+	transition-property: opacity,blur,background-color;
+	transition-duration: 0.4s;
+}
+.questRow > #Drop{
+	flow-children:right;
+}
+.questRow > ProgressBar{
+	width: 300px;
+	border-radius: 0px;
+	border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
+	box-shadow:#000000aa 0px 0px 2px 2px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 15px;
+}
+
+.questRow > ProgressBar .ProgressBarLeft{
+	background-color: #44c24a;
+}
+.IsLose:Hover .questRow > ProgressBar > .ProgressBarRight,
+.questRow > ProgressBar .ProgressBarRight{
+	background-color: #283928;
+	transition-duration: 0.4s;
+	transition-property: background-color;
+}
+
+.questRow > #Drop Label{
+	font-size: 20px;
+}
+#IsLose > Label,
+#IsComplete > Label{
+	align:center center;
+	font-size: 29px;
+	color: white;
+	text-shadow: 0px 0px 1.5px 1.0 white;
+
+}
+#IsLose > Label{
+	font-size: 34px;
+	color: #B34C4C;
+	text-shadow: 0px 0px 3px 1.0 red;
+}
+
+#IsLose,
+#IsComplete{
+	z-index: 900;
+	width: 100%;
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition-property: opacity,background-image;
+	transition-duration: 0.4s;
+	opacity: 0;
+}
+.IsLose #IsLose,
+.IsComplete #IsComplete{
+	opacity: 1;
+	background-image: url('file://{images}/war_of_kings/divider.png'); 
+}
+.IsLose .questRow,
+.IsComplete .questRow{
+	opacity: 0.2;
+	blur: gaussian( 3 );
+	background-color:#309415;
+}
+.IsLose .questRow > ProgressBar > .ProgressBarRight,
+.IsLose .questRow > ProgressBar{
+	background-color:#A65959;
+}
+.IsLose .questRow{
+	background-color:#B34C4C;
+}
+.IsLose:Hover #IsLose,
+.IsComplete:Hover #IsComplete{
+	opacity: 0;
+	background-image: none; 
+}
+.IsLose:Hover .questRow,
+.IsComplete:Hover .questRow{
+	opacity: 1;
+	blur: gaussian( 0 );
+	background-color:none;
+}
+#TogglesPicks{
+	horizontal-align:center;
+	vertical-align: bottom;
+	margin-bottom: 100px;
+	width: 250px;
+}
+#BarToggle{
+	width: 240px;
+	height: 16px;
+	background-color: skyblue;
+	vertical-align: center;
+	horizontal-align:center;
+	border-radius:5px;
+}
+
+.Toggle{
+	width: 36px;
+	height: 36px;
+	background-color:#264FA3;
+	border-radius:50%;
+	z-index: 200;
+	vertical-align:center;
+}
+.Toggle.IsOpen{
+	box-shadow:#051941 0px 0px 12px 0px;
+
+}
+.Toggle.IsOpen Label{
+	visibility: visible;
+}
+.Toggle Label{
+	align:center center;
+	font-size: 24px;
+	color: white;
+	text-align: center;
+	visibility: collapse;
+}
+#Toggle-2{
+	horizontal-align:right; 
+}
+#Toggle-3{
+	horizontal-align:right;
+}
+#PickDifficulty{
+	transition-duration: 0.45s;
+	transition-property: transform;
+}
+#PickDifficulty.hidden{
+	transform:translateX(-100%);
+}
+#SelectedUniqueCards,
+#PickUniqueBonus{
+	transition-duration: 0.45s;
+	transition-property: transform,opacity;
+	width: 100%;
+	height: 100%;
+	vertical-align: center;
+	margin-bottom: 10px;
+	transform: translateX(100%);
+	opacity:0;
+}
+
+#SelectedUniqueCards.Visible,
+#PickUniqueBonus.Visible{
+	transform:none;
+	opacity:1;
+}
+
+#PickAndUniqueContainer{
+	align:center center;	
+}
+
+.UniqueBonusContainer{
+	flow-children:right-wrap;
+	horizontal-align:center;
+	overflow: clip scroll;
+}
+.UniqueBonusContainer > VerticalScrollBar{
+	width: 4px;
+}
+
+.UniqueBonusContainer > VerticalScrollBar > .ScrollThumb{
+	background-color: #000000aa;
+}
+.UniqueBonusPanel{
+	width: 280px;
+	height: 320px;
+	margin:20px;
+	pre-transform-scale2d:0.8;
+	transition-property: pre-transform-scale2d;
+	transition-duration: .15s;
+}
+.UniqueBonusPanel:Disabled{
+	brightness:0.2;
+}
+.UniqueBonusPanel > #DisabledPanel{
+	visibility: collapse;
+}
+.UniqueBonusPanel:Disabled > #DisabledPanel{
+	visibility: visible;
+}
+.UniqueBonusPanel.Active,
+.UniqueBonusPanel:Hover{
+	pre-transform-scale2d:1;
+}
+.UniqueBonusPanel.Active #UniqueBonusContent{
+	border: 1px solid #CE485B;
+	box-shadow:#E13E55 0px 0px 5px 0px;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #F52D49  ), to( #EE8190 ) );
+}
+#UniqueBonusContent{
+	margin:15px;
+	width: 80%;
+	height: 85%;
+	/*box-shadow:#2584AB 0px 0px 5px 0px;*/
+	padding:12px;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #1351B8  ), to( #5D7EB5 ) );
+	border: 1px solid #151515;
+	transition-property: background-color,box-shadow,border;
+	transition-duration: .35s;
+	box-shadow: #151515 0 0 10px 0;
+	background-image: url("s2r://panorama/images/backgrounds/dashboard_vignette_png.vtex"); 
+	background-size: 100% 100%;
+}
+
+#UniqueBonusContent Label{
+	color:white;
+	text-shadow: 2px 2px 0px 1.0 #00000090;
+}
+.UniqueBonusBackgroundIcon{
+	width: 128px;
+	height: 128px;
+	vertical-align: bottom;
+	horizontal-align:right;
+	background-size: 100%;
+	z-index: 2000;
+	margin-left: 10px;
+}
+
+.mage1 .UniqueBonusBackgroundIcon{
+	background-image: url('file://{images}/war_of_kings/unique_mage.png');
+	height: 200px;
+	width: 140px;
+}
+
+.warrior1 .UniqueBonusBackgroundIcon{
+	background-image: url('file://{images}/war_of_kings/unique_warrior.png');
+	height: 190px;
+	width: 160px;
+}
+
+.health1 .UniqueBonusBackgroundIcon{
+	background-image: url('file://{images}/war_of_kings/unique_health.png');
+	height: 190px;
+	width: 170px;
+}
+#MidasIcon,
+.midas1 .UniqueBonusBackgroundIcon{
+	background-image: url('file://{images}/war_of_kings/unique_midas.png');
+}
+#CooldownMidas{
+	background-color: #000000aa;
+	height: 70%;
+	width: 100%;
+}
+
+#MidasTowerBar > Label{
+	color: white;
+	font-size: 15px;
+	align:center center;
+}
+
+#MidasTowerBar{
+	border-radius: 50%;
+	align:center center;
+	opacity: 0;
+	transition-property: opacity,transform;
+	transition-duration: 1.5s;
+	visibility: collapse;
+	transform:translateY(-100%);
+}
+#MidasTowerBar.Visible{
+	opacity: 1;
+	visibility: visible;
+	transform:none;
+}
+#MidasIcon{
+	opacity-mask:url('file://{images}/war_of_kings/unique_midas.png');
+	width: 55px;
+	height: 55px;
+	background-size: 100%;
+}
+.tower1 .UniqueBonusBackgroundIcon{
+	height: 190px;
+	width: 150px;
+	background-image: url('file://{images}/war_of_kings/unique_tower.png');
+}
+
+.gold_per_kill1 .UniqueBonusBackgroundIcon{ 
+	width: 111px;
+	height: 111px;
+	background-image: url('file://{images}/war_of_kings/gold_per_kill.png');
+}
+
+.close1 .UniqueBonusBackgroundIcon{
+	width: 100px;
+	height: 100px;
+	background-image: url('file://{images}/war_of_kings/closeIcon.png');
+}
+
+.tower_levelup .UniqueBonusBackgroundIcon{
+	width: 130px; 
+	height: 230px;
+	background-image: url('file://{images}/war_of_kings/tower_level_up.png');
+
+}
+.drop_chance .UniqueBonusBackgroundIcon{
+	background-image: url('file://{images}/war_of_kings/chestDrop.png');
+	width: 160px;
+	height: 100px;
+} 
+
+.creep_not_use .UniqueBonusBackgroundIcon{
+	background-image: url('file://{images}/war_of_kings/unique_creep_not_use.png');
+	height: 195px;
+	width: 250px;
+}
+
+#XpIcon{
+	width: 38px;
+	height: 38px;
+	background-image: url('file://{images}/war_of_kings/exp.png');
+	background-size: 100%;
+	vertical-align: center;
+	margin-right: 20px;
+
+}
+#XpPlayerContainer{
+	margin-top: 40px;
+	flow-children:down;
+	margin-left: 100px;
+}
+#XpPlayerContainer > Label{
+	horizontal-align:center;
+	margin-left: 80px;
+	color: white;
+	font-size: 20px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+#XpBar{
+	height: 25px;
+	vertical-align: center;
+	border-radius: 0px;
+	width: 300px;
+	background-color: #000000aa;
+	
+}
+#XpAndLevel:Hover #XpBar > Label{
+	transform:none;
+	opacity: 1;
+}
+#XpBar #XpBar_Left{
+	background-color: gradient( linear, 0% 0%, 300px 60%, from( #3375FFFF  ), to( #C234DC) );
+}
+#XpBar #XpBar_Right{
+	background-color: #000000aa;
+}
+#XpBar Label{
+	horizontal-align:center;
+	vertical-align: center;
+	text-align: center;
+	font-size: 16px;
+	transition-property: transform,opacity;
+	transition-duration: 0.2s;
+	transform:translateY(-100%);
+	opacity:0;
+	color: white;
+}
+
+#XpAndLevel{
+	vertical-align: top;
+	horizontal-align:left;
+	flow-children:right;
+
+}
+#SandBoxMenu{
+	vertical-align: center;
+	visibility: collapse;
+}
+#SandBoxMenu.Visible{
+	visibility: visible;
+}
+.ControlPanel
+{
+    transform: translateX( 0% ) translateY( -100px );
+    vertical-align: middle;
+    horizontal-align: left;
+    padding: 4px;
+    padding-left: 0px;
+	padding-top: 60px;
+
+    transition-property: background-color, transform;
+	transition-duration: 0.35s;
+	transition-timing-function: ease-in-out;
+}
+
+.HUDFlipped .ControlPanel
+{
+    horizontal-align: right;
+    flow-children: left;
+    transform: translateX( 0% ) translateY( -100px );
+    margin-right: -4px;
+}
+
+.ControlPanelContainer
+{
+    flow-children: right;
+    vertical-align: middle;
+    horizontal-align: left;
+
+    width: 210px;
+    font-size: 16;
+    background-color: #181818dd;
+    border: 2px solid #222222;
+   	box-shadow: #000000aa -4px -4px 8px 8px;
+   	padding-top: 10px;
+   	padding-bottom: 10px;
+}
+
+.HUDFlipped .ControlPanelContainer
+{
+    horizontal-align: right;
+    box-shadow: #000000aa -4px -4px 8px 8px;
+}
+
+#ControlPanelSlideThumb
+{
+	width: 32px;
+	height: 96px;
+	transform: translateX( 0px );
+    background-color: #181818cc;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+   	box-shadow: #00000055 -4px -4px 8px 8px;
+	vertical-align: middle;
+}
+
+.HUDFlipped #ControlPanelSlideThumb
+{
+    transform: scaleX(-1);
+}
+
+.RightArrowButtonIcon
+{
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	horizontal-align: right;
+	background-image: url("s2r://panorama/images/control_icons/double_arrow_left_png.vtex");
+    background-position: 0% 50%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	wash-color: #91aba6;
+
+	transform: translateX( -9px );
+	
+	transition-property: transform, wash-color;
+	transition-delay: 0.0s;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-in-out;
+}
+
+#ControlPanelSlideThumb:hover
+{
+	background-color: #383838cc;
+}
+
+#ControlPanelSlideThumb:hover .RightArrowButtonIcon
+{
+	transform: translateX( -12px );
+	wash-color: white;
+}
+
+.Minimized .ControlPanel .RightArrowButtonIcon
+{
+	transform: rotateZ(180deg) translateX( -6px );
+}
+
+.Minimized .ControlPanel #ControlPanelSlideThumb:hover .RightArrowButtonIcon
+{
+	transform: translateX( 3px ) rotateZ(180deg);
+	wash-color: white;
+}
+
+.ControlPanel. #ControlPanelSlideThumb:hover .RightArrowButtonIcon
+{
+    transform: translateX( 3px ) rotateZ(180deg);
+    wash-color: white;
+}
+
+.Minimized .ControlPanel
+{
+    transform: translateX( -160px ) translateY( -100px );
+}
+
+.HUDFlipped .Minimized .ControlPanel
+{
+    transform: translateX( 160px ) translateY( -100px );
+}
+
+.QuitPausePanel
+{
+	flow-children: right;
+	transform: translateX( 0px ) translateY( 0px );
+    vertical-align: top;
+    horizontal-align: right;
+    height: 45px;
+    width: 100%;
+    background-color: #181818;
+    border: 2px solid #222222;	
+}
+
+.QuitPausePanel .DemoButton
+{
+	height: 100%;
+    width: 48%;
+}
+
+.Category .QuitPausePanel
+{
+
+}
+
+.Category .QuitPausePanel .DemoButton Label
+{
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+.QuitPausePanel .QuitButton
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #441111), to( #662222 ) );
+    height: 100%;
+    width: 100%;
+
+	margin-top: 3px;
+	margin-bottom: 3px;
+	margin-left: 3px;
+	margin-right: 3px;
+
+    border-style: solid;
+    border-width: 2px;	
+
+    border-top-color: #661111;
+    border-left-color: #591111;
+    border-bottom-color: #441111;
+    border-right-color: #502222;
+
+    transition-property: background-color;
+	transition-duration: 0.15s;
+	transition-timing-function: ease-in-out;
+}
+
+.Category .QuitPausePanel .QuitButton Label
+{
+    margin-top: 5px;
+    margin-left: 5px;
+    color: #ffffff;
+    font-size: 16;
+    vertical-align: middle;
+    horizontal-align:center;
+    width: 70%;
+}
+
+.QuitPausePanel .QuitButton:hover
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #441111), to( #aa2222 ) );
+}
+
+.QuitPausePanel.QuitButton:active
+{
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #aa8888 ), to( #ffaaaa ) );
+	pre-transform-scale2d: 1.02;
+}
+
+.QuitPausePanel .QuitButton:selected
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #777777 ), to( #999999 ) );
+}
+
+.ControlPanelContainer Label
+{
+	flow-children: down;
+
+	horizontal-align: left;
+	font-size: 24;	
+	color: #444444;
+	margin-top: 7px;
+	margin-bottom: 6px;
+	margin-left: 6px;
+	margin-right: 6px;
+}
+
+.ControlPanelContainer .Category Label
+{
+	horizontal-align: left;
+	margin-left: 0%;
+	margin-top: 2px;
+	font-size: 16;
+	color: #888888;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	text-align: left;
+	min-width: 100%;
+}
+
+.ControlPanelContainer #Maximized
+{
+	flow-children: down;
+	visibility:visible;
+}
+
+.ControlPanelContainer #Maximized #MinimizeButton
+{
+	flow-children: down;
+    transform: translateX( 0% ) translateY( 0% );
+    vertical-align: middle;
+    horizontal-align: left;
+    width: 100%;
+    background-color: #181818;
+    border: 2px solid #111111;
+	visibility:visible;
+}
+
+.ControlPanelContainer #Maximized #MinimizeButton Label
+{
+	font-size: 18;
+	color: #666666;
+}
+
+#MinimizeButton
+{
+	horizontal-align: right;
+}
+
+#MinimizeButton Label
+{
+	font-size: 16;
+	color: #666666;
+}
+
+#MinimizeButton:hover Label
+{
+	font-size: 16;
+	color: #aaaaaa;
+}
+
+.Category
+{
+	flow-children: down;
+	border-style: solid;
+	border-color: #00000022;
+	border-width: 0%;
+	//border-radius: 5px;
+
+	box-shadow: fill #00000011 -4px -4px 8px 9px;
+
+	padding: 5px;
+
+	background-color: #11111166;
+}
+
+.Row
+{
+	flow-children: right;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	margin-right: 0%;
+	width: 100%;
+}
+
+.Category .Row Label
+{
+	horizontal-align: right;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 18;
+	color: #888888;
+}
+
+.Row #DemoButton
+{
+	
+}
+
+.Row TextEntry
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #111111FF ), to( #222222FF ) );
+	border: 1px solid baseBorder;
+	
+	color: lightgrey;
+    font-size: 16;
+
+    margin-top: 3px;
+	margin-bottom: 3px;
+	margin-left: 3px;
+	margin-right: 3px;
+
+    height: 100%;
+	width: 45px;
+	vertical-align: center;
+}
+
+.Row TextEntry #PlaceholderText
+{
+    opacity: 1.0;
+
+    transition-property: opacity;
+    transition-duration: 0.1s;
+
+    vertical-align: middle;
+
+	color: #444444;
+	font-size: 16;
+}
+
+.Row TextEntry:focus #PlaceholderText, TextEntry.HasInput #PlaceholderText
+{
+    opacity: 0.0;
+}
+
+.DemoButton
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #333333), to( #444444 ) );
+
+	height: 35px;
+	width: 170px;
+
+	margin-top: 3px;
+	margin-bottom: 3px;
+	margin-left: 3px;
+	margin-right: 3px;
+
+    border-style: solid;
+    border-width: 1px;
+
+    border-top-color: #444444;
+    border-left-color: #494949;
+    border-bottom-color: #111111;
+    border-right-color: #404040;
+
+    transition-property: background-color;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+}
+.DemoButton.TextEntry{
+	width: 120px;
+}
+.Category .Row .DemoButton#FieldButton
+{
+	height: 40px;
+	width: 140px;
+}
+
+.Category .DemoButton Label
+{
+    margin-top: 4px;
+/*	padding: 6% 12% 6% 3%;*/
+    color: #cccccc;
+    font-size: 15;
+    font-weight: thin;
+    vertical-align: middle;
+    text-transform: none;
+    letter-spacing: 0px;
+}
+
+.Category .DemoButton:hover
+{
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #444444 ), to( #555555 ) );
+}
+
+.Category .DemoButton:hover Label
+{
+    //color: #cccccc;
+}
+
+.Category .DemoButton:active
+{
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #888888 ), to( #aaaaaa ) );
+	pre-transform-scale2d: 1.02;
+}
+
+.Category .DemoButton:active Label
+{
+    //color: #eeeeee;
+}
+
+.Category .DemoButton:selected
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #777777 ), to( #999999 ) );
+}
+
+.Category ToggleButton.DemoButton:active Label
+{
+    //color: #eeeeee;
+}
+.Category ToggleButton.DemoButton Label{
+	margin: 0;
+	margin-left: 4px;
+}
+.Category ToggleButton:selected Label
+{
+    //color: #cccccc;
+}
+
+#SelectHeroContainer
+{
+	vertical-align: center;
+	margin-left: 200px;
+	background-color: #000c;
+
+	opacity: 0.0;
+    transform: translateX( -60px ) translateY( -100px );
+
+	transition-property: opacity, transform;
+	transition-duration: 0.2s;
+}
+
+.HUDFlipped  #SelectHeroContainer
+{
+	margin-left: 0px;
+	margin-right: 200px;
+	horizontal-align: right;
+	transform: translateX( 60px ) translateY( -100px );
+}
+
+#SelectHeroContainer.HeroPickerVisible 
+{
+	opacity: 1.0;
+	transform: translateX( 0px ) translateY( -100px );
+}
+
+#CancelButton
+{
+	horizontal-align: right;
+	width: 14px;
+	height: 14px;
+}
+
+#SelectionCardSandBox{
+	width: 750px;
+	height: 600px;
+	flow-children:right-wrap;
+	overflow: clip scroll;
+	padding: 20px;
+}
+#SelectionDifficultySandBox VerticalScrollBar{
+	padding: 1px;
+}
+#HeaderSelectionCardMenu{
+	horizontal-align:right;
+}
+#ImageContainerBuy > EconItemImage{
+	width: 100%;
+	height: 100%;
+}
+#SelectionDifficultySandBox,
+#SelectionCardContainer{
+	transform: translateX(-100%);
+	opacity: 0;
+	transition-property: transform,opacity;
+	transition-duration: 0.2s;
+	flow-children:down;
+	background-image: url("s2r://panorama/images/hud/reborn/bg_scoreboard_psd.vtex");
+	background-size: 100%;
+	box-shadow:#000000aa -4px -4px 8px 8px;
+	padding-top: 20px;
+	margin-left: 220px;
+}
+
+#ToggleButtonsContainer{
+	flow-children:down;
+	overflow: clip scroll;
+}
+
+#SelectionDifficultySandBox.Visible,
+#SelectionCardContainer.Visible{
+	transform: none;
+	opacity: 1;
+}
+.CardSandBoxSelection{
+	width: 140px;
+	height: 180px;
+	box-shadow:#000000 -5px -5px 10px 10px;
+	border-radius:2px;
+	pre-transform-scale2d:0.85;
+	transition-property: pre-transform-scale2d,opacity,height,width;
+	transition-duration: .3s;
+
+}
+#ToggleButtonsContainer > RadioButton{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #333333), to( #444444 ) );
+	width: 100px;
+	height: 30px;
+	box-shadow:#000000aa -4px -4px 8px 8px;
+	transition-property: background-color;
+	transition-duration: 0.2s;
+	margin:10px;
+}
+
+#ToggleButtonsContainer > RadioButton .RadioBox{
+	visibility: collapse;
+}
+#ToggleButtonsContainer > RadioButton:Hover,
+#ToggleButtonsContainer > RadioButton:selected{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #DC3838), to( #C97777 ) );
+}
+#ToggleButtonsContainer > RadioButton Label{
+	align:center center;
+	text-align: center;
+	margin: 0;
+	font-size: 18px;
+}
+.CardSandBoxSelection.Hidden{
+	opacity: 0;
+	height: 0;
+	width: 0;
+	pre-transform-scale2d:0;
+}
+
+.CardSandBoxSelection:Hover{
+	pre-transform-scale2d:1;
+}
+.CardSandBoxSelection:Hover #footerCard{
+	transform:none;
+}
+#footerCard{
+	transition-property:transform;
+	transition-duration: 0.2s;
+	height: 20%;
+	width: 100%;
+	vertical-align: bottom;
+	transform: translateY(100%);
+	opacity:0.75;
+	background-image:url("s2r://panorama/images/hud/reborn/bg_mainshop_psd.vtex");
+}
+#footerCard Label{
+	align:center center;
+	color: white;
+}
+
+#BackgroundSandBoxSelection{
+	width: 100%;
+	height: 100%;
+}
+
+#ShopMainContainer{
+	width: 1195px;
+	height: 600px;
+	flow-children:down;
+	background-color: #1b252b;
+	background-repeat: no-repeat;
+	box-shadow: 0px 2px 7px #000000aa;
+}
+
+#BuyCoinsPanel{
+	align:center center;
+	width: 700px;
+	height: 300px;
+	background-color: #1b252b;
+	z-index: 2;
+	opacity: 0;
+	pre-transform-scale2d:0.1;
+	transition-duration: 0.3s;
+	transition-property: pre-transform-scale2d,opacity;
+
+}
+#BuyCoinsPanel.Visible{
+	opacity: 1;
+	pre-transform-scale2d:1;	
+}
+#BuyUrlContainer{
+	flow-children:right;
+	align:center center;
+}
+.BuyUrl{
+	width: 150px;
+	height: 150px;
+	background-size: 100%;
+	margin: 10px;
+	margin-right: 20px;
+	transition-duration: 0.3s;
+	transition-property: pre-transform-scale2d;
+	pre-transform-scale2d:0.7;
+}
+#h2-header{
+	text-align: center;
+	horizontal-align:center;
+	margin-top: 10px;
+	font-size: 30px;
+	color: gradient( linear, 0% 0%, 0% 140%, from( #4397D2 ), to( white ) );
+}
+.BuyUrl.disabled{
+	/*saturation:0.1;*/
+	brightness:0.3;
+}
+#BuyUrlContainerRoot{
+	flow-children:down;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+}
+#Patreon.BuyUrl:Hover,
+.BuyUrl:Hover{
+	pre-transform-scale2d:1;
+}
+#Yandex.BuyUrl{
+	background-image: url('file://{images}/war_of_kings/yandex_icon.png');
+}
+
+#Patreon.BuyUrl{
+	pre-transform-scale2d:0.8;
+	background-image: url('file://{images}/war_of_kings/patreon_icon.png');
+}
+
+#Discord.BuyUrl{
+	background-image: url('file://{images}/war_of_kings/discord_icon.png');
+}
+
+#ShopContainerRoot{
+	align:center center;
+	transition-duration: .35s;
+	pre-transform-scale2d:0.8;
+	opacity: 0;
+	transform:translateX(-200px) translateY(-150px);
+	transition-property: opacity,pre-transform-scale2d,transform,box-shadow;
+}
+#ShopContainerRoot.Visible{
+	opacity: 1;
+	pre-transform-scale2d:1;
+	transform:none;
+	box-shadow:#000000aa 0px 0px 8px 0px;
+}
+
+#InputBuyCount{
+	width: 120px;
+}
+#ItemBuyContent{
+	height: 60%;
+	flow-children:right;
+}
+#ItemBuyContent Label{
+	font-size: 18px;
+}
+
+#ImageContainerBuy{
+	width: height-percentage( 150% );
+	height: 200px;
+	background-color: #1F1E1D;
+	margin-right: 30px;
+	vertical-align: center;
+	box-shadow: 0px 2px 7px #000000aa;
+}
+#ImageAndDescriptionContainer{
+	flow-children:down;
+}
+
+#ImageAndDescriptionContainer > Label{
+	horizontal-align:center;
+	font-size: 20px;
+	margin-top: 40px;
+	color: white;
+}
+
+#InputsCount{
+	flow-children:down;
+	horizontal-align:center;
+}
+#InputsCount > Button{
+	flow-children:right;
+}
+
+#InputsCount > Button Label{
+	vertical-align: center;
+}
+
+#InputsCount > Panel{
+	margin-top: 10px;
+	height: 32px;
+	flow-children:right;
+	horizontal-align:center;
+}
+#InputsCount > Panel Label{
+	vertical-align: middle;
+	font-size: 18px;
+	color: white;
+	text-align: center;
+}
+#InputsCount > Panel Image{
+	width: 22px;
+	height: 22px;
+	margin-right: 5px;
+	padding: 2px;
+	margin-bottom: 3px;
+	vertical-align: middle;
+
+}
+#ShopHeader{
+	width: 100%;
+}
+#ShopHeader > #ContentButton{
+	flow-children:right;
+	vertical-align: center;
+	padding: 10px;
+	width: 100%;
+}
+#ShopHeader > #ContentButton > RadioButton Label{
+	font-size: 22px;
+	transition-duration: 0.2s;
+	transition-property: color,text-shadow;
+}
+
+#ShopHeader > #ContentButton > RadioButton:selected Label{
+	text-shadow: 0px 0px 2px skyblue;
+}
+#ShopHeader > #ContentButton > RadioButton{
+	padding: 1px;
+	vertical-align: center;
+}
+#ShopHeader > #ContentButton > RadioButton .RadioBox{
+	visibility: collapse;
+}
+#CoinsContainer{
+	horizontal-align:right;
+	flow-children:right;
+}
+#PurchaseButton-content{
+	flow-children:right;
+	align:center center;
+	height: 28px;
+
+}
+#PurchaseButton-content Image{
+	width: 22px;
+	height: 22px;
+	margin-right: 2px;
+	padding: 3px;
+	vertical-align: middle;
+}
+#PurchaseButton-content Label{
+	vertical-align: middle;
+	text-align: center;
+	font-size: 19px;
+	color: white;
+}
+#CoinsIcon{
+	width: 32px;
+	height: 32px;
+	background-image: url('file://{images}/war_of_kings/crown.png');
+	background-size: 100%;
+	vertical-align: center;
+	margin-right: 8px;
+	opacity: 0.5;
+	transition-duration: 0.2s;
+	transition-property: opacity;
+}
+#CoinsContainer > Label{
+	font-size: 22px;
+	margin: 5px;
+	width: 120px;
+	text-align: center; 
+	padding: 3px;
+	border: 1px solid baseBorder;
+	height: 32px;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #111111FF ), to( #222222FF ) );
+}
+#RightHeader{
+	vertical-align: center;
+	horizontal-align:right;
+	flow-children:right;
+}
+
+#OpenCode{
+
+	width: 35px;
+	height: 35px;
+	background-image: url('file://{images}/war_of_kings/box_gift.png');
+	background-size: 100%;
+	vertical-align: center;
+	wash-color:white;
+	opacity: 0.5;
+	transition-duration: 0.2s;
+	transition-property: opacity;
+	margin-right: 12px;
+}
+#CoinsIcon:Hover,
+#OpenCode:Hover{
+	opacity: 1;
+}
+#MainContentItemSlot{
+	flow-children:down;
+}
+#ButtonContainerSpray > Button{
+	/*height: 40px;*/
+	/*margin-left: 8px;*/
+	width: 45%;
+	border-top: 1px solid #ffffff22;
+	border-left: 1px solid #ffffff11;
+	border-right: 1px solid #00000044;
+	border-bottom: 1px solid #00000088;
+	height: 40px;
+	transition-property: brightness;
+	transition-duration: .2s;
+}
+#ButtonContainerSpray > Button > Label{
+	text-align: center;
+	color: white;
+	padding: 5px;
+	font-size: 17px;
+	align:center center; 
+}
+#ButtonContainerSpray > Button:Hover{
+	brightness:1.5;
+}
+#SprayItem{
+	horizontal-align:right;
+	background-color:gradient( linear, 0% 0%, 0% 70%, from( #4FB259 ), to( #2AA036 ) );
+}
+
+#ButtonContainerSpray{
+	align:center center;
+	width: 100%;
+	padding: 10px;
+	flow-children:right;
+	margin-top: 50px;
+}
+#CheckSprayContent > Label{
+	text-align: center;
+	align:center center;
+	color: white;
+}
+#CheckSprayContent{
+	align:center center;
+	flow-children:down;
+}
+
+#CancelSpray{
+	background-color: #952B2B;
+	background-color:gradient( linear, 0% 0%, 0% 70%, from( #A85252 ), to( #952B2B ) );
+}
+
+.ShopSlot{
+	background-color: #000000aa;
+	width: 204px;
+	height: 248px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	flow-children:down;
+	transition-duration: 0.25s;
+	transition-property: height,width,opacity,visibility,box-shadow;
+}
+.ShopSlot.IsUnique{
+	box-shadow: 0px 0px 4px #E6B92F;
+}
+
+.ShopSlot.InventorySlot{
+	flow-children:none;
+}
+.IsOpenSpray > #CheckSpray{
+	transform: none;
+}
+.IsOpenSpray > #MainContentItemSlot{
+	blur: gaussian( 1 );
+}
+#CheckSpray{
+	width: 100%;
+	height: 100%;
+	background-color: #000000aa;
+	z-index: 200;
+	flow-children:down;
+	transform: translateY(-100%);
+	transition-duration: .1s;
+	transition-property: transform;
+}
+.ShopSlot.Hidden2,
+.ShopSlot.Hidden{
+	height: 0;
+	width: 0;
+	opacity: 0;
+	margin: 0;
+}
+#ClearSearchButton{
+	visibility: visible;
+}
+.Crown{
+	wash-color:#A04E4E;
+}
+.ShopSlot:Hover{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #000000aa ), to( #1e2b12 ) );
+}
+
+#PurchaseButton{
+	flow-children: right;
+	border-top: 1px solid #ffffff22;
+	border-left: 1px solid #ffffff11;
+	border-right: 1px solid #00000044;
+	border-bottom: 1px solid #00000088;
+	padding: 5px 14px 3px 14px;
+    width: 100%;
+    padding: 3px 8px 1px 3px;
+    margin: 8px 12px;
+	height: 30px;
+	align:center center;
+    background-color:gradient( linear, 0% 0%, 0% 100%, from( #307663 ), to( #245a4b ) );
+}
+#LabelsItem{
+	flow-children:down-wrap;
+}
+
+#LabelsItem > Label{
+	margin-top: 3px;
+	margin-bottom: 3px;
+	color: white;
+	font-size: 20px;
+}
+#SceneDemo{
+	width: 500px;
+	height: 250px;
+	flow-children:right;
+}
+
+.SceneCourier{
+	width: 250px;
+	height: 250px;
+}
+
+#ShopPageContents{
+	width: 100%;
+	height: 100%;	
+}
+#ShopPageContents.Deactivate{
+	blur: gaussian( 1 );
+}
+#ShopPageContents.Deactivate > #BgDarkBuyIng{
+	visibility: visible;
+}
+#BgDarkBuyIng{
+	width: 100%;
+	height: 100%;
+	background-color: #000000aa;
+	opacity: 1;
+	z-index: 20000;
+	visibility: collapse;
+}
+#BgContainer{
+	align:center center;
+	flow-children:right;
+}
+#BgContainer > Label{
+	font-size: 30px;
+	color: white;
+	vertical-align: center;
+	margin-left: 20px;
+}
+#BgContainer > .Spinner{
+	width: 65px;
+	height: 65px;
+}
+#BuyItemContainer{
+	align:center center;
+	width: 100%;
+	height: 100%;
+	background-color: gradient( linear, 100% 0%, 100% 100%, from( #192229 ), to( #000000 ) );
+	flow-children:down;
+	padding: 10px;
+	padding-top: 20px;
+	/*box-shadow: 0px 2px 7px #000000aa;*/
+	transform: translateX(100%);
+	transition-property: transform,opacity;
+	transition-duration: 0.2s;
+	opacity: 0;
+}
+#SelectionDaysPremium{
+	visibility: collapse;
+}
+
+#SelectionDaysPremium.Visible{
+	visibility: visible;
+}
+
+#BuyItemContainer.Visible{
+	transform: none;
+	opacity: 1;
+}
+#MainContents{
+	transition-property: transform,opacity;
+	transition-duration: 0.2s;
+}
+
+.FullIcon{
+	width: 100%;
+	height: 100%;
+}
+
+#MainContents.Hidden{
+	opacity: 0;
+	transform: translateX(-100%);
+}
+#HeaderBuyItem{
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	font-size: 30px;
+	margin-bottom: 20px;
+}
+#Buttons-Buy-cancel > Button{
+	transition-duration: 0.2s;
+	transition-property: brightness;
+}
+#Buttons-Buy-cancel > Button:Hover{
+	brightness:1.5;
+}
+#FullCost-Buttons-Buy-cancel{
+	flow-children:down;
+	vertical-align: center;
+	horizontal-align:right;
+	margin-right: 40px;
+	margin-top: 10px;
+}
+#IconCrown-FullCost,
+#Buttons-Buy-cancel{
+	flow-children:right;
+}
+#IconCrown-FullCost{
+	horizontal-align:left;
+	margin-bottom: 10px;
+	margin-left: 30px;
+}
+#IconCrown{
+	width: 24px;
+	height: 24px;
+	background-image: url('file://{images}/war_of_kings/crown.png');
+	background-size: 100%;
+	vertical-align: center;
+	margin-right: 10px;
+}
+
+#IconCrown-FullCost Label{
+	font-size: 20px;
+	text-align: center;
+	vertical-align: center;
+}
+
+#CancelBuyItem,
+#BuyItem{
+	width: height-percentage( 300% );
+	margin: 5px;
+	height: 45px;
+	border-radius: 2px;
+}
+
+#CancelBuyItem  > Label,
+#BuyItem > Label{
+	align:center center;
+	color: white;
+	font-size: 20px;
+	text-align: center;
+}
+
+#CancelBuyItem{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #D13C2D  ), to( #DE1717 ) ); 
+}
+
+#BuyItem{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #489D44  ), to( #105F0C ) ); 
+}
+
+#SelectionDaysPremium{
+	flow-children:right;
+	vertical-align: center;
+}
+#SelectionDaysPremium > Label{
+	vertical-align: center;
+	margin-right: 10px;
+}
+#FooterItemBuy{
+	width: 100%;
+}
+
+#PickingDays{
+	width: 100px;
+}
+#PurchaseButton:Hover{
+	brightness:1.5;
+}
+#ImageItemBuy{
+	width: 220px;
+	height: 220px;
+	align:center center;
+}
+
+#LabelItemBuy{
+	horizontal-align:center;
+	color: #b1b1b1;
+	font-size: 24px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+#ItemTypeLabel{
+	color: #666;
+	height: 24px;
+	vertical-align: middle;
+	text-transform: uppercase;
+	margin-top: 2px;
+}
+
+#ItemType{
+	color: #535353;
+	font-size: 16px;
+	horizontal-align:center;
+	margin: 12px;
+	margin-top: 2px;
+	margin-bottom: 0;
+	flow-children:right;
+
+}
+#MainContentItemSlot > Label,
+.ShopSlot > Label{
+	color: #b1b1b1;
+	width: 100%;
+	height: 22px;
+	font-size: 17px;
+	text-align: center;
+}
+
+#ItemImageContainer{
+	height: 120px;
+	width: height-percentage( 150% );
+	margin: 10px;
+	horizontal-align:center;
+	background-color: #1F1E1D;
+	transition-duration: 0.2s;
+	transition-property: box-shadow;
+
+}
+#ItemImageContainer > Label{
+	vertical-align: bottom;
+	horizontal-align:right;
+	font-size: 22px;
+	text-transform: uppercase;
+	z-index: 200;
+	color: white;
+}
+#ItemImageContainer:Hover EconItemImage,
+#ItemImageContainer:Hover Label,
+#ItemImageContainer:Hover Image{
+	pre-transform-scale2d:1.1;
+}
+#ItemImageContainer:Hover{
+	box-shadow: 2px 3px 8px #000000aa;
+}
+#ItemImageContainer > EconItemImage,
+#ItemImageContainer > Image{
+	align:center center;
+	pre-transform-scale2d:1;
+	transition-duration: 0.2s;
+	transition-property:pre-transform-scale2d;
+}
+.RuneShop{
+	width: 66px;
+	height: 66px;
+}
+.ScenePanelBurst{
+	z-index: 200;
+	width: 100%;
+	height: 100%;
+	transform: rotateZ(90deg);
+}
+
+#PlayerInventoryServer RadioButton > .RadioBox{
+	visibility: collapse;
+}
+#PlayerInventoryServer RadioButton:selected{
+	box-shadow: 0px 0px 4px skyblue;
+}
+#PlayerInventoryServer RadioButton.IsUnique:selected{
+	box-shadow: 0px 0px 4px #EA7813;
+}
+#ToggleDonate{
+	width: 150px;
+	transform: translateX(110px);
+	height: 45px;
+	background-color: gradient( linear, 0% 0%, 80% 0%, from( #DCAAAA ), to( #776B6B ) );
+	vertical-align: top;
+	horizontal-align:right;
+	margin-top: 20%;
+	z-index: 200;
+	transition-duration: 0.3s;
+	transition-property: transform;
+}
+#ToggleDonate:Hover{
+	transform:none;
+}
+#IconDonate{
+	width: 32px;
+	height: 32px;
+	vertical-align: center;
+	z-index: 20;
+	background-image: url('file://{images}/war_of_kings/patreon_button.png');
+	background-size: 100% 100%;
+}
+#ToggleDonate Label{
+	text-align: center;
+	font-size: 22px;
+	align:center center;
+	color: white;
+	text-transform: uppercase;
+}
+
+#ButtonsContainer{
+	width: 100%;
+	flow-children:right;
+}
+#ButtonsContainer.CountBig #PurchaseButton{
+	max-width: 80%;
+	margin-right: 0px;
+	padding-right: 0px;
+
+}
+#PlayerInventoryServer #ButtonsContainer Label{
+	color: white;
+	align:center center;
+}
+#NotifyServerContainer{
+	min-width: 300px;
+	min-height: 180px;
+	background-color: #151515;
+	z-index: 200;
+	align:center center;
+	box-shadow: #151515 0 0 14px 0;
+	visibility: collapse;
+	transition-duration: 0.35s;
+	transition-property: opacity,pre-transform-scale2d;
+	pre-transform-scale2d:0;
+	opacity: 0;
+	padding: 30px;
+	border-radius: 10px;
+}
+#NotifyServerContainer.Visible{
+	visibility:visible;
+	opacity: 1;
+	pre-transform-scale2d:1;
+}
+#NotifyServerContainer > Label{
+	font-size:32px;
+	color: white;
+	text-align: center;
+	align:center center;
+}
+.rune-mask{
+	/*background-color: #000000aa;*/
+	width: 100%;
+	height: 100%;
+	vertical-align: bottom;
+	z-index: 100; 
+}
+
+
+#RoundBoard{
+	vertical-align: top;
+	horizontal-align:center;
+	opacity-mask:url("s2r://panorama/images/hud/reborn/bg_timer_psd.vtex");
+	background-image:url("s2r://panorama/images/hud/reborn/bg_timer_psd.vtex");
+	background-size: 100%; 
+	width: 150px;
+	background-color: black;
+	visibility: collapse;
+}
+
+#RoundBoard.Visible{
+	visibility: visible;
+}
+
+#RoundBoardContainer{
+	text-align: center;
+	align:center center;
+	flow-children:down;
+	padding: 10px;
+	padding-right: 0;
+	padding-left: 0;
+	padding-top: 5px;
+}
+#RoundBoardContainer > Label{
+	color: white; 
+	font-size: 23px;
+	margin-bottom: 3px;
+	horizontal-align:center;
+	margin-left: 3px;
+}
+#InfinityIcon{
+	width: 30px;
+	height: 0;
+	align:center center;
+	background-image:url('file://{images}/war_of_kings/infinity.png');
+	background-size: 100%;
+	wash-color:#000000aa;
+	transition-property: pre-transform-scale2d,height;
+	transition-duration: 0.5s;
+}
+
+#InfinityIcon.Visible{
+	opacity: 1;
+	height: 15px;
+}
+
+#leaderboards{
+	background-image: url('file://{images}/war_of_kings/leaderboards.png');
+}
+
+#leaderboardsContainer{
+	height: 900px;
+	background-image:url("s2r://panorama/images/backgrounds/gallery_background.png");
+	background-size: 100%;
+	/*flow-children:right;*/
+	opacity: 0;
+	transition-duration: .35s;
+	pre-transform-scale2d:0.8;
+	transform:translateX(-200px) translateY(-150px);
+	transition-property: opacity,pre-transform-scale2d,transform,box-shadow;
+	align:center center;
+	padding: 10px;
+}
+#FriendLeader,
+#GlobalLeader{
+	flow-children:down;
+	height: 100%;
+	width: 600px;
+	opacity: 0;
+	transition-duration: .4s;
+	transition-property: transform,opacity;
+	transform:translateX(100%);
+	z-index: 2;
+}
+
+#FriendLeader.Visible,
+#GlobalLeader.Visible{
+	opacity: 1;
+	transform: none;
+}
+
+#ButtonTypeLeaders,
+#HeaderLeaderBoard{
+	flow-children:right;
+}
+#ButtonTypeLeaders{
+	width: 100%;
+}
+#HeaderLeaderBoard{
+	horizontal-align:center;
+}
+#ButtonTypeLeaders > RadioButton{
+	margin: 8px;
+	background-color: black;
+	padding: 8px;
+	width: 50%;
+	margin-bottom: 20px;
+}
+#ButtonTypeLeaders > RadioButton Label{
+	text-align: center;
+	horizontal-align:center;
+	margin: 0;
+}
+#ButtonTypeLeaders > RadioButton:selected{
+	box-shadow:#335EC1 0px 0px 8px 0px;
+}
+#ButtonTypeLeaders > RadioButton > .RadioBox{
+	visibility: collapse;
+}
+
+#HeaderLeaderBoard > Label{
+	margin-right: 5px;
+	margin-left: 5px;
+	text-align: center;
+}
+#leaderboardsContainer.Visible{
+	opacity: 1;
+	pre-transform-scale2d:1;
+	transform:none;
+	box-shadow:#000000aa 0px 0px 8px 0px;
+}
+
+.leader_player{
+	width: 250px;
+}
+.leader_rank{
+	width: 50px;
+}
+.leader_alive{
+	width: 140px;
+}
+#RankingPlayerContent{
+	horizontal-align:center;
+}
+#RankingPlayerContent VerticalScrollBar{
+	width: 3px;
+}
+#RankingPlayerContent > Panel{
+	opacity: 0;
+	transition-duration: 0.2s;
+	transition-property: opacity,transform;
+	transform:translateX(-100%);
+}
+#RankingPlayerContent > Panel.Visible{
+	opacity: 1;
+	transform: none;
+}
+#RankingPlayerContent > Panel{
+	flow-children:down;
+	overflow:clip scroll;
+	margin-top: 10px;
+}
+.leader_alive > Label,
+.leader_rank > Label{ 
+	align:center center;
+	font-size: 28px;
+	color: white;
+	text-shadow: 0px 0px 4px 1.0 #000000aa;
+}
+
+
+.Player_row_ranking{
+	flow-children:right;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-top:3px;
+	padding-bottom: 3px;
+}
+.Player_row_ranking > Panel{
+	margin-right: 5px;
+	margin-left: 5px;
+	vertical-align: center;
+}
+
+#LeaderIcon{
+	width: 44px;
+	height: 44px;
+	background-size: 100% 100%;
+	align:center center;
+}
+#ButtonToggleLeaderPage{
+	vertical-align: top;
+	horizontal-align:right;
+	/*background-color: #000000aa;*/
+	margin-top: 120px;
+	/*transform: translateX(250px);*/
+	flow-children:down;
+	z-index: 20;
+}
+#ButtonToggleLeaderPage > RadioButton{
+	width: 100px;
+	transform: translateX(50px);
+	background-color: #000000aa;
+	margin-top: 5px;
+	transition-property: transform;
+	transition-duration: .3s;
+	margin-bottom: 5px;
+	padding:2px;
+}
+/*#ButtonToggleLeaderPage > RadioButton:selected,*/
+#ButtonToggleLeaderPage > RadioButton:Hover{
+	transform: translateX(0px);
+}
+#ButtonToggleLeaderPage > RadioButton > Label{
+
+	font-size: 25px;
+}
+#ButtonToggleLeaderPage > RadioButton > .RadioBox{
+	visibility: collapse;
+}
+
+.leader_2{
+	background-image: url('file://{images}/war_of_kings/leader_2.png');
+}
+
+.leader_3{
+	background-image: url('file://{images}/war_of_kings/leader_3.png');
+}
+
+.leader_1{
+	background-image: url('file://{images}/war_of_kings/leader_1.png');
+}
+.SliderContainer{
+	flow-children:right;
+	margin-top: 30px;
+}
+.SliderContainer DOTASettingsSlider,
+.SliderContainer Label{
+	text-align: center;
+	align:center center;
+}
+
+.SliderContainer DOTASettingsSlider{
+	margin: 0px;
+	margin-right: 10px;
+	width: 400px;
+}
+
+
+#PlayerLeader{
+	flow-children:right;
+	padding: 10px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+#PlayerImageLeader{
+	width: 55px;
+	height: 55px;
+	margin-right: 10px;
+	/*border: 2px solid lime;*/
+
+}
+#PlayerLeader DOTAUserName{
+	vertical-align: center; 
+}
+#PlayerLeader  Label{
+	vertical-align: center;
+	letter-spacing: 0.5px;
+}
+.leader_header{
+	font-size: 27px;
+	color: white;
+	vertical-align: center;
+	horizontal-align:center;
+	margin: 5px;
+}
+/*
+ 3 page selection (delete :=) )
+#SelectedUniqueCards{
+	flow-children:right;
+}
+#SelectionCardMenu{
+	horizontal-align:right;
+	width: 850px;
+	height: 700px;
+	border: 1px solid white;
+	padding: 20px;
+	margin: 10px;
+	margin-top: 0;
+	flow-children:right-wrap;
+	overflow: clip scroll;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #C36F0C  ), to( #C4A27A ) ); 
+	background-size: 100%;
+}
+
+#SelectionMenu{
+	flow-children:down;
+	border: 1px solid white;
+}
+.row{
+	flow-children:right;
+	horizontal-align:center;
+}
+.SelectCardMenu{
+	width: 180px;
+	height: 250px;
+	background-color: royalblue;
+	margin:5px;
+}
+#SelectionCardMenu #VerticalScrollBar #ScrollThumb{
+	background-color: royalblue;
+}
+#SelectionCardMenu #VerticalScrollBar{
+	width: 8px;
+	border-radius: 10px;
+}
+.CardSelectionPlayer{
+	width: 180px;
+	height: 250px;
+	background-color: red;
+	margin:10px;
+	transition-duration: 0.35s;
+	transition-property: pre-transform-scale2d;
+	pre-transform-scale2d:0.9;
+	box-shadow: #151515 0 0 10px 0;
+}
+.CardSelectionPlayer:Hover{
+	pre-transform-scale2d:1;
+}
+.CardSelectionPlayer:Hover #DescriptionContainer{
+	opacity: 1;
+}
+#BackgroundImage{
+	width: 100%;
+	height: 100%;
+}
+#DescriptionContainer{
+	width: 100%;
+	background-color: #000000aa;
+	height: 100%;
+	opacity: 0;
+	transition-duration: 0.35s;
+	transition-property: opacity;
+}
+#DescriptionContainer > Label{
+	align:center center;
+	color:white;
+}
+
+#XpCardAmount{
+	vertical-align: bottom;
+	width: 100%;
+	background-color: yellow;
+	border-radius: 0;
+	height: 5px;
+}*/

@@ -1,0 +1,78 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.css" />
+		<include src="s2r://panorama/styles/dashboard_page_hero_new.vcss_c" />
+		<include src="file://{resources}/styles/tooltips/tooltip_ability.css" />
+		<include src="file://{resources}/styles/custom_game/custom_hud.css" />
+		<include src="s2r://panorama/styles/hero_stat_icons.vcss_c" />
+		<include src="file://{resources}/styles/custom_game/keyframes.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/util.js" />
+		<include src="file://{resources}/scripts/custom_game/tooltip.js" />
+	</scripts>
+	<Panel class="CardTooltip" hittest="false" ontooltiploaded="OnLoadCardTooltip()" >
+		<Panel id="Tooltip" > 
+			<Panel id="header" >
+				<Panel id="UnitIconParent">
+					<Panel id="BorderAnim"/>
+					<Image id="UnitIcon" src="" />
+				</Panel>
+				<Panel id="HeaderNameAndGold">
+					<Label text="{s:CardName}"/>
+					<Panel id="GoldNumberic">
+						<Panel id="GoldIcon"/>
+						<Label html="true" text="{s:gold_cost}"/>
+					</Panel>
+				</Panel>
+			</Panel>
+			<Panel id="ContentTooltip">
+				<Panel id="CardInfo">
+					<Label text="#war_of_kings_tooltip_rarity" html="true"/>
+					<Label text="#war_of_kings_tooltip_racial" html="true"/>
+					<Label text="#war_of_kings_tooltip_class"  html="true"/>
+					<Panel id="TierCard">
+						<Label text="#war_of_kings_tooltip_tier"/>
+						<Panel class="star"/>
+						<Panel class="star"/>
+						<Panel class="star"/>
+					</Panel>
+					<!--<Label text="Weather: Pain"/> -->
+				</Panel>
+				<Panel id="HeroStats">
+					<Panel class="HeroStatsSection">
+						<Label class="HeroStatsHeader" text="#DOTA_HeroStats_Castegory_Attack" />
+						<Panel class="HeroStatsRow">
+							<Panel class="HeroStatsIcon DamageIcon" />
+							<Label class="MonoNumbersFont" text="{s:damage_min} - {s:damage_max}" />
+						</Panel>
+						<Panel class="HeroStatsRow">
+							<Panel class="HeroStatsIcon AttackRangeIcon" />
+							<Label class="MonoNumbersFont" text="{s:attack_range}" />
+						</Panel>
+					</Panel>
+					<Panel class="HeroStatsSection" >
+						<Label class="HeroStatsHeader" text="#DOTA_HeroStats_Castegory_Defense" />
+						<Panel class="HeroStatsRow">
+							<Panel class="HeroStatsIcon ArmorIcon" />
+							<Label class="MonoNumbersFont" text="{s:armor}"/>
+						</Panel>
+						<Panel class="HeroStatsRow">
+							<Panel class="HeroStatsIcon MagicResistIcon" />
+							<Label class="MonoNumbersFont" text="{s:magic_resistance}%" />
+						</Panel>
+					</Panel>
+					<Panel class="HeroStatsSection" >
+						<Label class="HeroStatsHeader" text="#DOTA_HeroStats_Castegory_HealthMana" />
+						<Panel id="HealthRow" class="HeroResourceRow">
+							<Label class="MaxResource MonoNumbersFont" text="{s:max_health}" />
+						</Panel>
+						<Panel id="ManaRow" class="HeroResourceRow">
+							<Label class="MaxResource MonoNumbersFont" text="{s:max_mana}" />
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

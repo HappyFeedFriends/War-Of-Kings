@@ -1,0 +1,31 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/custom_hud.css" />
+		<include src="file://{resources}/styles/custom_game/keyframes.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/util.js" />
+		<include src="file://{resources}/scripts/custom_game/tooltip.js" />
+	</scripts>
+	<Panel class="DifficuilTooltip" hittest="false" ontooltiploaded="OnLoadDifficuiltTooltip()" >
+		<Panel id="Tooltip" > 
+				<Label html="true"   text="{s:description}" />
+				<Panel id="ContainerCrossTick">
+					<Panel id="GlobalRanking" class="rowTooltip" >
+						<Label text="#GLOBAL_RANKING" />
+						<Panel id="iconCrossTick" />
+					</Panel>
+					<Panel id="EndlessMode" class="rowTooltip" >
+						<Label text="#ENDLESS_MODE" />
+						<Panel id="iconCrossTick" />
+					</Panel>
+<!-- 					<Panel id="DroppedRarity" class="rowTooltip" >
+						<Label text="#DROPPED_ROSHAN" />
+						<Panel id="iconCrossTick" />
+					</Panel> -->
+				</Panel>
+				<!-- <Panel id="DropItems" /> -->
+		</Panel>
+	</Panel>
+</root>

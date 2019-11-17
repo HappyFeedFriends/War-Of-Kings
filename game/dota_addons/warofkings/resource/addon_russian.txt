@@ -1,0 +1,292 @@
+"lang"
+{
+	"Language"		"Russian"
+	"Tokens"
+	{	
+		"UI_not_damage_towers"						"Не наносит урон по башням"
+		"UI_low_defense"							"Имеют малое количество брони и 0% магического сопротивления"
+		"UI_bonus_crystal_drop"						"При смерти дают +{s:crystal_drop} кристалл(-ов)"
+		"UI_mutant_color"							"Окрашены в зелёный цвет"
+		"UI_mutant_spawn"							"Появляются только перед волной с боссом/Мини - Боссом и после"
+		"UI_champion_bonus_damage"					"Дополнительный урон по вашим башням +{s:champion_bonus_damage}"
+		"UI_champion_unique"						"Любой крип может превратиться в Champion, кроме Mini - Boss и Boss"
+		"UI_champion_unique_2"						"При появлении получает щит поглощающий до {s:shield}% от максимального здоровья"
+		"UI_health_bonus_creep"						"Здоровье увеличивается на {s:health}%"
+		"UI_bonus_movespeed_creep"					"Скорость передвижения +{s:movespeed_bonus}%"
+		"UI_bonus_crystal_and_gold"					"+{s:crystal_drop} кристаллов за убийство и +{s:gold_drop}% золота"
+		"UI_chance_spawn_creep"						"Шанс появления - {s:chance_spawn}%"
+		"UI_damage_creep_towers"					"Урон по башням - {s:damage_creep_towers}"       
+		"UI_magic_immune_creep"						"Неуязвимы для магического урона"
+		"UI_bonus_health_creep_base"				"Здоровье увеличивается на {s:health}% от базового"
+		"UI_ancient_movespeed"						"Базовая скорость передвижения - {s:base_movespeed}"
+		"UI_chance_spawn_mutant"					"Шанс появления - {s:chance_spawn}%. Ancient может стать только крип мутант"
+		"UI_standart_drop_creep"					"Стандартно {s:crystal} кристаллов и {s:gold} золота при убийстве"
+		"UI_chance_free_card"						"Шанс в {s:chance}% получить бесплатно случайную башню при убийстве"
+		"UI_spawn_interval"							"Появляются каждые {s:interval} волн"
+		"UI_boss_endless"							"Открывает бесконечный режим, если он доступен на вашем уровне сложности"
+
+		"UI_payment_methods"						"СПОСОБЫ ОПЛАТЫ"
+
+      	"YANDEX_DESCRIPTION"			"Функция оплаты данным средство скоро будет активна"
+      	"DISCORD_DESCRIPTION"			"Подключаясь к нашему Discord каналу, вы можете узнать полную информацию по поводу платежей"
+      	"PATREON_DESCRIPTION"			"На Patreon вы поддержать разработчика, получив за это уникальную роль и уникальных курьеров"
+
+		"Quick_start"					"БЫСТРЫЙ СТАРТ!"
+      	"step_1"						"ШАГ 1"
+      	"step_2"						"ШАГ 2"
+      	"step_3"						"ШАГ 3"
+      	"step_4"						"ШАГ 4"
+      	"step_5"						"ШАГ 5" 
+
+      	"step_1_description"			"Выбери башню которая больше нравится."
+      	"step_2_description"			"Поставь свою башню в твоё любимое место. Для более выгодной позиции советуем ставить ближе к вашему месту выхода крипов."
+      	"step_3_description"			"Следи за здоровьем своих башен, их могут уничтожить идущие крипы, башни имеющие класс Guardian, могут получить больше урона и имеют больше брони"
+      	"step_4_description"			"Уничтожай идущих крипов, их убийство приносит опыт башне, которая его убила, а вам золото"
+      	"step_5_description"			"Увеличивай возможности башен с помощью других башен! Комбинируй их и эксперементируй с ними."
+
+		"creep_data"								"ВИДЫ КРИПОВ"
+
+		"dota_hud_error_not_has_inventory"			"Существо не может использовать предметы"
+		"dota_hud_error_item_not_available"			"Предмет не доступ для данной башни"
+		"dota_hud_error_max_items"					"Превышено количество предметов"
+		"dota_hud_error_only_building_target" 		"Можно использовать только на башни"
+		"dota_hud_error_caster_building" 			"Только башня может это использовать"
+		"dota_hud_error_caster_not_owner" 			"Эта башня вам не принадлежит"
+		"dota_hud_error_cant_build_at_location" 	"Недоступная точка для создания башни"
+		"war_of_kings_hud_error_max_buildings"		"Превышен лимит башен"
+
+      	"Settings_CameraDistance"		"ДИСТАНЦИЯ КАМЕРЫ"
+      	"Setting"						"Настройки"
+      	"ShopButton"					"Магазин"
+      	"leaderboards"					"Таблица Лидеров"
+
+		"UI_CardInfoPanel"				"Список Башен"
+		"UI_cardinfo_panel"				"Информация"
+		"UI_cardAssembly"				"Улучшения башен"
+
+		"UI_NEED_LEVEL_BATTLE_PASS"		"Нужен 5 уровень Battle Pass, для игры на этой сложности"
+
+		"UI_tower_unique" 				"Каждые 3 пройденных раунда дают случайную башню"
+		"UI_midas_unique" 				"Каждые 10 секунд, c шансом в 10% каждая башня может уничтожить крипа и получить 200% золота и опыта"
+		"UI_gold_per_kill_unique" 		"Убитые крипы дают на 35% больше золота, но сундук с золотом на 1% меньше"
+		"UI_health_unique" 				"+50 К стартовому здоровью"
+		"UI_warrior_unique" 			"Уменьшает маг. урон на 60%, регенерацию маны на 20%, но увеличивает физ. урон на 100%"
+		"UI_mage_unique" 				"Уменьшает физ. урон на 60%, но увеличивает регенерацию маны на 5, уменьшает перезарядку на 35% и увеличивает маг. урон на 40%"              
+		"UI_close_unique" 				"Начать игру без уникального бонуса, по окончанию игры вы получаете в 2 раза больше опыта"  
+		"UI_tower_level" 				"Все башни стартуют с 10 уровнем, а дополнительный урон за каждый уровень увеличивается на 2"  
+		"UI_drop_chance_unique" 		"С шансом в 2% погибшие крипы выбрасывают случайный предмет, зависящий от типа крипа"         
+		"UI_creeps_not_use_ability" 	"Крипы больше не будут использовать способности"
+
+		"UI_warrior_1"								"Каждая ☆ увеличивает скорость атаки на {s:bonus_attack_speed_warrior}"
+		"UI_warrior_special"						"[Special] Troll Warlord увеличивает весь урон башен созданных на момент появления на {s:warrior_special}%"
+
+		"UI_shaman_1"								"Каждая ☆ увеличивает урон на {s:bonus_mana_shaman}"
+		"UI_shaman_special"							"[Special] Visage увеличивает максимальное количество башен на {s:shaman_special}"
+
+		"UI_guardian_1"								"Каждая ☆ увеличивает ваш максимум здоровья на {s:guardian_bonus_health}"
+		"UI_guardian_special"						"[Special] Dragon Knight также уменьшает получаемый урон от каждого пройденного крипа на {s:guardian_special}"
+
+		"UI_mage_1"									"Каждая ☆ увеличивает магический урон на {s:mage_bonus_amp}%"
+		"UI_mage_special"							"[Special] Skywrath Mage увеличивает урон способностей у всех башен созданных ранее на {s:mage_bonus_special}%"
+
+		"UI_rogue_1"								"Каждая ☆ увеличивает шанс критической атаки на {s:rogue_bonus_critical_chance}% и критический урон на {s:rogue_critical_damage}%"
+		"UI_rogue_special"							"[Special] Slark все башни на момент появления, не имеющие класс {s:class_rogue}, получают шанс в {s:rogue_critical_damage_chance_special}% нанести критический урон в размере {s:rogue_critical_damage_special}%"
+
+		"UI_archer_1"								"Каждая ☆ уменьшает базовую скорость атаки на {s:archer_bonus_1}"
+		"UI_archer_special"								"[Special] Windranger увеличивает дальность атаки всех башен на момент появления с классом {s:class_archer} на {s:archer_bonus_special}"
+
+		"UI_StartTime"								"ДО СТАРТА"
+		"Difficuilt_tooltip_sandbox"				"В данном режиме вы можете настраивать режим игры как хотите этого сами, по окончанию игры ничего не будет сохранено в ваши игровые результаты."
+		"Difficuilt_tooltip_sandbox_description"	"Режим песочницы, настраивайте сложность игры, волны и многое другое в одно нажатие"
+		"Difficuilt_tooltip_simple_description"		"Самый лёгкий режим, основан на познание механик режима. <br><br>МНОЖИТЕЛЬ ЗДОРОВЬЯ: 50% <br>МНОЖИТЕЛЬ УРОНА: 50%"
+		"Difficuilt_tooltip_normal_description"		"Стандартный режим, все враги в разы сильнее чем в режиме SIMPLE. <br><br>МНОЖИТЕЛЬ ЗДОРОВЬЯ: 100% <br>МНОЖИТЕЛЬ УРОНА: 100%"
+		"Difficuilt_tooltip_hard_description"		"Суровый режим, проходится не так уж и сложно, но может вызвать затруднения. <br><br>МНОЖИТЕЛЬ ЗДОРОВЬЯ: 150% <br>МНОЖИТЕЛЬ УРОНА: 150%"
+		"Difficuilt_tooltip_impossible_description"	"Невероятный режим, случайный игрок его врятле пройдёт, тут нужно контроль и правильная постановка ваших башен. <br><br> МНОЖИТЕЛЬ ЗДОРОВЬЯ: 175% <br>МНОЖИТЕЛЬ УРОНА: 175%"
+		"Difficuilt_tooltip_hell_description"		"Адский режим, выбирайте его если вы отчаялись <br><br>МНОЖИТЕЛЬ ЗДОРОВЬЯ: 200% <br>МНОЖИТЕЛЬ УРОНА: 175%"  
+
+		"Difficuilt_tooltip_sandbox"				"Режим песочницы, вы имеете бесконечный запас золота,а также можете сами вызывать волны"				
+		"Difficuilt_tooltip_normal"					"Режим для более опытных игроков в Tower Defense, довольно сложней по сравнению с SIMPLE"
+		"Difficuilt_tooltip_hard"					"Режим для знающих толк в TD игроков, сложно но возможно"
+		"Difficuilt_tooltip_impossible"				"Крайне сложный режим для новичка, контролируйте башни - чтобы пройти до конца."
+		"Difficuilt_tooltip_hell"					"Самый сложный уровень, выбирайте его только если вы готовы страдать"
+		"Difficuilt_tooltip_simple"					"Режим для новичков, которые только запустили режим"
+		"SelectionDifficuil"						"ВЫБЕРИ СЛОЖНОСТЬ"
+		"SelectionUnique"							"ВЫБИРАЙ УНИКАЛЬНЫЙ БОНУС"
+
+		"necrophos_upgrade_1"			"Если у Necrophos полное здоровье, то он будет восстанавливать до {value} целей возле себя, в размере {heal}% от базового значения способности"
+		"necrophos_upgrade_2"			"Увеличивает наносимый урон от {ability} на {value}%"
+
+		"lion_upgrade_1"				"Убийство крипа с помощью {ability} увеличивает урон от этой способности на {value}"
+
+		"lycan_upgrade_1"				"Критический урон во время активной способности {ability}, +{value}%"
+		"lycan_upgrade_2"				"Призываемые волки получают все предметы своего владельца"
+
+		"bloodseeker_upgrade_1"			"Получаемый урон по башни уменьшается до {value}"
+		"bloodseeker_upgrade_2"			"Длительность метки на крипах увеличивается на {value}"
+
+		"abaddon_upgrade_1"				"Abaddon полность восстанавливает здоровья при получении фатального урона"
+		"ogre_mage_upgrade_1"			"{ability} действует до {value} ближайших целей рядом с целью способности"
+
+		"devourer_upgrade_1"			"Урон от {ability} наносится в виде <font color='red'>Чистого урона</font>"
+		"devourer_upgrade_2"			"{ability} потребляет на <font color='skyblue'>{value}%</font> меньше маны."
+             
+		"medusa_upgrade_1"				"+{value}% к урону от {ability}"
+		"medusa_upgrade_2"				"+{value}% к урону от {ability}"        
+		"medusa_upgrade_3"				"+{value} стрелы за атаку от {ability}"
+
+		"shaman_upgrade_1"				"{ability} применяется по области в {value} ед."
+		"shaman_upgrade_2"				"{ability} наносит x{value} урона"
+		"shaman_upgrade_3"				"{ability} оглушает все цели на {value} сек."
+
+		"tusk_upgrade_1"				"{ability} +{value}% критического урона"
+		"tusk_upgrade_2"				"{ability} -{value} сек. перезарядки"
+
+		"tidehunter_upgrade_1"			"{ability} +{value} к радиусу действия"
+		"tidehunter_upgrade_2"			"{ability} +{value} к урону способности"
+  
+		"leshrac_upgrade_1"				"{ability} Больше не потребляет ману"
+
+		"pugna_upgrade_1"				"{ability} действует в радиусе {value} ед."
+               
+		"enigma_upgrade_1"				"+{value} урона от {ability}"
+		"enigma_upgrade_2"				"Длительность Black Hole +{value} сек."
+
+		"keeper_upgrade_1"				"{ability} наносит в {value} раза больше урона"
+
+		"mars_upgrade_1"				"God's Rebuke оглушает все цели получившие урон от данной способности на {value} сек."
+
+		"prophet_upgrade_1"				"Весь урон наносимый Death Prophet увеличивается на {value}%"
+
+		"dragon_upgrade_1"				"+{value}% к урону по соседним целям"
+		"dragon_upgrade_2"				"+{value} к дальности"
+
+		"bounty_hunter_1"				"{ability} даёт на <font color='gold'>{value}</font> золота больше за атаку."   
+
+		"zeus_upgrade_1"				"Использование способностей оглушает все цели в радиусе {radius} на {value} сек."
+		"zeus_upgrade_2"				"+{value}% урона от {ability}"
+		"zeus_upgrade_3"				"+{value} урона от {ability}"
+
+		"phantom_assasin_upgrade_1" 	"Увеличивает критический урон от {ability} на {value}%"
+		"phantom_assasin_upgrade_2"		"Увеличивает шанс критической атаки от {ability} на {value}%"
+		"phantom_assasin_upgrade_3"		"С шансом {value_chance}% может нанести x{value} урона."
+
+		"templar_assasin_upgrade_1"		"Бонусный урон от {ability} дополнительно увеличивается на {value}"
+		"templar_assasin_upgrade_2"		"Количество эффектов от {ability} +{value}"
+		"templar_assasin_upgrade_3"		"Урон от пробития у способности {ability} +{value}%"
+
+		"drow_ranged_upgrade_1"			"Урон от {ability} +{value}"
+		"drow_ranged_upgrade_2"			"Количество дополнительных стрел от {ability} +{value}"
+
+		"centaur_warruner_upgrade_1"	"Длительность оглушения от {ability} +{value} сек."
+		"centaur_warruner_upgrade_2"	"Радиус оглушения от {ability} +{value}"
+
+		"ursa_upgrade_1"				"Урон за каждый эффект {ability} увеличивается на {value}"
+
+		"wraith_king_upgrade_1"			"Урон в секунду от {ability} увеличивается на {value}"
+		"wraith_king_upgrade_2"			"Длительность оглушения от {ability} увеличивается на {value}"
+
+		"lina_upgrade_2"				"При получении урона от {ability} цель поджигается и получает переодический урон каждые 0.4 секунды."
+		"lina_upgrade_1"				"При нанесении урона, создаётся {value} новых дракона, летящие в другом направлении."
+		"lina_upgrade_3"				"{ability} применяется по площади радиусом в {value} ед."
+
+		"queen_upgrade_1"				"{ability} всегда имеет перезарядку в {value} секунд"
+		"queen_upgrade_2"				"{ability} действует в глобальном радиусе в том числе и на крипов других игроков."
+
+		"sniper_upgrade_1"				"Базовая скорость атаки изменяется на {value}"
+		"sniper_upgrade_2"				"Увеличивает дальность атаки на {value}"
+
+		"sven_upgrade_1"				"Дистанция прорубающего урона +{value}"
+		"sven_upgrade_2"				"Радиус оглушения от способности {ability} увеличивается на {value}"
+
+		"clinkz_upgrade_1"				"+{value} дополнительного урона от {ability}"
+
+		"luna_upgrade_1"				"+{value} урона от {ability}"
+		"luna_upgrade_2"				"-{value}% снижения урона от отскоков"	
+
+		"viper_upgrade_1"				"{ability} наносит на {value} урона больше"
+
+		"gyrocopter_upgrade_1"			"Длительность {ability} +{value} секунды"
+
+		"juggernaut_upgrade_1"			"Время перезарядки {ability} всегда {value} секунд"
+
+		"huskar_upgrade_1"				"Урон от {ability} увеличивается на {value}"
+
+		// First Upgrade (x2 spirits)
+		"spirit_upgrade_1"				"Дарует способность {ability}, способность поджигает цель и наносит ей урон."
+		"spirit_upgrade_2"				"Дарует способность {ability}, каждая атака может оглушить цель атаки."
+		"spirit_upgrade_3"				"Дарует способность {ability}, все крипы передвигаются чуть медленее."
+
+		"Dota_tooltip_ability_ability_bonus_magical_damage"	"MAGICAL RUNE"
+		"Dota_tooltip_ability_ability_bonus_magical_damage_description"	"Увеличивает магический урон всех башен и уменьшает перезарядку способностей"
+		"Dota_tooltip_ability_ability_bonus_magical_damage_amplify"		"%AMPLIFY:"
+		"Dota_tooltip_ability_ability_bonus_magical_damage_cooldown_reduction" 	"%COOLDOWN REDUCTION:"
+		"Dota_tooltip_ability_ability_bonus_magical_damage_duration" 			"DURATION:"
+
+		"Dota_tooltip_ability_ability_bonus_life"				"LIFE RUNE"
+		"Dota_tooltip_ability_ability_bonus_life_description"	"При получении фатального урона, вы восстанавливаете полное здоровье."
+      
+		"Dota_tooltip_ability_ability_bonus_physical_damage_damage"				"%BONUS DAMAGE:"
+		"Dota_tooltip_ability_ability_bonus_physical_damage_attack_speed" 		"ATTACK SPEED:"
+		"Dota_tooltip_ability_ability_bonus_physical_damage_duration" 			"DURATION:"                   
+		"Dota_tooltip_ability_ability_bonus_physical_damage"			"PHYSICAL RUNE"
+		"Dota_tooltip_ability_ability_bonus_physical_damage_description" "Увеличивает скорость атаки и физический урон башен"
+
+		"Dota_tooltip_ability_ability_remove_unit_description"	"Уничножить башню, при этом нельзя получить часть золота обратно"
+
+		"Dota_tooltip_ability_item_assault_shield"						"Assault Shield"
+		"Dota_tooltip_ability_item_assault_shield_description"			"<h1> Пассивная: Regenerating Shield </h1> Увеличивает/создаёт щит вокруг башни, поглощающий любой входящий урон. Щит не может превысить %max_health_shield%%  от максимального здоровья башни. Щит увеличивается на %bonus_shield% каждые %shield_cooldown_tooltip% секунд" 
+		"Dota_tooltip_ability_item_assault_shield_bonus_health"			"+$health"
+
+		"Dota_tooltip_ability_item_book_of_soul_creep"					"BOOK OF SAVE"
+		"Dota_tooltip_ability_item_book_of_soul_creep_description"		"<h1> Activated: Save Tower </h1> Уничтожает выбранную башню, весь опыт который находился в данной башне поровну распределяется между остальными,а сама башня будет продолжать комбинировать со всеми остальными башнями." 
+
+		"Dota_tooltip_ability_obsidian_destroyer_arcane_orb_custom_description" 	"Атаки Outworld Devourer наносят дополнительный урон, основанный на Мане цели и Мане Outworld Devourer, а также увеличивает свой урон, а также наносит урон в пределах небольшого радиуса"
+
+		"Dota_tooltip_ability_obsidian_destroyer_sanity_eclipse_custom_description" 	"Наносит урон в радиусе взрыва, урон рассчитывается по количеству маны Outworld Devourer  умноженному на %damage_multiplier%"
+
+		"Dota_tooltip_ability_necrolyte_reapers_scythe_custom_description"							"Оглушает выбранную вражескую цель, нанося урон через %delay% сек."
+
+		"Dota_tooltip_ability_lion_finger_of_death_custom_description"						"Выворачивает вражеское существо наизнанку нанося большой урон. <br><br> При убийстве с помощью данной способности обнуляет время перезарядки и восстанавливает 50% маны"
+		"Dota_tooltip_ability_huskar_berserker_blood_custom_description"					"Увеличивает урон и скорость атаки в зависимости от здоровья его строителя, чем меньше здоровья, тем больше бонусы от данной способности"
+
+		"Dota_tooltip_ability_huskar_burning_spear_custom_description"					"Поджигает своё копьё, нанося переодический урон, каждые 0.8 сек."
+
+		"Dota_tooltip_ability_juggernaut_omni_slash_custom_description"					"Атакует свою цель несколько раз подряд,а также с небольшим шансом может убить цель атаки." 
+		"Dota_tooltip_ability_slark_kill_shot_1_description"							"Может убить цель своей атаки с небольшим шансом."
+		"Dota_tooltip_ability_bloodseeker_bloodrage_custom_description"					"Увеличивает наносимый урон выбранной башни, но при этом увеличивает получаемый урон."
+		"Dota_tooltip_ability_bloodseeker_bloodrite_custom_description"					"Создаёт кровавый круг, пропадающий через %duration%, все вражеские существа наступившие на круг получают метку на %duration_creep%, и при использовании любой способности или предмета Bloodseeker наносит %damage_per_use% всем существам с данной меткой."
+		"Dota_tooltip_ability_lina_dragon_slave_custom_description"						"Выпускает огненного дракона наносящего урон всем целям на пути"
+		"Dota_tooltip_ability_lina_laguna_blade_custom_aghanim_description"				"Изменяет тип урона способности с магического на чистый"
+		"Dota_tooltip_ability_ogre_mage_fireblast_custom_description"					"Поражает вражескую цель огнём нанося урон и оглушая цель"
+		"Dota_tooltip_ability_abaddon_borrowed_time_custom_description"					"Получая фатальный урон, Abaddon восстанавливает половину здоровья и получая неуязвимость на небольшое время"
+		"Dota_tooltip_ability_queenofpain_sonic_wave_custom_description"				"Создаёт перед гереом гигантскую звуковую волну нанося большой урон"
+		"Dota_tooltip_ability_queenofpain_sonic_wave_custom_aghanim_description"		"Все цели получившие урон от способности получают оглушение на %duration_stunned% сек."
+
+		"Dota_tooltip_ability_item_shield_buff_description"						"<h1> Active: Bonus Shield </h1> Увеличивает щит выбранной башни на %bonus_shield%"
+
+		"Dota_tooltip_ability_item_vortex_axe_1"								"VORTEX AXE"
+		"Dota_tooltip_ability_item_vortex_axe_1_description"					"<h1>Active: Shield Remove </h1> Отнимает %active_remove_shield%%  щита выбранной цели на %active_remove_shield_duration% сек.\n<h1>Passive: Shield Penetration </h1> Атаки по крипам с щитом наносят дополнительно %damage_shield%%  урона"
+		"Dota_tooltip_ability_item_vortex_axe_1_bonus_damage"					"+$damage"
+		"Dota_tooltip_ability_item_vortex_axe_1_bonus_attack_speed"				"+$attack"
+		"Dota_tooltip_ability_item_vortex_axe_1_bonus_health"					"+$health"	
+  
+		"Dota_tooltip_ability_item_vortex_axe_2"								"VORTEX AXE"
+		"Dota_tooltip_ability_item_vortex_axe_2_description"					"<h1>Active: Shield Remove </h1> Отнимает %active_remove_shield%%  щита выбранной цели на %active_remove_shield_duration% сек.\n<h1>Passive: Shield Penetration </h1> Атаки по крипам с щитом наносят дополнительно %damage_shield%%  урона"
+		"Dota_tooltip_ability_item_vortex_axe_2_bonus_damage"					"+$damage"
+		"Dota_tooltip_ability_item_vortex_axe_2_bonus_attack_speed"				"+$attack"
+		"Dota_tooltip_ability_item_vortex_axe_2_bonus_health"					"+$health"	
+
+		"Dota_tooltip_ability_item_vortex_axe_3"								"VORTEX AXE"
+		"Dota_tooltip_ability_item_vortex_axe_3_description"					"<h1>Active: Shield Remove </h1> Отнимает %active_remove_shield%%  щита выбранной цели на %active_remove_shield_duration% сек.\n<h1>Passive: Shield Penetration </h1> Атаки по крипам с щитом наносят дополнительно %damage_shield%%  урона"
+		"Dota_tooltip_ability_item_vortex_axe_3_bonus_damage"					"+$damage"
+		"Dota_tooltip_ability_item_vortex_axe_3_bonus_attack_speed"				"+$attack"
+		"Dota_tooltip_ability_item_vortex_axe_3_bonus_health"					"+$health"
+
+		"Dota_tooltip_ability_item_purify_sabre_godness"						"Purify Sabre"
+		"Dota_tooltip_ability_item_purify_sabre_godness_description"			"<h1>Passive: Purify Blade </h1> %damage_pure%% урона переводится в чистый урон и наносится в виде дополнительного"
+
+		"Dota_tooltip_ability_item_healing_ward_godness"						"Healing Ward"
+		"Dota_tooltip_ability_item_healing_ward_godness_description"			"<h1>Active: Ward </h1> Все башни в течении %duration% сек. увеличивают свой урон на %bonus_damage% и магический урон на %amplify%%, а восстановление здоровья на %healing%%"
+
+	}
+}

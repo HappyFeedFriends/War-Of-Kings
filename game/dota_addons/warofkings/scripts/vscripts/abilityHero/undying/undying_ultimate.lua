@@ -1,0 +1,3 @@
+undying_ultimate = class({
+
+})
