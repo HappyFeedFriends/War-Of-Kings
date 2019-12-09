@@ -8,6 +8,7 @@
         "buildings",
         "build_blocker",
         "BuildSystem",
-        "CustomShop"
+        "CustomShop",
+        "modifiers_value",
     ]
 } 

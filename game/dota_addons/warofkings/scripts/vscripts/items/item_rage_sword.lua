@@ -18,15 +18,6 @@ modifier_item_rage_sword =  class({
 	AllowIllusionDuplicate	= function(self) return false end,
 	IsPermanent             = function(self) return false end,
 	
-	OnCreated 				= function(self)
-		self.ability = self:GetAbility()
-		self.damage = self.ability:GetSpecialValueFor('bonus_damage')
-		self.bonus_attack = self.ability:GetSpecialValueFor('bonus_atk')
-		if self:GetParent().GetBuilding then 
-			self.parent = self:GetParent()
-			self:StartIntervalThink(0.2)
-		end
-	end,
 	OnIntervalThink = 		function(self)
 		if IsServer() then
 			if self.ability:IsFullyCastable() then
@@ -46,9 +37,21 @@ modifier_item_rage_sword =  class({
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,	
 	} end,
 	GetModifierPreAttack_BonusDamage = function( self ) return self.damage end,
-	GetModifierAttackSpeedBonus_Constant = function( self ) return self.bonus_attack end
+	GetModifierAttackSpeedBonus_Constant = function( self ) return self.bonus_attack end,
+	GetModifierBonusStats_Strength 		=	function(self) return self.str end,
 
-})
+},nil,class({
+	_OnCreated 				= function(self)
+		self.ability = self:GetAbility()
+		self.damage = self.ability:GetSpecialValueFor('bonus_damage')
+		self.bonus_attack = self.ability:GetSpecialValueFor('bonus_atk')
+		self.str = self.ability:GetSpecialValueFor('bonus_strength')
+		if self:GetParent().GetBuilding then 
+			self.parent = self:GetParent()
+			self:StartIntervalThink(0.2)
+		end
+	end,
+}),true)
 
 modifier_item_rage_sword_active =  class({
 	IsHidden 				= function(self) return true end,

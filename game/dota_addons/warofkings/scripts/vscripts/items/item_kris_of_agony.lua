@@ -4,9 +4,11 @@ LinkLuaModifier("modifier_item_kris_of_agony_count_stack", "items/item_kris_of_a
 item_kris_of_agony_1 = class({
 	GetIntrinsicModifierName 	= function(self) return 'modifier_item_kris_of_agony' end,
 })
+
 item_kris_of_agony_2 = item_kris_of_agony_1
 item_kris_of_agony_3 = item_kris_of_agony_1
-modifier_item_kris_of_agony =  class({
+
+local tableClass = {
 	IsHidden 				= function(self) return true end,
 	IsPurgable 				= function(self) return false end,
 	IsDebuff 				= function(self) return false end,
@@ -14,21 +16,27 @@ modifier_item_kris_of_agony =  class({
 	RemoveOnDeath 			= function(self) return false end,
 	AllowIllusionDuplicate	= function(self) return false end,
 	IsPermanent             = function(self) return false end,
-	OnCreated 				= function(self)
-		self.ability = self:GetAbility()
-		self.parent = self:GetParent()
-		self.bonus_stack = self.ability:GetSpecialValueFor('bonus_stack')
-		self.max_stack_bonus = self.ability:GetSpecialValueFor('max_stack_bonus')
-		self.max_bonus = self.ability:GetSpecialValueFor('max_bonus')
-		self.bonus_damage = self.ability:GetSpecialValueFor('bonus_damage')
-		self.passiveDamage = self.ability:GetSpecialValueFor('bonus_damage_passive') or 0 -- In case of patches from Gabe that would be on by default == 0
-	end,
 	DeclareFunctions 		= function(self) return 	{	
 		MODIFIER_EVENT_ON_TAKEDAMAGE,
 		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE	
 	} end,
 	GetModifierPreAttack_BonusDamage = function( self ) return self.passiveDamage end,
-})
+	GetModifierBonusStats_Strength 		=	function(self) return self.AllAttribute end,
+	GetModifierBonusStats_Agility 		=	function(self) return self.AllAttribute end,
+	GetModifierBonusStats_Intellect 	=	function(self) return self.AllAttribute end,
+}
+
+modifier_item_kris_of_agony =  class(tableClass,nil,class({
+	_OnCreated 				= function(this,data) -- call modifier_attribute_all_base
+		this.bonus_stack = this.ability:GetSpecialValueFor('bonus_stack')
+		this.max_stack_bonus = this.ability:GetSpecialValueFor('max_stack_bonus')
+		this.max_bonus = this.ability:GetSpecialValueFor('max_bonus')
+		this.bonus_damage = this.ability:GetSpecialValueFor('bonus_damage')
+		this.passiveDamage = this.ability:GetSpecialValueFor('bonus_damage_passive') or 0 -- In case of patches from Gabe that would be on by default == 0
+		this.AllAttribute = this.ability:GetSpecialValueFor('Attributes')
+	end,
+}),true)
+
 function modifier_item_kris_of_agony:OnTakeDamage(params)
 	if params.attacker == self.parent  then
 		local modifier = self.parent:FindModifierByName('modifier_item_kris_of_agony_buff')

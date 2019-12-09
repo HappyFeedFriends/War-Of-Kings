@@ -4,7 +4,7 @@ item_card_base_class = {
 			local location = self:GetCursorPosition()
 			local builder = PlayerResource:GetSelectedHeroEntity(self:GetCaster():GetPlayerOwnerID())
 			SnapToGrid(BUILDING_SIZE,location)
-			if builder and BuildSystem:PlaceBuilding(builder, name, location, BUILDING_ANGLE) then
+			if builder and BuildSystem:PlaceBuilding(builder, name, location, BUILDING_ANGLE,self.cost or 0) then
 				self:UpdateCharge()
 			end
 	end,
@@ -26,6 +26,11 @@ end
 function item_card_base_class:GetCustomCastErrorLocation(vLocation)
 	return self.error
 end
+item_card_war_of_kings_thunder_lizard = class(item_card_base_class or {}) 
+item_card_war_of_kings_harpy = class(item_card_base_class or {}) 
+item_card_war_of_kings_shadow_fiend = class(item_card_base_class or {}) 
+item_card_war_of_kings_tinker = class(item_card_base_class or {}) 
+item_card_war_of_kings_dark_willow = class(item_card_base_class or {}) 
 item_card_war_of_kings_undying = class(item_card_base_class or {}) 
 item_card_war_of_kings_ogre_mage = class(item_card_base_class or {})
 item_card_war_of_kings_abaddon = class(item_card_base_class or {})

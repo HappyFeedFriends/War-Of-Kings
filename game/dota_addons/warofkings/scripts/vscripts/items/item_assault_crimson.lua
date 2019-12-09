@@ -12,16 +12,19 @@ modifier_item_assault_crimson = class({
 	AllowIllusionDuplicate	= function(self) return true end,
 	IsPermanent             = function(self) return true end,
 	IsAura 					= function(self) return true end,
+	GetModifierBonusStats_Strength 	= function(self) return self.str end,
 	GetAuraRadius 			= function(self) return self.radius end,
 	GetAttributes           = function(self) return MODIFIER_ATTRIBUTE_MULTIPLE end,
 	GetAuraSearchTeam 		= function(self) return DOTA_UNIT_TARGET_TEAM_FRIENDLY end,
 	GetAuraSearchFlags      = function(self) return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE end,
 	GetAuraSearchType		= function(self) return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP end,
 	GetModifierAura 		= function(self) return 'modifier_item_assault_crimson_buff' end,
-	OnCreated 				= function(self)
-		self.radius = self:GetAbility():GetSpecialValueFor('radius')
+},nil,class({
+	_OnCreated 				= function(self)
+		self.radius = self.ability:GetSpecialValueFor('radius')
+		self.str = self.ability:GetSpecialValueFor('bonus_str')
 	end,
-})
+}),true)
 
 function modifier_item_assault_crimson:GetAuraEntityReject(hEntity)
 	return not hEntity.GetBuilding

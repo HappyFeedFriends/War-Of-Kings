@@ -5,6 +5,8 @@ function GameMode:StartGameEvents()
   	ListenToGameEvent("player_chat", Dynamic_Wrap(GameMode, 'OnPlayerChat'), self)
   	ListenToGameEvent("entity_hurt", Dynamic_Wrap(GameMode, 'OnEntityHurt'), self) 
   	ListenToGameEvent("dota_item_purchased", Dynamic_Wrap(GameMode, 'OnPurchasedItem'), self) 
+  	ListenToGameEvent("modifier_event", Dynamic_Wrap(GameMode, 'OnModifierEvent'), self)
+
   	CustomGameEventManager:RegisterListener("OnUseAbility", Dynamic_Wrap(GameMode, 'OnUseAbility'))
   	CustomGameEventManager:RegisterListener("OnSelectionUnique", Dynamic_Wrap(GameMode, 'OnSelectionUnique'))
   	CustomGameEventManager:RegisterListener("OnCardAddPlayerSandBox", Dynamic_Wrap(GameMode, 'OnCardAddPlayerSandBox'))
@@ -177,7 +179,7 @@ local damagebits = keys.damagebits
 	end 
 	local pID = UnitVarToPlayerID(killerEntity)
 	local unitName = killedUnit:GetUnitName()
-	if killedUnit.playerRound and pID and pID > -1 then
+	if killedUnit.playerRound and not killedUnit.IsSkip then
 		local playerID = killedUnit.playerRound
 		local __Player = GetPlayerCustom(playerID)
 		local hero = PlayerResource:GetSelectedHeroEntity(playerID)
@@ -189,7 +191,15 @@ local damagebits = keys.damagebits
 		local xpDrop = killedUnit:GetDeathXP()
 		if xpDrop > 0 and (BuildSystem:IsBuilding(killerEntity) or (killerEntity.custom_owner and BuildSystem:IsBuilding(killerEntity.custom_owner))) then
 			local tower = BuildSystem:IsBuilding(killerEntity) and killerEntity or killerEntity.custom_owner
-			tower:GetBuilding():AddExperience(xpDrop)
+			
+			tower:GetBuilding():AddExperience(xpDrop/2)
+			xpDrop = (xpDrop / 2) / math.max(BuildSystem:GetCountBuild(playerID) - 1,1)
+
+			BuildSystem:EachBuilding(playerID,function(build)
+				if build:GetUnitEntity() ~= tower:GetBuilding():GetUnitEntity() then
+					build:AddExperience(xpDrop)
+				end
+			end)
 		end
 		if killedUnit.bIsGodness then
 			local item = string.gsub(unitName,'npc_','item_card_') .. "_building"
@@ -212,9 +222,14 @@ local damagebits = keys.damagebits
 			end
 		end
 		__Player:UpdateQuest(QUEST_FOR_BATTLE_KILL_COUNT,1)
-		if __Player:GetUniqueBonus() == UNIQUE_BONUS_DROP_CHANCE and RollPercentage(2) then 
+		if RollPercentage(2) then 
 			local index = (killedUnit:IsBoss() or killedUnit.IsMiniBoss) and 3 or killedUnit.IsChampion == true and 2 or 1
-			killedUnit:DropItem(PickRandomShuffle(DROP_UNIQUE_BONUS_DROP_CHANCE[index],{}),killedUnit:GetAbsOrigin())
+			local item,drop = killedUnit:DropItem(PickRandomShuffle(DROP_UNIQUE_BONUS_DROP_CHANCE[index],{}),killedUnit:GetAbsOrigin())
+			if drop then 
+			local nfx = ParticleManager:CreateParticle("particles/neutral_item_drop_lvl" .. index.. ".vpcf" , PATTACH_CUSTOMORIGIN, nil );
+				ParticleManager:SetParticleControl(nfx, 0, drop:GetAbsOrigin())
+				ParticleManager:ReleaseParticleIndex( nfx );
+			end
 		end
 		if __Player:IsSandBoxMode() then 
 			__Player.tSandbox.tCacheUnits[killedUnit:GetEntityIndex()] = nil

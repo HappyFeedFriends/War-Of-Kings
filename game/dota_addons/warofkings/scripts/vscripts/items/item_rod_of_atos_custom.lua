@@ -48,14 +48,7 @@ modifier_item_rod_of_atos_custom = class({
 	AllowIllusionDuplicate	= function(self) return false end,
 	IsPermanent             = function(self) return false end,
 	GetAttributes           = function(self) return MODIFIER_ATTRIBUTE_MULTIPLE + MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE end,
-	OnCreated 				= function(self)
-		self.amp = self:GetAbility():GetSpecialValueFor('bonus_amp')
-		if self:GetCaster().GetBuilding then
-			self.ability = self:GetAbility()
-			self.parent = self:GetParent()
-			self:StartIntervalThink(0.2)
-		end
-	end,
+	GetModifierBonusStats_Intellect 	=	function(self) return self.int end,
 	OnIntervalThink = 		function(self)
 		if IsServer() then
 			if self.ability:IsFullyCastable() then
@@ -74,7 +67,17 @@ modifier_item_rod_of_atos_custom = class({
 		MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE
 	} end,
 	GetModifierSpellAmplify_Percentage = function(self) return self.amp end,
-})
+},nil,class({
+	_OnCreated 				= function(self)
+		self.amp = self:GetAbility():GetSpecialValueFor('bonus_amp')
+		self.int = self:GetAbility():GetSpecialValueFor('bonus_intellect')
+		if self:GetCaster().GetBuilding then
+			self.ability = self:GetAbility()
+			self.parent = self:GetParent()
+			self:StartIntervalThink(0.2)
+		end
+	end,
+}),true)
 
 function item_rod_of_atos_custom:OnProjectileHit( hTarget, vLocation )
 	if hTarget then

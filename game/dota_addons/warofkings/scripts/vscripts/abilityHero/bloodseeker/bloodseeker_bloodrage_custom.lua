@@ -21,6 +21,7 @@ modifier_bloodseeker_bloodrage_custom = class({
 		}
 	end,
 	OnCreated 				= function(self)
+		if IsClient() then return end
 		self.incoming = self:GetAbility():GetSpecialValueFor('bonus_damage')
 		self.bonus_damage  = self:GetAbility():GetSpecialValueFor('bonus_damage_by_hero')
 		if self:GetCaster():IsAssembly('bloodseeker_upgrade_1') then --card:IsAssemblyCard(self:GetCaster():GetUnitName(),'bloodseeker_upgrade_1',self:GetCaster():GetOwner():GetPlayerID()) then 

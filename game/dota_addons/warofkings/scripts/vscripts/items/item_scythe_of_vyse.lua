@@ -26,16 +26,21 @@ modifier_scythe_of_vyse_buff = class({
 	AllowIllusionDuplicate	= function(self) return false end,
 	IsPermanent             = function(self) return false end,
 	GetAttributes           = function(self) return MODIFIER_ATTRIBUTE_MULTIPLE + MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE end,
+	GetModifierBonusStats_Intellect 	=	function(self) return self.intellect end,
 	DeclareFunctions 		= function(self) return {
 		MODIFIER_PROPERTY_MANA_REGEN_CONSTANT
 	} end,
 	GetModifierConstantManaRegen = function(self) return self.mpregen end,
-})
-function modifier_scythe_of_vyse_buff:OnCreated()
-	self.mpregen = self:GetAbility():GetSpecialValueFor('bonus_mana_regen')
-	if not self:GetParent().GetBuilding then return end
-	self:StartIntervalThink(0.2)
-end 
+
+},nil,class({
+	_OnCreated 				= function(self)
+		self.mpregen = self:GetAbility():GetSpecialValueFor('bonus_mana_regen')
+		self.intellect = self:GetAbility():GetSpecialValueFor('intellect')
+		if not self:GetParent().GetBuilding then return end
+		self:StartIntervalThink(0.2)
+	end,
+}),true)
+
 function modifier_scythe_of_vyse_buff:OnIntervalThink()
 	if IsServer() and self:GetAbility():IsCooldownReady() then
 	local radius = self:GetAbility():GetSpecialValueFor("range_tooltip")

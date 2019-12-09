@@ -22,7 +22,11 @@ modifier_item_monkey_king_bar_custom = class({
 		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
 	} end,
-	OnCreated 				= function(self)
+	GetModifierPreAttack_BonusDamage 	= function(self) return self.damage end,
+	GetModifierMoveSpeedBonus_Percentage = 	function(self) return self.atkSpeed end,
+	GetModifierBonusStats_Strength 		=	function(self) return self.bonusStr end,
+},nil,class({
+	_OnCreated 				= function(self)
 		self.ability = self:GetAbility()
 		self.damage = self.ability:GetSpecialValueFor( "bonus_damage" )
 		self.atkSpeed = self.ability:GetSpecialValueFor( "bonus_attack_speed" )
@@ -30,11 +34,10 @@ modifier_item_monkey_king_bar_custom = class({
 		self.dur = self.ability:GetSpecialValueFor('stunned_duration')
 		self.bonusdamage = self.ability:GetSpecialValueFor('bonus_chance_damage')
 		self.cooldown = self.ability:GetCooldown(self.ability:GetLevel())
-	end,
 
-	GetModifierPreAttack_BonusDamage 	= function(self) return self.damage end,
-	GetModifierMoveSpeedBonus_Percentage = 	function(self) return self.atkSpeed end,
-})
+		self.bonusStr = self.ability:GetSpecialValueFor('bonus_str')
+	end,
+}),true)
 
 function modifier_item_monkey_king_bar_custom:OnAttackLanded(params)
 	if params.attacker == self:GetParent() and IsServer() and self.ability:IsCooldownReady() and RollPercentage(self.chance) then

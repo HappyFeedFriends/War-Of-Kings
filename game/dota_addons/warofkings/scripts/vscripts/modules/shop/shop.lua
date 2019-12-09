@@ -61,7 +61,7 @@ end
 
 function CDOTA_BaseNPC:GetEmptySlots(item)
 	local amount = 0
-	for i=0, self:IsCreature() and DOTA_ITEM_SLOT_9 or DOTA_STASH_SLOT_6 do
+	for i=0, self:IsCreature() and DOTA_ITEM_SLOT_9 + 1 or DOTA_STASH_SLOT_6 do
 		local current_item = self:GetItemInSlot(i)
 		if not current_item or (current_item:GetAbilityName() == item and current_item:IsStackable()) then
 			amount = amount + 1
@@ -70,7 +70,7 @@ function CDOTA_BaseNPC:GetEmptySlots(item)
 	return amount
 end
 
-function CustomShop:BuyItem(playerID,itemName,ent,itemsHasInventory)
+function CustomShop:BuyItem(playerID,itemName,ent,itemsHasInventory,time)
 	local __Player = GetPlayerCustom(playerID)
 	local gold = __Player:GetGold()
 	local itemData = CustomShop.data[itemName]
@@ -101,8 +101,8 @@ function CustomShop:BuyItem(playerID,itemName,ent,itemsHasInventory)
 		end
 	end
 	for i,v in pairs(recipe) do
-		Timers:CreateTimer(0.03*i,function()
-			CustomShop:BuyItem(playerID,v,ent,itemsHasInventory)
+		Timers:CreateTimer(time + 0.03*i,function()
+			CustomShop:BuyItem(playerID,v,ent,itemsHasInventory,time + 0.03 * i)
 		end)
 	end
 
@@ -186,19 +186,13 @@ function CustomShop:OnBuyItem(data)
 				end
 			end
 			itemsHasInventory[data.itemName] = nil
-			CustomShop:BuyItem(data.PlayerID,data.itemName,ent,itemsHasInventory)
+			CustomShop:BuyItem(data.PlayerID,data.itemName,ent,itemsHasInventory,0)
 		end
 	end
 end
 
 function CustomShop:IsAccesitemByUnit(playerID,itemName,ent)
-	if ent and ent.GetBuilding and ent:GetBuilding():IsGodness() then
-		return true
-	end
-	local data = {
-		itemName = itemName,
-	}
-	itemName = itemName:lower()
+	itemName = itemName:gsub('item_recipe_','item_'):lower()
 	local hero = GetPlayerCustom(playerID):GetSelectedHeroEntity()
 	local IsItemUniqueClass = hero == ent
 	local IsGodnessItem = false
@@ -229,7 +223,7 @@ function CustomShop:_ItemParsing()
 	CustomShop.data = {}
 	local itemKv = KeyValues.ItemKV
 	for ItemName,dataItem in pairs(itemKv) do
-		if type(dataItem) == "table" then
+		if type(dataItem) == "table" and not string.match(ItemName,'_class')  then
 			CustomShop.data[ItemName] = {
 				cost = GetTrueItemCost(ItemName),
 				RecipeData = CustomShop:ItemRecipe(ItemName),
@@ -252,7 +246,7 @@ function CustomShop:_ItemParsing()
 	CustomNetTables:SetTableValue('CustomShop', 'ShopList', SHOP_ITEMS)
 	return CustomShop.data
 end
- 
+
 function CustomShop:GetUsedRecipeItem(itemName)
 	local data = {}
 	local itemKv = CustomShop.data

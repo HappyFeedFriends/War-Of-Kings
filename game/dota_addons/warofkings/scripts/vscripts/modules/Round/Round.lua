@@ -5,9 +5,6 @@ end
 ModuleRequire(...,'data')
 function round:Preload()
 		round.Round = 1
-		round.IsEndlessGame = false
-		self.GodnessNum = 1
-		round.DataAllRounds = {}
 		CustomGameEventManager:RegisterListener("OnPickDiff", Dynamic_Wrap(round, 'OnPickDiff'))
 		round.spawners = {
 			[0] = Entities:FindByName(nil, "spawner_creep_0"),
@@ -43,11 +40,18 @@ function round:UpgradeDifficultyState(state)
 			if unique == UNIQUE_BONUS_MIDAS then 
 				hero:AddNewModifier(hero, nil, 'modifier_unique_aura_midas', {duration = -1})
 			end
+			if unique == UNIQUE_BONUS_DROP_CHANCE then 
+				hero:AddNewModifier(hero, nil, 'modifier_unique_aura_all_damage', {duration = -1})
+			end
 			if unique == UNIQUE_BONUS_HEALTH then 
 				hero:SetBaseMaxHealth(150)
 				hero:SetMaxHealth(150)
 				hero:SetHealth(150)
 			end
+			PlayerResource:SetCameraTarget(pID, hero)
+			Timers:CreateTimer(0.1,function()
+				PlayerResource:SetCameraTarget(pID, nil)
+			end)
 			__Player:UpdateModel(hero)
 		end)
 		Timers:CreateTimer(20,function()
@@ -68,16 +72,51 @@ function round:GetPathCornerUnit(unit,isGodness,isBossEnd)
 		unit.PathCorner = string.gsub('path_corner_{pID}_start','{pID}',unit.playerRound)
 		return unit.PathCorner
 	end
+	local bIsFear = unit:HasModifier('modifier_fear_creep_custom')
 	local abs = Entities:FindByName(nil, unit.PathCorner):GetOrigin()
+	if bIsFear and unit.PathCorner == string.gsub('path_corner_{pID}_start','{pID}',unit.playerRound) then 
+		return unit.PathCorner
+	end
+	if unit.IsFear then 
+		unit.IsFear = nil
+		local str = string.gsub(unit.PathCorner,string.gsub('path_corner_{pID}_','{pID}',unit.playerRound),'')
+		if str == 'start' then 
+			return unit.PathCorner
+		end
+		if str == '1' then 
+			unit.PathCorner = string.gsub('path_corner_{pID}_start','{pID}',unit.playerRound)
+			return unit.PathCorner
+		end
+        local back_to = string.gsub('path_corner_{pID}_','{pID}',unit.playerRound) .. tostring(math.max(math.min(tonumber(str) - 1,9),1))
+        unit.PathCorner = back_to
+        return unit.PathCorner
+	end
+
+	if unit.IsFearRemove then 
+		unit.IsFearRemove = nil
+		local str = string.gsub(unit.PathCorner,string.gsub('path_corner_{pID}_','{pID}',unit.playerRound),'')
+		if str == 'start' then 
+			unit.PathCorner = string.gsub('path_corner_{pID}_1','{pID}',unit.playerRound)
+			return unit.PathCorner
+		end
+        local back_to = string.gsub('path_corner_{pID}_','{pID}',unit.playerRound) .. tostring(math.max(math.min(tonumber(str) + 1,9),1))
+        unit.PathCorner = back_to
+        return unit.PathCorner
+	end
 	abs.z = unit:GetOrigin().z
-	if unit:GetOrigin() == abs or #(unit:GetOrigin() - abs) < 10 then
+	if (unit:GetOrigin() == abs or #(unit:GetOrigin() - abs) < 20)  then
 		local start = string.gsub('path_corner_{pID}_start','{pID}',unit.playerRound)
 		if unit.PathCorner == start then
 			unit.PathCorner = string.gsub(start,'start','1')
 			return unit.PathCorner
 		end
 		local str = string.gsub(unit.PathCorner,string.gsub('path_corner_{pID}_','{pID}',unit.playerRound),'')
-		local number = math.min(tonumber(str) + 1,9)
+		local bonusNumber = bIsFear and -1 or 1
+		local number = math.max(math.min(tonumber(str) + bonusNumber,9),1)
+		if bIsFear and tonumber(str) == 1 then 
+			unit.PathCorner = start
+			return unit.PathCorner
+		end
 		if isGodness and not unit.AllStop and tonumber(str) == 1 and unit.Corner1 and (not unit.Corner2 or unit.Corner2 < 2 ) then
 			unit.Corner2 = (unit.Corner2 or 0) + 1
 			number = 'start'
@@ -97,6 +136,7 @@ function round:GetPathCornerUnit(unit,isGodness,isBossEnd)
 		end
 		unit.PathCorner = string.gsub('path_corner_{pID}_','{pID}',unit.playerRound) .. number
 	end
+
 	return unit.PathCorner
 end
 
@@ -153,7 +193,7 @@ function round:EndRound(roundNumber)
 		return  not __Player:IsSandBoxMode() and __Player:IsAlive()
 	end)
 	if playerCount > 0 then
-		Timers:CreateTimer(originalRound < 80 and 3 or 0.5,function()
+		Timers:CreateTimer(originalRound < 80 and 0.5 or 0.1,function()
 			round:StartRound()
 		end)
 	end
@@ -165,15 +205,15 @@ function CDOTA_BaseNPC:UpgradeRoundUnit(roundNumber,pID)
 	local __Player = GetPlayerCustom(pID)
 	if roundNumber > 80 then 
 		roundNumber = roundNumber - 80
-		local startHealth = unit:GetMaxHealth()  + (unit:GetMaxHealth() * roundNumber * 0.4)
+		local startHealth = unit:GetMaxHealth()  + (unit:GetMaxHealth() * roundNumber * 0.7)
 		local damage = 0
 		unit:SetBaseMaxHealth(startHealth)
 		unit:SetMaxHealth(startHealth)
 		unit:SetHealth(startHealth)
 		-- unit:SetBaseDamageMin(damage)
 		-- unit:SetBaseDamageMax(damage)
-		unit:SetPhysicalArmorBaseValue(math.min(80 + math.floor(roundNumber/2),260))
-		unit:SetBaseMagicalResistanceValue(math.min(35 + math.floor(roundNumber/6),95))
+		unit:SetPhysicalArmorBaseValue(math.min(160 + math.floor(roundNumber/1),260))
+		unit:SetBaseMagicalResistanceValue(math.min(55 + math.floor(roundNumber/3),95))
 		return 
 	end
 	if roundNumber > 1 and ((roundNumber + 1) % 80 == 0 
@@ -185,7 +225,7 @@ function CDOTA_BaseNPC:UpgradeRoundUnit(roundNumber,pID)
 	end
 	local difficuiltyData = __Player:GetDifficultyData() 
 	local IsMutant = unit.IsMutant
-	local startHealth = (unit:GetMaxHealth() * (roundNumber >= 40 and 2.25 or roundNumber >= 20 and 1.75 or 1 ))  * (difficuiltyData.health/100)
+	local startHealth = (unit:GetMaxHealth() * (roundNumber >= 50 and 6.5 or roundNumber >= 40 and 4.6 or roundNumber >= 20 and 2.1 or 1 ))  * (difficuiltyData.health/100)
 	local crystalDrop = 1
 	local damage = 0
 	local goldDrop = self:GetGoldBounty()-- + (self:GetGoldBounty()/100 * 25)
@@ -223,18 +263,18 @@ function CDOTA_BaseNPC:UpgradeRoundUnit(roundNumber,pID)
 	unit:SetHealth(startHealth)
 	unit:SetBaseDamageMin(damage)
 	unit:SetBaseDamageMax(damage)
-	unit:SetBaseMagicalResistanceValue(roundNumber < 15 and -10 or 30)
+	unit:SetBaseMagicalResistanceValue(roundNumber < 25 and -20 or
+	roundNumber < 45 and 0 or
+	roundNumber < 60 and 15 or 30)
 end
 
 function round:StartRound()
-	-- self.Round = math.max(self.Round,79)
 	local roundNumber = self.Round
 	local fTimeStart = GameRules:GetDOTATime(false, false)
 	local playerCount
 	local GS = CustomNetTables:GetTableValue('PlayerData', 'GLOBAL_SETTING')
 	GS.RoundNumber = roundNumber
 	CustomNetTables:SetTableValue("PlayerData", "GLOBAL_SETTING", GS)
-	self.DataAllRounds[roundNumber] = {}
 	Timers:CreateTimer(function()
 		playerCount = PlayerResource:GetAllPlayerCount(function(pID)
 			local __Player = GetPlayerCustom(pID)
@@ -306,6 +346,7 @@ function OnThinkLastBoss(unit)
 	cornerabs.z = unitabs.z
 	if string.find(unit.PathCorner,'_9') and (unitabs == cornerabs or #(unitabs - cornerabs) < 10) then
 		round:UnitLose(unit)
+		unit.IsSkip = true
 		unit:ForceKill(false)
 		return nil
 	end
@@ -317,6 +358,7 @@ function OnThinkMiniBoss(unit)
 	if unit:IsNull() or not unit:IsAlive() then return nil end
 	if corner ~= round:GetPathCornerUnit(unit,true) then
 		if unit.PathCorner == 'path_corner_' ..unit.playerRound .. '_4'  then 
+			unit.IsSkip = true
 			unit:ForceKill(false)
 			local __Player = GetPlayerCustom(unit.playerRound)
 			return nil
@@ -331,7 +373,7 @@ function OnThinkChest(unit)
 	if unit:IsNull() or not unit:IsAlive() then return nil end
 	if  unit.DeathTime < GameRules:GetDOTATime(false,false) or corner ~= round:GetPathCornerUnit(unit) then
 		if unit.PathCorner == 'path_corner_' ..unit.playerRound .. '_4' or unit.DeathTime < GameRules:GetDOTATime(false,false) then 
-			unit:ForceKill(false)
+			unit.IsSkip = true
 			local __Player = GetPlayerCustom(unit.playerRound)
 			__Player.fChestSpawn = -1
 			kills:CreateCustomToast({
@@ -349,6 +391,7 @@ function OnThinkChest(unit)
 			__Player.iGoldСhestDrop = __Player.iGoldСhestDrop + unit:GetMaxHealth()
 			__Player:IncrementKillChest()
 			__Player:SetValueQuest('6',unit:GetMaxHealth(),true)
+			unit:ForceKill(false)
 			return nil
 		end
 		unit:MoveToPosition(Entities:FindByName(nil, unit.PathCorner):GetOrigin())
@@ -394,6 +437,7 @@ function OnThinkNormalCreep(unit,IsEndless)
 	cornerabs.z = unitabs.z
 	if string.find(unit.PathCorner,'_9') and (unitabs == cornerabs or #(unitabs - cornerabs) < 10) then
 		round:UnitLose(unit)
+		unit.IsSkip = true
 		unit:ForceKill(false)
 		return nil
 	end

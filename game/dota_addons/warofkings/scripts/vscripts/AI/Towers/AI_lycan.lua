@@ -10,7 +10,7 @@ function Spawn( entityKeyValues )
 end
 
 function ThinkEntity()
-	if thisEntity:GetAttackTarget() and ability1:IsFullyCastable() then
+	if thisEntity:GetAttackTarget() and ability1:IsFullyCastable() and ability1:GetAutoCastState() then
 		thisEntity:CastAbilityNoTarget(ability1, -1)
 		return ability1:GetCastPoint() + 0.3
 	end

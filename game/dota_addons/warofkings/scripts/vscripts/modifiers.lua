@@ -16,7 +16,24 @@ modifier_war_of_kings_passive = class({
     GetModifierMoveSpeedOverride 	= function(self) return 1200 end,
     GetDisableHealing   = function(self) return 1 end,
 })
+modifier_fear_creep_custom = class({
+    IsHidden                = function(self) return true end,
+    IsPurgable              = function(self) return true end,
+    IsDebuff                = function(self) return true end,
+    IsBuff                  = function(self) return false end,
+    RemoveOnDeath           = function(self) return true end,
+    OnCreated               = function(self)
+        if not IsServer() then return end
+        local unit = self:GetParent()
+        unit.IsFear = true
+    end,
 
+    OnDestroy               = function(self)
+        if IsServer()  then 
+            self:GetParent().IsFearRemove = true
+        end
+    end,
+})
 modifier_war_of_kings_passive_unit = class({
     IsHidden                = function(self) return true end,
     IsPurgable              = function(self) return true end,
@@ -95,6 +112,20 @@ modifier_war_of_kings_bonus_damage = class({
     DeclareFunctions        = function(self) return {MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE} end,
     GetModifierPreAttack_BonusDamage    = function(self) return self:GetStackCount() end,
 })
+
+modifier_war_of_kings_amplify = class({
+    IsHidden                = function(self) return true end,
+    IsPurgable              = function(self) return true end,
+    IsDebuff                = function(self) return false end,
+    IsBuff                  = function(self) return false end,
+    RemoveOnDeath           = function(self) return true end,
+    DeclareFunctions        = function(self) return {MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE} end,
+    GetModifierSpellAmplify_Percentage    = function(self) return self:GetStackCount() * self.amp end,
+})
+
+function modifier_war_of_kings_amplify:OnCreated(data)
+    self.amp = (data and data.amplify or 0)
+end
 
 modifier_war_of_kings_bonus_attack_damage_special = class({
     IsHidden                = function(self) return false end,
@@ -303,4 +334,37 @@ modifier_unique_aura_magical_buff = class({
     GetModifierSpellAmplify_Percentage    = function(self) return 40 end,
     GetModifierConstantManaRegenUnique    = function(self) return 5 end,
     GetModifierPercentageCooldown         = function(self) return 35 end,
+})
+
+modifier_unique_aura_all_damage = class({
+    IsHidden                = function(self) return false end,
+    IsPurgable              = function(self) return false end,
+    IsDebuff                = function(self) return false end,
+    IsBuff                  = function(self) return true end,
+    RemoveOnDeath           = function(self) return false end,
+    AllowIllusionDuplicate  = function(self) return true end,
+    IsPermanent             = function(self) return true end,
+    IsAura                  = function(self) return true end,
+    GetAuraRadius           = function(self) return -1 end,
+    GetAuraSearchTeam       = function(self) return DOTA_UNIT_TARGET_TEAM_FRIENDLY end,
+    GetAuraSearchFlags      = function(self) return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES end,
+    GetAuraSearchType       = function(self) return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP end,
+    GetModifierAura         = function(self) return 'modifier_unique_aura_all_damage_buff' end,
+    OnCreated               = function(self)
+        if IsServer() then
+            self.pID = self:GetParent():GetPlayerID()
+        end
+    end,
+})
+function modifier_unique_aura_all_damage:GetAuraEntityReject(hEntity)
+    return not hEntity.GetBuilding or hEntity.GetBuilding():GetPlayerOwnerID() ~= self.pID
+end
+modifier_unique_aura_all_damage_buff = class({
+    IsHidden                = function(self) return true end,
+    IsPurgable              = function(self) return false end,
+    IsDebuff                = function(self) return false end,
+    IsBuff                  = function(self) return true end,
+    RemoveOnDeath           = function(self) return false end,
+    AllowIllusionDuplicate  = function(self) return true end,
+    IsPermanent             = function(self) return true end,
 })

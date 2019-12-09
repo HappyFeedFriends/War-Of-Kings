@@ -68,6 +68,14 @@ function Precache( context )
 	PrecacheUnitByNameSync("npc_war_of_kings_clinkz", context)
 	PrecacheUnitByNameSync("npc_war_of_kings_sven", context)
 	PrecacheUnitByNameSync("npc_war_of_kings_sniper", context)
+
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_lina.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_dark_willow.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_centaur.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_luna.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_ursa.vsndevts", context)
 	for k,v in pairs(ROUND_DATA.ROUNDS) do
 		if k ~= 'Special' then 
 			local units = string.split(v.UnitList or ('npc_war_of_kings_wave_' .. k),' | ')

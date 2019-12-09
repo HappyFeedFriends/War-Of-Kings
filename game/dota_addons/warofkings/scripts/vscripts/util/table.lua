@@ -97,6 +97,21 @@ function table.equals(tbl1, tbl2)
     return true
 end 
 
+function table.merge_copy(input1,input2)
+	local _input1 = {}
+	local _input2 = {}
+
+	for k,v in pairs(input1) do
+		_input1[k] = v
+	end
+
+	for k,v in pairs(input2) do
+		_input2[k] = v
+	end
+	table.merge(_input1,_input2)
+	return _input1
+end
+
 function table.count(inputTable)
 	local counter = 0
 	for _,_ in pairs(inputTable) do

@@ -12,3 +12,5 @@ item_xp_book = class({
 		DisplayError(playerID, '#War_of_kings_hud_error_target_none_building')
 	end,
 })
+
+item_xp_book_big = item_xp_book

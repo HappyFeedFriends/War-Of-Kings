@@ -83,10 +83,6 @@ CLASS_DATA = {
 		bonus_star = 50,
 		special_bonus = 20,
 	},
-	shaman = {
-		bonus_star = 37,
-		special_bonus = 1,
-	},
 	guardian = {
 		bonus_star = 1,
 		special_bonus = 1,
@@ -114,34 +110,24 @@ CARD_DATA = {
 	MAX_CARD = 8,
 	CARD_RANDOM_DROP = 5,
 	MAX_GRADE = {
-		common = 4,
 		uncommon = 5,
 		rare = 6,
 		mythical = 6,
 		legendary = 7,
 		Godness = 7,
 	},
-	DATA_COUNT = { -- OFF
-		common = 0,
-		uncommon = 0,
-		rare = 0,
-		mythical = 0,
-		legendary = 0,
-		Godness = 0,
-	},	
-	DAMAGE_PER_LEVEL = {
-		common = 1,
-		uncommon = 2,
-		rare = 3,
-		mythical = 4,
-		legendary = 5, 
-		Godness = 5,		
-	},
 	CARDS = {
-		['common'] = {
+		['uncommon'] = { -- creeps
+			npc_war_of_kings_thunder_lizard = {
+				class = 'guardian',
+				racial = 'beast',	
+			},
 			npc_war_of_kings_creep_bed = {
 				class = 'warrior',
 				racial = 'beast',		
+			},
+			npc_war_of_kings_harpy = {
+				class = 'archer',
 			},
 			npc_war_of_kings_creep_good = {
 				class = 'warrior',
@@ -155,30 +141,8 @@ CARD_DATA = {
 				class = 'warrior',
 				racial = 'goblin',
 			},
-			-- npc_war_of_kings_ghost = {
-			-- 	class = 'archer',
-			-- 	racial = 'spirit',
-			-- },
-			-- npc_war_of_kings_beast = {
-			-- 	class = 'warrior',
-			-- 	racial = 'beast',	
-			-- },
-			-- npc_war_of_kings_troll_shaman = {
-			-- 	class = 'shaman',
-			-- 	racial = 'troll'
-			-- },
 			npc_war_of_kings_gnoll = {
 				class = 'warrior',
-				racial = 'beast',
-			},
-			npc_war_of_kings_puck = {
-				class = 'mage',
-				racial = 'dragon',
-			},
-		},
-		['uncommon'] = {
-			npc_war_of_kings_tiny = {
-				class = 'guardian',
 				racial = 'beast',
 			},
 			npc_war_of_kings_bear = {
@@ -201,32 +165,105 @@ CARD_DATA = {
 				class = 'warrior',
 				racial = 'beast',
 			},
-			--[[npc_war_of_kings_centaur = {
-				class = 'warrior',
-				racial = 'beast',
-			},
-			npc_war_of_kings_troll_berserk = {
-				class = 'warrior',
-				racial = 'troll',
-				BonusAbilityByGrade  = {
-					troll_berserk_1 = 3,
-					troll_berserk_2 = 6,
-				},
-			},]]
 			npc_war_of_kings_demon = {
 				class = 'guardian',
 				racial = 'human',
 			},
-			npc_war_of_kings_crystal_maiden = {
-				class = 'mage',
-				racial = 'human',
-			},
-			--[[npc_war_of_kings_night_stalker = {
-				class = 'rogue',
-				racial = 'beast',
-			},]]
 		},
 		['rare'] = {
+			npc_war_of_kings_tusk = {
+				class = 'warrior',
+				racial = 'beast',
+				Assemblies = {
+					['tusk_upgrade_1'] = {
+						AssemblyAbility = 'tusk_walrus_punch_custom',
+						assembliesNeed = 'npc_war_of_kings_medusa | npc_war_of_kings_tidehunter',
+						data = {
+							value = 120,
+						},
+					},
+					['tusk_upgrade_2'] = {
+						AssemblyAbility = 'tusk_walrus_punch_custom',
+						assembliesNeed = 'npc_war_of_kings_leshrac',
+						data = {
+							value = 6,
+						},
+					},
+				},
+			},
+			npc_war_of_kings_pugna = {
+				class = 'mage',
+				racial = 'demon',
+				Assemblies = {
+					['pugna_upgrade_1'] = {
+						AssemblyAbility = 'pugna_life_drain_custom',
+						assembliesNeed = 'npc_war_of_kings_leshrac',
+						data = {
+							value = 600,
+						},
+					},
+				},
+			},
+			npc_war_of_kings_bloodseeker = {
+				class = 'rogue',
+				Assemblies = {
+					['bloodseeker_upgrade_1'] = {
+						AssemblyAbility = 'bloodseeker_bloodrage_custom',
+						assembliesNeed = 'npc_war_of_kings_lion',
+						data = {
+							value = 0,
+						},
+					},
+					['bloodseeker_upgrade_2'] = {
+						AssemblyAbility = 'bloodseeker_bloodrite_custom',
+						assembliesNeed = 'npc_war_of_kings_necrophos',
+						data = {
+							value = 10,
+						},
+					},
+				},
+			},
+			npc_war_of_kings_lion = {
+				class = 'mage',
+				Assemblies = {
+					['lion_upgrade_1'] = {
+						AssemblyAbility = 'lion_finger_of_death_custom',
+						assembliesNeed = 'npc_war_of_kings_gnoll | npc_war_of_kings_ogre',
+						data = {
+							value = 30,
+						},
+					},
+				},
+			},
+			npc_war_of_kings_puck = {
+				class = 'mage',
+				racial = 'dragon',
+			},
+			npc_war_of_kings_tiny = {
+				class = 'guardian',
+				racial = 'beast',
+			},
+			npc_war_of_kings_dark_willow = {
+				class = 'mage',	
+				Assemblies = {
+					['dark_willow_1'] = {
+						AssemblyAbility = 'dark_willow_3',
+						assembliesNeed = 'npc_war_of_kings_shadow_fiend',
+						data = {
+							value = DAMAGE_TYPE_PURE,
+						},
+					},
+					['dark_willow_2'] = {
+						AssemblyAbility = 'dark_willow_2',
+						assembliesNeed = 'npc_war_of_kings_creep_bed',
+						data = {
+							value = 0.25,
+						},
+					},
+				},		
+			},
+
+			
 			npc_war_of_kings_ogre_mage = {
 				class = 'mage',
 				Assemblies = {
@@ -277,7 +314,7 @@ CARD_DATA = {
 					},]]
 					['lina_upgrade_2'] = {
 						AssemblyAbility = 'lina_dragon_slave_custom',
-						assembliesNeed = 'npc_war_of_kings_tiny | npc_war_of_kings_bear',
+						assembliesNeed = 'npc_war_of_kings_satyr_big | npc_war_of_kings_bear',
 						data = {
 							value = 70,
 							duration = 10,
@@ -338,7 +375,7 @@ CARD_DATA = {
 				Assemblies = {
 					['devourer_upgrade_1'] = {
 						AssemblyAbility = 'obsidian_destroyer_sanity_eclipse_custom',
-						assembliesNeed = 'npc_war_of_kings_satyr_big'
+						assembliesNeed = 'npc_war_of_kings_tiny'
 					},
 					['devourer_upgrade_2'] = {
 						AssemblyAbility = 'obsidian_destroyer_arcane_orb_custom',
@@ -448,7 +485,7 @@ CARD_DATA = {
 				},
 			},]]
 			npc_war_of_kings_shadow_shaman = {
-				class = 'shaman',
+				class = 'mage',
 				racial = 'troll',
 				Assemblies = {
 					['shaman_upgrade_1'] = {
@@ -496,10 +533,26 @@ CARD_DATA = {
 			},
 		},
 		['mythical'] = {
-			-- npc_war_of_kings_undying = {
-			-- 	class = 'guardian',
-				
-			-- },
+			npc_war_of_kings_shadow_fiend = {
+				class = 'archer',
+				Assemblies = { 
+					['sf_upgrade_1'] = {
+						AssemblyAbility = 'nevermore_dark_lord_custom',
+						assembliesNeed = 'npc_war_of_kings_necrophos + npc_war_of_kings_bloodseeker',
+						data = {
+							value = 35,
+							damage = 400,
+						},
+					},
+					['sf_upgrade_2'] = {
+						AssemblyAbility = 'shadow_fiend_shadowraze_custom',
+						assembliesNeed = 'npc_war_of_kings_demon',
+						data = {
+							value = 1,
+						},
+					},
+				},			
+			},
 			npc_war_of_kings_necrophos = {
 				class = 'mage',
 				Assemblies = {
@@ -514,37 +567,6 @@ CARD_DATA = {
 					['necrophos_upgrade_2'] = {
 						AssemblyAbility = 'necrolyte_reapers_scythe_custom',
 						assembliesNeed = 'npc_war_of_kings_satyr + npc_war_of_kings_forge',
-						data = {
-							value = 10,
-						},
-					},
-				},
-			},
-			npc_war_of_kings_lion = {
-				class = 'mage',
-				Assemblies = {
-					['lion_upgrade_1'] = {
-						AssemblyAbility = 'lion_finger_of_death_custom',
-						assembliesNeed = 'npc_war_of_kings_gnoll | npc_war_of_kings_ogre',
-						data = {
-							value = 30,
-						},
-					},
-				},
-			},
-			npc_war_of_kings_bloodseeker = {
-				class = 'rogue',
-				Assemblies = {
-					['bloodseeker_upgrade_1'] = {
-						AssemblyAbility = 'bloodseeker_bloodrage_custom',
-						assembliesNeed = 'npc_war_of_kings_lion',
-						data = {
-							value = 0,
-						},
-					},
-					['bloodseeker_upgrade_2'] = {
-						AssemblyAbility = 'bloodseeker_bloodrite_custom',
-						assembliesNeed = 'npc_war_of_kings_necrophos',
 						data = {
 							value = 10,
 						},
@@ -606,53 +628,6 @@ CARD_DATA = {
 						assembliesNeed = 'npc_war_of_kings_zeus',
 						data = {
 							value = 2,
-						},
-					},
-				},
-			},
-			npc_war_of_kings_zeus = {
-				class = 'mage',
-				racial = 'god',
-				Assemblies = {
-					['zeus_upgrade_1'] = {
-						assembliesNeed = 'npc_war_of_kings_tusk',
-						data = {
-							radius = 650,
-							value = 0.6,
-						},
-					},
-					['zeus_upgrade_2'] = {
-						AssemblyAbility = 'zuus_static_field',
-						assembliesNeed = 'npc_war_of_kings_templar_assasin',
-						data = {
-							value = 2,
-						},
-					},
-					['zeus_upgrade_3'] = {
-						AssemblyAbility = 'zuus_arc_lightning',
-						assembliesNeed = 'npc_war_of_kings_outworld_devourer',
-						data = {
-							value = 120,
-						},
-					},
-				},
-			},
-			npc_war_of_kings_tusk = {
-				class = 'warrior',
-				racial = 'beast',
-				Assemblies = {
-					['tusk_upgrade_1'] = {
-						AssemblyAbility = 'tusk_walrus_punch_custom',
-						assembliesNeed = 'npc_war_of_kings_medusa | npc_war_of_kings_tidehunter',
-						data = {
-							value = 120,
-						},
-					},
-					['tusk_upgrade_2'] = {
-						AssemblyAbility = 'tusk_walrus_punch_custom',
-						assembliesNeed = 'npc_war_of_kings_leshrac',
-						data = {
-							value = 6,
 						},
 					},
 				},
@@ -730,34 +705,39 @@ CARD_DATA = {
 					},
 				},
 			},
-			npc_war_of_kings_pugna = {
+		},
+		['legendary'] = {
+			npc_war_of_kings_zeus = {
 				class = 'mage',
-				racial = 'demon',
+				racial = 'god',
 				Assemblies = {
-					['pugna_upgrade_1'] = {
-						AssemblyAbility = 'pugna_life_drain_custom',
-						assembliesNeed = 'npc_war_of_kings_leshrac',
+					['zeus_upgrade_1'] = {
+						assembliesNeed = 'npc_war_of_kings_tusk',
 						data = {
-							value = 600,
+							radius = 650,
+							value = 0.6,
+						},
+					},
+					['zeus_upgrade_2'] = {
+						AssemblyAbility = 'zeus_static_field_custom',
+						assembliesNeed = 'npc_war_of_kings_templar_assasin',
+						data = {
+							value = 2,
+						},
+					},
+					['zeus_upgrade_3'] = {
+						AssemblyAbility = 'zeus_arc_lightning_custom',
+						assembliesNeed = 'npc_war_of_kings_outworld_devourer',
+						data = {
+							value = 120,
 						},
 					},
 				},
 			},
-			-- npc_war_of_kings_mars = {
-			-- 	class = 'warrior',
-			-- 	racial = 'god',
-			-- 	Assemblies = {
-			-- 		['mars_upgrade_1'] = {
-			-- 			AssemblyAbility = 'mars_gods_rebuke',
-			-- 			assembliesNeed = 'npc_war_of_kings_pugna',
-			-- 			data = {
-			-- 				value = 1.2,
-			-- 			},
-			-- 		},
-			-- 	},
-			-- },
-		},
-		['legendary'] = {
+			npc_war_of_kings_crystal_maiden = {
+				class = 'mage',
+				racial = 'human',
+			},
 			npc_war_of_kings_huskar = {
 				class = 'archer',
 				racial = 'god',
@@ -777,38 +757,20 @@ CARD_DATA = {
 				Assemblies = {
 					['juggernaut_upgrade_1'] = {
 						AssemblyAbility = 'juggernaut_omni_slash_custom',
-						assembliesNeed = 'npc_war_of_Kings_special_boss_warrior_building', 
+						assembliesNeed = 'npc_war_of_kings_bloodseeker', 
 						data = {
 							value = 15,
 						},
 					},
 				},
 			},
-			-- npc_war_of_kings_sniper = {
-			-- 	class = 'archer',
-			-- 	racial = 'god',	
-			-- 	Assemblies = {
-			-- 		--[[['sniper_upgrade_1'] = {
-			-- 			assembliesNeed = 'npc_war_of_kings_juggernaut | npc_war_of_kings_huskar', 
-			-- 			data = {
-			-- 				value = 0.7,
-			-- 			},
-			-- 		},]]
-			-- 		['sniper_upgrade_2'] = {
-			-- 			assembliesNeed = 'npc_war_of_kings_special_boss_archer_building', 
-			-- 			data = {
-			-- 				value = 350,
-			-- 			},
-			-- 		},
-			-- 	},	
-			-- },
 			npc_war_of_kings_sven = {
 				class = 'warrior',
 				racial = 'god',	
 				Assemblies = {
 					['sven_upgrade_1'] = {
 						AssemblyAbility = 'sven_great_cleave',
-						assembliesNeed = 'npc_war_of_Kings_special_boss_warrior_building', 
+						assembliesNeed = 'npc_war_of_kings_bear', 
 						data = {
 							value = 340,
 						},
@@ -892,32 +854,6 @@ CARD_DATA = {
 						},
 					},
 				},
-			},
-		},
-		['Godness'] = {
-			npc_war_of_Kings_special_boss_warrior_building = {
-				class = 'warrior',
-				racial = 'god',
-			},
-			npc_war_of_Kings_special_boss_rogue_building = {
-				class = 'rogue',
-				racial = 'god',
-			},
-			npc_war_of_Kings_special_boss_archer_building = {
-				class = 'archer',
-				racial = 'god',
-			},
-			npc_war_of_Kings_special_boss_mage_building = {
-				class = 'mage',
-				racial = 'god',
-			},
-			npc_war_of_Kings_special_boss_shaman_building = {
-				class = 'shaman',
-				racial = 'god',
-			},
-			npc_war_of_Kings_special_boss_guardian_building = {
-				class = 'guardian',
-				racial = 'god',
 			},
 		},
 	},

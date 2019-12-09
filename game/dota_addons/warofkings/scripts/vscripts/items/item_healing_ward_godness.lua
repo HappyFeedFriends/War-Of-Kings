@@ -82,7 +82,6 @@ modifier_item_healing_ward_godness_aura = class({
 			self.ability = self:GetAbility()
 			self.parent = self:GetParent()
 			self.pID = self.parent:GetPlayerOwnerID()
-			print(self.pID)
 		end
 	end,
 

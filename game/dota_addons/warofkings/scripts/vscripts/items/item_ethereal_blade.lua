@@ -23,13 +23,7 @@ function item_ethereal_blade_1:OnSpellStart()
 	}
 	ProjectileManager:CreateTrackingProjectile( info )
 end 
---[[function item_ethereal_blade_1:OnCreated()
-	self:StartIntervalThink(0.5)
-end
 
-function item_ethereal_blade_1:OnIntervalThink()
-	print('32')
-end ]]
 function item_ethereal_blade_1:OnProjectileHit( hTarget, vLocation )
 	local caster = self:GetCaster()
 	if not caster.GetBuilding then  return end
@@ -55,9 +49,9 @@ modifier_ethereal_blade_custom_tick =  class({
 	AllowIllusionDuplicate	= function(self) return false end,
 	IsPermanent             = function(self) return true end,
 	GetAttributes           = function(self) return MODIFIER_ATTRIBUTE_MULTIPLE end,
-	OnCreated 				= function(self) 
-		self:StartIntervalThink(0.5)
-	end,
+	GetModifierBonusStats_Strength 		=	function(self) return self.AllAttribute end,
+	GetModifierBonusStats_Agility 		=	function(self) return self.AllAttribute end,
+	GetModifierBonusStats_Intellect 	=	function(self) return self.AllAttribute end,
 	OnIntervalThink = 		function(self)
 		if IsServer() then
 			local unit = self:GetParent():GetRandomUnitRadius(1000,{
@@ -70,7 +64,12 @@ modifier_ethereal_blade_custom_tick =  class({
 			end
 		end
 	end,
-})
+},nil,class({
+	_OnCreated 				= function(self) 
+		self:StartIntervalThink(0.5)
+		self.AllAttribute = self:GetAbility():GetSpecialValueFor('attributes')
+	end,
+}),true)
 modifier_ethereal_blade_custom =  class({
 	IsHidden 				= function(self) return false end,
 	IsPurgable 				= function(self) return true end,

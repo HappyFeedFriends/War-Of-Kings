@@ -17,7 +17,7 @@ function item_battle_fury_1:OnProjectileHit( hTarget, vLocation )
 	ApplyDamage(damageTable)
 end
 
-modifier_battle_fury_custom = modifier_battle_fury_custom or class({
+modifier_battle_fury_custom = class({
 	IsHidden 				= function(self) return true end,
 	IsPurgable 				= function(self) return false end,
 	IsDebuff 				= function(self) return false end,
@@ -26,11 +26,17 @@ modifier_battle_fury_custom = modifier_battle_fury_custom or class({
 	AllowIllusionDuplicate	= function(self) return false end,
 	IsPermanent             = function(self) return false end,
 	GetAttributes           = function(self) return MODIFIER_ATTRIBUTE_MULTIPLE end,
-})
-function modifier_battle_fury_custom:OnCreated()
-	self.damage = self:GetAbility():GetSpecialValueFor("damage")
-	self.attackspeed = self:GetAbility():GetSpecialValueFor("attack_speed")
-end
+	GetModifierBonusStats_Strength 		=	function(self) return self.all end,
+	GetModifierBonusStats_Agility 		=	function(self) return self.all end,
+	GetModifierBonusStats_Intellect 	=	function(self) return self.all end,
+},nil,class({
+	_OnCreated = 			function(self)
+		self.damage = self:GetAbility():GetSpecialValueFor("damage")
+		self.attackspeed = self:GetAbility():GetSpecialValueFor("attack_speed")
+		self.all = self:GetAbility():GetSpecialValueFor("bonus_all")
+	end
+}),true)
+
 function modifier_battle_fury_custom:DeclareFunctions()
 local funcs =
 	{	

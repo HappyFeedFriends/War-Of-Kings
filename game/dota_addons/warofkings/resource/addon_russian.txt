@@ -24,11 +24,48 @@
 		"UI_chance_free_card"						"Шанс в {s:chance}% получить бесплатно случайную башню при убийстве"
 		"UI_spawn_interval"							"Появляются каждые {s:interval} волн"
 		"UI_boss_endless"							"Открывает бесконечный режим, если он доступен на вашем уровне сложности"
-
 		"UI_payment_methods"						"СПОСОБЫ ОПЛАТЫ"
 
+		"quest_kill_creep_count" 		"Убейте крипов"
+        "quest_alive_round" 			"Защитите раунды"  
+        "quest_kill_godness_by_name" 	"Одержите победу над определённым боссом"
+        "quest_damage_by_chest" 		"Нанести урона по сундуку"
+        "quest_kill_godness_count" 		"Одержать победу над несколькими боссами"
+        "quest_use_xp_book_count" 		"Используйте книги опыта на башню"
+        "quest_spend_crystal_amount" 	"Потратить кристаллов духа за игру"
+        "quest_spend_gold_amount" 		"Потратить золота за игру"
+        "quest_round_per_no_damage" 	"Пройти раунды подряд без получения урона"
+        "quest_upgrade_tower_grade" 	"Поднять максимальный уровень ☆ у любой башни"         
+        "quest_remove_shield_count" 	"Сломать щиты у крипов"
+        "quest_healing_tower" 			"Восстановить здоровье башен"
+
+        "Dota_tooltip_ability_warrior_class"			"CLASS: Warrior"
+        "Dota_tooltip_ability_warrior_class_description" 	"<h1> Warrior </h1> Каждый уровень ☆ увеличивает скорость атаки войнов на %bonus_damage%"
+        "Dota_tooltip_ability_warrior_class_Lore"	"<font color='red'>Могут улучшать предметы до ☆☆☆ только с классом Warrior </font>"
+
+        "Dota_tooltip_ability_archer_class"			"CLASS: Archer"
+        "Dota_tooltip_ability_archer_class_description" 	"<h1> Archer </h1> Каждая ☆ уменьшает базовую скорость атаки на %base_attack_speed%"
+        "Dota_tooltip_ability_archer_class_Lore"		"<font color='#249024'>Могут улучшать предметы до ☆☆☆ только с классом Archer </font>"	
+                               
+        "Dota_tooltip_ability_mage_class"			"CLASS: Mage"
+        "Dota_tooltip_ability_mage_class_description" 	"<h1> Mage </h1> Каждая ☆ увеличивает магический урон на %amp_bonus%% "
+		"Dota_tooltip_ability_mage_class_Lore"				"<font color='#1B607C'>Могут улучшать предметы до ☆☆☆ только с классом Mage </font>"  
+                                
+        "Dota_tooltip_ability_rogue_class"			"CLASS: Rogue"
+        "Dota_tooltip_ability_rogue_class_description" 	"<h1> Rogue </h1> Каждая ☆ увеличивает шанс критической атаки на %chance_critical_attack%%  и критический урон на %critical_damage%"
+        "Dota_tooltip_ability_rogue_class_Lore"				"<font color='#37AC37'>Могут улучшать предметы до ☆☆☆ только с классом Rogue </font>"
+
+        "Dota_tooltip_ability_guardian_class"				"CLASS: Guardian"
+        "Dota_tooltip_ability_guardian_class_description" 	"<h1> Guardian </h1> Каждая ☆ увеличивает максимум здоровья на %bonus_health%"
+        "Dota_tooltip_ability_guardian_class_Lore"			"<font color='skyblue'>Могут улучшать предметы до ☆☆☆ только с классом Guardian </font>"
+
+		"UI_QUEST_FOR_BATTLE"						"ЗАДАЧИ ДАННОГО БОЯ"
+		"UI_QUEST_DAILY"							"ЕЖЕДНЕВНЫЕ ЗАДАЧИ"
+		"ROUND_DAMAGE"								"УРОН ЗА РАУНД"
+
       	"YANDEX_DESCRIPTION"			"Функция оплаты данным средство скоро будет активна"
-      	"DISCORD_DESCRIPTION"			"Подключаясь к нашему Discord каналу, вы можете узнать полную информацию по поводу платежей"
+      	"DISCORD_DESCRIPTIO
+      	N"			"Подключаясь к нашему Discord каналу, вы можете узнать полную информацию по поводу платежей"
       	"PATREON_DESCRIPTION"			"На Patreon вы поддержать разработчика, получив за это уникальную роль и уникальных курьеров"
 
 		"Quick_start"					"БЫСТРЫЙ СТАРТ!"
@@ -45,6 +82,15 @@
       	"step_5_description"			"Увеличивай возможности башен с помощью других башен! Комбинируй их и эксперементируй с ними."
 
 		"creep_data"								"ВИДЫ КРИПОВ"
+
+		"DOTA_HUD_AgilityDetails_custom"					"= {s:attack_speed_details} скорости атаки"
+		"DOTA_HUD_IntelligenceDetails_custom"				"= +{s:mana_details} к мане, {s:amplify_details}% к урону способн. и + {s:mana_regen} к регенерации маны"         
+		"DOTA_HUD_StrengthDetails_custom"					"= {s:damage_details} к урону"
+
+		"DOTA_HUD_PrimaryAttributeStrength_custom"	"= {s:critical_chance_details}% к шансу крит. атаки в {s:critical_damage}%"
+		"DOTA_HUD_PrimaryAttributeAgility_custom" 	"= {s:attack_range_details} к дальности атаки и -{s:base_attack_details} базовой скорости атаки"
+		"DOTA_HUD_PrimaryAttributeIntelligence_custom" "= {s:reduction_cooldown_details}% уменьшения перезарядки, + {s:duration_effects}% к длительности всех эффектов"                       
+
 
 		"dota_hud_error_not_has_inventory"			"Существо не может использовать предметы"
 		"dota_hud_error_item_not_available"			"Предмет не доступ для данной башни"
@@ -70,11 +116,11 @@
 		"UI_midas_unique" 				"Каждые 10 секунд, c шансом в 10% каждая башня может уничтожить крипа и получить 200% золота и опыта"
 		"UI_gold_per_kill_unique" 		"Убитые крипы дают на 35% больше золота, но сундук с золотом на 1% меньше"
 		"UI_health_unique" 				"+50 К стартовому здоровью"
-		"UI_warrior_unique" 			"Уменьшает маг. урон на 60%, регенерацию маны на 20%, но увеличивает физ. урон на 100%"
+		"UI_warrior_unique" 			"Уменьшает маг. урон на 60%, регенерацию маны на 20%, но увеличивает физ. урон на 60%"
 		"UI_mage_unique" 				"Уменьшает физ. урон на 60%, но увеличивает регенерацию маны на 5, уменьшает перезарядку на 35% и увеличивает маг. урон на 40%"              
 		"UI_close_unique" 				"Начать игру без уникального бонуса, по окончанию игры вы получаете в 2 раза больше опыта"  
-		"UI_tower_level" 				"Все башни стартуют с 10 уровнем, а дополнительный урон за каждый уровень увеличивается на 2"  
-		"UI_drop_chance_unique" 		"С шансом в 2% погибшие крипы выбрасывают случайный предмет, зависящий от типа крипа"         
+		"UI_tower_level" 				"Все башни стартуют с 10 уровнем, а также получают на 2 атрибута больше за каждый уровень"  
+		"UI_drop_chance_unique" 		"Все башни наносят на 25% больше любого вида урона"         
 		"UI_creeps_not_use_ability" 	"Крипы больше не будут использовать способности"
 
 		"UI_warrior_1"								"Каждая ☆ увеличивает скорость атаки на {s:bonus_attack_speed_warrior}"
@@ -211,6 +257,12 @@
 
 		"huskar_upgrade_1"				"Урон от {ability} увеличивается на {value}"
 
+		"dark_willow_1"					"Тип урона от {ability} изменятся на <font color='red'>Чистый</font>"
+		"dark_willow_2"					"Интервал атаки от  {ability} изменяется на {value} сек."
+
+		"sf_upgrade_2"					"{ability} также уменьшает магическое сопротивление крипов на {value}%"
+		"sf_upgrade_1"					"При использовании {ability} башня атакует все цели в радиусе способности, а также увеличивает урон от Shadowraze на 400"
+
 		// First Upgrade (x2 spirits)
 		"spirit_upgrade_1"				"Дарует способность {ability}, способность поджигает цель и наносит ей урон."
 		"spirit_upgrade_2"				"Дарует способность {ability}, каждая атака может оглушить цель атаки."
@@ -287,6 +339,93 @@
 
 		"Dota_tooltip_ability_item_healing_ward_godness"						"Healing Ward"
 		"Dota_tooltip_ability_item_healing_ward_godness_description"			"<h1>Active: Ward </h1> Все башни в течении %duration% сек. увеличивают свой урон на %bonus_damage% и магический урон на %amplify%%, а восстановление здоровья на %healing%%"
+
+		"Dota_tooltip_ability_nevermore_dark_lord_custom"						"DARK LORD"
+		"Dota_tooltip_ability_nevermore_dark_lord_custom_description"			"Уменьшает броню вражеских существ в радиусе %presence_radius%"
+		"Dota_tooltip_ability_nevermore_dark_lord_custom_presence_armor_reduction"	"СНИЖЕНИЕ БРОНИ:"
+
+		"Dota_tooltip_ability_shadow_fiend_shadowraze_custom"					"Shadowraze"
+		"Dota_tooltip_ability_shadow_fiend_shadowraze_custom_description"		"Shadow Fiend окружает ближайших крипов огнём нанося им урон, каждый последующий урон от данной способности наносит на %damage_bonus%% больше урона в течении действия эффекта"
+		"Dota_tooltip_ability_shadow_fiend_shadowraze_custom_radius"			"РАДИУС:"
+		"Dota_tooltip_ability_shadow_fiend_shadowraze_custom_damage"			"УРОН:"
+		"Dota_tooltip_ability_shadow_fiend_shadowraze_custom_duration"			"ДЛИТЕЛЬНОСТЬ ДОП.УРОНА:"
+ 
+		"Dota_tooltip_ability_shadow_fiend_requirem_custom"						"Requirem"
+		"Dota_tooltip_ability_shadow_fiend_requirem_custom_description"			"Когда рядом с Shadow Fiend умирает крип, происходит взрыв наносящий урон рядом идущим крипам"
+		"Dota_tooltip_ability_shadow_fiend_requirem_custom_damage"				"УРОН:"
+		"Dota_tooltip_ability_shadow_fiend_requirem_custom_radius_damage"		"РАДИУС:"
+
+		"Dota_tooltip_ability_dark_willow_1"									"SHADOW CLONE"
+		"Dota_tooltip_ability_dark_willow_1_description"						"Dark Willow создаёт своего клона, который атакует ту же цель, что и сама Dark Willow"
+		"Dota_tooltip_ability_dark_willow_1_duration"							"ДЛИТЕЛЬНОСТЬ ЖИЗНИ:"
+
+		"Dota_tooltip_ability_dark_willow_2"									"BEDLAM"
+		"Dota_tooltip_ability_dark_willow_2_description"						"Dark Willow отправляет своего светлечка атаковать цель, а также с небольшим шансом оглушить её"
+		"Dota_tooltip_ability_dark_willow_2_damage"								"УРОН ЗА ТИК:"
+		"Dota_tooltip_ability_dark_willow_2_chance_stunned"						"%ШАНС ОГЛУШЕНИЯ:"
+		"Dota_tooltip_ability_dark_willow_2_duration_stunned"					"ДЛИТЕЛЬНОСТЬ ОГЛУШЕНИЯ:"
+		"Dota_tooltip_ability_dark_willow_2_duration"							"ДЛИТЕЛЬНОСТЬ:"
+
+		"Dota_tooltip_ability_dark_willow_3"									"TERRORIZE"
+		"Dota_tooltip_ability_dark_willow_3_description"						"Отравляет разум крипов, заставляя их бежать в обратном направлении, а также нанося им всем большой урон"
+		"Dota_tooltip_ability_dark_willow_3_damage"								"УРОН:"
+		"Dota_tooltip_ability_dark_willow_3_duration"							"ДЛИТЕЛЬНОСТЬ:"
+		"Dota_tooltip_ability_dark_willow_3_radius"								"РАДИУС ПОРАЖЕНИЯ:"
+
+		"Dota_tooltip_ability_crystal_maiden_arcane_aura_custom"				"Arcane Aura"
+		"Dota_tooltip_ability_crystal_maiden_arcane_aura_custom_description"	"Увеличивает регенеацию маны всех башен, а также увеличивает их маг. урон"
+		"Dota_tooltip_ability_crystal_maiden_arcane_aura_custom_mana_regen"		"ВОССТАНОВЛЕНИЕ МАНЫ:"
+		"Dota_tooltip_ability_crystal_maiden_arcane_aura_custom_amp"			"%МАГИЧЕСКИЙ УРОН:"
+
+		"Dota_tooltip_ability_ability_remove_unit_description"					"Удаляет башню, возвращая 50% золота и распределяя весь опыт по башням"
+
+		"Dota_tooltip_ability_zeus_static_field_custom"		"STATIC FIELD"
+		"Dota_tooltip_ability_zeus_static_field_custom_description"	"При использовании способностей Zeus наносит урон случайному крипу в радиусе 1200 в зависимости от количества маны, (3% максимальной маны героя + %mana_damage%%  от количества маны у героя)"
+		"Dota_tooltip_ability_zeus_static_field_custom_mana_damage"	"%МАНА В УРОН:"
+		
+		"Dota_tooltip_ability_zeus_arc_lightning_custom"				"ARC LIGHTNING"
+		"Dota_tooltip_ability_zeus_arc_lightning_custom_description"	"Герой выпускает молнию в свою цель нанося магический урон ей и всем ближайшим крипам в радиусе"
+		"Dota_tooltip_ability_zeus_arc_lightning_custom_arc_damage"		"УРОН:"
+		"Dota_tooltip_ability_zeus_arc_lightning_custom_radius"			"РАДИУС:"
+
+		"Dota_tooltip_ability_crystal_maiden_crystal_nova_custom"		"CRYSTAL NOVA"
+		"Dota_tooltip_ability_crystal_maiden_crystal_nova_custom_description"		"Обдаёт выбранную область холодным ветром, из-за чего все вражеские существа попавшие в данную область получают урон и замедляются"
+		"Dota_tooltip_ability_crystal_maiden_crystal_nova_custom_radius"			"РАДИУС:"
+		"Dota_tooltip_ability_crystal_maiden_crystal_nova_custom_movespeed_slow"	"%ЗАМЕДЛЕНИЕ:"
+		"Dota_tooltip_ability_crystal_maiden_crystal_nova_custom_duration"			"ДЛИТЕЛЬНОСТЬ:"
+		"Dota_tooltip_ability_crystal_maiden_crystal_nova_custom_nova_damage"		"УРОН:"
+
+		"Dota_tooltip_ability_crystal_maiden_freezing_field_custom"					"FREEZING FIELD"
+		"Dota_tooltip_ability_crystal_maiden_freezing_field_custom_description"		"Crystal Maiden выпускает метель в большом радиусе, замедляя крипов, а также каждые 0.1 секунду отправляя глыбы снега в случайную точку метели наносящие урон"
+		"Dota_tooltip_ability_crystal_maiden_freezing_field_custom_radius"			"РАДИУС:"
+		"Dota_tooltip_ability_crystal_maiden_freezing_field_custom_explosion_radius" "РАДИУС ВЗРЫВА:"
+		"Dota_tooltip_ability_crystal_maiden_freezing_field_custom_movespeed_slow"	"%ЗАМЕДЛЕНИЕ:"
+		"Dota_tooltip_ability_crystal_maiden_freezing_field_custom_damage"			"УРОН ВЗРЫВА:"
+		"Dota_tooltip_ability_crystal_maiden_freezing_field_custom_duration_tooltip"	"ДЛИТЕЛЬНОСТЬ:"     
+
+		"Dota_tooltip_ability_spawnlord_master_stomp_custom"						"DESECRATE"
+		"Dota_tooltip_ability_spawnlord_master_stomp_custom_description"			"Ударяет по земле, нанося небольшой урон и уменьшает броню всех целей"
+		"Dota_tooltip_ability_spawnlord_master_stomp_custom_radius"					"РАДИУС:"
+		"Dota_tooltip_ability_spawnlord_master_stomp_custom_damage"					"УРОН:"
+		"Dota_tooltip_ability_spawnlord_master_stomp_custom_duration"				"ДЛИТЕЛЬНОСТЬ:"
+		"Dota_tooltip_ability_spawnlord_master_stomp_custom_armor_reduction_pct"	"%УМЕНЬШЕНИЕ БРОНИ:"
+
+		"Dota_tooltip_ability_item_kris_of_agony_1_description"					"<h1>Pasive: Agony </h1> %bonus_stack%%  урона сохраняется пока не наберётся %max_stack_bonus%, после чего герой получает %bonus_damage% урона, а сохранённый урон пропадает <br><br> Максимальный бонус к урону - %max_bonus%"
+		"Dota_tooltip_ability_item_kris_of_agony_2_description"					"<h1>Pasive: Agony </h1> %bonus_stack%%  урона сохраняется пока не наберётся %max_stack_bonus%, после чего герой получает %bonus_damage% урона, а сохранённый урон пропадает <br><br> Максимальный бонус к урону - %max_bonus%"
+		"Dota_tooltip_ability_item_kris_of_agony_3_description"					"<h1>Pasive: Agony </h1> %bonus_stack%%  урона сохраняется пока не наберётся %max_stack_bonus%, после чего герой получает %bonus_damage% урона, а сохранённый урон пропадает <br><br> Максимальный бонус к урону - %max_bonus%" 
+
+		"Dota_tooltip_ability_item_mantle_style_custom_description"	"<h1> Illusions </h1> Создаёт до %amount% иллюзий вокруг героя наносящие %outgoing_damage%%%  урона <br><br> Длительность жизни: %duration% сек."
+
+		"Dota_tooltip_ability_item_clarity_custom_description"	"<h1> Активируемая: Mana Regen</h1> Увеличивает регенерацию маны на %regen%%%, но не меньше %regen_min% <br><br> Длительность: %duration% сек."
+
+		"Dota_tooltip_ability_item_flicker_custom_description" "<h1> Passive: Flicker </h1> Урон от любой способности владельца наносит дополнительно %base_damage% базового урона + %int_damage%%%  от количества интеллекта"
+		"Dota_tooltip_ability_creep_bed_aura_debuff_description"	"Уменьшает броню ближайших крипов"
+		"Dota_tooltip_ability_creep_good_buff_description"	"Увеличивает урон всех ближайших башен"
+		"Dota_tooltip_ability_creep_good_buff_radius"		"РАДИУС:"
+		"Dota_tooltip_ability_creep_good_buff_bonus_damage"		"БОНУС К УРОНУ:"
+		"Dota_tooltip_ability_creep_bed_aura_debuff_radius"	"РАДИУС:"
+		"Dota_tooltip_ability_creep_bed_aura_debuff_armor_reduction"	"УМЕНЬШЕНИЕ БРОНИ:"
+
 
 	}
 }

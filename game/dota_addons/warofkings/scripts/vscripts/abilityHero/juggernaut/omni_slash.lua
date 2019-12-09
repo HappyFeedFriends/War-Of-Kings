@@ -11,7 +11,7 @@ modifier_omni_slash_custom = class({
     RemoveOnDeath           = function(self) return true end,
     DeclareFunctions        = function(self) return {MODIFIER_EVENT_ON_ATTACK_START} end,
     OnAttackStart 			= function(self)
-    	if self:GetAbility():IsCooldownReady() and not self:GetAbility().IsAttack and self:GetCaster():GetOwner() then 
+    	if self:GetAbility():GetAutoCastState() and self:GetAbility():IsCooldownReady() and not self:GetAbility().IsAttack and self:GetCaster():GetOwner() then 
     		local countAttack = self:GetAbility():GetSpecialValueFor('count_attack')
     		self:GetAbility().IsAttack = true
     		for i=1,countAttack do
@@ -19,15 +19,6 @@ modifier_omni_slash_custom = class({
 	    			if self:GetParent():IsAlive() then
 	    				local unit = self:GetParent():GetAttackTarget()
 	    				self:GetParent():PerformAttack(unit, true, true, true, true, false, false, true)
-	    				if unit:IsAlive() and RollPercentage(self:GetAbility():GetSpecialValueFor(unit:IsBoss() and 'chance_killedUnit_boss' or 'chance_killedUnit')) then
-	    						ApplyDamage({
-	    							damage = unit:GetHealth(),
-	    							damage_type = DAMAGE_TYPE_PURE,
-	    							victim = unit,
-	    							attacker = self:GetParent(),
-	    							ability = self:GetAbility(),
-	    						})
-	    					end
 	    			else
 	    				local unit = FindUnitsInRadius(self:GetParent():GetTeam(), 
 	    					self:GetParent():GetAttackTarget():GetAbsOrigin(), 
@@ -40,15 +31,6 @@ modifier_omni_slash_custom = class({
 							false)[1]
 	    				if unit then
 	    					self:GetParent():PerformAttack(unit, true, true, true, true, false, false, true)
-	    					if unit:IsAlive() and RollPercentage(self:GetAbility():GetSpecialValueFor(unit:IsBoss() and 'chance_killedUnit_boss' or 'chance_killedUnit')) then
-	    						ApplyDamage({
-	    							damage = unit:GetHealth(),
-	    							damage_type = DAMAGE_TYPE_PURE,
-	    							victim = unit,
-	    							attacker = self:GetParent(),
-	    							ability = self:GetAbility(),
-	    						})
-	    					end
 	    				end
 	    			end
     			end

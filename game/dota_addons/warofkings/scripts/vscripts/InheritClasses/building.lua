@@ -61,6 +61,7 @@ function Building:GetLevelByXp(xp)
 end
 
 function Building:IsAssembly(name)
+	if not self.hOwner then return false end
 	local data = CustomNetTables:GetTableValue('PlayerData', "player_" .. self.hOwner:GetPlayerOwnerID()).BuildingsCardsindexID[tostring(self.hUnit:GetEntityIndex())].hIsAssemblies
 	return data[name] == 1
 end
@@ -70,6 +71,15 @@ function CDOTA_BaseNPC:IsAssembly(name)
 		return false
 	end
 	return self.GetBuilding():IsAssembly(name)
+end
+
+function CDOTA_BaseNPC:GetSpecialValueForBuilding(key,name)
+	name = name or 'value'
+	local data = card:GetDataCard(self:GetUnitName()) 
+	if data and data.Assemblies[key] and data.Assemblies[key].data and data.Assemblies[key].data[name] then 
+		return data.Assemblies[key].data[name]
+	end
+	return 0
 end
 
 function Building:GetNeedXpByLevelUp(lvl)
@@ -112,14 +122,22 @@ function Building:GetXpByLevelUp(lvl)
 end
 
 function Building:LevelUpBuilding(lvlup)
-	local __Player = GetPlayerCustom(self.hOwner:GetPlayerOwnerID())
-	local bonus = (CARD_DATA.DAMAGE_PER_LEVEL[self:GetRariry()] or 0) + 
-	(__Player:GetUniqueBonus() == UNIQUE_BONUS_TOWER_LEVEL and 2 or 0)
-	self.hUnit:AddStackModifier({
-		modifier = 'modifier_war_of_kings_bonus_damage',
-		count = lvlup * bonus,
-		caster = self.hUnit,
-	})
+	-- local __Player = GetPlayerCustom(self.hOwner:GetPlayerOwnerID())
+	-- local dataCard = CARD_DATA[self:GetClass() == 'mage' and 'AMPLIFY_PER_LEVEL' or 'DAMAGE_PER_LEVEL']
+	-- local bonus = (dataCard[self:GetRariry()] or 0) + 
+	-- (__Player:GetUniqueBonus() == UNIQUE_BONUS_TOWER_LEVEL and 2 or 0)
+	-- self.hUnit:AddStackModifier({
+	-- 	modifier = self:GetClass() == 'mage' and 'modifier_war_of_kings_amplify' or 'modifier_war_of_kings_bonus_damage',
+	-- 	count = lvlup * (self:GetClass() == 'mage' and 1 or bonus),
+	-- 	caster = self.hUnit,
+	-- 	data = self:GetClass() == 'mage' and {amplify = bonus} or {}
+	-- })
+	local hUnit = self.hUnit
+	local uniqueBonusGain = GetPlayerCustom(self.hOwner:GetPlayerOwnerID()):GetUniqueBonus() == UNIQUE_BONUS_TOWER_LEVEL and 2 or 0
+	local primaryAttribute = hUnit:GetPrimaryAttribute()
+	hUnit:ModifyStrength((hUnit:GetStrengthGain() + uniqueBonusGain) * lvlup,true)
+	hUnit:ModifyIntellect((hUnit:GetIntellectGain() + uniqueBonusGain) * lvlup,true)
+	hUnit:ModifyAgility((hUnit:GetAgilityGain() + uniqueBonusGain )* lvlup,true)
 end
 
 function Building:AddShield(amount,ability)
@@ -144,6 +162,12 @@ end
 function Building:GetLevel()
 	return self.iLevel
 end
+
+
+function Building:IsCreep()
+	return self:GetRariry() == 'uncommon'
+end
+
 function Building:AddExperience(amount)
 	self.allXp = math.max(self.allXp + amount,0)
 	local levelbyxp = self:GetLevelByXp()
@@ -172,8 +196,9 @@ function Building:IsGodness(class)
 	end
 	return self:GetRariry() == 'Godness' and self:GetClass() == class
 end
+
 -- constructor
-function Building:constructor(sName, vLocation, fAngle, hOwner)
+function Building:constructor(sName, vLocation, fAngle, hOwner,cost)
 	self.iIndex = Building.insert(self)
 	self.vLocation = vLocation
 	self.fAngle = fAngle
@@ -182,6 +207,7 @@ function Building:constructor(sName, vLocation, fAngle, hOwner)
 	self.allXp = 0
 	self.iLevel = 1
 	self.damage = 0
+	self.iGoldCost = cost or 0
 	self.invul = false
 	self:Replace(sName)
 	local iPlayerID = self.hOwner:GetPlayerOwnerID()
@@ -201,6 +227,7 @@ function Building:constructor(sName, vLocation, fAngle, hOwner)
 	end
 	--PrintTable(CustomNetTables:GetTableValue('DataCard', "player_" .. iPlayerID))
 	self.hBlocker = BuildSystem:CreateBlocker(BuildSystem:GridNavSquare(BUILDING_SIZE, vLocation))
+	attributes:Create(self)
 end
 
 -- add star 
@@ -229,55 +256,6 @@ function Building:UpgradeBuilding(iBonus)
 	if self.iGrade == CARD_DATA.MAX_GRADE[self:GetRariry()] then
 		self.particleMaxGrade = ParticleManager:CreateParticle('particles/econ/events/fall_major_2016/teleport_end_fm06_glow.vpcf', PATTACH_ABSORIGIN_FOLLOW, unit)
 		ParticleManager:SetParticleControl(self.particleMaxGrade, 0, unit:GetAbsOrigin())
-	end
-	local race = self:GetClass()
-	local IsGodness = self:GetRariry() == 'Godness'
-	if race == 'warrior' or IsGodness then
-		self.hUnit:AddStackModifier({
-			modifier = 'modifier_war_of_kings_bonus_attack_speed',
-			count = CLASS_DATA.warrior.bonus_star,
-			caster = self.hUnit,
-		})
-	end
-	if race == 'shaman' or IsGodness then
-		self.hUnit:AddStackModifier({
-			modifier = 'modifier_war_of_kings_bonus_attack_damage_special',
-			count = CLASS_DATA.shaman.bonus_star,
-			caster = self.hUnit,
-		})
-	end
-	if race == 'guardian' or IsGodness then
-		local health = self.hOwner:GetHealth()
-		local maxhealth = self.hOwner:GetMaxHealth()
-		self.hOwner:SetBaseMaxHealth(maxhealth + CLASS_DATA.guardian.bonus_star)
-		self.hOwner:SetMaxHealth(maxhealth + CLASS_DATA.guardian.bonus_star)
-		self.hOwner:SetHealth(health + CLASS_DATA.guardian.bonus_star)
-	end
-	if race == 'mage' or IsGodness then
-		self.hUnit:AddStackModifier({
-			modifier = 'modifier_war_of_kings_bonus_amplify',
-			count = CLASS_DATA.mage.bonus_star,
-			caster = self.hUnit,
-		})
-	end
-	if race == 'rogue' or IsGodness then
-		if self.hUnit:FindModifierByName('modifier_war_of_kings_rogue_critical_damage') then
-			local chance = self.hUnit:FindModifierByName('modifier_war_of_kings_rogue_critical_damage').chance
-			self.hUnit:FindModifierByName('modifier_war_of_kings_rogue_critical_damage').chance = chance + CLASS_DATA.rogue.bonus_star.chance
-		else
-			self.hUnit:AddNewModifier(self.hUnit, nil, 'modifier_war_of_kings_rogue_critical_damage', {
-				duration = -1,
-				critical_chance = CLASS_DATA.rogue.bonus_star.chance,
-			})
-		end	
-		self.hUnit:AddStackModifier({
-			modifier = 'modifier_war_of_kings_rogue_critical_damage',
-			count = CLASS_DATA.rogue.bonus_star.critical,
-			caster = self.hUnit,
-		})
-	end
-	if race == 'archer' or IsGodness then
-		self.hUnit:SetBaseAttackTime(math.max(self.hUnit:GetBaseAttackTime() - CLASS_DATA.archer.bonus_star,0.3))
 	end
 end
 
@@ -348,56 +326,7 @@ function Building:RemoveSelf()
 	local iPlayerID = self.hOwner:GetPlayerOwnerID()
 	local __Player = GetPlayerCustom(iPlayerID)
 	__Player:ModifyTowerAmount(-1)
-	if self:GetUnitEntityName() == 'npc_war_of_Kings_special_boss_shaman_building' then
-		__Player:ModifyTowerAmount(-1,'max')
-	end
 	local nettables = CustomNetTables:GetTableValue('PlayerData', "player_" .. iPlayerID)
-	local race = self:GetClass()
-	local IsGodness = self:GetRariry() == 'Godness'
-	if race == 'guardian' or IsGodness then
-		local health = self.hOwner:GetHealth()
-		local maxhealth = self.hOwner:GetMaxHealth()
-		self.hOwner:SetBaseMaxHealth(math.max(maxhealth - CLASS_DATA.guardian.bonus_star,100))
-		self.hOwner:SetMaxHealth(math.max(maxhealth - (CLASS_DATA.guardian.bonus_star * (self.iGrade - 1)),100))
-		self.hOwner:SetHealth(math.max(health - (CLASS_DATA.guardian.bonus_star * (self.iGrade - 1)) ,100))
-	end
-	if race == 'shaman' or IsGodness then
-		BuildSystem:EachBuilding(iPlayerID,function(build)
-			build.hUnit:SetMaxMana(build.hUnit:GetMaxMana() - (CLASS_DATA.shaman.bonus_star * (self.iGrade - 1)))
-			--build.hUnit:GiveMana(CLASS_DATA.shaman.bonus_star)
-		end)
-	end
-	if self:IsGodness('mage') then
-		BuildSystem:EachBuilding(iPlayerID,function(build)
-			build.hUnit:AddStackModifier({
-				modifier = 'modifier_war_of_kings_bonus_amplify_special',
-				count = -CLASS_DATA.mage.special_bonus,
-				caster = build.hUnit,
-			})
-		end)
-	end
-	if self:IsGodness('rogue') then
-		BuildSystem:EachBuilding(iPlayerID,function(build)
-			if build:GetClass() ~= 'rogue' and build.hUnit:FindModifierByName('modifier_war_of_kings_rogue_critical_damage') then
-				build.hUnit:AddStackModifier({
-					modifier = 'modifier_war_of_kings_rogue_critical_damage',
-					count = -CLASS_DATA.rogue.special_bonus.critical,
-					caster = build.hUnit,
-				})
-			end
-		end)
-	end
-	if self:IsGodness('archer') then
-		BuildSystem:EachBuilding(iPlayerID,function(build)
-			if build:GetClass() == 'archer' and build.hUnit:HasModifier('modifier_war_of_kings_bonus_attack_range') then
-				build.hUnit:AddStackModifier({
-					modifier = 'modifier_war_of_kings_bonus_attack_range',
-					count = -CLASS_DATA.archer.special_bonus,
-					caster = build.hUnit,
-				})
-			end
-		end)
-	end
 	nettables.BuildingsCardsindexID[tostring(self.hUnit:GetEntityIndex())] = nil
 	self.hUnit:ForceKill(false)
 	Timers:CreateTimer(0.1,function()

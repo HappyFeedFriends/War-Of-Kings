@@ -15,7 +15,7 @@
 		"SoundSet"					"Hero_Medusa"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_medusa.vsndevts"
 		"Level"						"1"
-
+ 
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					""
@@ -74,11 +74,192 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
+
+	"npc_war_of_kings_shadow_fiend"	
+	{
+
+		"AttributeBaseStrength"		"21"
+		"AttributeStrengthGain"		"1.5"
+		"AttributeBaseIntelligence"		"16"
+		"AttributeIntelligenceGain"		"3.600000"
+		"AttributeBaseAgility"		"25"
+		"AttributeAgilityGain"		"2.5"
+
+		"vscripts"					"AI/Towers/AI_shadow_fiend.lua"
+		"ConsideredHero"			"1"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/heroes/shadow_fiend/shadow_fiend.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"1"
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"shadow_fiend_shadowraze_custom"
+		"Ability2"					"nevermore_dark_lord_custom"			// Ability 2
+		"Ability3"					"shadow_fiend_requirem_custom"			// Ability 3
+		"Ability4"					""			// Ability 4
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"			// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"280"		// Damage range min.
+		"AttackDamageMax"			"340"		// Damage range max.
+		"AttackRate"				"1.24"		// Speed of attack.
+		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
+		"AttackRange"				"1250"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_fire_arcana.vpcf" // Particle system model for projectile.
+		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"170"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"24"		// Experience earn.
+		"BountyGoldMin"				"21"		// Gold earned min.
+		"BountyGoldMax"				"29"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"				"270"		// Speed.			
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"450"		// Base health.
+		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusMana"				"2600"			// Base mana.
+		"StatusManaRegen"			"5.0"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		"Creature"
+		{
+			"AttachWearables"
+			{
+			    "Wearable1" { "ItemDef" "387" } 
+				"Wearable2" { "ItemDef" "488" } 
+				"Wearable3" { "ItemDef" "486" } 
+			}
+		}
+	}
+
+	"npc_war_of_kings_dark_willow"	
+	{
+		"vscripts"					"AI/Towers/AI_dark_willow.lua"
+		"ConsideredHero"			"1"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_INTELLECT"
+
+		"AttributeBaseStrength"		"14"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"26"
+		"AttributeIntelligenceGain"		"3.6"
+		"AttributeBaseAgility"		"18"
+		"AttributeAgilityGain"		"1.35"
+
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/heroes/dark_willow/dark_willow.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"1"
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"dark_willow_1"
+		"Ability2"					"dark_willow_2"			// Ability 2
+		"Ability3"					"dark_willow_3"			// Ability 3
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"			// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"280"		// Damage range min.
+		"AttackDamageMax"			"340"		// Damage range max.
+		"AttackRate"				"1.45"		// Speed of attack.
+		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
+		"AttackRange"				"1000"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_dark_willow/dark_willow_base_attack.vpcf" // Particle system model for projectile.
+		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"170"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"24"		// Experience earn.
+		"BountyGoldMin"				"21"		// Gold earned min.
+		"BountyGoldMax"				"29"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"				"270"		// Speed.			
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"450"		// Base health.
+		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusMana"				"2600"			// Base mana.
+		"StatusManaRegen"			"5.0"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		"Creature"
+		{
+			"AttachWearables"
+			{
+			    "Wearable1" { "ItemDef" "642" } 
+				"Wearable2" { "ItemDef" "641" } 
+				"Wearable3" { "ItemDef" "640" } 
+			}
+		}
+	}
+
 	"npc_war_of_kings_undying"	
 	{
 		"vscripts"					"AI/Towers/AI_undying.lua"
 		"ConsideredHero"			"1"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+
+		"AttributeBaseStrength"		"22"
+		"AttributeStrengthGain"		"2.4"
+		"AttributeBaseIntelligence"		"16"
+		"AttributeIntelligenceGain"		"0.6"
+		"AttributeBaseAgility"		"19"
+		"AttributeAgilityGain"		"1.6"
 		// General
 		//----------------------------------------------------------------
 		"Model"						"models/heroes/undying/undying.vmdl"	// Model.
@@ -156,6 +337,12 @@
 		"vscripts"					"AI/Towers/AI_medusa.lua"
 		"ConsideredHero"			"1"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"22"
+		"AttributeStrengthGain"		"1.4"
+		"AttributeBaseIntelligence"		"16"
+		"AttributeIntelligenceGain"		"0.6"
+		"AttributeBaseAgility"		"28"
+		"AttributeAgilityGain"		"2.6"
 		// General
 		//----------------------------------------------------------------
 		"Model"						"models/heroes/medusa/medusa.vmdl"	// Model.
@@ -238,6 +425,12 @@
 		"ConsideredHero"			"1"
 		"vscripts"					"AI/Towers/AI_tidehunter.lua"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"32"
+		"AttributeStrengthGain"		"3.4"
+		"AttributeBaseIntelligence"		"10"
+		"AttributeIntelligenceGain"		"0"
+		"AttributeBaseAgility"		"25"
+		"AttributeAgilityGain"		"1.9"
 		// General
 		//----------------------------------------------------------------
 		"Model"						"models/heroes/tidehunter/tidehunter.vmdl"	// Model.
@@ -317,6 +510,12 @@
 		"vscripts"					"AI/Towers/AI_leshrac.lua"
 		"ConsideredHero"			"1"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributeBaseStrength"		"18"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"33"
+		"AttributeIntelligenceGain"		"3.3"
+		"AttributeBaseAgility"		"19"
+		"AttributeAgilityGain"		"1.6"
 		// General
 		//----------------------------------------------------------------
 		"Model"						"models/heroes/leshrac/leshrac.vmdl"	// Model.
@@ -399,6 +598,12 @@
 		"ConsideredHero"			"1"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
 		"vscripts"					"AI/Towers/AI_bounty_hunter.lua"
+		"AttributeBaseStrength"		"26"
+		"AttributeStrengthGain"		"2"
+		"AttributeBaseIntelligence"		"14"
+		"AttributeIntelligenceGain"		"1.3"
+		"AttributeBaseAgility"		"24"
+		"AttributeAgilityGain"		"3.6"
 		// General
 		//----------------------------------------------------------------
 		"Model"						"models/heroes/bounty_hunter/bounty_hunter.vmdl"	// Model.
@@ -480,6 +685,12 @@
 		"ConsideredHero"			"1"
 		"vscripts"					"AI/Towers/AI_pugna.lua"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributeBaseStrength"		"5"
+		"AttributeStrengthGain"		"0.4"
+		"AttributeBaseIntelligence"		"120"
+		"AttributeIntelligenceGain"		"1.3"
+		"AttributeBaseAgility"		"24"
+		"AttributeAgilityGain"		"2.4"
 		// General
 		//----------------------------------------------------------------
 		"Model"						"models/heroes/pugna/pugna.vmdl"	// Model.
@@ -560,8 +771,13 @@
 	"npc_war_of_kings_mars"	
 	{
 		"ConsideredHero"			"1"
-		"vscripts"					"AI/Towers/AI_mars.lua"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"26"
+		"AttributeStrengthGain"		"3.4"
+		"AttributeBaseIntelligence"		"0"
+		"AttributeIntelligenceGain"		"0"
+		"AttributeBaseAgility"		"24"
+		"AttributeAgilityGain"		"2.4"
 		// General
 		//----------------------------------------------------------------
 		"Model"						"models/heroes/mars/mars.vmdl"	// Model.
@@ -640,8 +856,15 @@
 	"npc_war_of_kings_satyr"	
 	{
 		"ConsideredHero"			"1"
+		"vscripts"					"AI/Towers/AI_satyr.lua"
 		"PrototypeModel"			"npc_dota_neutral_satyr_hellcaller"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"10"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"10"
+		"AttributeIntelligenceGain"		"1"
+		"AttributeBaseAgility"		"10"
+		"AttributeAgilityGain"		"1"
 		// General
 		//----------------------------------------------------------------
 		"Model"						"models/creeps/neutral_creeps/n_creep_satyr_a/n_creep_satyr_a.vmdl"	// Model.
@@ -649,6 +872,8 @@
 		"SoundSet"					"Hero_Medusa"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_medusa.vsndevts"
 		"Level"						"1"
+		"Ability1"	"satyr_hellcaller_shockwave"
+		"Ability2"	"dark_troll_warlord_ensnare"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -657,9 +882,9 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"150"		// Damage range min.
-		"AttackDamageMax"			"190"		// Damage range max.
-		"AttackRate"				"1.45"		// Speed of attack.
+		"AttackDamageMin"			"210"		// Damage range min.
+		"AttackDamageMax"			"320"		// Damage range max.
+		"AttackRate"				"1.1"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"700"		// Range within a target can be attacked.
@@ -706,6 +931,12 @@
 		"ConsideredHero"			"1"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"PrototypeModel"			"npc_dota_neutral_ogre_mauler"
+		"AttributeBaseStrength"		"42"
+		"AttributeStrengthGain"		"4.6"
+		"AttributeBaseIntelligence"		"12"
+		"AttributeIntelligenceGain"		"1.1"
+		"AttributeBaseAgility"		"10"
+		"AttributeAgilityGain"		"1"
 		// General
 		//----------------------------------------------------------------
 		"Model"						"models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl"	// Model.
@@ -720,8 +951,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"110"		// Damage range min.
-		"AttackDamageMax"			"160"		// Damage range max.
+		"AttackDamageMin"			"250"		// Damage range min.
+		"AttackDamageMax"			"420"		// Damage range max.
 		"AttackRate"				"1.45"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
@@ -774,6 +1005,12 @@
 		"SoundSet"					"Hero_Medusa"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_medusa.vsndevts"
 		"Level"						"1"
+		"AttributeBaseStrength"		"10"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"10"
+		"AttributeIntelligenceGain"		"1"
+		"AttributeBaseAgility"		"10"
+		"AttributeAgilityGain"		"1"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -826,263 +1063,17 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
-	"npc_war_of_kings_troll_berserk"	
-	{
-		"ConsideredHero"			"1"
-		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
-		"Model"						"models/creeps/neutral_creeps/n_creep_troll_dark_a/n_creep_troll_dark_a.vmdl"	// Model.
-		"BaseClass"					"npc_dota_creature"
-		"SoundSet"					"Hero_Medusa"
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_medusa.vsndevts"
-		"Level"						"1"
 
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"3"			// Physical protection.
-		"Ability1"					"troll_warlord_fervor"
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"90"		// Damage range min.
-		"AttackDamageMax"			"150"		// Damage range max.
-		"AttackRate"				"1.15"		// Speed of attack.
-		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
-		"AttackRange"				"750"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/neutral_fx/ghost_base_attack.vpcf" // Particle system model for projectile.
-		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
-
-		// Bounds
-		//----------------------------------------------------------------
-		"RingRadius"				"40"
-		"HealthBarOffset"			"170"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"24"		// Experience earn.
-		"BountyGoldMin"				"21"		// Gold earned min.
-		"BountyGoldMax"				"29"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
-		"MovementSpeed"				"270"		// Speed.			
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"450"		// Base health.
-		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
-		"StatusMana"				"1250"			// Base mana.
-		"StatusManaRegen"			"5"		// Mana regeneration rate.		 
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}
-	"npc_war_of_kings_fire_spirit"	
-	{
-		"ConsideredHero"			"1"
-		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
-		"PrototypeModel"			"npc_dota_brewmaster_fire"
-		// General
-		//----------------------------------------------------------------
-
-		"Model"						"models/heroes/brewmaster/brewmaster_firespirit.vmdl"	// Model.
-		"BaseClass"					"npc_dota_creature"
-		"SoundSet"					"Hero_Medusa"
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_medusa.vsndevts"
-		"Level"						"1"
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"3"			// Physical protection.
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"145"		// Damage range min.
-		"AttackDamageMax"			"160"		// Damage range max.
-		"AttackRate"				"0.8"		// Speed of attack.
-		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
-		"AttackRange"				"750"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/units/heroes/hero_phoenix/phoenix_base_attack.vpcf" // Particle system model for projectile.
-		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
-
-		// Bounds
-		//----------------------------------------------------------------
-		"RingRadius"				"40"
-		"HealthBarOffset"			"170"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"24"		// Experience earn.
-		"BountyGoldMin"				"21"		// Gold earned min.
-		"BountyGoldMax"				"29"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
-		"MovementSpeed"				"270"		// Speed.			
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"450"		// Base health.
-		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
-		"StatusMana"				"1250"			// Base mana.
-		"StatusManaRegen"			"5"		// Mana regeneration rate.		 
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}
-	"npc_war_of_kings_earth_spirit"	
-	{
-		"PrototypeModel"			"npc_dota_brewmaster_earth"
-		"ConsideredHero"			"1"
-		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
-		// General
-		//----------------------------------------------------------------
-
-		"Model"						"models/heroes/brewmaster/brewmaster_earthspirit.vmdl"	// Model.
-		"BaseClass"					"npc_dota_creature"
-		"SoundSet"					"Hero_Medusa"
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_medusa.vsndevts"
-		"Level"						"1"
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"3"			// Physical protection.
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"145"		// Damage range min.
-		"AttackDamageMax"			"160"		// Damage range max.
-		"AttackRate"				"0.8"		// Speed of attack.
-		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
-		"AttackRange"				"750"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/econ/items/necrolyte/necronub_base_attack/necrolyte_base_attack_ka.vpcf" // Particle system model for projectile.
-		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
-
-		// Bounds
-		//----------------------------------------------------------------
-		"RingRadius"				"40"
-		"HealthBarOffset"			"170"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"24"		// Experience earn.
-		"BountyGoldMin"				"21"		// Gold earned min.
-		"BountyGoldMax"				"29"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
-		"MovementSpeed"				"270"		// Speed.			
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"450"		// Base health.
-		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
-		"StatusMana"				"1250"			// Base mana.
-		"StatusManaRegen"			"5"		// Mana regeneration rate.		 
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}
-	"npc_war_of_kings_wind_spirit"	
-	{
-		"PrototypeModel"			"npc_dota_brewmaster_storm"
-		"ConsideredHero"			"1"
-		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
-		// General
-		//----------------------------------------------------------------
-
-		"Model"						"models/heroes/brewmaster/brewmaster_windspirit.vmdl"	// Model.
-		"BaseClass"					"npc_dota_creature"
-		"SoundSet"					"Hero_Medusa"
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_medusa.vsndevts"
-		"Level"						"1"
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"3"			// Physical protection.
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"145"		// Damage range min.
-		"AttackDamageMax"			"160"		// Damage range max.
-		"AttackRate"				"0.8"		// Speed of attack.
-		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
-		"AttackRange"				"750"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/base_attacks/ranged_tower_good_linear.vpcf" // Particle system model for projectile.
-		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
-
-		// Bounds
-		//----------------------------------------------------------------
-		"RingRadius"				"40"
-		"HealthBarOffset"			"170"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"24"		// Experience earn.
-		"BountyGoldMin"				"21"		// Gold earned min.
-		"BountyGoldMax"				"29"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
-		"MovementSpeed"				"270"		// Speed.			
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"450"		// Base health.
-		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
-		"StatusMana"				"1250"			// Base mana.
-		"StatusManaRegen"			"5"		// Mana regeneration rate.		 
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}
 	"npc_war_of_kings_tusk"	
 	{
 		"ConsideredHero"			"1"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"42"
+		"AttributeStrengthGain"		"3.3"
+		"AttributeBaseIntelligence"		"36"
+		"AttributeIntelligenceGain"		"0.3"
+		"AttributeBaseAgility"		"25"
+		"AttributeAgilityGain"		"1.9"
 		// General
 		//----------------------------------------------------------------
 		"Model"						"models/heroes/tuskarr/tuskarr.vmdl"	// Model.
@@ -1174,7 +1165,12 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_obsidian_destroyer.vsndevts"
 		"Level"						"1"
 		"ModelScale" 				"1"
-
+		"AttributeBaseStrength"		"21"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"45"
+		"AttributeIntelligenceGain"		"3.8"
+		"AttributeBaseAgility"		"5"
+		"AttributeAgilityGain"		"0"
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"obsidian_destroyer_arcane_orb_custom"
@@ -1258,6 +1254,13 @@
 		"Level"						"1"
 		"ModelScale" 				"1"
 
+		"AttributeBaseStrength"		"10"
+		"AttributeStrengthGain"		"3.9"
+		"AttributeBaseIntelligence"		"31"
+		"AttributeIntelligenceGain"		"2.6"
+		"AttributeBaseAgility"		"2.7"
+		"AttributeAgilityGain"		"2"
+
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"		"shadow_shaman_ether_shock"
@@ -1339,7 +1342,12 @@
 		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_shadowshaman.vsndevts"
 		"Level"						"1"
 		"ModelScale" 				"1"
-
+		"AttributeBaseStrength"		"0"
+		"AttributeStrengthGain"		"0"
+		"AttributeBaseIntelligence"		"0"
+		"AttributeIntelligenceGain"		"0"
+		"AttributeBaseAgility"		"60"
+		"AttributeAgilityGain"		"8"
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"black_dragon_fireball"			// Ability 1
@@ -1405,6 +1413,13 @@
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
 		"ModelScale" 				"1"
+
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.3"
+		"AttributeBaseIntelligence"		"35"
+		"AttributeIntelligenceGain"		"2.3"
+		"AttributeBaseAgility"		"18"
+		"AttributeAgilityGain"		"3"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -1475,6 +1490,13 @@
 		"Level"						"1"
 		"ModelScale" 				"1"
 
+		"AttributeBaseStrength"		"35"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"70"
+		"AttributeIntelligenceGain"		"4.5"
+		"AttributeBaseAgility"		"60"
+		"AttributeAgilityGain"		"2.4"
+
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"		"enigma_malefice"
@@ -1532,91 +1554,19 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
-	"npc_war_of_kings_keeper_of_the_light"	
-	{
-		"vscripts"					"AI/Towers/AI_keeper.lua"
-		"ConsideredHero"			"1"
-		// General
-		//----------------------------------------------------------------
-		"Model"		"models/heroes/keeper_of_the_light/keeper_of_the_light.vmdl"
-		"IdleExpression"		"scenes/keeper_of_the_light/keeper_of_the_light_exp_idle_01.vcd"
-		"SoundSet"		"Hero_KeeperOfTheLight"
-		"BaseClass"					"npc_dota_creature"
-		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_keeper_of_the_light.vsndevts"
-		"Level"						"1"
-		"ModelScale" 				"1"
 
-		// Abilities
-		//----------------------------------------------------------------
-		"Ability1"		"keeper_of_the_light_illuminate"
-		"Ability2"		"keeper_of_the_light_will_o_wisp"
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"3"			// Physical protection.
-
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"180"		// Damage range min.
-		"AttackDamageMax"			"230"		// Damage range max.
-		"AttackRate"				"1.55"		// Speed of attack.
-		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
-		"AttackRange"				"1250"		// Range within a target can be attacked.	     
-		"ProjectileModel"		"particles/units/heroes/hero_keeper_of_the_light/keeper_of_the_light_base_attack.vpcf"
-		"ProjectileSpeed"		"2000"
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
-		// Bounds
-		//----------------------------------------------------------------
-		"RingRadius"				"40"
-		"HealthBarOffset"			"170"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"24"		// Experience earn.
-		"BountyGoldMin"				"21"		// Gold earned min.
-		"BountyGoldMax"				"29"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
-		"MovementSpeed"				"270"		// Speed.			
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"450"		// Base health.
-		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
-		"StatusMana"				"2500"			// Base mana.
-		"StatusManaRegen"			"5"		// Mana regeneration rate.		 
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-		"Creature"
-		{
-			"AttachWearables"
-			{
-			    "Wearable1" { "ItemDef" "252" } 
-				"Wearable2" { "ItemDef" "253" } 
-				"Wearable3" { "ItemDef" "254" } 
-				"Wearable4" { "ItemDef" "255" } 
-				"Wearable5" { "ItemDef" "256" }
-			}
-		}
-	}
 	"npc_war_of_kings_death_prophet"	
 	{
 		"vscripts"					"AI/Towers/AI_death_prophet.lua"
 		"ConsideredHero"			"1"
+
+		"AttributeBaseStrength"		"45"
+		"AttributeStrengthGain"		"2.4"
+		"AttributeBaseIntelligence"		"60"
+		"AttributeIntelligenceGain"		"3.8"
+		"AttributeBaseAgility"		"34"
+		"AttributeAgilityGain"		"3.4"
+
 		// General
 		//----------------------------------------------------------------
 		"Model"		"models/heroes/death_prophet/death_prophet.vmdl"
@@ -1694,18 +1644,24 @@
 			}
 		}
 	}
-	"npc_war_of_kings_golem"	
+	"npc_war_of_kings_harpy"	
 	{
 		"ConsideredHero"			"1"
+		"vscripts"					"AI/Towers/AI_harpy.lua"
 		// General
 		//----------------------------------------------------------------
-		"Model"		"models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"
-		"SoundSet"		"Hero_DeathProphet"
 		"BaseClass"					"npc_dota_creature"
-		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_death_prophet.vsndevts"
-		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_death_prophet.vsndevts"
-		"Level"						"1"
-		"ModelScale" 				"1"
+		"Model"						"models/creeps/neutral_creeps/n_creep_harpy_b/n_creep_harpy_b.vmdl"
+		"SoundSet"					"n_creep_Ranged"
+		"ProjectileModel"			"particles/base_attacks/ranged_badguy.vpcf"
+
+		"AttributeBaseStrength"		"15"
+		"AttributeStrengthGain"		"1.6"
+		"AttributeBaseIntelligence"		"25"
+		"AttributeIntelligenceGain"		"2.6"
+		"AttributeBaseAgility"		"32"
+		"AttributeAgilityGain"		"3"
+		"Ability1"	"harpy_storm_chain_lightning"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -1717,8 +1673,175 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"140"		// Damage range min.
-		"AttackDamageMax"			"170"		// Damage range max.
+		"AttackDamageMin"			"240"		// Damage range min.
+		"AttackDamageMax"			"320"		// Damage range max.
+		"AttackRate"				"1.35"		// Speed of attack.
+		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
+		"AttackRange"				"750"		// Range within a target can be attacked.	     
+		"ProjectileSpeed"		"2000"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"21"
+		"AttributeStrengthGain"		"2.500000"
+		"AttributeBaseIntelligence"		"16"
+		"AttributeIntelligenceGain"		"3.600000"
+		"AttributeBaseAgility"		"14"
+		"AttributeAgilityGain"		"1.0"
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"170"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"24"		// Experience earn.
+		"BountyGoldMin"				"21"		// Gold earned min.
+		"BountyGoldMax"				"29"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"				"270"		// Speed.			
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"450"		// Base health.
+		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusMana"				"2500"			// Base mana.
+		"StatusManaRegen"			"5"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+	}
+
+	"npc_war_of_kings_thunder_lizard"	
+	{
+		"ConsideredHero"			"1"
+		"vscripts"					"AI/Towers/AI_thunder_lizard.lua"
+		// General
+		//----------------------------------------------------------------
+		"Model"		"models/creeps/neutral_creeps/n_creep_thunder_lizard/n_creep_thunder_lizard_big.vmdl"
+		"SoundSet"		"Hero_DeathProphet"
+		"BaseClass"					"npc_dota_creature"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_death_prophet.vsndevts"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_death_prophet.vsndevts"
+		"Level"						"1"
+		"ModelScale" 				"1"
+
+		"AttributeBaseStrength"		"70"
+		"AttributeStrengthGain"		"3"
+		"AttributeBaseIntelligence"		"25"
+		"AttributeIntelligenceGain"		"1.2"
+		"AttributeBaseAgility"		"35"
+		"AttributeAgilityGain"		"2.3"
+		"Ability1"	"big_thunder_lizard_frenzy"
+		"Ability2"	"big_thunder_lizard_wardrums_aura"
+
+		// Abilities
+		//----------------------------------------------------------------
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"3"			// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"320"		// Damage range min.
+		"AttackDamageMax"			"420"		// Damage range max.
+		"AttackRate"				"1.7"		// Speed of attack.
+		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
+		"AttackRange"				"750"		// Range within a target can be attacked.	     
+		"ProjectileModel"		"particles/units/heroes/hero_death_prophet/death_prophet_base_attack.vpcf"
+		"ProjectileSpeed"		"2000"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"21"
+		"AttributeStrengthGain"		"2.500000"
+		"AttributeBaseIntelligence"		"16"
+		"AttributeIntelligenceGain"		"3.600000"
+		"AttributeBaseAgility"		"14"
+		"AttributeAgilityGain"		"1.0"
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"170"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"24"		// Experience earn.
+		"BountyGoldMin"				"21"		// Gold earned min.
+		"BountyGoldMax"				"29"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"				"270"		// Speed.			
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"450"		// Base health.
+		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusMana"				"2500"			// Base mana.
+		"StatusManaRegen"			"5"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+	}
+
+	"npc_war_of_kings_golem"	
+	{
+		"ConsideredHero"			"1"
+		"vscripts"					"AI/Towers/AI_golem.lua"
+		// General
+		//----------------------------------------------------------------
+		"Model"		"models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"
+		"SoundSet"		"Hero_DeathProphet"
+		"BaseClass"					"npc_dota_creature"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_death_prophet.vsndevts"
+		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_death_prophet.vsndevts"
+		"Level"						"1"
+		"ModelScale" 				"1"
+
+		"AttributeBaseStrength"		"100"
+		"AttributeStrengthGain"		"10"
+		"AttributeBaseIntelligence"		"0"
+		"AttributeIntelligenceGain"		"0"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0"
+		"Ability1"	"mud_golem_hurl_boulder"
+		//"Ability2"	"stone_golem_buff_aura"
+
+		// Abilities
+		//----------------------------------------------------------------
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"3"			// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"330"		// Damage range min.
+		"AttackDamageMax"			"440"		// Damage range max.
 		"AttackRate"				"1.46"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
@@ -1780,6 +1903,15 @@
 		"Level"						"1"
 		"ModelScale" 				"1"
 
+		"AttributeBaseStrength"		"15"
+		"AttributeStrengthGain"		"1.7"
+		"AttributeBaseIntelligence"		"10"
+		"AttributeIntelligenceGain"		"1.3"
+		"AttributeBaseAgility"		"25"
+		"AttributeAgilityGain"		"2.7"
+		"Ability1"					"alpha_wolf_critical_strike"		
+		"Ability2"					"alpha_wolf_command_aura"			
+
 		// Abilities
 		//----------------------------------------------------------------
 
@@ -1790,15 +1922,15 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"140"		// Damage range min.
-		"AttackDamageMax"			"170"		// Damage range max.
+		"AttackDamageMin"			"240"		// Damage range min.
+		"AttackDamageMax"			"470"		// Damage range max.
 		"AttackRate"				"1.47"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"1250"		// Range within a target can be attacked.	     
 		"ProjectileModel"		"particles/units/heroes/hero_death_prophet/death_prophet_base_attack.vpcf"
 		"ProjectileSpeed"		"2000"
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"AttributeBaseStrength"		"21"
 		"AttributeStrengthGain"		"2.500000"
 		"AttributeBaseIntelligence"		"16"
@@ -1851,8 +1983,15 @@
 		"Level"						"1"
 		"ModelScale" 				"1"
 
-		"Ability1"					"spawnlord_master_stomp"			// Ability 1
+		"Ability1"					"spawnlord_master_stomp_custom"			// Ability 1
 		"Ability2"					"spawnlord_master_freeze"	// Ability 2
+
+		"AttributeBaseStrength"		"29"
+		"AttributeStrengthGain"		"1.8"
+		"AttributeBaseIntelligence"		"18"
+		"AttributeIntelligenceGain"		"1.4"
+		"AttributeBaseAgility"		"25"
+		"AttributeAgilityGain"		"2.15"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1861,8 +2000,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"110"		// Damage range min.
-		"AttackDamageMax"			"150"		// Damage range max.
+		"AttackDamageMin"			"310"		// Damage range min.
+		"AttackDamageMax"			"350"		// Damage range max.
 		"AttackRate"				"1.46"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
@@ -1924,10 +2063,17 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"15"
+		"AttributeStrengthGain"		"1.3"
+		"AttributeBaseIntelligence"		"25"
+		"AttributeIntelligenceGain"		"2.1"
+		"AttributeBaseAgility"		"21"
+		"AttributeAgilityGain"		"1.8"
+
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"zuus_arc_lightning"	
-		"Ability3"					"zuus_static_field"	
+		"Ability1"					"zeus_arc_lightning_custom"	
+		"Ability3"					"zeus_static_field_custom"	
 		"Ability6"					"zuus_thundergods_wrath_custom"			// Ability 4
 
 		// Armor
@@ -2004,6 +2150,13 @@
 		"SoundSet"					"Hero_Bounty_hunter"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"45"
+		"AttributeStrengthGain"		"3.3"
+		"AttributeBaseIntelligence"		"10"
+		"AttributeIntelligenceGain"		"1"
+		"AttributeBaseAgility"		"70"
+		"AttributeAgilityGain"		"5"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -2084,9 +2237,16 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"1.4"
+		"AttributeBaseIntelligence"		"35"
+		"AttributeIntelligenceGain"		"3.8"
+		"AttributeBaseAgility"		"14"
+		"AttributeAgilityGain"		"0.6"
+
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"templar_assassin_refraction"
+		"Ability1"					"templar_assassin_refraction" 
 		"Ability2"					"templar_assassin_psi_blades"	
 
 		// Armor
@@ -2243,6 +2403,13 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"1.9"
+		"AttributeBaseIntelligence"		"15"
+		"AttributeIntelligenceGain"		"1.35"
+		"AttributeBaseAgility"		"40"
+		"AttributeAgilityGain"		"3.3"
+
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"centaur_hoof_stomp"	
@@ -2322,6 +2489,13 @@
 		"Level"						"1"
 		"ModelScale" 				"1"
 
+		"AttributeBaseStrength"		"35"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"25"
+		"AttributeIntelligenceGain"		"1.7"
+		"AttributeBaseAgility"		"40"
+		"AttributeAgilityGain"		"1"
+
 		// Armor
 		//----------------------------------------------------------------
 		"ArmorPhysical"				"3"			// Physical protection.
@@ -2373,79 +2547,6 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
-	"npc_war_of_kings_troll_shaman"	
-	{
-		"ConsideredHero"			"1"
-		// General
-		//----------------------------------------------------------------
-		"Model"		"models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_high_priest.vmdl"
-		"SoundSet"		"Hero_DeathProphet"
-		"BaseClass"					"npc_dota_creature"
-		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_death_prophet.vsndevts"
-		"VoiceFile"		"soundevents/voscripts/game_sounds_vo_death_prophet.vsndevts"
-		"Level"						"1"
-		"ModelScale" 				"1"
-
-		// Abilities
-		//----------------------------------------------------------------
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"3"			// Physical protection.
-
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"140"		// Damage range min.
-		"AttackDamageMax"			"170"		// Damage range max.
-		"AttackRate"				"1.8"		// Speed of attack.
-		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
-		"AttackRange"				"1100"		// Range within a target can be attacked.	     
-		"ProjectileModel"		"particles/units/heroes/hero_death_prophet/death_prophet_base_attack.vpcf"
-		"ProjectileSpeed"		"2000"
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
-		"AttributeBaseStrength"		"21"
-		"AttributeStrengthGain"		"2.500000"
-		"AttributeBaseIntelligence"		"16"
-		"AttributeIntelligenceGain"		"3.600000"
-		"AttributeBaseAgility"		"14"
-		"AttributeAgilityGain"		"1.0"
-		// Bounds
-		//----------------------------------------------------------------
-		"RingRadius"				"40"
-		"HealthBarOffset"			"170"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"24"		// Experience earn.
-		"BountyGoldMin"				"21"		// Gold earned min.
-		"BountyGoldMax"				"29"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
-		"MovementSpeed"				"270"		// Speed.			
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"450"		// Base health.
-		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
-		"StatusMana"				"2500"			// Base mana.
-		"StatusManaRegen"			"5"		// Mana regeneration rate.		 
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}
 	"npc_war_of_kings_gnoll"	
 	{
 		"ConsideredHero"			"1"
@@ -2459,6 +2560,14 @@
 		"Level"						"1"
 		"ModelScale" 				"1"
 
+		"AttributeBaseStrength"		"10"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"10"
+		"AttributeIntelligenceGain"		"1"
+		"AttributeBaseAgility"		"25"
+		"AttributeAgilityGain"		"1.4"
+		"Ability1"	"gnoll_assassin_envenomed_weapon"
+
 		// Abilities
 		//----------------------------------------------------------------
 
@@ -2469,9 +2578,9 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"110"		// Damage range min.
-		"AttackDamageMax"			"140"		// Damage range max.
-		"AttackRate"				"1.8"		// Speed of attack.
+		"AttackDamageMin"			"0"		// Damage range min.
+		"AttackDamageMax"			"1000"		// Damage range max.
+		"AttackRate"				"1"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"1100"		// Range within a target can be attacked.	     
@@ -2530,6 +2639,13 @@
 		"SoundSet"					"Hero_Bounty_hunter"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"12"
+		"AttributeStrengthGain"		"1.1"
+		"AttributeBaseIntelligence"		"22"
+		"AttributeIntelligenceGain"		"2.7"
+		"AttributeBaseAgility"		"14"
+		"AttributeAgilityGain"		"1.6"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -2605,12 +2721,19 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"20"
+		"AttributeStrengthGain"		"2.3"
+		"AttributeBaseIntelligence"		"26"
+		"AttributeIntelligenceGain"		"2.1"
+		"AttributeBaseAgility"		"14"
+		"AttributeAgilityGain"		"0"
+
 		// Armor
 		//----------------------------------------------------------------
 		"ArmorPhysical"				"3"			// Physical protection.
-		"Ability1"					"crystal_maiden_crystal_nova"
-		"Ability2"					"crystal_maiden_brilliance_aura"
-		"Ability3"					"crystal_maiden_freezing_field"
+		"Ability1"					"crystal_maiden_crystal_nova_custom"
+		"Ability2"					"crystal_maiden_arcane_aura_custom"
+		"Ability3"					"crystal_maiden_freezing_field_custom"
 
 		// Attack
 		//----------------------------------------------------------------
@@ -2683,11 +2806,18 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"40"
+		"AttributeStrengthGain"		"3.6"
+		"AttributeBaseIntelligence"		"0"
+		"AttributeIntelligenceGain"		"0"
+		"AttributeBaseAgility"		"23"
+		"AttributeAgilityGain"		"2.6"
+
 		// Abilities
-		//----------------------------------------------------------------
-		"Ability1"					"ursa_earthshock"
-		"Ability2"					"ursa_overpower"	
-		"Ability3"					"ursa_fury_swipes"
+		//---------------------------------------------------------------- 
+		"Ability1"					"ursa_overpower"	
+		"Ability2"					"ursa_fury_swipes"
+		"Ability3"					"ursa_enrage"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -2760,6 +2890,13 @@
 		"Model"						"models/heroes/troll_warlord/troll_warlord.vmdl"	// Model.
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"33"
+		"AttributeStrengthGain"		"3.4"
+		"AttributeBaseIntelligence"		"0"
+		"AttributeIntelligenceGain"		"0"
+		"AttributeBaseAgility"		"120"
+		"AttributeAgilityGain"		"7.43"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -2836,9 +2973,16 @@
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"56"
+		"AttributeStrengthGain"		"2.6"
+		"AttributeBaseIntelligence"		"25"
+		"AttributeIntelligenceGain"		"2.87"
+		"AttributeBaseAgility"		"80"
+		"AttributeAgilityGain"		"2.8"
+
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"slark_kill_shot_1"
+		//"Ability1"					"slark_kill_shot_1"
 		// Armor
 		//----------------------------------------------------------------
 		"ArmorPhysical"				"3"			// Physical protection.
@@ -2912,6 +3056,13 @@
 		"Level"						"1"
 		"vscripts"					"AI/Towers/AI_windrunner.lua"
 
+		"AttributeBaseStrength"		"10"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"60"
+		"AttributeIntelligenceGain"		"2.4"
+		"AttributeBaseAgility"		"65"
+		"AttributeAgilityGain"		"4.6"
+
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"windrunner_shackleshot"
@@ -2922,8 +3073,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"270"		// Damage range min.
-		"AttackDamageMax"			"350"		// Damage range max.
+		"AttackDamageMin"			"470"		// Damage range min.
+		"AttackDamageMax"			"650"		// Damage range max.
 		"AttackRate"				"1.4"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
@@ -2987,6 +3138,13 @@
 		"Model"						"models/heroes/skywrath_mage/skywrath_mage.vmdl"	// Model.
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"32"
+		"AttributeStrengthGain"		"1.7"
+		"AttributeBaseIntelligence"		"200"
+		"AttributeIntelligenceGain"		"10"
+		"AttributeBaseAgility"		"10"
+		"AttributeAgilityGain"		"1"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -3066,6 +3224,13 @@
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"600"
+		"AttributeStrengthGain"		"0"
+		"AttributeBaseIntelligence"		"200"
+		"AttributeIntelligenceGain"		"0"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"14"
+
 		// Abilities
 		//----------------------------------------------------------------
 
@@ -3076,9 +3241,9 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"100"		// Damage range min.
-		"AttackDamageMax"			"180"		// Damage range max.
-		"AttackRate"				"1.25"		// Speed of attack.
+		"AttackDamageMin"			"400"		// Damage range min.
+		"AttackDamageMax"			"680"		// Damage range max.
+		"AttackRate"				"1.35"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"750"		// Range within a target can be attacked.
@@ -3130,6 +3295,13 @@
 		"Model"						"models/heroes/dragon_knight/dragon_knight.vmdl"	// Model.
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"250"
+		"AttributeStrengthGain"		"8"
+		"AttributeBaseIntelligence"		"10"
+		"AttributeIntelligenceGain"		"2.9"
+		"AttributeBaseAgility"		"75"
+		"AttributeAgilityGain"		"4.5"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -3211,6 +3383,13 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"45"
+		"AttributeStrengthGain"		"1.2"
+		"AttributeBaseIntelligence"		"10"
+		"AttributeIntelligenceGain"		"1.5"
+		"AttributeBaseAgility"		"35"
+		"AttributeAgilityGain"		"2.2"
+
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"skeleton_king_hellfire_blast"	
@@ -3226,7 +3405,7 @@
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"			"165"		// Damage range min.
 		"AttackDamageMax"			"210"		// Damage range max.
-		"AttackRate"				"1.6"		// Speed of attack.
+		"AttackRate"				"1.3"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"750"		// Range within a target can be attacked.
@@ -3292,6 +3471,13 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"20"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"23"
+		"AttributeIntelligenceGain"		"3.3"
+		"AttributeBaseAgility"		"35"
+		"AttributeAgilityGain"		"1"
+
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"luna_lucent_beam"	
@@ -3305,9 +3491,9 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"210"		// Damage range min.
-		"AttackDamageMax"			"250"		// Damage range max.
-		"AttackRate"				"1.55"		// Speed of attack.
+		"AttackDamageMin"			"250"		// Damage range min.
+		"AttackDamageMax"			"280"		// Damage range max.
+		"AttackRate"				"1.25"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"1100"		// Range within a target can be attacked.
@@ -3373,6 +3559,13 @@
 		"SoundSet"					"Hero_Bounty_hunter"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"15"
+		"AttributeStrengthGain"		"1.1"
+		"AttributeBaseIntelligence"		"28"
+		"AttributeIntelligenceGain"		"2.1"
+		"AttributeBaseAgility"		"31"
+		"AttributeAgilityGain"		"2.4"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -3450,6 +3643,13 @@
 		"SoundSet"					"Hero_Bounty_hunter"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"21"
+		"AttributeStrengthGain"		"1.7"
+		"AttributeBaseIntelligence"		"16"
+		"AttributeIntelligenceGain"		"1.1"
+		"AttributeBaseAgility"		"29"
+		"AttributeAgilityGain"		"2.4"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -3530,6 +3730,13 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"15"
+		"AttributeStrengthGain"		"1.3"
+		"AttributeBaseIntelligence"		"29"
+		"AttributeIntelligenceGain"		"2.4"
+		"AttributeBaseAgility"		"29"
+		"AttributeAgilityGain"		"2.4"
+
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"lina_dragon_slave_custom"	
@@ -3608,6 +3815,13 @@
 		"SoundSet"					"Hero_Bounty_hunter"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"16"
+		"AttributeStrengthGain"		"1.1"
+		"AttributeBaseIntelligence"		"33"
+		"AttributeIntelligenceGain"		"3.1"
+		"AttributeBaseAgility"		"26"
+		"AttributeAgilityGain"		"2.1"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -3688,6 +3902,14 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"22"
+		"AttributeStrengthGain"		"1.4"
+		"AttributeBaseIntelligence"		"10"
+		"AttributeIntelligenceGain"		"1.5"
+		"AttributeBaseAgility"		"19"
+		"AttributeAgilityGain"		"2.1"
+		"Ability1"	"warlock_golem_flaming_fists"
+		"Ability2"	"warlock_golem_permanent_immolation"
 		// Abilities
 		//----------------------------------------------------------------	
 
@@ -3698,9 +3920,9 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"145"		// Damage range min.
-		"AttackDamageMax"			"190"		// Damage range max.
-		"AttackRate"				"1.42"		// Speed of attack.
+		"AttackDamageMin"			"250"		// Damage range min.
+		"AttackDamageMax"			"280"		// Damage range max.
+		"AttackRate"				"1"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"1100"		// Range within a target can be attacked.
@@ -3756,6 +3978,14 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"10"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"10"
+		"AttributeIntelligenceGain"		"1"
+		"AttributeBaseAgility"		"10"
+		"AttributeAgilityGain"		"1"
+		"Ability1"	"forged_spirit_melting_strike"
+
 		// Abilities
 		//----------------------------------------------------------------	
 
@@ -3766,9 +3996,9 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"122"		// Damage range min.
-		"AttackDamageMax"			"166"		// Damage range max.
-		"AttackRate"				"1.33"		// Speed of attack.
+		"AttackDamageMin"			"255"		// Damage range min.
+		"AttackDamageMax"			"330"		// Damage range max.
+		"AttackRate"				"1.4"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"1100"		// Range within a target can be attacked.
@@ -3814,7 +4044,6 @@
 	{
 		"PrototypeModel"			"npc_dota_lone_druid_bear"
 		"ConsideredHero"			"1"
-		//"vscripts"					"AI/Towers/AI_centaur.lua"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
 		// General
 		//----------------------------------------------------------------
@@ -3823,6 +4052,15 @@
 		"SoundSet"					"Hero_Bounty_hunter"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
+
+		"AttributeBaseStrength"			"25"
+		"AttributeStrengthGain"			"1"
+		"AttributeBaseIntelligence"		"25"
+		"AttributeIntelligenceGain"		"1"
+		"AttributeBaseAgility"			"25"
+		"AttributeAgilityGain"			"1"
+		"Ability1"						"lone_druid_spirit_bear_entangle"
+		"Ability2"						"lone_druid_true_form_battle_cry"
 
 		// Abilities
 		//----------------------------------------------------------------	
@@ -3834,9 +4072,9 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"50"		// Damage range min.
-		"AttackDamageMax"			"300"		// Damage range max.
-		"AttackRate"				"1.4"		// Speed of attack.
+		"AttackDamageMin"			"350"		// Damage range min.
+		"AttackDamageMax"			"600"		// Damage range max.
+		"AttackRate"				"1.7"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"1100"		// Range within a target can be attacked.
@@ -3891,6 +4129,15 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"30"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"30"
+		"AttributeIntelligenceGain"		"1"
+		"AttributeBaseAgility"		"30"
+		"AttributeAgilityGain"		"1"
+		"Ability1"	"creep_bed_aura_debuff"
+		"Ability2"	"broodmother_poison_sting"
+
 		// Abilities
 		//----------------------------------------------------------------	
 
@@ -3901,9 +4148,9 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"100"		// Damage range min.
-		"AttackDamageMax"			"170"		// Damage range max.
-		"AttackRate"				"1.5"		// Speed of attack.
+		"AttackDamageMin"			"300"		// Damage range min.
+		"AttackDamageMax"			"370"		// Damage range max.
+		"AttackRate"				"1.2"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"1100"		// Range within a target can be attacked.
@@ -3958,6 +4205,15 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"30"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"30"
+		"AttributeIntelligenceGain"		"1"
+		"AttributeBaseAgility"		"30"
+		"AttributeAgilityGain"		"1"
+		"Ability1"	"creep_good_buff"
+		"Ability2"	"broodmother_poison_sting"
+
 		// Abilities
 		//----------------------------------------------------------------	
 
@@ -3968,8 +4224,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"100"		// Damage range min.
-		"AttackDamageMax"			"170"		// Damage range max.
+		"AttackDamageMin"			"300"		// Damage range min.
+		"AttackDamageMax"			"370"		// Damage range max.
 		"AttackRate"				"1.5"		// Speed of attack.
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
@@ -4012,85 +4268,7 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
-	"npc_war_of_kings_sniper"	
-	{
-		"ConsideredHero"			"1"
-		"vscripts"					"AI/Towers/AI_sniper.lua"
-		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
-		// General
-		//----------------------------------------------------------------
-		"Model"						"models/heroes/sniper/sniper.vmdl"
-		"BaseClass"					"npc_dota_creature"
-		"SoundSet"					"Hero_Bounty_hunter"
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
-		"Level"						"1"
 
-		// Abilities
-		//----------------------------------------------------------------	
-		"Ability1"					"sniper_headshot"
-		"Ability2"					"sniper_take_aim"
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"3"			// Physical protection.
-
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"220"		// Damage range min.
-		"AttackDamageMax"			"280"		// Damage range max.
-		"AttackRate"				"1.55"		// Speed of attack.
-		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
-		"AttackRange"				"1300"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/units/heroes/hero_sniper/sniper_base_attack.vpcf" // Particle system model for projectile.
-		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
-
-		// Bounds
-		//----------------------------------------------------------------
-		"RingRadius"				"40"
-		"HealthBarOffset"			"170"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"24"		// Experience earn.
-		"BountyGoldMin"				"21"		// Gold earned min.
-		"BountyGoldMax"				"29"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
-		"MovementSpeed"				"270"		// Speed.			
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"450"		// Base health.
-		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
-		"StatusMana"				"1250"			// Base mana.
-		"StatusManaRegen"			"4"		// Mana regeneration rate.		 
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-		"Creature"
-		{
-			"AttachWearables"
-			{
-			    "Wearable1" { "ItemDef" "281" } 
-				"Wearable2" { "ItemDef" "282" } 
-				"Wearable3" { "ItemDef" "283" } 
-				"Wearable4" { "ItemDef" "284" } 
-				"Wearable5" { "ItemDef" "285" } 
-			}
-		}
-	}
 	"npc_war_of_kings_sven"	
 	{
 		"ConsideredHero"			"1"
@@ -4103,6 +4281,13 @@
 		"SoundSet"					"Hero_Bounty_hunter"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"90"
+		"AttributeStrengthGain"		"12.6"
+		"AttributeBaseIntelligence"		"25"
+		"AttributeIntelligenceGain"		"2.2"
+		"AttributeBaseAgility"		"45"
+		"AttributeAgilityGain"		"7"
 
 		// Abilities
 		//----------------------------------------------------------------	
@@ -4184,6 +4369,13 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"20"
+		"AttributeStrengthGain"		"1.8"
+		"AttributeBaseIntelligence"		"17.3"
+		"AttributeIntelligenceGain"		"1.3"
+		"AttributeBaseAgility"		"35"
+		"AttributeAgilityGain"		"3.5"
+
 		// Abilities
 		//----------------------------------------------------------------	
 		"Ability1"					"clinkz_searing_arrows"
@@ -4263,6 +4455,13 @@
 		"SoundSet"					"Hero_Bounty_hunter"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"30"
+		"AttributeStrengthGain"		"3.3"
+		"AttributeBaseIntelligence"		"0"
+		"AttributeIntelligenceGain"		"0"
+		"AttributeBaseAgility"		"40"
+		"AttributeAgilityGain"		"3.8"
 
 		// Abilities
 		//----------------------------------------------------------------	
@@ -4344,6 +4543,13 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"30"
+		"AttributeStrengthGain"		"1.8"
+		"AttributeBaseIntelligence"		"21"
+		"AttributeIntelligenceGain"		"0.4"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"0.6"
+
 		// Abilities
 		//----------------------------------------------------------------	
 		"Ability1"					"tiny_avalanche"
@@ -4416,6 +4622,13 @@
 		"SoundSet"					"Hero_Bounty_hunter"
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"50"
+		"AttributeStrengthGain"		"2.6"
+		"AttributeBaseIntelligence"		"20"
+		"AttributeIntelligenceGain"		"1"
+		"AttributeBaseAgility"		"35"
+		"AttributeAgilityGain"		"1.6"
 
 		// Abilities
 		//----------------------------------------------------------------	
@@ -4500,6 +4713,13 @@
 		"Ability2"					"ogre_magi_bloodlust"
 		"Ability3"					"ogre_magi_multicast"
 
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"2.5"
+		"AttributeBaseIntelligence"		"21"
+		"AttributeIntelligenceGain"		"1"
+		"AttributeBaseAgility"		"10"
+		"AttributeAgilityGain"		"2"
+
 		// Armor
 		//----------------------------------------------------------------
 		"ArmorPhysical"				"3"			// Physical protection.
@@ -4571,6 +4791,13 @@
 		"Model"						"models/heroes/abaddon/abaddon.vmdl"	// Model.
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"35"
+		"AttributeStrengthGain"		"3.3"
+		"AttributeBaseIntelligence"		"12"
+		"AttributeIntelligenceGain"		"1.6"
+		"AttributeBaseAgility"		"25"
+		"AttributeAgilityGain"		"2.1"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -4649,6 +4876,13 @@
 		"Model"						"models/heroes/lycan/lycan.vmdl"	// Model.
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"55"
+		"AttributeStrengthGain"		"2.2"
+		"AttributeBaseIntelligence"		"18"
+		"AttributeIntelligenceGain"		"1.9"
+		"AttributeBaseAgility"		"55"
+		"AttributeAgilityGain"		"3.6"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -4730,6 +4964,13 @@
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"24"
+		"AttributeStrengthGain"		"1.7"
+		"AttributeBaseIntelligence"		"44"
+		"AttributeIntelligenceGain"		"5"
+		"AttributeBaseAgility"		"10"
+		"AttributeAgilityGain"		"2.6"
+
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"necrolyte_death_pulse_custom"	
@@ -4809,6 +5050,13 @@
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
 
+		"AttributeBaseStrength"		"21"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"33"
+		"AttributeIntelligenceGain"		"4"
+		"AttributeBaseAgility"		"13"
+		"AttributeAgilityGain"		"1"
+
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"lion_impale"	
@@ -4886,6 +5134,13 @@
 		"Model"						"models/heroes/blood_seeker/blood_seeker.vmdl"	// Model.
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
+
+		"AttributeBaseStrength"		"21"
+		"AttributeStrengthGain"		"1.8"
+		"AttributeBaseIntelligence"		"25"
+		"AttributeIntelligenceGain"		"1.5"
+		"AttributeBaseAgility"		"35"
+		"AttributeAgilityGain"		"2.4"
 
 		// Abilities
 		//----------------------------------------------------------------

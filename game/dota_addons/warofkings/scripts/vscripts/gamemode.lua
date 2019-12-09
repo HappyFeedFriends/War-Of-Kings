@@ -22,11 +22,16 @@ LinkLuaModifier ("modifier_unique_aura_midas", "modifiers.lua", LUA_MODIFIER_MOT
 LinkLuaModifier ("modifier_unique_aura_midas_buff", "modifiers.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier ("modifier_unique_aura_midas_buff_cooldown", "modifiers.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier ("modifier_creep_heroes", "modifiers.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier ("modifier_war_of_kings_amplify", "modifiers.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier ("modifier_fear_creep_custom", "modifiers.lua", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier('modifier_octarine_core_custom', 'items/item_octarine_1.lua', LUA_MODIFIER_MOTION_NONE)
+
+LinkLuaModifier('modifier_unique_aura_all_damage', 'modifiers.lua', LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier('modifier_unique_aura_all_damage_buff', 'modifiers.lua', LUA_MODIFIER_MOTION_NONE)
 if GameMode == nil then
     _G.GameMode = class({})
 end
-
+-- particles/neutral_fx/neutral_item_drop_lvl5.vpcf
 local RequireList = {
 	"settings",
 	"events",
@@ -40,6 +45,7 @@ local RequireList = {
 	['InheritClasses'] = {
 		"building",
 		'Player',
+		'attributes',
 	},
 	["util"] = {
 		"funcs",
@@ -47,6 +53,7 @@ local RequireList = {
 		"PlayerResource",
 		"string",
 		"table",
+		"class",
 	},
 }
 
@@ -59,6 +66,7 @@ for k,v in pairs(RequireList) do
 		require(v)
 	end
 end
+
 require("modules/index")
 function GameMode:OnHeroInGame(hero)
 end
@@ -144,14 +152,14 @@ function GameMode:Init()
 	end
 	GameMode:StartGameEvents()
 	GameMode:FiltersOn()
+	 
 	round:Preload()
 	CustomShop:Preload()
 	GameRules:GetGameModeEntity():SetHudCombatEventsDisabled( true )
 end
 
-function GameMode:Think()
-	Timers:CreateTimer(0.1,function()
 
-		return 0.1
-	end)
+
+function GameMode:Think()
+
 end

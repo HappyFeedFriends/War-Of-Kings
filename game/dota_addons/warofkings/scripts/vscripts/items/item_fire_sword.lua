@@ -13,12 +13,6 @@ modifier_item_fire_sword_buff =  class({
 	AllowIllusionDuplicate	= function(self) return false end,
 	IsPermanent             = function(self) return false end,
 	GetAttributes           = function(self) return MODIFIER_ATTRIBUTE_MULTIPLE end,
-	OnCreated 				= function(self)
-		self.ability = self:GetAbility()
-		self.damage = self.ability:GetSpecialValueFor('bonus_damage')
-		self.bonus_attack = self.ability:GetSpecialValueFor('bonus_atk')
-		self.dur = self.ability:GetSpecialValueFor('duration')
-	end,
 	DeclareFunctions 		= function(self) return 	{	
 		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
 		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
@@ -26,8 +20,17 @@ modifier_item_fire_sword_buff =  class({
 	} end,
 	GetModifierPreAttack_BonusDamage = function( self ) return self.damage end,
 	GetModifierAttackSpeedBonus_Constant = function( self ) return self.bonus_attack end,
+	GetModifierBonusStats_Strength 		=	function(self) return self.str end,
 
-})
+},nil,class({
+	_OnCreated 				= function(self)
+		self.ability = self:GetAbility()
+		self.damage = self.ability:GetSpecialValueFor('bonus_damage')
+		self.bonus_attack = self.ability:GetSpecialValueFor('bonus_atk')
+		self.dur = self.ability:GetSpecialValueFor('duration')
+		self.str = self.ability:GetSpecialValueFor('bonus_str')
+	end,
+}),true)
 
 modifier_item_fire_sword_debuff =  class({
 	IsHidden 				= function(self) return false end,

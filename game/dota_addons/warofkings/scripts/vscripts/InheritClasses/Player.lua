@@ -3,6 +3,7 @@ DATA_USABLE_MODIFEIRS = {
 	modifier_unique_aura_physical = true,
 	modifier_unique_aura_magical = true,
 	modifier_bonus_life = true,
+	modifier_unique_aura_all_damage = true,
 }
 
 UNIQUE_BONUS_CLOSE = 0
@@ -28,16 +29,17 @@ UNIQUE_ACCES_LVL = {
 
 DROP_UNIQUE_BONUS_DROP_CHANCE = {
 	[1] = { -- normal creep
-		'item_bracer','item_wraith_band','item_staff_of_wizardry','item_ogre_axe','item_staff_of_wizardry',
-		'item_helm_of_iron_will','item_claymore','item_broadsword','item_javelin','item_mithril_hammer',
-		'item_point_booster','item_platemail','item_talisman_of_evasion','item_void_stone','item_clarity',
+		'item_ogre_axe_custom','item_staff_of_wizardry_custom','item_helm_of_iron_will','item_claymore',
+		'item_broadsword','item_javelin','item_mithril_hammer','item_point_booster','item_platemail',
+		'item_void_stone','item_clarity_custom','item_shield_buff','item_hyperstone','item_demon_edge',
+		'item_blade_of_alacrity_custom','item_dragon_lance_custom',
 	},
 
 	[2] = { -- champions
-		'item_shield_buff','item_hyperstone','item_demon_edge','item_reaver','item_energy_booster',
-		'item_vitality_booster','item_ultimate_orb','item_dagon_custom_1','item_dagon_custom_2','item_dagon_custom_3',
-		'item_aether_lens','item_fire_sword','item_veil_of_discord_1','item_assault_shield','item_maelstrom',
-		'item_blades_of_attack','item_bracer','item_wraith_band','item_xp_book',
+		'item_reaver_custom','item_energy_booster','item_vitality_booster','item_ultimate_orb','item_dagon_custom_1',
+		'item_dagon_custom_2','item_dagon_custom_3','item_aether_lens','item_fire_sword','item_veil_of_discord_1',
+		'item_assault_shield','item_maelstrom','item_blades_of_attack','item_bracer','item_xp_book',
+		'item_book_all_stats','item_book_agility','item_book_strength','item_book_intellect','item_hand_of_midas_custom',
 
 	},
 
@@ -63,8 +65,6 @@ function GetPlayerCustom(PlayerID)
 	return Player.PlayerHandles[PlayerID]
 end
 
--- Constructor
--- all row privates
 function Player:constructor(PlayerID)
 	self.iPlayerID = PlayerID
 	self.tBuildingData = {}
@@ -73,7 +73,7 @@ function Player:constructor(PlayerID)
 	self.tEndGame = {}
 	self.tDataPerRound = {}
 	self.tChampions = {}
-	self.tDailyQuests = {} -- TODO
+	self.tDailyQuests = {}
 	self.tQuests = {}
 	self.tTowerBuy = {}
 	self.tInventory = {}
@@ -239,7 +239,6 @@ function Player:IsValidIsland(pos)
 	local bounds = trigger:GetBounds()
 	local vMin = RotatePosition(Vector(0, 0, 0), angles, bounds.Mins)+origin
 	local vMax = RotatePosition(Vector(0, 0, 0), angles, bounds.Maxs)+origin
-	print(vMax,vMin,pos)
 	return 	(pos.x >= vMin.x and pos.x <= vMax.x) and
 			(pos.z >= vMin.z and pos.z <= vMax.z)
 
@@ -663,7 +662,7 @@ function Player:GameEnd()
 		DataEndGame = self.tEndGame
 	}})
 end
--- GetPlayerCustom(0):ApplyDamage(true)
+
 function Player:OnSprayItem(index)
 	local data = CustomNetTables:GetTableValue("PlayerData", "GLOBAL_SETTING").SHOP_DATA
 	if not data[tostring(index)] or not self.tInventory[tostring(index - 1)] then 
@@ -768,7 +767,8 @@ function Player:OnBuyCard(cardID)
 	local hero = self:GetSelectedHeroEntity()
 	local cardName = self.tCacheCard[cardID]
 	self.tTowerBuy[cardName] = (self.tTowerBuy[cardName] or 0) + 1
-	hero:AddItem(CreateItem(string.gsub(cardName,'npc_','item_card_'), hero, hero))
+	local name,_ = string.gsub(cardName,'npc_','item_card_')
+	hero:AddItemByName(name).cost = self.iGoldCostCache or 0
 	self.tCacheCard  = {}
 	self:UpdateClientData()
 	local player = PlayerResource:GetPlayer(self.iPlayerID)

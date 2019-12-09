@@ -11,15 +11,18 @@ modifier_item_basher_3 = class({
 	AllowIllusionDuplicate	= function(self) return true end,
 	IsPermanent             = function(self) return true end,
 	GetAttributes           = function(self) return MODIFIER_ATTRIBUTE_MULTIPLE end,
-	OnCreated 				= function(self)
-		self.damage = self:GetAbility():GetSpecialValueFor('damage')
-	end,
+	GetModifierBonusStats_Agility 		=	function(self) return self.agi end,
 	GetModifierPreAttack_BonusDamage = function(self) return self.damage end,
 	DeclareFunctions 		= function(self) return 	{	
 		MODIFIER_EVENT_ON_ATTACK_LANDED,	
 		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
 	} end,
-})
+},nil,class({
+	_OnCreated 				= function(self)
+		self.damage = self:GetAbility():GetSpecialValueFor('damage')
+		self.agi = self:GetAbility():GetSpecialValueFor('bonus_agi')
+	end,
+}),true) 
 
 function modifier_item_basher_3:OnAttackLanded(params)
 	if IsServer() and params.attacker == self:GetParent() then

@@ -19,6 +19,10 @@ function GameMode:ModifyModifierFilter(data)
 				data.duration = data.duration + dataCard.Assemblies['gyrocopter_upgrade_1'].data.value
 			end
 		end
+		local ModifierIntellect = caster:FindModifierByName('modifier_attributes_custom_primary_2')
+		if ModifierIntellect and  data.duration > 0 then 
+			data.duration = data.duration + (data.duration / 100 * ModifierIntellect:GetModifierEffectDuration_Custom())
+		end
 	end
 	return true
 end
@@ -96,6 +100,7 @@ function GameMode:ExecuteOrderFilter(filterTable)
 			end
 		end
 	end
+
 	if order_type == DOTA_UNIT_ORDER_SELL_ITEM and ability and unit then 
 		CustomShop:SellItem(playerId, unit, ability)
 	end
@@ -112,6 +117,8 @@ function GameMode:ExecuteOrderFilter(filterTable)
 			return false
 		end
 		local item = target:AddItemByName(abilityname)
+		local cooldown = ability:GetCooldownTimeRemaining()
+		item:StartCooldown(cooldown)
 		if ability:IsStackable() then 
 			local chargesRate = ability:GetCurrentCharges() / ability:GetInitialCharges()
 			item:SetCurrentCharges(chargesRate)
@@ -132,22 +139,28 @@ function GameMode:HealingFilter( data )
 end
 
 function GameMode:DamageFilter(filterDamage)
--- Fix Swap Hero
-
-		local attacker = filterDamage.entindex_attacker_const and EntIndexToHScript(filterDamage.entindex_attacker_const) 
-		if not attacker then return true end 
-		local ability,abilityName
-		local victim = EntIndexToHScript(filterDamage.entindex_victim_const)
-		local typeDamage = filterDamage.damagetype_const
-		local dataCard = card:GetDataCard(attacker:GetUnitName())
-		if filterDamage.entindex_inflictor_const then
-			ability = EntIndexToHScript(filterDamage.entindex_inflictor_const )
-			if ability and ability.GetAbilityName and ability:GetAbilityName() then
-				abilityName = ability:GetAbilityName()
-			end
+	local attacker = filterDamage.entindex_attacker_const and EntIndexToHScript(filterDamage.entindex_attacker_const) 
+	if not attacker then
+		print('[DamageFilter] Unit damage not attacker!',EntIndexToHScript(filterDamage.entindex_victim_const):GetUnitName()) 
+		return true 
+	end 
+	local ability,abilityName
+	local victim = EntIndexToHScript(filterDamage.entindex_victim_const)
+	local typeDamage = filterDamage.damagetype_const
+	local dataCard = card:GetDataCard(attacker:GetUnitName())
+	if filterDamage.entindex_inflictor_const then
+		ability = EntIndexToHScript(filterDamage.entindex_inflictor_const )
+		if ability and ability.GetAbilityName and ability:GetAbilityName() then
+			abilityName = ability:GetAbilityName()
 		end
-		local allModifiers =  victim:FindAllModifiers()
-		if typeDamage == DAMAGE_TYPE_MAGICAL and filterDamage.damage > 0 then 
+	end
+	local allModifiers =  victim:FindAllModifiers()
+	if typeDamage == DAMAGE_TYPE_MAGICAL then 
+		local flicker = attacker:FindModifierByName('modifier_item_flicker_custom')
+		if flicker then 
+			filterDamage.damage = filterDamage.damage + (flicker.base_damage + (filterDamage.damage/100 * flicker.int_damage))
+		end
+		if filterDamage.damage > 0 then
 			for k,v in pairs(allModifiers) do
 				if v.GetMagicalCriticalDamage and v.GetMagicalCriticalChance and RollPercentage(v.GetMagicalCriticalChance(v)) then 
 					filterDamage.damage = (filterDamage.damage*v.GetMagicalCriticalDamage(v)/100 )
@@ -155,138 +168,129 @@ function GameMode:DamageFilter(filterDamage)
 				end
 			end
 		end
-		if  attacker.GetOwner and attacker:GetOwner() and attacker:GetOwner().GetPlayerID and card:IsAssemblyCard(attacker:GetUnitName(),'phantom_assasin_upgrade_3',attacker:GetOwner():GetPlayerID()) and RollPercentage(dataCard.Assemblies['phantom_assasin_upgrade_3'].data.value_chance) then
-			filterDamage.damage = filterDamage.damage * dataCard.Assemblies['phantom_assasin_upgrade_3'].data.value
-		end
-		if attacker:HasModifier('modifier_mars_gods_rebuke_crit') and attacker.GetOwner and attacker:GetOwner() and card:IsAssemblyCard(attacker:GetUnitName(),'mars_upgrade_1',attacker:GetOwner():GetPlayerID()) then
-			victim:AddNewModifier(attacker, ability, 'modifier_stunned', {duration = dataCard.Assemblies['mars_upgrade_1'].data.value})
-		end
-		if ability and abilityName then
-			if abilityName == "shadow_shaman_ether_shock" and attacker.GetOwner and attacker:GetOwner() then
-				if card:IsAssemblyCard(attacker:GetUnitName(),'shaman_upgrade_2',attacker:GetOwner():GetPlayerID()) then
-					filterDamage.damage = filterDamage.damage * dataCard.Assemblies['shaman_upgrade_2'].data.value
-				end
-				if card:IsAssemblyCard(attacker:GetUnitName(),'shaman_upgrade_3',attacker:GetOwner():GetPlayerID()) then
-					victim:AddNewModifier(attacker, ability, 'modifier_stunned', {duration = dataCard.Assemblies['shaman_upgrade_3'].data.value})
-				end
+	end
+	if attacker:HasModifier('modifier_unique_aura_all_damage_buff') then 
+		filterDamage.damage = filterDamage.damage + (filterDamage.damage * 0.25)
+	end
+	if  attacker.GetOwner and attacker:GetOwner() and attacker:GetOwner().GetPlayerID and card:IsAssemblyCard(attacker:GetUnitName(),'phantom_assasin_upgrade_3',attacker:GetOwner():GetPlayerID()) and RollPercentage(dataCard.Assemblies['phantom_assasin_upgrade_3'].data.value_chance) then
+		filterDamage.damage = filterDamage.damage * dataCard.Assemblies['phantom_assasin_upgrade_3'].data.value
+	end
+	if attacker:HasModifier('modifier_mars_gods_rebuke_crit') and attacker.GetOwner and attacker:GetOwner() and card:IsAssemblyCard(attacker:GetUnitName(),'mars_upgrade_1',attacker:GetOwner():GetPlayerID()) then
+		victim:AddNewModifier(attacker, ability, 'modifier_stunned', {duration = dataCard.Assemblies['mars_upgrade_1'].data.value})
+	end
+	if ability and abilityName then
+		if abilityName == "shadow_shaman_ether_shock" and attacker.GetOwner and attacker:GetOwner() then
+			if card:IsAssemblyCard(attacker:GetUnitName(),'shaman_upgrade_2',attacker:GetOwner():GetPlayerID()) then
+				filterDamage.damage = filterDamage.damage * dataCard.Assemblies['shaman_upgrade_2'].data.value
 			end
-			--[[if filterDamage.damage > 0 and attacker:FindAbilityByName('obsidian_destroyer_equilibrium') and attacker:HasModifier('modifier_obsidian_destroyer_equilibrium') then
-				local IsActive = attacker:HasModifier('modifier_obsidian_destroyer_equilibrium_active') 
-				local regen = attacker:FindAbilityByName('obsidian_destroyer_equilibrium'):GetSpecialValueFor(IsActive and 'mana_steal_active' or 'mana_steal')
-				attacker:GiveMana(filterDamage.damage / 100 * regen)
-			end]]
-			if attacker.GetOwner and attacker:GetOwner() and card:IsAssemblyCard(attacker:GetUnitName(),'tidehunter_upgrade_2',attacker:GetOwner():GetPlayerID()) then
-				filterDamage.damage = filterDamage.damage + dataCard.Assemblies['tidehunter_upgrade_2'].data.value
-			end
-			if attacker.GetOwner and attacker:GetOwner() and card:IsAssemblyCard(attacker:GetUnitName(),'tidehunter_upgrade_2',attacker:GetOwner():GetPlayerID()) then
-				filterDamage.damage = filterDamage.damage + dataCard.Assemblies['tidehunter_upgrade_2'].data.value
+			if card:IsAssemblyCard(attacker:GetUnitName(),'shaman_upgrade_3',attacker:GetOwner():GetPlayerID()) then
+				victim:AddNewModifier(attacker, ability, 'modifier_stunned', {duration = dataCard.Assemblies['shaman_upgrade_3'].data.value})
 			end
 		end
-		if attacker.GetOwner and attacker:GetOwner() and attacker:GetOwner().GetPlayerID then
-			BuildSystem:EachBuilding(attacker:GetOwner():GetPlayerID(),function(building)
-				if building:IsGodness('warrior') then
-					filterDamage.damage = filterDamage.damage + (filterDamage.damage  / 100 * CLASS_DATA.warrior.special_bonus)
-				end
-			end)
+		if attacker.GetOwner and attacker:GetOwner() and card:IsAssemblyCard(attacker:GetUnitName(),'tidehunter_upgrade_2',attacker:GetOwner():GetPlayerID()) then
+			filterDamage.damage = filterDamage.damage + dataCard.Assemblies['tidehunter_upgrade_2'].data.value
 		end
-		if attacker:HasItemInInventory('item_aether_lens_3') and typeDamage == DAMAGE_TYPE_MAGICAL then
-			local item = attacker:FindItemInInventory('item_aether_lens_3')
-			local purify = item:GetSpecialValueFor('magical_purify')
+		if attacker.GetOwner and attacker:GetOwner() and card:IsAssemblyCard(attacker:GetUnitName(),'tidehunter_upgrade_2',attacker:GetOwner():GetPlayerID()) then
+			filterDamage.damage = filterDamage.damage + dataCard.Assemblies['tidehunter_upgrade_2'].data.value
+		end
+	end
+	if attacker:HasItemInInventory('item_aether_lens_3') and typeDamage == DAMAGE_TYPE_MAGICAL then
+		local item = attacker:FindItemInInventory('item_aether_lens_3')
+		local purify = item:GetSpecialValueFor('magical_purify')
+		ApplyDamage({
+			victim = victim,
+			attacker = attacker,
+			damage_type = DAMAGE_TYPE_PURE,
+			ability = item,
+			damage = filterDamage.damage * (purify/100),
+		})
+	end
+	if typeDamage == DAMAGE_TYPE_MAGICAL then
+		local penetration = attacker:GetMagicalPenetration()
+		if penetration > 0 then
 			ApplyDamage({
 				victim = victim,
 				attacker = attacker,
 				damage_type = DAMAGE_TYPE_PURE,
-				ability = item,
-				damage = filterDamage.damage * (purify/100),
+				ability = ability,
+				damage = filterDamage.damage * (penetration/100),
 			})
 		end
-		if typeDamage == DAMAGE_TYPE_MAGICAL then
-			local penetration = attacker:GetMagicalPenetration()
-			if penetration > 0 then
-				ApplyDamage({
-					victim = victim,
-					attacker = attacker,
-					damage_type = DAMAGE_TYPE_PURE,
-					ability = ability,
-					damage = filterDamage.damage * (penetration/100),
-				})
-			end
+	end
+	if attacker:HasModifier('modifier_unique_aura_physical_buff') then
+		if  typeDamage == DAMAGE_TYPE_PHYSICAL then
+			filterDamage.damage = filterDamage.damage + (filterDamage.damage * 0.6)
 		end
-		if attacker:HasModifier('modifier_unique_aura_physical_buff') then
-			if  typeDamage == DAMAGE_TYPE_PHYSICAL then
-				filterDamage.damage = filterDamage.damage * 2
-			end
-			if  typeDamage == DAMAGE_TYPE_MAGICAL then
-				filterDamage.damage = filterDamage.damage - (filterDamage.damage * 0.6)
-			end
+		if  typeDamage == DAMAGE_TYPE_MAGICAL then
+			filterDamage.damage = filterDamage.damage - (filterDamage.damage * 0.6)
 		end
-		if attacker:HasModifier('modifier_unique_aura_magical_buff') then
-			if  typeDamage == DAMAGE_TYPE_PHYSICAL then
-				filterDamage.damage = filterDamage.damage - (filterDamage.damage * 0.6)
-			end
-			if  typeDamage == DAMAGE_TYPE_MAGICAL then
-				filterDamage.damage = filterDamage.damage + (filterDamage.damage * 0.4)
-			end
+	end
+	if attacker:HasModifier('modifier_unique_aura_magical_buff') then
+		if  typeDamage == DAMAGE_TYPE_PHYSICAL then
+			filterDamage.damage = filterDamage.damage - (filterDamage.damage * 0.6)
 		end
-		if filterDamage.damage > 0 and BuildSystem:IsBuilding(attacker) and not attacker:IsNull() and attacker:IsAlive()  then
-			attacker:GetBuilding():ModifyTotalDamage(filterDamage.damage)
+		if  typeDamage == DAMAGE_TYPE_MAGICAL then
+			filterDamage.damage = filterDamage.damage + (filterDamage.damage * 0.4)
 		end
-		if victim:HasModifier('modifier_shield') then
-			local shield = victim:FindModifierByName('modifier_shield')
-			local shieldCount = shield:GetStackCount()
-			local damage_start = filterDamage.damage
-			shield:SetStackCount(math.max(shieldCount - filterDamage.damage,0))
-			filterDamage.damage = math.max(filterDamage.damage - shieldCount,0)
-			if shield:GetStackCount() < 1 then
-				for k,v in pairs( allModifiers ) do
-					if v.OnShieldRemove then
-						v:OnShieldRemove({ -- custom event modifier
-							hAttacker = attacker,
-							iShieldOld = shieldCount,
-							fDamage_end = filterDamage.damage,
-							fDamage_start = damage_start,
-							iDamage_type = typeDamage,
-							hModifier = shield,
-						})
-					end
-				end
-				if attacker and attacker.GetBuilding then 
-					local __Player = GetPlayerCustom(attacker:GetBuilding():GetPlayerOwnerID())
-					__Player:UpdateQuest(QUEST_FOR_BATTLE_REMOVE_SHIELD_ENEMY_COUNT,1)
-				end
-				shield:Destroy()
-			end
-		end
-		if victim.playerRound and attacker and attacker.GetOwner and attacker:GetOwner() and attacker:GetOwner().GetPlayerID and victim.GoldDropPercentage then
-			local bonusHealth = filterDamage.damage * victim.GoldDropPercentage
-			local maxMana = victim:GetMaxMana()
-			local maxhealth = victim:GetMaxHealth()
-			local __Player = GetPlayerCustom(victim.playerRound)
-			victim:SetBaseMaxHealth(maxhealth+bonusHealth)
-			victim:SetMaxHealth(maxhealth+bonusHealth)
-			victim:SetHealth(maxhealth+bonusHealth)
-			__Player:ModifyDamageChest(filterDamage.damage)
-			filterDamage.damage = 0
-		end
-		if victim:GetHealth() - filterDamage.damage < 1 then
-			for k,v in pairs(victim:FindAllModifiers() ) do
-				if v.OnFatalDamage then
-					v:OnFatalDamage({ -- custom event modifier
+	end
+	if filterDamage.damage > 0 and BuildSystem:IsBuilding(attacker) and not attacker:IsNull() and attacker:IsAlive()  then
+		attacker:GetBuilding():ModifyTotalDamage(filterDamage.damage)
+	end
+	if victim:HasModifier('modifier_shield') then
+		local shield = victim:FindModifierByName('modifier_shield')
+		local shieldCount = shield:GetStackCount()
+		local damage_start = filterDamage.damage
+		shield:SetStackCount(math.max(shieldCount - filterDamage.damage,0))
+		filterDamage.damage = math.max(filterDamage.damage - shieldCount,0)
+		if shield:GetStackCount() < 1 then
+			for k,v in pairs( allModifiers ) do
+				if v.OnShieldRemove then
+					v:OnShieldRemove({ -- custom event modifier
 						hAttacker = attacker,
-						fDamage = filterDamage.damage,
+						iShieldOld = shieldCount,
+						fDamage_end = filterDamage.damage,
+						fDamage_start = damage_start,
 						iDamage_type = typeDamage,
+						hModifier = shield,
 					})
 				end
 			end
+			if attacker and attacker.GetBuilding then 
+				local __Player = GetPlayerCustom(attacker:GetBuilding():GetPlayerOwnerID())
+				__Player:UpdateQuest(QUEST_FOR_BATTLE_REMOVE_SHIELD_ENEMY_COUNT,1)
+			end
+			shield:Destroy()
 		end
-		if victim:HasModifier('modifier_ability_creep_blocked_attacks') and filterDamage.damage > 40 then 
-			victim:AddStackModifier({
-				modifier = 'modifier_ability_creep_blocked_attacks',
-				count = -1,
-				caster = victim,
-			})
+	end
+	if victim.playerRound and attacker and (attacker.GetOwner and attacker:GetOwner() and attacker:GetOwner().GetPlayerID or attacker:IsIllusion()) and victim.GoldDropPercentage then
+		local bonusHealth = filterDamage.damage * victim.GoldDropPercentage
+		local maxMana = victim:GetMaxMana()
+		local maxhealth = victim:GetMaxHealth()
+		local __Player = GetPlayerCustom(victim.playerRound)
+		victim:SetBaseMaxHealth(maxhealth+bonusHealth)
+		victim:SetMaxHealth(maxhealth+bonusHealth)
+		victim:SetHealth(maxhealth+bonusHealth)
+		__Player:ModifyDamageChest(filterDamage.damage)
+		filterDamage.damage = 0
+	end
+	if victim:GetHealth() - filterDamage.damage < 1 then
+		for k,v in pairs(victim:FindAllModifiers() ) do
+			if v.OnFatalDamage then
+				v:OnFatalDamage({ -- custom event modifier
+					hAttacker = attacker,
+					fDamage = filterDamage.damage,
+					iDamage_type = typeDamage,
+				})
+			end
 		end
-		--filterDamage.damage = 0
+	end
+	if victim:HasModifier('modifier_ability_creep_blocked_attacks') and filterDamage.damage > 40 then 
+		victim:AddStackModifier({
+			modifier = 'modifier_ability_creep_blocked_attacks',
+			count = -1,
+			caster = victim,
+		})
+	end
 	return true
 end
 

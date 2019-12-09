@@ -3,7 +3,7 @@ if not card then
 end
 
 ModuleRequire(...,'data')
-
+-- refactor
 function card:OnPreLoad()
 	CustomGameEventManager:RegisterListener("OnBuyCard", Dynamic_Wrap(card, 'OnBuyCard'))
 	CustomGameEventManager:RegisterListener("OnDiscardCard", Dynamic_Wrap(card, 'OnDiscard'))
@@ -11,17 +11,17 @@ function card:OnPreLoad()
 	card:LoadDataAllCard()
 	BuildSystem:init()
 	CustomNetTables:SetTableValue("PlayerData", "GLOBAL_SETTING", {
-		NEED_CARD_UPGRADE = CARD_DATA.COUNT_CARD_BY_UPGRADE,
-		GOLD_COST_REFRESHING = CARD_DATA.GOLD_COST_REFRESHING_CARD,
-		MAX_CARD_PER_PLAYER = CARD_DATA.MAX_CARD,
+		-- NEED_CARD_UPGRADE = CARD_DATA.COUNT_CARD_BY_UPGRADE,
+		-- GOLD_COST_REFRESHING = CARD_DATA.GOLD_COST_REFRESHING_CARD,
+		-- MAX_CARD_PER_PLAYER = CARD_DATA.MAX_CARD,
 		ROUND_DIFFICUILT_DATA = ROUND_DIFFICUILT_DATA,
 		PickTime = -1,
 		RoundNumber = 0,
-		STATS_BONUS_PER_GRADE = CARD_DATA.DAMAGE_PER_LEVEL,
-		MAX_GRADE = CARD_DATA.MAX_GRADE,
-		CLASS_DATA = CLASS_DATA,
+		-- STATS_BONUS_PER_GRADE = CARD_DATA.DAMAGE_PER_LEVEL,
+		-- MAX_GRADE = CARD_DATA.MAX_GRADE,
+		-- CLASS_DATA = CLASS_DATA,
 		CUSTOM_SHOP_DATA = CUSTOM_SHOP_DATA,
-		CREEP_DATA = CREEP_DATA,
+		-- CREEP_DATA = CREEP_DATA,
 		SHOP_DATA = {},
 		LeaderboardGlobal = {},
 	})
@@ -54,7 +54,17 @@ function card:LoadDataAllCard()
 					AttackRange = (GetKeyValueByHeroName(unit, 'AttackRange') or 100),
 					AttackRate = (GetKeyValueByHeroName(unit, 'AttackRate') or 1),
 					Ability = HeroAbility(unit),
-					PrimaryStats = (GetKeyValueByHeroName(unit, 'AttributePrimary') or -1)
+					PrimaryStats = (GetKeyValueByHeroName(unit, 'AttributePrimary') or -1),
+					BaseArmor = (GetKeyValueByHeroName(unit, 'ArmorPhysical') or 0),
+
+					AgilityGain = (GetKeyValueByHeroName(unit, 'AttributeAgilityGain') or 0),
+					AgilityBase = (GetKeyValueByHeroName(unit, 'AttributeBaseAgility') or 0),
+
+					StrengthGain = (GetKeyValueByHeroName(unit, 'AttributeStrengthGain') or 0),
+					StrengthBase = (GetKeyValueByHeroName(unit, 'AttributeBaseStrength') or 0),
+
+					IntellectGain = (GetKeyValueByHeroName(unit, 'AttributeIntelligenceGain') or 0),
+					IntellectBase = (GetKeyValueByHeroName(unit, 'AttributeBaseIntelligence') or 0),
 			}
 			CustomNetTables:SetTableValue("CardInfoUnits", unit, card.AllCards[unit])
 		end
@@ -153,8 +163,7 @@ function card:GetRandomCards(chances,IsDonate)
 	end
 
 	for i=1,CARD_DATA.CARD_RANDOM_DROP + (IsDonate and 1 or 0) do
-		local typeCard = RollPercentage(chanceDropped.common)  and 'common' or
-						RollPercentage(chanceDropped.uncommon) and 'uncommon' or
+		local typeCard = RollPercentage(chanceDropped.uncommon) and 'uncommon' or
 						RollPercentage(chanceDropped.rare)  and 'rare' or
 						RollPercentage(chanceDropped.mythical)  and 'mythical' or
 						RollPercentage(chanceDropped.legendary) and 'legendary'

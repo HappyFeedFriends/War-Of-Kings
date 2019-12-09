@@ -11,19 +11,19 @@ if BuildSystem == nil then
 end
 
 function BuildSystem:init(bReload)
-	if not bReload then
+	if not bReload  then
 		self.hBlockers = {}
 		self.cardBuildingInfo = {}
 		for cardName,data in pairs(card.AllCards) do
-			local unit = CreateUnitByName(cardName, Vector(11000, 11000, 0), false, nil, nil, DOTA_TEAM_NOTEAM)
-			unit:SetAngles(0, BUILDING_ANGLE, 0)
+			-- local unit = CreateUnitByName(cardName, Vector(11000, 11000, 0), false, nil, nil, DOTA_TEAM_NOTEAM)
+			-- unit:SetAngles(0, BUILDING_ANGLE, 0)
 			self.cardBuildingInfo[cardName] = {
-				entindex = unit:entindex(),
-				size = BUILDING_SIZE,
-				scale = unit:GetModelScale(),
-				grid_alpha = GRID_ALPHA,
-				model_alpha = MODEL_ALPHA,
-				recolor_ghost = RECOLOR_GHOST_MODEL,
+				-- entindex = unit:entindex(),
+				-- size = BUILDING_SIZE,
+				-- scale = unit:GetModelScale(),
+				-- grid_alpha = GRID_ALPHA,
+				-- model_alpha = MODEL_ALPHA,
+				-- recolor_ghost = RECOLOR_GHOST_MODEL,
 				attack_range = data.BaseStats.AttackRange,
 				abilityName = string.gsub(cardName,'npc_','item_card_')
 			}			
@@ -79,7 +79,7 @@ function BuildSystem:GetCountBuild(pID)
 	return value	
 end
 
-function BuildSystem:PlaceBuilding(hero, name, location, angle)
+function BuildSystem:PlaceBuilding(hero, name, location, angle,cost)
 	local playerID = hero:GetPlayerOwnerID()
 	angle = angle or BUILDING_ANGLE
 	local IsUpgrade = false
@@ -91,6 +91,7 @@ function BuildSystem:PlaceBuilding(hero, name, location, angle)
 	BuildSystem:EachBuilding(playerID, function(building)
 		if building:GetUnitEntityName() == name and CARD_DATA.MAX_GRADE[building:GetRariry()]  and building.iGrade < CARD_DATA.MAX_GRADE[building:GetRariry()] then
 			building:UpgradeBuilding()
+			building.iGoldCost = building.iGoldCost + cost
 			IsUpgrade = true
 			return true
 		end
@@ -102,7 +103,7 @@ function BuildSystem:PlaceBuilding(hero, name, location, angle)
 		DisplayError(playerID,'war_of_kings_hud_error_max_buildings')
 		return false
 	end
-	local building = NewBuilding(name, location, angle, hero)
+	local building = NewBuilding(name, location, angle, hero,cost)
 	if name == 'npc_war_of_kings_devoloper' then
 		return
 	end
@@ -118,55 +119,10 @@ function BuildSystem:PlaceBuilding(hero, name, location, angle)
 		end
 		nettables.BuildingsCardsindexID[tostring(building:GetUnitEntityIndex())].hIsAssemblies = hIsAssemblies
 	end)
-	PrintTable(nettables.BuildingsCardsindexID)
 	CustomNetTables:SetTableValue("PlayerData", "player_" .. playerID, nettables)
 	self:UpdateNetTables()
 	if not hero:IsAlive() then
 		self:RemoveBuilding(building)
-	end
-	if building:IsGodness('mage') then
-		BuildSystem:EachBuilding(playerID,function(build)
-				build.hUnit:AddStackModifier({
-				modifier = 'modifier_war_of_kings_bonus_amplify_special',
-				count = CLASS_DATA.mage.special_bonus,
-				caster = build.hUnit,
-			})
-		end)
-	end
-	if building:IsGodness('rogue') then
-		BuildSystem:EachBuilding(playerID,function(build)
-			if build:GetClass() ~= 'rogue' then
-				if build.hUnit:FindModifierByName('modifier_war_of_kings_rogue_critical_damage') then
-					local chance = build.hUnit:FindModifierByName('modifier_war_of_kings_rogue_critical_damage').chance
-					build.hUnit:FindModifierByName('modifier_war_of_kings_rogue_critical_damage').chance = chance + CLASS_DATA.rogue.special_bonus.chance
-				else
-					build.hUnit:AddNewModifier(build.hUnit, nil, 'modifier_war_of_kings_rogue_critical_damage', {
-						duration = -1,
-						critical_chance = CLASS_DATA.rogue.special_bonus.chance,
-					})
-				end
-				build.hUnit:AddStackModifier({
-					modifier = 'modifier_war_of_kings_rogue_critical_damage',
-					count = CLASS_DATA.rogue.special_bonus.critical,
-					caster = build.hUnit,
-				})
-			end
-			local hIsAssemblies = {}
-			for k,v in pairs(card:GetDataCard(build:GetUnitEntityName()).Assemblies or {}) do
-				hIsAssemblies[k] = card:IsAssemblyCard(build:GetUnitEntityName(),k,playerID)
-			end
-		end)
-	end
-	if building:IsGodness('archer') then
-		BuildSystem:EachBuilding(playerID,function(build)
-			if build:GetClass() == 'archer' then
-				build.hUnit:AddStackModifier({
-					modifier = 'modifier_war_of_kings_bonus_attack_range',
-					count = CLASS_DATA.archer.special_bonus,
-					caster = build.hUnit,
-				})
-			end
-		end)
 	end
 	return building
 end
@@ -211,10 +167,19 @@ function BuildSystem:RemoveBuilding( building )
 		print('[BuildSystem] Not Building target')
 		return
 	end
+
 	building = building:GetBuilding()
 	local playerID = building:GetPlayerOwnerID()
+	local xp = building:GetAllXp() / math.max(BuildSystem:GetCountBuild(playerID) - 1,1)
+	local goldCost = building.iGoldCost > 0 and building.iGoldCost/2 or building.iGoldCost
+	GetPlayerCustom(playerID):ModifyGold(goldCost,true)
 	ArrayRemove(self.tPlayerBuildings[playerID].CardList, building:GetUnitEntityIndex())
 	building:RemoveSelf()
+
+
+	BuildSystem:EachBuilding(playerID,function(build)
+		build:AddExperience(xp)
+	end)
 	self:UpdateNetTables()
 end
 
@@ -234,13 +199,11 @@ function BuildSystem:ReplaceBuilding( building, sName )
 end
 
 function BuildSystem:ValidPosition(size, location)
-	local halfSide = (size/2)*64 - 1
+	local halfSide = ((size-1)/2)*64
 	local leftBorderX = location.x-halfSide
 	local rightBorderX = location.x+halfSide
 	local topBorderY = location.y+halfSide
 	local bottomBorderY = location.y-halfSide
-
-	-- 已建造区域检测
 	for blockerEntIndex, blocker in pairs(self.hBlockers) do
 		if IsPointInPolygon(location, blocker.polygon) or
 		IsPointInPolygon(Vector(leftBorderX, bottomBorderY, 0), blocker.polygon) or

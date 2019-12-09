@@ -19,6 +19,21 @@ function ErrorMessage(playerID, message, sound)
 	end
 end
 
+function CDOTABaseAbility:_IsBehavior(iBehavior)
+	return bit.band(self:GetBehavior(),iBehavior) == iBehavior
+end
+function FindUnitsRadiusDefaultAbility(radius,point,caster)
+	return  FindUnitsInRadius(caster:GetTeamNumber(),
+		point,
+		nil,
+		radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP,
+		DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+		FIND_CLOSEST,
+		false)
+end
+
 function CDOTA_BaseNPC:GetAllItems()
 	local items = {}
 	for i=0, 5 do
@@ -313,6 +328,7 @@ function CDOTA_BaseNPC:CreateIllusion(data)
 		illusion:SetPlayerID(self:GetPlayerID())
 		illusion:SetControllableByPlayer(self:GetPlayerID(), true)
 	end
+	illusion.custom_owner = self
 	return illusion
 end
 
@@ -793,6 +809,18 @@ function CDOTA_BaseNPC:Teleport(position)
 	end)
 end
 
+function CDOTA_Buff:__OnCreated__(data)
+	if self.__base__ and self.__base__._OnCreated then 
+		self.__base__._OnCreated(self,data)
+	end
+end
+
+function CDOTA_Buff:__OnDestroy__()
+	if self.__base__ and self.__base__._OnDestroy then 
+		self.__base__._OnDestroy(self)
+	end
+end
+
 function CDOTA_Buff:SetSharedKey(key, value)
 	local t = CustomNetTables:GetTableValue("modifiers_value", self:GetParent():GetEntityIndex() .. "_" .. self:GetName()) or {}
 	t[key] = value
@@ -811,19 +839,22 @@ end
 	count
 	updateStack
 	caster
+	data
 ]]
 function CDOTA_BaseNPC:AddStackModifier(data)
+	data.data = data.data or {}
+	data.data.duration = (data.duration or -1)
 	if self:HasModifier(data.modifier) then
 		local current_stack = self:GetModifierStackCount( data.modifier, data.ability )
 		if data.updateStack then
-			self:AddNewModifier(data.caster or self, data.ability,data.modifier,{duration = (data.duration or -1)})
+			self:AddNewModifier(data.caster or self, data.ability,data.modifier,data.data)
 		end
 		self:SetModifierStackCount( data.modifier, data.ability, current_stack + (data.count or 1) )
 		if self:GetModifierStackCount( data.modifier, data.ability ) < 1 then
 			self:RemoveModifierByName(data.modifier)
 		end
 	else
-		self:AddNewModifier(data.caster or self, data.ability,data.modifier,{duration = (data.duration or -1)})
+		self:AddNewModifier(data.caster or self, data.ability,data.modifier,data.data)
 		self:SetModifierStackCount( data.modifier, data.ability, (data.count or 1) )
 	end
 end
@@ -924,4 +955,38 @@ function CDOTA_BaseNPC:CreateParticleRage()
 	ParticleManager:SetParticleControl(fx, 15, Vector(255,232,130))
 	ParticleManager:ReleaseParticleIndex(fx)
 	return fx
+end
+
+function CreateTxt()
+	local file = io.open("D:/Steam/SteamApps/common/dota 2 beta/game/dota_addons/warofkings_test/scripts/vscripts/util/test.txt",'r+')
+	local dataLocalization = {}
+	local tag = 'Dota_tooltip_ability_'
+	local tokens = LoadKeyValues('resource/addon_english.txt')['Tokens']
+	local color = {
+		uncommon = 	'#b1b3b1',
+		rare = 		'#4573D5',
+		mythical = 	'#9933ff',
+		legendary = '#FF7C00',
+
+	}
+
+	local nameCard = {
+		uncommon = 	'Uncommon',
+		rare = 		'Rare',
+		mythical = 	'Mythical',
+		legendary = 'Legendary',
+	}
+	local allStr = ''
+	for rarity,dataRarity in pairs(CARD_DATA.CARDS) do
+		for npc_name,_ in pairs(dataRarity) do
+			local cardName = npc_name:gsub('npc_','item_card_')
+			
+			local cardName_localization = "[<font color='".. color[rarity] .. "'>".. nameCard[rarity] .. "</font>] " .. tokens[npc_name]
+			local strLocalization = (string.gsub('"{cardName}"  "{cardName_localization}"\n"{cardName_description}" "{cardName_description_localization}"\n','{cardName}',tag .. cardName)):gsub('{cardName_localization}',cardName_localization)
+			strLocalization = strLocalization:gsub('{cardName_description}',tag .. cardName .. '_description'):gsub('{cardName_description_localization}','<h1> Activated: Create Tower </h1> Puts on a given point tower, which can be improved and pumped.')
+			file:write(strLocalization)
+		end
+	end
+	file:close()
+
 end

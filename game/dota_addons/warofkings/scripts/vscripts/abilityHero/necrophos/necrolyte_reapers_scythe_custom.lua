@@ -20,6 +20,7 @@ necrolyte_reapers_scythe_custom = class({
 					damage = target:GetHealth() / 100 * damage,
 					damage_type = DAMAGE_TYPE_MAGICAL,
 					ability = self,
+					damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
 				})
 			end
 		end)

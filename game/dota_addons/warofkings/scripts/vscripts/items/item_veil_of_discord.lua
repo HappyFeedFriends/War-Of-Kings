@@ -31,14 +31,18 @@ modifier_veil_of_discord_custom = class({
 	AllowIllusionDuplicate	= function(self) return false end,
 	IsPermanent             = function(self) return false end,
 	GetAttributes           = function(self) return MODIFIER_ATTRIBUTE_MULTIPLE end,
-})
-function modifier_veil_of_discord_custom:OnCreated()
-	self.amp = self:GetAbility():GetSpecialValueFor('bonus_amplify')
-	self.mpregen = self:GetAbility():GetSpecialValueFor('bonus_mana_regen')
-	if self:GetParent().GetBuilding then 
-		self:StartIntervalThink(0.2)
-	end
-end
+	GetModifierBonusStats_Intellect 	=	function(self) return self.int end,
+},nil,class({
+	_OnCreated 				= function(self)
+		self.amp = self:GetAbility():GetSpecialValueFor('bonus_amplify')
+		self.mpregen = self:GetAbility():GetSpecialValueFor('bonus_mana_regen')
+		self.int = self:GetAbility():GetSpecialValueFor('bonus_int')
+		if self:GetParent().GetBuilding then 
+			self:StartIntervalThink(0.2)
+		end
+	end,
+}),true)
+
 
 function modifier_veil_of_discord_custom:OnIntervalThink()
 	if IsServer() then

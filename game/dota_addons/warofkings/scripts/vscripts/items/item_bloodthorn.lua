@@ -15,7 +15,7 @@ function item_bloodthorn_1:OnSpellStart()
 	end
 end 
 
-modifier_bloodthor_custom = modifier_bloodthor_custom or class({
+modifier_bloodthor_custom = class({
 	IsHidden 				= function(self) return true end,
 	IsPurgable 				= function(self) return false end,
 	IsDebuff 				= function(self) return false end,
@@ -23,18 +23,27 @@ modifier_bloodthor_custom = modifier_bloodthor_custom or class({
 	RemoveOnDeath 			= function(self) return false end,
 	AllowIllusionDuplicate	= function(self) return false end,
 	IsPermanent             = function(self) return false end,
+	GetModifierBonusStats_Strength 		=	function(self) return self.str end,
+	GetModifierBonusStats_Agility 		=	function(self) return self.agi end,
+	GetModifierBonusStats_Intellect 	=	function(self) return self.int end,
 	GetAttributes           = function(self) return MODIFIER_ATTRIBUTE_MULTIPLE end,
-})
-function modifier_bloodthor_custom:OnCreated()
-	self.atkspeed = self:GetAbility():GetSpecialValueFor("bonus_attackspeed")
-	self.damage = self:GetAbility():GetSpecialValueFor("bonus_damage")
-	self.mp = self:GetAbility():GetSpecialValueFor("mana_regen")
-	self.chance = self:GetAbility():GetSpecialValueFor("passive_chance_crit")
-	self.critical = self:GetAbility():GetSpecialValueFor("passive_critical") 
-	if self:GetCaster().GetBuilding then
-		self:StartIntervalThink(0.5)
-	end
-end
+},nil,class({
+	_OnCreated 				= function(self)
+		self.atkspeed = self:GetAbility():GetSpecialValueFor("bonus_attackspeed")
+		self.damage = self:GetAbility():GetSpecialValueFor("bonus_damage")
+		self.mp = self:GetAbility():GetSpecialValueFor("mana_regen")
+		self.chance = self:GetAbility():GetSpecialValueFor("passive_chance_crit")
+		self.critical = self:GetAbility():GetSpecialValueFor("passive_critical") 
+
+		self.str = self:GetAbility():GetSpecialValueFor("bonus_str") 
+		self.agi = self:GetAbility():GetSpecialValueFor("bonus_agility") 
+		self.int =self:GetAbility():GetSpecialValueFor("bonus_int") 
+		if self:GetCaster().GetBuilding then
+			self:StartIntervalThink(0.5)
+		end
+	end,
+}),true)
+
 
 function modifier_bloodthor_custom:OnIntervalThink()
 	if IsServer()   then

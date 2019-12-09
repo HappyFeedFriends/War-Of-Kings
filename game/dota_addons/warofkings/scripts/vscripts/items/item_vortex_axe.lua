@@ -46,19 +46,9 @@ modifier_item_vortex_axe = class({
 	AllowIllusionDuplicate	= function(self) return true end,
 	IsPermanent             = function(self) return true end,
 	GetAttributes           = function(self) return MODIFIER_ATTRIBUTE_MULTIPLE end,
-	OnCreated 				= function(self)
-		self.ability = self:GetAbility()
-		self.damage_shield = self.ability:GetSpecialValueFor('damage_shield')
-		self.bonus_damage = self.ability:GetSpecialValueFor('bonus_damage')
-		self.bonus_attack_speed = self.ability:GetSpecialValueFor('bonus_attack_speed')
-		self.bonus_health = self.ability:GetSpecialValueFor('bonus_health')
-		self.parent = self:GetParent()
-		--self.cooldown = self.ability:GetCooldown(self.ability:GetLevel())
-		self.building = self.parent.GetBuilding
-		if self.building then 
-			self:StartIntervalThink(self.ability:GetCastPoint() + 0.3)
-		end
-	end,
+	GetModifierBonusStats_Strength 		=	function(self) return self.stats end,
+	GetModifierBonusStats_Agility 		=	function(self) return self.stats end,
+	GetModifierBonusStats_Intellect 	=	function(self) return self.stats end,
 	OnIntervalThink 	= function(self)
 		if IsServer() and self.ability:IsCooldownReady() then
 			local unit = self.parent:GetRandomUnitRadius(1100,{
@@ -84,7 +74,25 @@ modifier_item_vortex_axe = class({
 	GetModifierExtraHealthBonus = function(self) return self.bonus_health end,
 	GetModifierPreAttack_BonusDamage = function( self ) return self.bonus_damage end,
 	GetModifierAttackSpeedBonus_Constant = function( self ) return self.bonus_attack_speed end,
-})
+	GetModifierBonusStats_Agility 		=	function(self) return self.stats end,
+	GetModifierBonusStats_Strength 		=	function(self) return self.stats end,
+	GetModifierBonusStats_Intellect 	=	function(self) return self.stats end,
+},nil,class({
+	_OnCreated 				= function(self)
+		self.ability = self:GetAbility()
+		self.damage_shield = self.ability:GetSpecialValueFor('damage_shield')
+		self.bonus_damage = self.ability:GetSpecialValueFor('bonus_damage')
+		self.bonus_attack_speed = self.ability:GetSpecialValueFor('bonus_attack_speed')
+		self.bonus_health = self.ability:GetSpecialValueFor('bonus_health')
+		self.stats = self.ability:GetSpecialValueFor('all_stats')
+		self.parent = self:GetParent()
+		--self.cooldown = self.ability:GetCooldown(self.ability:GetLevel())
+		self.building = self.parent.GetBuilding
+		if self.building then 
+			self:StartIntervalThink(self.ability:GetCastPoint() + 0.3)
+		end
+	end
+}),true)
 
 function modifier_item_vortex_axe:OnAttackLanded(data)
 	if data.attacker == self.parent and data.target:HasModifier('modifier_shield') then 
