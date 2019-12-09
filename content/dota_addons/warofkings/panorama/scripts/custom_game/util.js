@@ -359,15 +359,24 @@ function FormatComma (value) {
   } catch (e) {}
 }
 
-function FormatGold (gold) {
-  var formatted = FormatComma(gold);
-  if (gold.toString().length > 6) {
-    return FormatGold(gold.toString().substring(0, gold.toString().length - 5) / 10) + 'M';
-  } else if (gold.toString().length > 5) { 
-    return FormatGold(gold.toString().substring(0, gold.toString().length - 3)) + 'K';
-  } else {
-    return formatted;
-  }
+function FormatGold (value) {
+  // var formatted = FormatComma(gold);
+  // if (gold.toString().length > 6) {
+  //   return FormatGold(gold.toString().substring(0, gold.toString().length - 5) / 10) + 'M';
+  // } else if (gold.toString().length > 5) { 
+  //   return FormatGold(gold.toString().substring(0, gold.toString().length - 3)) + 'K';
+  // } else {
+  //   return formatted;
+  // }
+  
+  // ark120202
+	return (value > 9999999 
+		? (value/1000000).toFixed(2) + 'M' 
+		: value > 99999 
+			? (value/1000).toFixed(1) + 'k' 
+			: value)
+		.toString()
+		.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
 function DynamicSubscribePTListener(table, callback, OnConnectedCallback) {

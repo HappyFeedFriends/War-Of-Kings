@@ -228,6 +228,7 @@
 					</Panel>
 				</Panel> 
 				<Panel id="ScenePanel" />
+				<DOTAAbilityImage id="ClassAbilityPanel"  />
 				<Panel id="FooterCard" >
 					<Panel id="HeaderCardBg" />
 					<Panel id="AbilityList" />
@@ -244,7 +245,8 @@
 								<Panel id="DisconnectIconPlayer" />
 							</Panel>
 							<Panel id="PlayerData" >
-								<DOTAUserName id="PlayerName" steamid="local" />
+								<!-- <DOTAUserName id="PlayerName" steamid="local" /> -->
+								<Label id="PlayerName" text="" />
 								<Panel id="ProgressBarContainer" >
 									<Panel id="ProgressBarDamageAllPlayer" >
 										<Panel id="Circle" />
@@ -294,7 +296,7 @@
 		<Panel id="TopbarButtons" hittest="false" require-composition-layer="true" always-cache-composition-layer="true" >
 			<Button id="CardInfoButton" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( UI_CardInfoPanel )" onactivate="ToggleVisiblePanel('CardMenuContainer')" />
 			<Button id="CardAssemblyInfo" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( UI_cardAssembly )" onactivate="ToggleVisiblePanel('CardAssemblyContainer')" />
-			 <Button id="CardInfoPanels" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( UI_cardinfo_panel )" onactivate="ToggleVisiblePanel('InfoPanelCards')" />  
+			 <!-- <Button id="CardInfoPanels" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( UI_cardinfo_panel )" onactivate="ToggleVisiblePanel('InfoPanelCards')" />   -->
 			 <Button id="Settings" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( Setting )" onactivate="ToggleVisiblePanel('SettingContainer')" /> 
 			 <Button id="ShopButton" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( ShopButton )" onactivate="ToggleVisiblePanel('ShopContainerRoot')" />
 			 <Button id="leaderboards" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( leaderboards )" onactivate="ToggleVisiblePanel('leaderboardsContainer')" />
@@ -338,7 +340,7 @@
 			<Panel id="CardAssemblyMain" />
 		</Panel>
 		<Panel id="HeroBarsContainer" hittest="false" />
-		<Panel id="InfoPanelCards" hittest="false"  >
+<!-- 		<Panel id="InfoPanelCards" hittest="false"  >
 			<Panel id="MainContainer" >  
 				<Panel id="StepInfoCards" >
 					<Label text="#Quick_start" />
@@ -351,7 +353,7 @@
 							<Panel id="BgStepMovie" > 
 								<Panel id="CursorBg" />
 							</Panel>  
-							<!-- <MoviePanel class="VideoPanel" src="file://{resources}/videos/step_1.webm" controls="none" repeat="true" autoplay="onload"  /> -->
+							 <MoviePanel class="VideoPanel" src="file://{resources}/videos/step_1.webm" controls="none" repeat="true" autoplay="onload"  /> 
 						</Panel>
 					</Panel>
 					<Panel id="Step-container" >
@@ -364,7 +366,7 @@
 								<Panel id="BgStepMovie" > 
 									<Panel id="CursorBg" />
 								</Panel>     
-								<!-- <MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_2.webm" controls="none" repeat="true" autoplay="onload"  /> -->
+								 <MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_2.webm" controls="none" repeat="true" autoplay="onload"  /> 
 							</Panel>
 						</Panel>
 						<Panel id="Step3" class="Step square" >
@@ -376,7 +378,7 @@
 								<Panel id="BgStepMovie" > 
 									<Panel id="CursorBg" />
 								</Panel>      
-								<!-- <MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_3.webm" controls="none" repeat="true" autoplay="onload"  /> -->
+								 <MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_3.webm" controls="none" repeat="true" autoplay="onload"  /> 
 							</Panel>
 						</Panel>
 						<Panel id="Step4" class="Step square" >
@@ -388,7 +390,7 @@
 								<Panel id="BgStepMovie" > 
 									<Panel id="CursorBg" />
 								</Panel> 
-								<!-- <MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_4.webm" controls="none" repeat="true" autoplay="onload"  /> -->
+								 <MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_4.webm" controls="none" repeat="true" autoplay="onload"  /> 
 							</Panel>
 						</Panel>
 						<Panel id="Step5" class="Step square" >
@@ -400,7 +402,7 @@
 								<Panel id="BgStepMovie" > 
 									<Panel id="CursorBg" />
 								</Panel>   
-								<!-- <MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_5.webm" controls="none" repeat="true" autoplay="onload"  /> -->
+								<MoviePanel  class="VideoPanel" src="file://{resources}/videos/step_5.webm" controls="none" repeat="true" autoplay="onload"  /> 
 							</Panel>
 						</Panel>
 					</Panel>
@@ -684,7 +686,7 @@
 				</Panel>
 			</Panel>
 			<Button id="QuitButton" onactivate="$('#InfoPanelCards').RemoveClass('Visible')"/>
-		</Panel>  
+		</Panel>   -->
 		<Panel id="TotalDamageTowers" hittest="false"  >
 			<Panel id="ArrowOpenStatic" >
 				<Panel id="ArrowIcon"/>

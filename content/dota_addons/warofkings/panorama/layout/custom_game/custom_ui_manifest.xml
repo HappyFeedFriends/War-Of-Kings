@@ -13,7 +13,14 @@
 		<include src="file://{resources}/scripts/libraries/CustomKeyBind.js" />
 		<include src="file://{resources}/scripts/libraries/lodash.min.js" />
 	</scripts>
-	<Panel>    
+	<Panel>  
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/hexagon.png" /> 
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_thunder_lizard.png" />  
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_harpy.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_shadow_fiend.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_tinker.png" />
+		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_dark_willow.png" />
+
 		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_beast.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_bounty_hunter.png" />
 		<Image id="gamemode" class="SeqImg" src="file://{images}/war_of_kings/cards/npc_war_of_kings_undying.png" />

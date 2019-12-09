@@ -13,18 +13,26 @@ var modelParticle;
 var gridParticles;
 var overlayParticles;
 var builderIndex;
-var blockers = [];
+var iconPanel = $.GetContextPanel().FindChildTraverse('IconPanel') ||  $.CreatePanel('Image',$.GetContextPanel(),'IconPanel')
+iconPanel.style.width = '40px';
+iconPanel.style.height = '40px';
+iconPanel.hittest =false
+iconPanel.style.zIndex = '2000000';
+iconPanel.SetScaling('stretch-to-cover-preserve-aspect')
+iconPanel.style.borderRadius = "50%";
 
+var blockers = [];
+var screenHR = Game.GetScreenHeight() / 1080;
 function StartBuildingHelper( params )
 {
     if (params !== undefined)
     {
         // Set the parameters passed by AddBuilding
         state = params.state;
-        size = params.size;
+        size = 3;
         overlay_size = size * 3;
-        grid_alpha = Number(params.grid_alpha);
-        model_alpha = Number(params.model_alpha);
+        grid_alpha = 25;
+        model_alpha = 75;
         recolor_ghost = Number(params.recolor_ghost);
         builderIndex = params.builderIndex;
         var scale = params.scale;
@@ -37,9 +45,9 @@ function StartBuildingHelper( params )
             ghost_color = [255,255,255]
         var localHeroIndex = Players.GetPlayerHeroEntityIndex( Players.GetLocalPlayer() );
 
-        if (modelParticle !== undefined) {
-            Particles.DestroyParticleEffect(modelParticle, true)
-        }
+        // if (modelParticle !== undefined) {
+        //     Particles.DestroyParticleEffect(modelParticle, true)
+        // }
         if (gridParticles !== undefined) {
             for (var i in gridParticles) {
                 Particles.DestroyParticleEffect(gridParticles[i], true)
@@ -51,13 +59,14 @@ function StartBuildingHelper( params )
         Particles.SetParticleControl(rangeParticle, 1, [attack_range, attack_range, attack_range]);
 
         // Building Ghost
-        modelParticle = Particles.CreateParticle("particles/buildinghelper/ghost_model.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, localHeroIndex);
-        Particles.SetParticleControlEnt(modelParticle, 1, entindex, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "", Entities.GetAbsOrigin(entindex), true)
-        Particles.SetParticleControl(modelParticle, 2, ghost_color)
-        Particles.SetParticleControl(modelParticle, 3, [model_alpha,0,0])
-        Particles.SetParticleControl(modelParticle, 4, [scale,0,0])
-
+        // modelParticle = Particles.CreateParticle("particles/buildinghelper/ghost_model.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, localHeroIndex);
+        // Particles.SetParticleControlEnt(modelParticle, 1, entindex, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "", Entities.GetAbsOrigin(entindex), true)
+        // Particles.SetParticleControl(modelParticle, 2, ghost_color)
+        // Particles.SetParticleControl(modelParticle, 3, [model_alpha,0,0])
+        // Particles.SetParticleControl(modelParticle, 4, [scale,0,0])
         // Grid squares
+        let dataUnit = CustomNetTables.GetTableValue('CardInfoUnits',params.cardName)
+        iconPanel.SetImage(`s2r://panorama/images/heroes/${dataUnit.prototype_model}.png`)
         gridParticles = [];
         for (var x=0; x < size*size; x++)
         {
@@ -82,7 +91,8 @@ function StartBuildingHelper( params )
         $.Schedule(0, StartBuildingHelper);
 
         var mPos = GameUI.GetCursorPosition();
-        var GamePos = GameUI.GetScreenWorldPosition(mPos);;
+
+        var GamePos = GameUI.GetScreenWorldPosition(mPos);
 
         if ( GamePos !== null )
         {
@@ -129,7 +139,9 @@ function StartBuildingHelper( params )
                     Particles.SetParticleControl(gridParticle, 2, color)
                 }
             }
-
+            let screenX = Game.WorldToScreenX(GamePos[0], GamePos[1], GamePos[2])
+            let screenY =  Game.WorldToScreenY(GamePos[0], GamePos[1], GamePos[2])
+            iconPanel.style.position = `${screenX/screenHR}px ${screenY/screenHR}px 0px`;
             // Overlay Grid, visible with Alt pressed
             // Keep in mind that a particle with 0 alpha does still eat frame rate.
             //overlay_alpha = GameUI.IsAltDown() ? 90 : 0;
@@ -174,15 +186,15 @@ function StartBuildingHelper( params )
             Particles.SetParticleControl(rangeParticle, 0, GamePos)
 
             // Update the model particle
-            Particles.SetParticleControl(modelParticle, 0, GamePos)
+            // Particles.SetParticleControl(modelParticle, 0, GamePos)
 
-            // Turn the model red if we can't build there
-            if (recolor_ghost){
-                if (invalid)
-                    Particles.SetParticleControl(modelParticle, 2, [255,0,0])
-                else
-                    Particles.SetParticleControl(modelParticle, 2, [255,255,255])
-            }
+            // // Turn the model red if we can't build there
+            // if (recolor_ghost){
+            //     if (invalid)
+            //         Particles.SetParticleControl(modelParticle, 2, [255,0,0])
+            //     else
+            //         Particles.SetParticleControl(modelParticle, 2, [255,255,255])
+            // }
         }
     }
 }
@@ -192,15 +204,16 @@ function EndBuildingHelper() {
     if (rangeParticle !== undefined) {
         Particles.DestroyParticleEffect(rangeParticle, false);
     }
-    if (modelParticle !== undefined) {
-        Particles.DestroyParticleEffect(modelParticle, false);
-    }
+    // if (modelParticle !== undefined) {
+    //     Particles.DestroyParticleEffect(modelParticle, false);
+    // }
     for (var i in gridParticles) {
         Particles.DestroyParticleEffect(gridParticles[i], true);
     }
     for (var i in overlayParticles) {
         Particles.DestroyParticleEffect(overlayParticles[i], true);
     }
+    iconPanel.SetImage('none')
 }
 function IsPointInPolygon(point, polygon) {
     var j = polygon.length-1;
@@ -228,14 +241,15 @@ function CheckBuildingHelper() {
                 if ( Abilities.GetAbilityName(ability) == data.abilityName && (Abilities.GetBehavior(ability) & DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT) == DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT) {
                     StartBuildingHelper({
                         state : "active",
-                        size : data.size,
-                        scale : data.scale,
-                        grid_alpha : data.grid_alpha,
-                        model_alpha : data.model_alpha,
-                        recolor_ghost : data.recolor_ghost,
-                        entindex : data.entindex,
-                        builderIndex : unitEntIndex,
+                        // size : data.size,
+                        // scale : data.scale,
+                        // grid_alpha : data.grid_alpha,
+                        // model_alpha : data.model_alpha,
+                        // recolor_ghost : data.recolor_ghost,
+                        // entindex : data.entindex,
+                        // builderIndex : unitEntIndex,
                         attack_range : data.attack_range,
+                        cardName : cardName,
                     });
                 }
             }
@@ -256,7 +270,7 @@ function polygonArray(polygon) {
 }
 
 function UpdateBuilding() {
-    $.Schedule(1/90, UpdateBuilding);
+    $.Schedule(1/60, UpdateBuilding);
     CheckBuildingHelper();
 }
 

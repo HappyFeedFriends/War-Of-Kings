@@ -11,7 +11,7 @@ var tooltip = null;
 var allItems = CustomNetTables.GetAllTableValues('CustomShop')
 var oldGold = 0
 var sort_allItems = []
-   
+    
 function FillItems(){
 	var data = CustomNetTables.GetTableValue('CustomShop', 'ShopList')
 	var number = 0;
@@ -35,7 +35,7 @@ function FillItems(){
 		}
 	}  
 }
-   
+     
 function UpdateShopItems(){
 	var gold = GetGold()
 	_.each(panels,function(panel){
@@ -179,6 +179,7 @@ function OnInputSearchShop(){
 	var count = 0;
 	var parent = $("#SearchResultDotaShop").FindChildTraverse('SearchResultsContents')
 	var text = $("#SearchTextEntryShop").text.toLowerCase()
+	let gold = GetGold()
 	parent.RemoveAndDeleteChildren()
 	for (var _i in sort_allItems){
 		var d = sort_allItems[_i]
@@ -199,6 +200,7 @@ function OnInputSearchShop(){
 			panel_search.SetDialogVariable('item_cost', data.cost)
 			count++;
 			panel_search.SetPanelEvent('oncontextmenu', panelLoad.OnContextClick);
+			panelLoad.SetHasClass('CanPurchase', gold >= data.cost )
 			// panel_search.SetPanelEvent('onactivate',panelLoad.OnActivate);
 			PanelSearchSetEvent(panel_search,panelLoad)
 		}		

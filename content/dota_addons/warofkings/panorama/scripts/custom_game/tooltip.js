@@ -164,7 +164,7 @@ function OnLoadTooltipAssembly(){
 		var proto = dataUnit.prototype_model;
 		var image = $.CreatePanel('Image',labelDescription,'')
 		image.AddClass('HeroImageDescription')
-		image.SetImage('file://{images}/heroes/{name}.png'.replace('{name}',proto))
+		image.SetImage(`file://{images}/heroes/${proto}.png`) //.replace('{name}',proto))
 		$.CreatePanel('Label',labelDescription,'plusDescription').text = '+'
 		for (var names in split){ 
 			var proto = CustomNetTables.GetTableValue("CardInfoUnits", split[names]).prototype_model;
@@ -175,5 +175,112 @@ function OnLoadTooltipAssembly(){
 				$.CreatePanel('Label',labelDescription,'plusDescription').text = '+'
 			start++
 		}
+	}
+}
+
+function OnTooltipDamageArmor(){
+	let unit = Players.GetLocalPlayerPortraitUnit();
+	let unitName = Entities.GetUnitName(unit)
+
+	let dataAttributes = {
+		fStrength:-1,
+		fAgility:-1,
+		fIntellect:-1,
+		
+		baseStrength:0,
+		baseAgility:0,
+		baseIntellect:0,
+	}
+	for (let i = 0; i < Entities.GetNumBuffs(unit); i++) {
+    	let buff = Entities.GetBuff(unit, i);
+        let name = Buffs.GetName(unit, buff);
+		if (name == 'modifier_attributes_custom_strength')
+			dataAttributes.fStrength = Buffs.GetStackCount( unit, buff);
+		if (name == 'modifier_attributes_custom_agility')
+			dataAttributes.fAgility = Buffs.GetStackCount( unit, buff);
+		if (name == 'modifier_attributes_custom_intellect')
+			dataAttributes.fIntellect = Buffs.GetStackCount( unit, buff);
+
+		if (name == 'modifier_attributes_custom_base_strength')
+			dataAttributes.baseStrength = Buffs.GetStackCount( unit, buff);
+		if (name == 'modifier_attributes_custom_base_agility'){
+			dataAttributes.baseAgility = Buffs.GetStackCount( unit, buff);
+		}
+		if (name == 'modifier_attributes_custom_base_intellect')
+			dataAttributes.baseIntellect = Buffs.GetStackCount( unit, buff);
+    }
+    $('#Contents').SetHasClass('Hero',dataAttributes.fStrength != -1)
+
+    let BaseStats = CustomNetTables.GetTableValue("CardInfoUnits", unitName) && CustomNetTables.GetTableValue("CardInfoUnits", unitName).BaseStats || {}
+	let dataInfo = {
+		attack_speed:Entities.GetAttackSpeed( unit ).toFixed(1),
+		
+		base_damage_max:Entities.GetDamageMax( unit ),
+		base_damage_min:Entities.GetDamageMin( unit ),
+		bonus_damage:(`${Entities.GetDamageBonus( unit ) > 0 ? "+" : ""}`) + Entities.GetDamageBonus( unit ), 
+		
+		base_attack_range:Entities.GetAttackRange( unit ),
+		// bonus_attack_range:"+" + Entities.GetAttackRange( unit ),
+		
+		base_spell_amp:0,
+		// bonus_spell_amp:"+ " + 24,
+		
+		base_armor:BaseStats.BaseArmor || 0,
+		bonus_armor:(`${Entities.GetBonusPhysicalArmor( unit ) > 0 ? "+" : ""}`) + Entities.GetBonusPhysicalArmor( unit ),
+		
+		base_agility:dataAttributes.baseAgility,
+		bonus_agility:(dataAttributes.fAgility - dataAttributes.baseAgility) > 0 
+		&& ("+ " + (dataAttributes.fAgility - dataAttributes.baseAgility)) || "",
+		
+		base_intelligence:dataAttributes.baseIntellect,
+		bonus_intelligence: (dataAttributes.fIntellect - dataAttributes.baseIntellect) > 0 
+		&& ("+ " + (dataAttributes.fIntellect - dataAttributes.baseIntellect)) || "",
+		 
+		base_strength:dataAttributes.baseStrength,
+		bonus_strength:(dataAttributes.fStrength - dataAttributes.baseStrength) > 0 
+		&& ("+ " + (dataAttributes.fStrength - dataAttributes.baseStrength)) || "",
+		
+		agility_per_level:(BaseStats.AgilityGain || 0).toFixed(1),
+		strength_per_level:(BaseStats.StrengthGain || 0).toFixed(1),
+		intelligence_per_level:(BaseStats.IntellectGain || 0).toFixed(1),
+
+		attack_speed_details:Math.floor(dataAttributes.fAgility/3),
+		
+		amplify_details:Math.floor(dataAttributes.fIntellect/19),
+		mana_details:dataAttributes.fIntellect * 15,
+		mana_regen:Math.floor(dataAttributes.fIntellect/42).toFixed(1),
+		
+		damage_details:Math.floor(dataAttributes.fStrength/5),
+
+		critical_chance_details:Math.min(Math.floor((0.0005 * dataAttributes.fStrength)/(1 + 0.001 * dataAttributes.fStrength)*100),75),
+		critical_damage:100 + Math.floor(dataAttributes.fStrength/20),
+
+		base_attack_details:Math.min((0.0005 * dataAttributes.fAgility)/(1 + 0.001 * dataAttributes.fAgility),0.4).toFixed(2),
+		attack_range_details:Math.floor(dataAttributes.fAgility/9),
+
+		reduction_cooldown_details:Math.min(Math.floor((0.0009 * dataAttributes.fIntellect)/(1 + 0.001 * dataAttributes.fIntellect)*100),75),
+		duration_effects:((( dataAttributes.fIntellect / 100 + 1 ) / ( 0.4403 * dataAttributes.fIntellect / 100 + 1 ) - 1) * 100).toFixed(1),
+	}
+	let primaryStats = BaseStats.PrimaryStats == 'DOTA_ATTRIBUTE_AGILITY' 
+	? Attributes.DOTA_ATTRIBUTE_AGILITY
+	: BaseStats.PrimaryStats == 'DOTA_ATTRIBUTE_STRENGTH'
+		? Attributes.DOTA_ATTRIBUTE_STRENGTH
+		: BaseStats.PrimaryStats == 'DOTA_ATTRIBUTE_INTELLECT'
+			? Attributes.DOTA_ATTRIBUTE_INTELLECT
+			: Attributes.DOTA_ATTRIBUTE_INVALID
+
+	$('#StrengthContainer').SetHasClass('PrimaryAttribute', primaryStats == Attributes.DOTA_ATTRIBUTE_STRENGTH)
+	$('#AgilityContainer').SetHasClass('PrimaryAttribute', primaryStats == Attributes.DOTA_ATTRIBUTE_AGILITY)
+	$('#IntelligenceContainer').SetHasClass('PrimaryAttribute', primaryStats == Attributes.DOTA_ATTRIBUTE_INTELLECT)
+
+	$('#DamageBonus').SetHasClass('NegativeValue', dataInfo.bonus_damage[0] == "-")
+	// $('#RangeBonus').SetHasClass('NegativeValue', dataInfo.bonus_attack_range[0] == "-")
+	$('#ArmorBonus').SetHasClass('NegativeValue', dataInfo.bonus_armor[0] == "-")
+	$('#DamageBonus').SetHasClass('NoBonus', dataInfo.bonus_damage == 0)
+	// $('#RangeBonus').SetHasClass('NoBonus', dataInfo.bonus_attack_range == 0)
+	$('#ArmorBonus').SetHasClass('NoBonus', dataInfo.bonus_armor == 0)
+
+	for (i in dataInfo){
+		$.GetContextPanel().SetDialogVariable(i, dataInfo[i])
 	}
 }

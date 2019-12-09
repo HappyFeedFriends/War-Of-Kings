@@ -6,14 +6,14 @@ var dataNumbers = {
 	4:'IMPOSSIBLE',
 	5:'HELL',
 	6:'SANDBOX',
-}   
+}    
 var questContainer = $('#QuestMainContainer')
 var dailyQuest = $("#QuestDailyContainer")
 var sandBoxMenu = $('#SandBoxMenu')
 var CoinsContainer = $("#CoinsContainer");
 var NotifyServerContainer = $('#NotifyServerContainer');
 var ChestTimeAlive = $('#ChestTimeAlive')
-
+ 
 var m_QueryUnit = Game.GetLocalPlayerID();;
 var PhysicalRuneMask = $('#double-rune-mask');
 var MagicalRuneMask = $('#magic-rune-mask');
@@ -23,6 +23,8 @@ var infinityIcon = $('#InfinityIcon');
 var roundLabel = $('#RoundLabel');
  
 var RoundBoard = $("#RoundBoard")
+
+var attributes = GetDotaHud().FindChildTraverse('stragiint')
 
 var colors = {
 	common:'#7d7f7d',
@@ -44,12 +46,10 @@ function UpdateInfoPanel(){
 	var parent = $('#ContainerMenu')
 	parent.RemoveAndDeleteChildren()
 	var data = {
-		common:[],
 		uncommon:[],
 		rare:[],
 		mythical:[],
 		legendary:[],
-		Godness:[],
 	}    
 	var dataCard = CustomNetTables.GetAllTableValues('CardInfoUnits')
 	for (k in dataCard){
@@ -84,10 +84,6 @@ function UpdateInfoPanel(){
 			for (name in classes)
 				classname += $.Localize(classes[name]) + " ";
 			var cardPanel = $.CreatePanel('Panel',parentCard,'CardInfoPanel')
-			if (k == 'Godness'){
-				var xml = '<DOTAScenePanel id="LevelUpBurstFX" map="scenes/hud/levelupburst" renderdeferred="false" rendershadows="false" camera="camera_1" hittest="false" particleonly="true" />'
-				cardPanel.BCreateChildren(xml);
-			}
 			var cardPanelInformation = $.CreatePanel('Panel',parentCard,'CardTooltip')
 			cardPanelInformation.BLoadLayoutSnippet('TooltipCard')
 			cardPanelInformation.SetDialogVariable('damageMin', unitData.BaseStats.DamageMin)
@@ -153,8 +149,11 @@ function UpdateInfoPanel(){
 			var xml = IsAnimationCards()    
 			? '<DOTAScenePanel antialias="true" hittest="false" id="UnitModelCard" unit="{unitName}" particleonly="false" />'.replace('{unitName}',unitData.prototype_model)
 			: '<Image id="UnitModelCard" scaling="stretch-to-cover-preserve-aspect" src="s2r://panorama/images/war_of_kings/cards/' + cardName + '.png"/>';  
-			scenePanel.BCreateChildren(xml);  
-			// cardPanel.FindChildTraverse('BackgroundCard').DeleteAsync(0);
+			scenePanel.BCreateChildren(xml);   
+			let ClassAbilityPanel = cardPanel.FindChildTraverse('ClassAbilityPanel')
+			ClassAbilityPanel.abilityname =unitData.class + "_class"; ;
+			ClassAbilityPanel.SetPanelEvent( "onmouseover", ShowAbilityTooltip(ClassAbilityPanel));  
+			ClassAbilityPanel.SetPanelEvent( "onmouseout",HideAbilityTooltip(ClassAbilityPanel));
 		})
 	}
 }   
@@ -202,7 +201,7 @@ function OnUpdateSelectionButton(){
 	$("#XpPlayerContainer").SetDialogVariable('player_level', ExpData.Level);
 	var Xpb = $("#XpBar");
 	Xpb.value = ExpData.Exp; 
-	Xpb.max = 35;
+	Xpb.max = ExpData.ExpMax;
 	Xpb.SetDialogVariable('xp_level', Xpb.value)
 	Xpb.SetDialogVariable('xp_max_level', Xpb.max)
 }
@@ -227,7 +226,7 @@ function UseAbility(ability){
 var toggleList = {
 	1:'CardAssemblyContainer',
 	2:'CardMenuContainer',
-	3:'InfoPanelCards',
+	// 3:'InfoPanelCards',
 	4:'SettingContainer',
 	5:'ShopContainerRoot',
 	6:'leaderboardsContainer',
@@ -252,7 +251,6 @@ function ToggleVisiblePanel(name){
 function OnInputSubmitEntry(){
 	var name = $("#ItemSearchTextEntry").text
 	var data = {
-		common:[],
 		uncommon:[],
 		rare:[],
 		mythical:[],
@@ -318,12 +316,10 @@ function UpdateAssemblyPanel(){
 	parent.RemoveAndDeleteChildren();
 	var allData = CustomNetTables.GetAllTableValues('CardInfoUnits');
 	var dataSort = {
-		common:1,
 		uncommon:2,
 		rare:3,
 		mythical:4,
-		legendary:5,
-		Godness:6,   
+		legendary:5,   
 	}
 	var array = []
 	for (var k in allData){
@@ -448,7 +444,13 @@ function OnUpdateCardSelection(data){
 		var xml = IsAnimationCards()  
 			? '<DOTAScenePanel antialias="true" hittest="false" id="UnitModelCard" unit="{unitName}" particleonly="false" />'.replace('{unitName}',baseDataUnit.prototype_model)
 			: '<Image id="UnitModelCard" scaling="stretch-to-cover-preserve-aspect" src="s2r://panorama/images/war_of_kings/cards/' + card + '.png"/>';  
-		scenePanel.BCreateChildren(xml);   
+		scenePanel.BCreateChildren(xml);  
+
+		let ClassAbilityPanel = containerP.FindChildTraverse('ClassAbilityPanel')
+		ClassAbilityPanel.abilityname = baseDataUnit.class + "_class"; 
+		ClassAbilityPanel.SetPanelEvent( "onmouseover", ShowAbilityTooltip(ClassAbilityPanel));  
+		ClassAbilityPanel.SetPanelEvent( "onmouseout",HideAbilityTooltip(ClassAbilityPanel));
+
 		containerP.FindChildTraverse('CardNameHeader').text = $.Localize(card)
 		containerP.FindChildTraverse('HeroIcon').AddClass(baseDataUnit.type)
 		containerP.FindChildTraverse('HeroIcon').SetImage('file://{images}/heroes/{name}.png'.replace('{name}',baseDataUnit.prototype_model))
@@ -531,6 +533,61 @@ function UpdateRoundDamage(){
 }
 
 function AutoUpdatePlayerData(){
+	var dataAttributes = {
+		fStrength:-1,
+		fAgility:-1,
+		fIntellect:-1,
+		
+		baseStrength:0,
+		baseAgility:0,
+		baseIntellect:0,
+	}
+	var unit = Players.GetLocalPlayerPortraitUnit();
+	for (var i = 0; i < Entities.GetNumBuffs(unit); i++) {
+    	var buff = Entities.GetBuff(unit, i);
+        var name = Buffs.GetName(unit, buff);
+		if (name == 'modifier_attributes_custom_strength')
+			dataAttributes.fStrength = Buffs.GetStackCount( unit, buff);
+		if (name == 'modifier_attributes_custom_agility')
+			dataAttributes.fAgility = Buffs.GetStackCount( unit, buff);
+		if (name == 'modifier_attributes_custom_intellect')
+			dataAttributes.fIntellect = Buffs.GetStackCount( unit, buff);
+
+		if (name == 'modifier_attributes_custom_base_strength')
+			dataAttributes.baseStrength = Buffs.GetStackCount( unit, buff);
+		if (name == 'modifier_attributes_custom_base_agility'){
+			dataAttributes.baseAgility = Buffs.GetStackCount( unit, buff);
+		}
+		if (name == 'modifier_attributes_custom_base_intellect')
+			dataAttributes.baseIntellect = Buffs.GetStackCount( unit, buff);
+    }
+    attributes.SetHasClass('ShowStrAgiInt', dataAttributes.fStrength > -1)
+    if (dataAttributes.fStrength > -1){
+
+    	attributes.FindChildTraverse('StrengthLabel').text = dataAttributes.baseStrength
+    	attributes.FindChildTraverse('AgilityLabel').text = dataAttributes.baseAgility
+    	attributes.FindChildTraverse('IntelligenceLabel').text = dataAttributes.baseIntellect
+
+ 		var greenStrength = dataAttributes.fStrength - dataAttributes.baseStrength
+ 		var greenAgility = dataAttributes.fAgility - dataAttributes.baseAgility
+ 		var greenIntellect = dataAttributes.fIntellect - dataAttributes.baseIntellect
+
+    	attributes.FindChildTraverse('StrengthModifierLabel').SetHasClass('StatPositive',greenStrength > 0 )
+    	attributes.FindChildTraverse('StrengthModifierLabel').SetHasClass('StatNegative',greenStrength < 0 )
+
+    	attributes.FindChildTraverse('AgilityModifierLabel').SetHasClass('StatPositive',greenAgility > 0 )
+    	attributes.FindChildTraverse('AgilityModifierLabel').SetHasClass('StatNegative',greenAgility < 0 )
+
+    	attributes.FindChildTraverse('IntelligenceModifierLabel').SetHasClass('StatPositive',greenIntellect > 0 )
+    	attributes.FindChildTraverse('IntelligenceModifierLabel').SetHasClass('StatNegative',greenIntellect < 0 )
+
+    	var labelStr = greenStrength == 0 ?  "" :  (greenStrength > 0 ? ("+" + greenStrength) : greenStrength)
+    	var labelAgi = greenAgility == 0 ?   "" :  (greenAgility > 0 ? ("+" + greenAgility) : greenAgility)
+    	var labelInt = greenIntellect == 0 ? "" : (greenIntellect > 0 ? ("+" + greenIntellect) : greenIntellect)
+    	attributes.SetDialogVariable('strength_bonus', labelStr)
+    	attributes.SetDialogVariable('agility_bonus', labelAgi)
+    	attributes.SetDialogVariable('intelligence_bonus', labelInt)
+    }
 	GameUI.SetCameraDistance(RemapValClamped($("#CameraDistanceSlider").value, 0, 1, 1300, 1520));
 	var container = $("#PlayerRowContainer")
 	var maxDamage = 0
@@ -548,7 +605,7 @@ function AutoUpdatePlayerData(){
 			panel = $.CreatePanel('Panel',container,'Player_' + pID)
 			panel.BLoadLayoutSnippet('PlayerRow')
 			panel.FindChildTraverse('PlayerAvatar').steamid = Game.GetPlayerInfo(pID).player_steamid
-			panel.FindChildTraverse('PlayerName').steamid = Game.GetPlayerInfo(pID).player_steamid
+			panel.FindChildTraverse('PlayerName').text = Players.GetPlayerName( pID )
 			panel.style.transform = 'none';
 			panel.style.borderLeftColor = GetHEXPlayerColor(pID)
 			panel.FindChildTraverse('PlayerAvatar').style.borderColor = GetHEXPlayerColor(pID)
@@ -557,7 +614,7 @@ function AutoUpdatePlayerData(){
 		panel.SetHasClass('Premium_2', data.IsDonator == 2)
 		panel.SetHasClass('Premium_3', data.IsDonator == 3)
 		var towerData = data.amountTower.split('/')
-		panel.FindChildTraverse('Avatar').SetHasClass('IsDisconnect',Game.GetPlayerInfo(pID).player_connection_state == DOTAConnectionState_t.DOTA_CONNECTION_STATE_DISCONNECTED)
+		panel.FindChildTraverse('Avatar').SetHasClass('IsDisconnect',Game.GetPlayerInfo(pID).player_connection_state >= DOTAConnectionState_t.DOTA_CONNECTION_STATE_DISCONNECTED)
 		panel.SetDialogVariable('towerAmount', towerData[0])
 		panel.SetDialogVariable('towerMax', towerData[1])
 		var panelWidth = panel.FindChildTraverse('ProgressBarDamageAllPlayer')
@@ -600,6 +657,7 @@ function AutoUpdatePlayerData(){
 
 function AutoUpdateHud(){
 	$.Schedule(1/80,AutoUpdateHud) 
+	if (Game.IsGamePaused()) return
 	AutoUpdatePlayerData();
 	var dotaTime = Game.GetDOTATime(false,false)
 	var gs = CustomNetTables.GetTableValue("PlayerData", "GLOBAL_SETTING")
@@ -801,7 +859,6 @@ function OnUpdateModeAndDifficulty(){
 function GameEndPlayer(data){
 	var parent = $('#EndScreenPlayer')  
 	data = data && data[GetPlayerID()] || null
-	$.Msg(data)
 	var local = (data || {}) || CustomNetTables.GetTableValue('PlayerData', 'Player_' + GetPlayerID())
 	if (LengthTable(local.DataEndGame) < 1) return
 		$('#EndScreenContainer').AddClass('Visible')
@@ -839,7 +896,7 @@ function GameEndPlayer(data){
 		var pb = panel.FindChildTraverse('ProgressBarPlayerDeath')
 		var dataXp = GetXpAndOst(pID);
 		pb.value = Number(dataXp.Exp);
-		pb.max = 35;
+		pb.max = dataXp.ExpMax;
 		var amount = !IsEnd  ? dataPI.Experience : Math.max(pb.value - playerData.ExpBonus,0)
 		pb.SetDialogVariable('value', amount + ' + ( ' + playerData.ExpBonus + ' ) ')
 		pb.SetDialogVariable('max_lvl', pb.max)
@@ -873,74 +930,7 @@ function GameEndPlayer(data){
    
 function SetGlobalSetting(){
 	var nettables = CustomNetTables.GetTableValue("PlayerData", "GLOBAL_SETTING")
-	var perGrade = nettables.STATS_BONUS_PER_GRADE
-	var maxGrade = nettables.MAX_GRADE
-	var classData = nettables.CLASS_DATA
-	var creepData = nettables.CREEP_DATA
 	var context = $.GetContextPanel()
-	context.SetDialogVariable('common_max_star', maxGrade.common)
-	context.SetDialogVariable('uncommon_max_star', maxGrade.uncommon)
-	context.SetDialogVariable('rare_max_star', maxGrade.rare)
-	context.SetDialogVariable('mythical_max_star', maxGrade.mythical)
-	context.SetDialogVariable('legendary_max_star', maxGrade.legendary)
-	context.SetDialogVariable('Godness_max_star', maxGrade.Godness)
-
-	context.SetDialogVariable('common_bonus_damage', perGrade.common)
-	context.SetDialogVariable('uncommon_bonus_damage', perGrade.uncommon)
-	context.SetDialogVariable('rare_bonus_damage', perGrade.rare)
-	context.SetDialogVariable('mythical_bonus_damage', perGrade.mythical)
-	context.SetDialogVariable('legendary_bonus_damage', perGrade.legendary)
-	context.SetDialogVariable('Godness_bonus_damage', perGrade.Godness)
- 
-	context.SetDialogVariable('bonus_attack_speed_warrior', classData.warrior.bonus_star)
-	context.SetDialogVariable('warrior_special', classData.warrior.special_bonus)
-	context.SetDialogVariable('bonus_mana_shaman', classData.shaman.bonus_star)
-	context.SetDialogVariable('shaman_special', classData.shaman.special_bonus)
-	context.SetDialogVariable('guardian_bonus_health', classData.guardian.bonus_star)
-	context.SetDialogVariable('guardian_special', classData.guardian.special_bonus)
-	context.SetDialogVariable('mage_bonus_amp', classData.mage.bonus_star)
-	context.SetDialogVariable('mage_bonus_special', classData.mage.special_bonus)
-	context.SetDialogVariable('rogue_bonus_critical_chance', classData.rogue.bonus_star.chance)
-	context.SetDialogVariable('rogue_critical_damage', classData.rogue.bonus_star.critical)
-	context.SetDialogVariable('rogue_critical_damage_chance_special', classData.rogue.special_bonus.chance)
-	context.SetDialogVariable('rogue_critical_damage_special', classData.rogue.special_bonus.critical)
-	context.SetDialogVariable('archer_bonus_1', classData.archer.bonus_star.toFixed(1))
-	context.SetDialogVariable('archer_bonus_special', classData.archer.special_bonus)
-	context.SetDialogVariable('class_archer', $.Localize('archer'))
-	context.SetDialogVariable('class_rogue', $.Localize('rogue'))
-	var infoContainer = $('#CreepDataContainer').Children()
-	var normalCreep = infoContainer[0]
-	var mutantcreep = infoContainer[1]
-	var championcreep = infoContainer[2]
-	var ancientcreep = infoContainer[3]
-	var minibosscreep = infoContainer[4]
-	var bosscreep = infoContainer[5]
-	normalCreep.SetDialogVariable('crystal_drop', creepData[1].crystal_drop)
-	mutantcreep.SetDialogVariable('crystal_drop', creepData[2].crystal_drop)
-	championcreep.SetDialogVariable('champion_bonus_damage', creepData[3].bonus_damage_tower)
-	championcreep.SetDialogVariable('health', creepData[3].health_bonus)
-	championcreep.SetDialogVariable('movespeed_bonus', creepData[3].movespeed)
-	championcreep.SetDialogVariable('crystal_drop', creepData[3].crystal)
-	championcreep.SetDialogVariable('gold_drop', creepData[3].gold)
-	championcreep.SetDialogVariable('chance_spawn', creepData[3].chance)
-	championcreep.SetDialogVariable('shield', creepData[3].shield)
-
-	ancientcreep.SetDialogVariable('health', creepData[4].health)
-	ancientcreep.SetDialogVariable('base_movespeed', creepData[4].base_speed)
-	ancientcreep.SetDialogVariable('gold_drop', creepData[4].gold)
-	ancientcreep.SetDialogVariable('crystal_drop', creepData[4].crystal)
-	ancientcreep.SetDialogVariable('chance_spawn', creepData[4].chance)
-	ancientcreep.SetDialogVariable('damage_creep_towers', creepData[4].damage)
-
-	minibosscreep.SetDialogVariable('damage_creep_towers', creepData[5].damage)
-	minibosscreep.SetDialogVariable('interval', creepData[5].interval)
-	minibosscreep.SetDialogVariable('gold', creepData[5].gold)
-	minibosscreep.SetDialogVariable('crystal', creepData[5].crystal)
-	minibosscreep.SetDialogVariable('chance', creepData[5].chance_drop_card)
-  
-	bosscreep.SetDialogVariable('damage_creep_towers', creepData[6].damage)
-	bosscreep.SetDialogVariable('gold', creepData[6].gold)
-	bosscreep.SetDialogVariable('crystal', creepData[6].crystal)
 
 	$('#ArrowOpenStatic').SetPanelEvent('onactivate', function(){
 		$('#TowersDamage').SetHasClass('hidden', !$('#TowersDamage').BHasClass('hidden'))
@@ -1351,16 +1341,60 @@ function GetXPByLevelUp(lvl){
 	// return Math.abs(GetXpMaxLvl(lvl) - CustomNetTables.GetTableValue("PlayerData", "player_" + (pID || GetPlayerID())).Experience)
 }
 
-function GetXpAndOst(pID){
-	var xp = Number(CustomNetTables.GetTableValue("PlayerData", "player_" + (pID || GetPlayerID())).Experience);
-	var lvl = 1;
-	while (xp >= 35){
-		xp -= 35;
-		lvl++;
+function GetAllXp(pID){
+	return Number(CustomNetTables.GetTableValue("PlayerData", "player_" + (pID || GetPlayerID())).Experience);
+}
+
+function GetNeedXpByLevelUp(lvl,pID){
+	lvl = lvl || GetLevelByXp(GetAllXp(pID))
+	return GetXpByLevelUp(lvl) - GetAllXp(pID);
+}
+
+function GetTotalEarnedXP(pID){
+	return GetCurrentXp(null,pID) + GetNeedXpByLevelUp(null,pID)
+}
+
+
+function GetCurrentXp(myXp,pID){
+	var xp = myXp || GetAllXp(pID)
+	var i = 0
+	while (true) {
+		i = i + 1;
+		var add = MaxXpByLevel(i)
+		xp = xp - add
+		if (xp < 0)
+			return xp + add
 	}
+}
+
+function GetLevelByXp(xp){
+	var i = 1;
+	while (xp > 0) {
+		xp = xp - MaxXpByLevel(i)
+		if (xp >= 0)
+			i++;
+	}
+	return i
+}
+ 
+function MaxXpByLevel(lvl){
+	return Math.floor(35 + (35 * 0.15 * lvl))
+
+}
+
+function GetXpByLevelUp(lvl){
+	var xp = 0;
+	for (var i = 1; i <= lvl;++i)
+		xp = xp + MaxXpByLevel(i);
+	return xp;
+}
+
+function GetXpAndOst(pID){
+	var xp = GetAllXp(pID)
 	return {
-		Level:lvl,
-		Exp:xp,
+		Level:GetLevelByXp(xp),
+		Exp:GetCurrentXp(null,(pID || GetPlayerID())),
+		ExpMax: GetTotalEarnedXP(pID),
 	}
 }
 
@@ -1489,7 +1523,9 @@ function UploadRanking(){
 	}
 }
 
+
 function OnUpdateQueryUnit(){
+	// var panel = GetDotaHud().FindChildTraverse('stragiint')
 	var unit = Players.GetLocalPlayerPortraitUnit();
 	var localPlayerID = Game.GetLocalPlayerID();
 	m_QueryUnit = Entities.GetPlayerOwnerID(unit);
@@ -1498,7 +1534,7 @@ function OnUpdateQueryUnit(){
 	}
 }
 
-(function(){ 	
+(function(){ 
 	UploadRanking();
 	I__OnLoadInventory__I();
 	OnUploadShop();
@@ -1509,6 +1545,8 @@ function OnUpdateQueryUnit(){
 	AutoUpdateHud();
 	GameEndPlayer();
 	HidePanel(GetDotaHud().FindChildTraverse('stackable_side_panels'))
+	HidePanel(GetDotaHud().FindChildTraverse('CourierControls'))
+	GetDotaHud().FindChildTraverse('ShopButton').style.width = "130px"
 	UpdateAssemblyPanel();   
 	OnUpdateCardSelection();
 	UpdateInfoPanel();
@@ -1596,7 +1634,15 @@ function OnUpdateQueryUnit(){
 		$.Schedule(3,function(){
 			$("#EndlessModeOn").RemoveClass('Visible');
 		})
-	})
+	}) 
+	var tooltipHover = GetDotaHud().FindChildTraverse('stats_tooltip_region')
+	tooltipHover.SetPanelEvent('onmouseover', function(){
+		$.DispatchEvent("UIShowCustomLayoutParametersTooltip", tooltipHover, "TooltipArmorDamageCustom", 
+			"file://{resources}/layout/custom_game/tooltips/TooltipunitDamageArmor3.xml", "")
+	})  
+	tooltipHover.SetPanelEvent( "onmouseout",function(){
+		$.DispatchEvent("UIHideCustomLayoutTooltip", tooltipHover, "TooltipArmorDamageCustom");
+	});
 
 	var heroesSelling = CustomNetTables.GetTableValue("PlayerData", "GLOBAL_SETTING").CUSTOM_SHOP_DATA.GodnessHeroes
 	var container = $('#CustomShop').FindChildTraverse('ShopContainer')
@@ -1614,6 +1660,4 @@ function OnUpdateQueryUnit(){
 	}
 	GameEvents.Subscribe('dota_player_update_query_unit', OnUpdateQueryUnit);
 	GameEvents.Subscribe('dota_player_update_selected_unit', OnUpdateQueryUnit);
-	if (CustomNetTables.GetTableValue("PlayerData", "player_" + GetPlayerID()).CountGame < 4 )
-		ToggleVisiblePanel('InfoPanelCards');
 })(); 

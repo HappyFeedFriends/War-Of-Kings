@@ -72,19 +72,19 @@ function FindKeyByValue(value,table){
 }
 
 function UpdateByUnit(){
-    $.Schedule(1/80,UpdateByUnit) 
+    $.Schedule(1/60,UpdateByUnit) 
     var creatures = Entities.GetAllEntitiesByClassname('npc_dota_creature')
     var playerData = CustomNetTables.GetTableValue("PlayerData", "player_" + GetPlayerID())
     // playerData.champions = playerData.champions || {}
     var dataBuilding = playerData.BuildingsCardsindexID
-    for (var entityId in heroBars){
-        entityId = Number(entityId)
-        var find = FindKeyByValue(entityId,creatures)
-        if (!find && heroBars[entityId]){
-            heroBars[entityId].DeleteAsync(0);
-            delete heroBars[entityId];  // delete health bars if the creeps were killed, but the client no longer knows the information about it           
-        }
-    }
+    // for (var entityId in heroBars){
+    //     entityId = Number(entityId)
+    //     var find = FindKeyByValue(entityId,creatures)
+    //     if (!find && heroBars[entityId]){
+    //         heroBars[entityId].DeleteAsync(0);
+    //         delete heroBars[entityId];  // delete health bars if the creeps were killed, but the client no longer knows the information about it           
+    //     }
+    // }
     for (var entityId of creatures) {
         if (Entities.IsOutOfGame(entityId) || !Entities.IsAlive(entityId)) {
             if (!Entities.IsAlive(entityId) && heroBars[entityId]){
