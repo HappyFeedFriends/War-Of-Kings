@@ -201,7 +201,7 @@ function StartBuildingHelper( params )
 
 function EndBuildingHelper() {
     state = 'disabled'
-    if (rangeParticle !== undefined) {
+    if (rangeParticle) {
         Particles.DestroyParticleEffect(rangeParticle, false);
     }
     // if (modelParticle !== undefined) {

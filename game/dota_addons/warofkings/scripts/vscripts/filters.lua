@@ -217,6 +217,25 @@ function GameMode:DamageFilter(filterDamage)
 			})
 		end
 	end
+
+	if typeDamage == DAMAGE_TYPE_PHYSICAL then 
+		local _ability = attacker:FindAbilityByName('silencer_2')
+		if _ability and _ability:GetAutoCastState() and _ability:IsOwnersManaEnough() then 
+			local modifier  = attacker:FindModifierByName('modifier_silencer_2_buff')
+			if modifier then 
+				ApplyDamage({
+					victim = victim,
+					attacker = attacker,
+					damage_type = DAMAGE_TYPE_MAGICAL,
+					ability = ability,
+					damage = filterDamage.damage * modifier.int_mult/100,
+				})
+				attacker:ReduceMana(_ability:GetManaCost(_ability:GetLevel()))
+				filterDamage.damage = filterDamage.damage - (filterDamage.damage * (modifier.physical_damage / 100))
+			end
+		end
+	end
+
 	if attacker:HasModifier('modifier_unique_aura_physical_buff') then
 		if  typeDamage == DAMAGE_TYPE_PHYSICAL then
 			filterDamage.damage = filterDamage.damage + (filterDamage.damage * 0.6)

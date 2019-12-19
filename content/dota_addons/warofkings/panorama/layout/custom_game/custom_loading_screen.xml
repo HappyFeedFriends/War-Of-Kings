@@ -3,9 +3,18 @@
 		<include src="s2r://panorama/styles/dotastyles.css" />
 		<include src="file://{resources}/styles/custom_game/custom_loading_screen.css" />
 	</styles>
+	<script>
+		function UpdateHelp(){
+			$.Schedule(9,UpdateHelp)
+			$('#help').text = $.Localize("help_" + Math.floor(Math.random() * (10 - 1) + 1))
+		}
+		UpdateHelp();
+	</script>
 	<Panel class="AddonLoadingRoot" > 
 		<Panel id="CustomBg" >
-			<Panel  id="LoadScreenImages" scaling="stretch-to-fit-preserve-aspect" /> 
+			<Panel  id="LoadScreenImages" scaling="stretch-to-fit-preserve-aspect" > 
+				<Label id="help" text="#help_1" />
+			</Panel>
 		</Panel>
 	</Panel>
 </root>

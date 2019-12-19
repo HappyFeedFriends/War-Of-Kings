@@ -28,7 +28,7 @@ function Building.remove(hBuilding)
 			Building.tBuildings[iIndex] = nil
 			return true
 		end
-	else -- 按实例删除
+	else 
 		for iIndex, _hBuilding in pairs(Building.tBuildings) do
 			if _hBuilding == hBuilding then
 				Building.tBuildings[iIndex] = nil
@@ -122,16 +122,6 @@ function Building:GetXpByLevelUp(lvl)
 end
 
 function Building:LevelUpBuilding(lvlup)
-	-- local __Player = GetPlayerCustom(self.hOwner:GetPlayerOwnerID())
-	-- local dataCard = CARD_DATA[self:GetClass() == 'mage' and 'AMPLIFY_PER_LEVEL' or 'DAMAGE_PER_LEVEL']
-	-- local bonus = (dataCard[self:GetRariry()] or 0) + 
-	-- (__Player:GetUniqueBonus() == UNIQUE_BONUS_TOWER_LEVEL and 2 or 0)
-	-- self.hUnit:AddStackModifier({
-	-- 	modifier = self:GetClass() == 'mage' and 'modifier_war_of_kings_amplify' or 'modifier_war_of_kings_bonus_damage',
-	-- 	count = lvlup * (self:GetClass() == 'mage' and 1 or bonus),
-	-- 	caster = self.hUnit,
-	-- 	data = self:GetClass() == 'mage' and {amplify = bonus} or {}
-	-- })
 	local hUnit = self.hUnit
 	local uniqueBonusGain = GetPlayerCustom(self.hOwner:GetPlayerOwnerID()):GetUniqueBonus() == UNIQUE_BONUS_TOWER_LEVEL and 2 or 0
 	local primaryAttribute = hUnit:GetPrimaryAttribute()
@@ -165,7 +155,23 @@ end
 
 
 function Building:IsCreep()
-	return self:GetRariry() == 'uncommon'
+	return self.bIsCreep
+end
+-- static
+function Building:IsCreepByName(name)
+	local rarity = card.AllCards[name] and card.AllCards[name].type or ''
+	return rarity == 'uncommon'
+end
+
+function Building:IsHero()
+	return not self:IsCreep()
+end
+
+function CDOTA_BaseNPC:IsCreepBuild()
+	if  not BuildSystem:IsBuilding(self) then 
+		return false
+	end
+	return self.GetBuilding():IsCreep()
 end
 
 function Building:AddExperience(amount)
@@ -208,8 +214,10 @@ function Building:constructor(sName, vLocation, fAngle, hOwner,cost)
 	self.iLevel = 1
 	self.damage = 0
 	self.iGoldCost = cost or 0
-	self.invul = false
+	self.invul = false 
 	self:Replace(sName)
+	self.iRarity = card.AllCards[sName] and card.AllCards[sName].type or ''
+
 	local iPlayerID = self.hOwner:GetPlayerOwnerID()
 	local __Player = GetPlayerCustom(iPlayerID)
 	local nettables = CustomNetTables:GetTableValue('PlayerData', "player_" .. iPlayerID)
@@ -225,9 +233,10 @@ function Building:constructor(sName, vLocation, fAngle, hOwner,cost)
 	if __Player:GetUniqueBonus() == UNIQUE_BONUS_TOWER_LEVEL then 
 		self:AddExperience(self:GetXpByLevelUp(9))
 	end
-	--PrintTable(CustomNetTables:GetTableValue('DataCard', "player_" .. iPlayerID))
+
 	self.hBlocker = BuildSystem:CreateBlocker(BuildSystem:GridNavSquare(BUILDING_SIZE, vLocation))
 	attributes:Create(self)
+	CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(iPlayerID), 'RemoveAndCreateBuilding', {})
 end
 
 -- add star 
@@ -290,6 +299,7 @@ function Building:Replace(sName)
 	--[[hUnit.IsBuilding = function(self)
 		return self:IsCreature()
 	end]]
+	self.bIsCreep = self:GetRariry() == 'uncommon'
 	local particle = ParticleManager:CreateParticle('particles/econ/events/ti9/shovel/shovel_baby_roshan_spawn_burst.vpcf', PATTACH_ABSORIGIN_FOLLOW, hUnit)
 	ParticleManager:SetParticleControl(particle, 0, hUnit:GetAbsOrigin())
 	ParticleManager:ReleaseParticleIndex(particle)
@@ -355,6 +365,7 @@ function Building:RemoveSelf()
 		ParticleManager:ReleaseParticleIndex(self.particleMaxGrade)
 		ParticleManager:DestroyParticle(self.particleMaxGrade, true)
 	end
+	CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(iPlayerID), 'RemoveAndCreateBuilding', {})
 end
 
 -- utility funcs
@@ -392,8 +403,7 @@ function Building:GetClass()
 end
 
 function Building:GetRariry()
-	local name = self:GetUnitEntityName()
-	return card.AllCards[name] and card.AllCards[name].type or ''
+	return self.iRarity 
 end
 
 function Building:GetOwner()

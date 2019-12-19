@@ -72,20 +72,18 @@ modifier_item_vortex_axe = class({
 		}
 	end,
 	GetModifierExtraHealthBonus = function(self) return self.bonus_health end,
-	GetModifierPreAttack_BonusDamage = function( self ) return self.bonus_damage end,
-	GetModifierAttackSpeedBonus_Constant = function( self ) return self.bonus_attack_speed end,
+	GetModifierPreAttack_BonusDamage = function(self) return self.bonus_damage end,
+	GetModifierAttackSpeedBonus_Constant = function(self) return self.bonus_attack_speed end,
 	GetModifierBonusStats_Agility 		=	function(self) return self.stats end,
 	GetModifierBonusStats_Strength 		=	function(self) return self.stats end,
 	GetModifierBonusStats_Intellect 	=	function(self) return self.stats end,
 },nil,class({
 	_OnCreated 				= function(self)
-		self.ability = self:GetAbility()
 		self.damage_shield = self.ability:GetSpecialValueFor('damage_shield')
 		self.bonus_damage = self.ability:GetSpecialValueFor('bonus_damage')
 		self.bonus_attack_speed = self.ability:GetSpecialValueFor('bonus_attack_speed')
 		self.bonus_health = self.ability:GetSpecialValueFor('bonus_health')
 		self.stats = self.ability:GetSpecialValueFor('all_stats')
-		self.parent = self:GetParent()
 		--self.cooldown = self.ability:GetCooldown(self.ability:GetLevel())
 		self.building = self.parent.GetBuilding
 		if self.building then 

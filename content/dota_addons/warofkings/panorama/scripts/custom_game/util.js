@@ -7,6 +7,33 @@ function GetGold(pID){
 	return CustomNetTables.GetTableValue('PlayerData', 'Player_' + (pID || GetPlayerID())).Gold || 0
 }
 
+function GetPrototypeUnitBuilding(iIndex){
+	let name = Entities.GetUnitName(Number(iIndex))
+	let dataServer = CustomNetTables.GetTableValue("CardInfoUnits", name)
+	if (!dataServer) {
+		$.Msg(`[Error] tower by name ${name} not found!`)
+		return 
+	}
+	return dataServer.prototype_model
+}
+
+function GetChildrenFor(panel,fn){
+	let data = []
+
+	_.each(panel.GetChildren(),function(child){
+		if (fn && fn(child))
+			data.push(child)
+	})
+	return data
+}
+
+function IsCreepBuilding(iIndex){
+	let name = Entities.GetUnitName(Number(iIndex))
+	let dataServer = CustomNetTables.GetTableValue("CardInfoUnits", name)
+	if (!dataServer) return false
+	return dataServer.type == 'uncommon'
+}
+
 function StrFormattingCountSymbol(str,count){
 	var c = str.length
 	str = str.substr(0,count)

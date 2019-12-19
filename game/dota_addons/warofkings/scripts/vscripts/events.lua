@@ -13,9 +13,13 @@ function GameMode:StartGameEvents()
   	CustomGameEventManager:RegisterListener("OnBuyShopItem", Dynamic_Wrap(GameMode, 'OnBuyShopItem'))
   	CustomGameEventManager:RegisterListener("OnSprayItem", Dynamic_Wrap(GameMode, 'OnPlayerSprayitem'))
   	CustomGameEventManager:RegisterListener("OnSelectCourier", Dynamic_Wrap(GameMode, 'OnPlayerSelectCourier')) 
+  	CustomGameEventManager:RegisterListener("OnSelectDefaultTower", Dynamic_Wrap(GameMode, 'OnSelectDefaultTower'))
   	CustomGameEventManager:RegisterListener("custom_shop_buy_item", Dynamic_Wrap(CustomShop, 'OnBuyItem'))
   	ListenToGameEvent('player_disconnect', Dynamic_Wrap(GameMode, 'OnDisconnect'), self)
   	--CustomGameEventManager:RegisterListener("OnUpgradeTalent", Dynamic_Wrap(Talents, 'OnUpgradeTalent'))
+end
+function GameMode:OnSelectDefaultTower(data)
+	GetPlayerCustom(data.PlayerID):OnSelectDefaultTower(data.TowerName)
 end
 
 function GameMode:OnPlayerSprayitem(data)
@@ -91,10 +95,6 @@ function GameMode:OnUseAbility(data)
 		ability:OnSpellStart()
 		ability:StartCooldown(ability:GetCooldown(1))
 		__Player.iRuneUse = __Player.iRuneUse + 1
-		-- local nettables = CustomNetTables:GetTableValue('PlayerData', 'player_' .. data.PlayerID)
-		-- nettables.runes[key] = math.max(nettables.runes[key] - 1,0)
-		-- CustomNetTables:SetTableValue("PlayerData", "player_" .. data.PlayerID,nettables)
-		-- round.playerData[data.PlayerID].runes[key] = nettables.runes[key]
 		__Player:ModifyRune(key,-1)
 	end
 end
@@ -187,6 +187,11 @@ local damagebits = keys.damagebits
 		__Player:IncrementKills(roundNumber)
 		if killedUnit:GetGoldBounty() > 0  then 
 			__Player:ModifyGold(killedUnit:GetGoldBounty())
+		end
+		if killerEntity:IsAssembly('silencer_4') then 
+			local value = killerEntity:GetSpecialValueForBuilding('silencer_4')
+			killerEntity:ModifyIntellect(value)
+			killerEntity.fIntellect_bonus = killerEntity.fIntellect_bonus + value
 		end
 		local xpDrop = killedUnit:GetDeathXP()
 		if xpDrop > 0 and (BuildSystem:IsBuilding(killerEntity) or (killerEntity.custom_owner and BuildSystem:IsBuilding(killerEntity.custom_owner))) then

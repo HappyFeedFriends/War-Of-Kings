@@ -1,7 +1,11 @@
 item_book_strength = class({
 	OnSpellStart = function(self)
 		local target = self:GetCursorTarget() or self:GetCaster()
-		target:ModifyStrength(self:GetSpecialValueFor('value'))
+		local value = self:GetSpecialValueFor('value')
+		target:ModifyStrength(value)
+		if target.fStrengthBook then 
+			target.fStrengthBook = target.fStrengthBook + value
+		end
 		self:UpdateCharge()
 	end,
 })

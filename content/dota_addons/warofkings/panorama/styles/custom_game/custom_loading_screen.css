@@ -41,3 +41,22 @@
 	margin-top:20px;
 	margin-left:100px;
 }
+
+#help{
+	width: 320px;
+	min-height: 60px;
+	vertical-align: bottom;
+	margin-bottom: 170px;
+	horizontal-align:center;
+	border-radius: 25px;
+	background-color: #2B2E31;
+	/*margin-right: 40px;*/
+	transition-property: height,position;
+	transition-duration: 5s; 
+	padding: 9px;
+	text-align: center;
+	color: white;
+	box-shadow: 0px 0px 24px black;
+	text-shadow: 2px 2px 2px #000000;
+	border:3px solid black;
+}

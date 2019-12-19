@@ -48,6 +48,11 @@ function round:UpgradeDifficultyState(state)
 				hero:SetMaxHealth(150)
 				hero:SetHealth(150)
 			end
+
+			local tower = __Player.sTowerDefault:gsub('npc_','item_card_')
+
+			hero:AddItemByName(tower)
+
 			PlayerResource:SetCameraTarget(pID, hero)
 			Timers:CreateTimer(0.1,function()
 				PlayerResource:SetCameraTarget(pID, nil)
@@ -202,6 +207,7 @@ end
 
 function CDOTA_BaseNPC:UpgradeRoundUnit(roundNumber,pID)
 	local unit = self
+	unit.__health__ = unit:GetMaxHealth() -- original health by doom
 	local __Player = GetPlayerCustom(pID)
 	if roundNumber > 80 then 
 		roundNumber = roundNumber - 80
@@ -330,14 +336,16 @@ function OnThinkLastBoss(unit)
 	local corner = unit.PathCorner
 	if unit:IsNull() or not unit:IsAlive() then return nil end
 	if corner ~= round:GetPathCornerUnit(unit,false,true) then
-		local attack = nil
-		BuildSystem:EachBuilding(unit.playerRound,function(build)
-			attack = build
-			return true
-		end)
-		if attack and unit.attackCount < 8 then
-			unit.attackCount = unit.attackCount + 1
-			unit:AttackTowerPlayer(unit.playerRound,attack)
+		if not unit:IsDisarmed() then 
+			local attack = nil
+			BuildSystem:EachBuilding(unit.playerRound,function(build)
+				attack = build
+				return true
+			end)
+			if attack and unit.attackCount < 8 then
+				unit.attackCount = unit.attackCount + 1
+				unit:AttackTowerPlayer(unit.playerRound,attack)
+			end
 		end
 		unit:MoveToPosition(Entities:FindByName(nil, unit.PathCorner):GetOrigin())
 	end
@@ -372,7 +380,7 @@ function OnThinkChest(unit)
 	local corner = unit.PathCorner
 	if unit:IsNull() or not unit:IsAlive() then return nil end
 	if  unit.DeathTime < GameRules:GetDOTATime(false,false) or corner ~= round:GetPathCornerUnit(unit) then
-		if unit.PathCorner == 'path_corner_' ..unit.playerRound .. '_4' or unit.DeathTime < GameRules:GetDOTATime(false,false) then 
+		if  unit.DeathTime < GameRules:GetDOTATime(false,false) then 
 			unit.IsSkip = true
 			local __Player = GetPlayerCustom(unit.playerRound)
 			__Player.fChestSpawn = -1
@@ -407,7 +415,7 @@ function OnThinkNormalCreep(unit,IsEndless)
 		if __Player:GetUniqueBonus() ~= UNIQUE_BONUS_CREEP_NOT_USE_ABILITY then
 			local lastSymbol = unit.PathCorner:sub(#unit.PathCorner,#unit.PathCorner)
 			local nextPath = unit.PathCorner:match('start') and unit.PathCorner:gsub('start','1') or unit.PathCorner:gsub(lastSymbol,tonumber(lastSymbol) + 1)
-			if not unit.PathCorner:match('start') then
+			if not unit.PathCorner:match('start') and not unit:IsSilenced() then
 				for i = 0,5 do 
 					local ability = unit:GetAbilityByIndex(i)
 					if ability and ability.OnSwapPathCorner then 
@@ -419,7 +427,7 @@ function OnThinkNormalCreep(unit,IsEndless)
 				end
 			end
 		end
-		if unit.attackCount and unit.attackCount < (IsEndless and 2 or 5) then
+		if unit.attackCount and unit.attackCount < (IsEndless and 2 or 5) and not unit:IsDisarmed() then
 			local attack = nil
 			BuildSystem:EachBuilding(unit.playerRound,function(build)
 				attack = build

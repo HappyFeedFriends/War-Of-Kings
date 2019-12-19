@@ -3362,10 +3362,10 @@ DropDownMenu{
 	horizontal-align:center;
 	vertical-align: bottom;
 	margin-bottom: 100px;
-	width: 250px;
+	width: 320px;
 }
 #BarToggle{
-	width: 240px;
+	width: 95%;
 	height: 16px;
 	background-color: skyblue;
 	vertical-align: center;
@@ -3396,7 +3396,7 @@ DropDownMenu{
 	visibility: collapse;
 }
 #Toggle-2{
-	horizontal-align:right; 
+	horizontal-align:center; 
 }
 #Toggle-3{
 	horizontal-align:right;
@@ -5195,6 +5195,312 @@ DropDownMenu{
 	vertical-align: center;
 	horizontal-align:center;
 	margin: 5px;
+}
+.CreepAndHeroes > Image{
+	width: 46px;
+	height: 46px;
+	align:center center;
+	margin-right: 10px;
+}
+
+.CreepAndHeroesContainer Label{
+	align:center center;
+	text-align: center;
+	color: white;
+}
+.AmountAndIcons{
+	flow-children:right;
+	/*width: 200px;*/
+	align:center center;
+}
+
+.AmountAndIcons > Label{
+	align:center center;
+	text-align: center;
+}
+
+.CreepAndHeroes{
+		flow-children:right;
+}
+
+.CreepAndHeroesContainer{
+	horizontal-align:right;
+	vertical-align: top;
+	margin-right: 100px;
+}
+#CreepAndHeroesContainer{
+	flow-children:down;
+	background-color: #211515;
+	padding: 10px;
+	box-shadow: #151515 0 0 10px 0;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
+#CreepAndHeroesContainerMain{
+	transition-duration: 0.4s;
+	transition-property: transform;
+}
+#CreepAndHeroesContainerMain.Hide{
+	transform: translateY(-14%);
+	visibility: visible;
+}
+#CreepContainer,#HeroesContainer{
+	margin: 10px;
+	horizontal-align:center;
+	flow-children:right-wrap;
+	max-width: 160px;
+	min-height: 50px;
+}
+#CreepContainer Panel,#HeroesContainer Panel{
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	margin: 4px;
+	background-size: cover;
+	background-position: 50%;
+	box-shadow: #151515 0 0 10px 0;
+}
+#HeroesContainer Panel{
+	width: 36px;
+	height: 36px;
+}
+#OpenClose{
+	width: 50px;
+	height: 50px;
+	background-image: url('file://{images}/war_of_kings/arrow-down.png');
+	background-size: 100%;
+	horizontal-align:center;
+	margin-top: 20px;
+	z-index: 20;
+	vertical-align: bottom;
+}
+
+#MainStartingTower{
+    height: 84%;
+    width: 100%;
+}
+.pick{
+	width: 50%;
+	height: 100%;
+}
+#MainStartingTower{
+	flow-children:right;
+}
+.rowwrap{
+    align: center center;
+    flow-children:down;
+    /*margin-top: 85px;*/
+}
+.row{
+    /*height: 275px;*/
+    flow-children:right;
+    align: center center;
+    margin-top: -34px;
+
+}
+.row:Hover{
+	z-index: 20;
+}
+.hexagon > .RadioBox{
+	visibility: collapse;
+}
+.hexagon{
+	flow-children:none;
+    margin: -23px;
+    height: 190px;
+    align: center center;
+    width: 175px;
+    background-color: black;
+    opacity-mask: url("file://{resources}/images/war_of_kings/hexagon.png");
+	transition-duration: 0.25s;
+	pre-transform-scale2d:0.7;
+	transition-property: background-color,pre-transform-scale2d,brightness;
+	brightness:0.5;
+	margin-top: -26px;
+	margin-bottom: -26px;
+
+}
+.hexagon:disabled{
+	/*pre-transform-scale2d:1;*/
+}
+.IconHero{
+	width: 100%;
+	height: 100%;
+	background-image: url('file://{images}/war_of_kings/coming_soon_hero.png');
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.hexagon.RandomButton > .BorderBoxHexagon{
+	background-color: gradient( linear, 100% 60%, 60% 100%, from( #2E85F0  ), to( #0B3B76 ) );
+}
+.hexagon.RandomButton{
+	brightness:1;
+}
+.hexagon.RandomButton > .IconHero{
+	background-image: url('file://{images}/war_of_kings/random_button.png');
+	background-size: 80% 80%;
+	wash-color:#54B8E1;
+	
+}
+.SilencerIcon{background-size: 100%; background-image: url('file://{images}/war_of_kings/CardDefault/npc_war_of_kings_default_silencer.png');}
+.DragonKnightIcon{background-size: 100%; background-image: url('file://{images}/war_of_kings/CardDefault/npc_war_of_kings_default_dragon_knight.png');}
+.DoomIcon{background-size: 100%; background-image: url('file://{images}/war_of_kings/CardDefault/npc_war_of_kings_default_doom.png');}
+.DrowIcon{background-size: 100%; background-image: url('file://{images}/war_of_kings/CardDefault/npc_war_of_kings_default_drow_ranger.png');}
+.BorderBoxHexagon{
+	width: 100%;
+	height: 100%;
+	opacity-mask: url("file://{resources}/images/war_of_kings/hexagon_border.png");
+	background-color: gradient( linear, 100% 60%, 60% 100%, from( #DC8D28  ), to( #CA9653 ) );
+	transition-property: background-color;
+	transition-duration: .35s;
+}
+
+.hexagon:selected{
+	brightness:1;
+}
+.hexagon.Locked:selected,
+.hexagon.Locked{
+	brightness:0.2;
+}
+.hexagon:selected > .BorderBoxHexagon{
+	background-color: gradient( linear, 100% 60%, 60% 100%, from( lime  ), to( #226522 ) );
+}
+.hexagon.Locked:selected > .BorderBoxHexagon,
+.hexagon.Locked > .BorderBoxHexagon{
+	background-color: gradient( linear, 100% 60%, 60% 100%, from( red  ), to( #7C1F1F ) );
+}
+.hexagon.Locked .LockedIcon {
+	visibility: visible;
+}
+.LockedIcon{
+	background-image: url("file://{resources}/images/war_of_kings/lockedIcon.png");
+	align:center center;
+	width: 40%; 
+	height: 45%;
+	z-index: 200;
+	background-size: 100%;
+	visibility: collapse;
+}
+.LockedIcon > Label{
+	color: white;
+	font-size: 35px;
+	letter-spacing: 1px;
+	align:center center;
+}
+.hexagon:hover{
+    pre-transform-scale2d:1;
+    z-index: 200;
+    brightness:1;
+}
+#ModelInfoContainer{
+	width: 100%;
+	height: 100%;	
+}
+#ModelAndInfoContainer  DOTAScenePanel{
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+}
+#ModelAndInfoContainer{
+	height: 100%;
+	width: 25%;
+}
+#AbilityListByHeroContainer{
+	width: 25%;
+	height: 100%;
+}
+#SelectDefaultCard.Visible{
+	visibility: visible;
+}
+#SelectDefaultCard:Hover{
+	background-color: gradient( linear, 50% 0%, 0% 0%, from( #207F19  ), to( #084F03 ) );
+}
+#SelectDefaultCard{
+	width: 200px;
+	height:60px;
+	margin-top: -140px;
+	box-shadow: black 0px 0px 13px 0px;
+	background-color: gradient( linear, 50% 0%, 0% 100%, from( #084F03  ), to( #207F19 ) );
+	align:center center;
+	border-radius: 20px;
+	transition-duration: 0.3s;
+	transition-property: background-color;
+	visibility: collapse;
+}
+#SelectDefaultCard > Label{
+	align:center center;
+	color: white;
+	transition-duration: 0.15s;
+	transition-property: color;
+	font-size: 30px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+.hexagon.Locked:Hover{
+	brightness:0.2;
+}
+#AbilityListByHero > DOTAAbilityImage:disabled{
+	brightness:0.3;
+
+}
+#AbilityListByHero > DOTAAbilityImage > .LockedIcon{
+	background-size: 100%;
+	width: 50%;
+	height: 50%; 
+	visibility: visible;
+	background-image: url("file://{resources}/images/war_of_kings/lockedIcon.png");
+}
+#AbilityListByHero > DOTAAbilityImage:Hover{
+	pre-transform-scale2d:1;
+}
+#AbilityListByHero > DOTAAbilityImage{
+	width: 89px;
+	height: 89px;
+	margin:5px;
+	box-shadow: white 0px 0px 3px 0px;
+	transition-duration: 0.3s;
+	transition-property: pre-transform-scale2d;
+	pre-transform-scale2d:0.8;
+}
+#AbilityListByHero{
+	background-color: #000000aa;
+	flow-children:right-wrap;
+	box-shadow: #151515 0 0 10px 0;
+	horizontal-align:center;
+}
+
+#AbilityListByHeroContainer > Label{
+	align:center center;
+	color: white;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+	font-size: 25px;
+	text-shadow: 2px 2px 0px 1.0 #00000090;
+}
+#LockedAndInfo > Label{
+	align:center top;
+	margin-top: 230px;
+	color: white;
+	font-size: 30px;
+}
+#LockedAndInfo{
+	width: 100%;
+	height: 100%;
+	visibility: collapse;
+	background-image: url("file://{resources}/images/war_of_kings/lockedIcon.png");
+	background-size: 60px 74px;
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: 2000;
+	background-color: #000000aa;
+	border-radius: 15px;
+}
+#LockedAndInfo.Visible{
+	visibility: visible;
+}
+#AbilityListByHeroContainer{
+	flow-children:down;
 }
 /*
  3 page selection (delete :=) )

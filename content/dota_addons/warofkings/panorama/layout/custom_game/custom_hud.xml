@@ -187,7 +187,8 @@
 						<Panel class="TowerSlot" />
 						<Panel class="TowerSlot" />
 						<Panel class="TowerSlot" />
-						<Panel class="TowerSlot bonus_slot" />
+						<Panel class="TowerSlot" />
+						<Panel class="TowerSlot" />
 					</Panel>
 				</Panel>
 			</Panel>
@@ -257,7 +258,7 @@
 							</Panel>
 							<Label id="kills" text="0" />
 						</Panel>
-						<Label text="{s:towerAmount}/{s:towerMax}" />
+						<!-- <Label text="{s:towerAmount}/{s:towerMax}" /> -->
 					</Panel>
 				</Panel>
         </snippet>
@@ -292,7 +293,9 @@
         </snippet>
     </snippets>
 	<Panel class="Root" hittest="false">
+		
 		<Panel id="GlobalBgDark" />
+		
 		<Panel id="TopbarButtons" hittest="false" require-composition-layer="true" always-cache-composition-layer="true" >
 			<Button id="CardInfoButton" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( UI_CardInfoPanel )" onactivate="ToggleVisiblePanel('CardMenuContainer')" />
 			<Button id="CardAssemblyInfo" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( UI_cardAssembly )" onactivate="ToggleVisiblePanel('CardAssemblyContainer')" />
@@ -301,17 +304,16 @@
 			 <Button id="ShopButton" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( ShopButton )" onactivate="ToggleVisiblePanel('ShopContainerRoot')" />
 			 <Button id="leaderboards" onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( leaderboards )" onactivate="ToggleVisiblePanel('leaderboardsContainer')" />
 		</Panel>
+		
 		<Panel id="PickedCardContainer"  >
-			<!--<Panel id="left_flare" /> -->
 			<Panel id="SelectCardContainer" >
-				<!--<Panel id="BackgroundSelection" />-->
 				<Panel id="MainContainerSelectCard" />
 				<Panel id="Discard" onactivate="DiscardCard()"  onmouseout="UIHideTextTooltip();" onmouseover="UIShowTextTooltip( Discard_tooltip )" >
 					<Label text="Discard" />
 				</Panel>
 			</Panel>
-			<!--<Panel id="right_flare" />-->
 		</Panel>
+		
 		<Panel id="CardMenuContainer" hittest="false"  >
 			<Panel id="SettingsSearch" >
 		        <Panel class="SearchBox">
@@ -319,16 +321,10 @@
 					<Button class="ClearSearchButton CloseButton" />
 		        </Panel> 
 		        <Button id="QuitButton" class="vertical-align" onactivate="$('#CardMenuContainer').RemoveClass('Visible')"/>
-				<!--<Panel id="ArrangeContainer">
-					<Label class="FilterCategoryTitle" text="#DOTA_HeroGrid_Sort_By" />
-					<DropDown id="ArrangeButton" oninputsubmit="OnClickDropDown()" menuclass="SortDropdownMenu">
-						<Label id="racial" text="РАСА"  />
-						<Label id="className" text="КЛАСС"  />
-					</DropDown>
-				</Panel> -->
 			</Panel>
 			<Panel id="ContainerMenu" />
 		</Panel>
+		
 		<Panel id="CardAssemblyContainer" hittest="false"  >
 			<Panel id="SettingsSearch" >
 		        <Panel class="SearchBox">
@@ -339,6 +335,7 @@
 			</Panel>
 			<Panel id="CardAssemblyMain" />
 		</Panel>
+		
 		<Panel id="HeroBarsContainer" hittest="false" />
 <!-- 		<Panel id="InfoPanelCards" hittest="false"  >
 			<Panel id="MainContainer" >  
@@ -687,6 +684,7 @@
 			</Panel>
 			<Button id="QuitButton" onactivate="$('#InfoPanelCards').RemoveClass('Visible')"/>
 		</Panel>   -->
+		
 		<Panel id="TotalDamageTowers" hittest="false"  >
 			<Panel id="ArrowOpenStatic" >
 				<Panel id="ArrowIcon"/>
@@ -694,6 +692,7 @@
 			</Panel>
 			<Panel id="TowersDamage" />
 		</Panel>
+		
 		<Panel id="PlayerList"  >
 			<Panel id="PlayerListHeader" >
 				<Label  text="{s:Mode} / {s:difficulty}" />
@@ -701,7 +700,8 @@
 			</Panel>
 			<Panel id="PlayerRowContainer" />
 		</Panel>
-	<Panel id="DifficultyGamePlayer" hittest="true" > 
+		
+		<Panel id="DifficultyGamePlayer" hittest="true" > 
 			<Panel id="Timer" >
 				<CircularProgressBar id="TimerRing" max="30" value="0" min="0" />
 				<Label id="TimeNumber" text="0" />
@@ -835,64 +835,131 @@
 							</Panel>
 						</Panel>
 					</Panel>
-				</Panel>
-<!-- 				<Panel id="SelectedUniqueCards" >
-					<Panel id="SelectionMenu" >
-						<Panel class="row" >
-							<Panel class="SelectCardMenu" />
-							<Panel class="SelectCardMenu" />
-							<Panel class="SelectCardMenu" />
+				</Panel> 
+				<Panel id="SelectedUniqueCards" >
+					<Label text="#UI_SELECT_START_TOWER" />
+					<Panel id="MainStartingTower" >
+						<Panel id="ModelAndInfoContainer" >
+							<Panel id="ModelInfoContainer" />
+							<Panel id="LockedAndInfo" >
+								<Label text="#acces_default_lvl" />
+							</Panel>
 						</Panel>
-						<Panel class="row" >
-							<Panel class="SelectCardMenu" />
-							<Panel class="SelectCardMenu" />
+						<Panel class="pick">
+					        <Panel class="rowwrap">
+					        	<Panel class="row">
+					                <RadioButton id="hexagon_1" groupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton> 
+					                <RadioButton id="hexagon_2" groupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <RadioButton id="hexagon_3" groupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					            </Panel>
+					            <Panel class="row">
+					                <RadioButton id="hexagon_7" groupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <RadioButton id="hexagon_5" groupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <RadioButton id="hexagon_6" groupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <RadioButton id="hexagon_4" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+								</Panel>
+					            <Panel class="row">
+					                <RadioButton id="hexagon_8" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <RadioButton id="hexagon_9" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <Button groupname="TowerDefaultPick" class="hexagon RandomButton">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </Button>
+					                <RadioButton id="hexagon_10" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <RadioButton id="hexagon_11" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+								</Panel>
+					            <Panel class="row">
+					                <RadioButton id="hexagon_12" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <RadioButton id="hexagon_13" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <RadioButton id="hexagon_14" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <RadioButton id="hexagon_15" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+								</Panel>
+					            <Panel class="row">
+					                <RadioButton id="hexagon_16" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <RadioButton id="hexagon_17" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+					                <RadioButton id="hexagon_18" cgroupname="TowerDefaultPick" class="hexagon">
+					                	<Panel class="IconHero"/>
+					                	<Panel class="BorderBoxHexagon" />
+					                	<Panel class="LockedIcon" />
+					                </RadioButton>
+								</Panel>
+							</Panel>
+						</Panel>
+						<Panel id="AbilityListByHeroContainer" >
+							<Label text="#UI_ABILITY_LIST" />
+							<Panel id="AbilityListByHero" />
 						</Panel>
 					</Panel>
-					<Panel id="SelectionCardMenu" >
-						<Panel class="CardSelectionPlayer" >
-							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
-							<Panel id="DescriptionContainer" >
-								<Label text="РЈСЂРѕРЅ +20" />
-							</Panel>
-							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
-						</Panel>
-						<Panel class="CardSelectionPlayer" >
-							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
-							<Panel id="DescriptionContainer" >
-								<Label text="РЈСЂРѕРЅ +20" />
-							</Panel>
-							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
-						</Panel>
-						<Panel class="CardSelectionPlayer" >
-							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
-							<Panel id="DescriptionContainer" >
-								<Label text="РЈСЂРѕРЅ +20" />
-							</Panel>
-							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
-						</Panel>
-						<Panel class="CardSelectionPlayer" >
-							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
-							<Panel id="DescriptionContainer" >
-								<Label text="РЈСЂРѕРЅ +20" />
-							</Panel>
-							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
-						</Panel>
-						<Panel class="CardSelectionPlayer" >
-							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
-							<Panel id="DescriptionContainer" >
-								<Label text="РЈСЂРѕРЅ +20" />
-							</Panel>
-							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
-						</Panel>
-						<Panel class="CardSelectionPlayer" >
-							<Image id="BackgroundImage" src="s2r://panorama/images/war_of_kings/cards/npc_war_of_kings_bear_png.vtex"  />
-							<Panel id="DescriptionContainer" >
-								<Label text="РЈСЂРѕРЅ +20" />
-							</Panel>
-							<ProgressBar id="XpCardAmount" min="0" value="20" max="100" />
-						</Panel>
-					</Panel>
-				</Panel> -->
+				</Panel> 
 			</Panel>
 			<Panel id="TogglesPicks" >
 				<Panel id="Toggle-1" class="Toggle IsOpen" >
@@ -902,9 +969,9 @@
 				<Panel id="Toggle-2" class="Toggle" >
 					<Label text="2" />
 				</Panel>
-<!-- 				<Panel id="Toggle-3" class="Toggle" >
+				<Panel id="Toggle-3" class="Toggle" >
 					<Label text="3" />
-				</Panel> -->
+				</Panel>
 			</Panel>
 			<Panel id="XpPlayerContainer" >
 				<Label text="Level {s:player_level}" />
@@ -916,6 +983,7 @@
 				</Panel>
 			</Panel>
 		</Panel>
+		
 		<Panel id="SettingContainer" hittest="false" >
 			<ToggleButton id="IsTooltipOpen" >
 				<Label text="#UI_hidden_tooltip_towers" />
@@ -927,12 +995,14 @@
 				<DOTASettingsSlider id="CameraDistanceSlider" text="#Settings_CameraDistance" min="1300" max="1520" default="1400" /> 
 			</Panel>
 		</Panel>
+		
 		<Panel id="NotificationRoundContainer" hittest="false" >
 			<Panel id="StartRoundNotificaton" hittest="false" > 
 				<Label text="Start Round {s:roundStart}" /> 
 				<!-- <Label text="БЕСКОНЕЧНАЯ ВОЛНА 9" /> -->
 			</Panel> 
 		</Panel>
+		
 		<Panel id="EndScreenContainer" hittest="false" >
 			<Panel id="EndScreenPlayer" > 
 				<Panel id="HeaderEndScreen" >
@@ -969,6 +1039,7 @@
 				</Button>
 			</Panel>
 		</Panel> 
+		
 		<Panel id="PlayerInventory" >
 			<Panel id="PhysicalRune" class="InventoryButton" onactivate="UseAbility('ability_bonus_physical_damage')" onmouseout="DOTAHideAbilityTooltip();" onmouseover="DOTAShowAbilityTooltip( ability_bonus_physical_damage )" >
 				<Panel id="physical-rune-mask" >
@@ -995,7 +1066,9 @@
 				<Label text="x{s:rune_life_count}" />
 			</Panel> 
 		</Panel>
+		
 		<Panel id="CustomToastManager" hittest="false" hittestchildren="true" />
+		
 		<Panel id="QuestMainContainer" hittest="false" >
 			<Button id="BtnToggle" onactivate="ToggleQuestContainer()" />
 			<Panel id="QuestContainer" >
@@ -1014,6 +1087,7 @@
 				</Panel>
 			</Panel> 
 		</Panel> 
+		
 		<Panel id="SandBoxMenu" hittest="false" >
 			<Panel id="ContainerMenuSettings" >
 				<Panel id="SelectionCardContainer" >
@@ -1115,6 +1189,7 @@
 				</Panel>
 			</Panel> 
 		</Panel>
+		
 		<Panel id="ShopContainerRoot" hittest="false" >\
 			<Panel id="ToggleDonate" hittest="true"  onactivate="$('#BuyCoinsPanel').ToggleClass('Visible')">
 				<Panel id="IconDonate" />
@@ -1247,12 +1322,14 @@
 				</Panel>
 			</Panel>
 		</Panel>
+		
 		<Panel id="RoundBoard"  >
 			<Panel id="RoundBoardContainer" >
 				<Label id="RoundLabel" text="144" />
 				<Panel id="InfinityIcon" />
 			</Panel>
 		</Panel> 
+		
 		<Panel id="leaderboardsContainer" hittest="false" >
 			<Button id="QuitButton"  onactivate="$('#leaderboardsContainer').RemoveClass('Visible')"/>
 			<Panel id="ButtonToggleLeaderPage" hittest="false" >
@@ -1312,13 +1389,16 @@
 				</Panel>
 			</Panel>
 		</Panel> 
+		
 		<Panel id="EndlessModeOn" >
 			<Label html="true" text="ENDLESS_MODE_ON" />
 		</Panel>
+		
 		<Panel  id="ChestTimeAlive" >
 			<Panel id="CourierIcon" />
 			<Label text="{s:time_gold_chest}s" />
 		</Panel> 
+		
 		<Panel hittest="false" class="ShowMainShop ShopLarge" id="shop" require-composition-layer="true" always-cache-composition-layer="true">
 			<Button id="GuidesButton" onactivate="ToggleStyle( 'GuideFlyout', 'HideGuide' ); ToggleStyle( 'GuidesButton', 'HideGuide' )">
 				<Panel id="GuidesButtonIcon"/>
@@ -1347,21 +1427,6 @@
 					</Panel>
 				</Panel>
 				<Panel id="HeightLimiter" >
-<!-- 					<Panel id="SearchResultDotaShop">
-						<Panel id="result0" class="SearchResultDotaShopResult"/>
-						<Panel id="result1" class="SearchResultDotaShopResult"/>
-						<Panel id="result2" class="SearchResultDotaShopResult"/>
-						<Panel id="result3" class="SearchResultDotaShopResult"/>
-						<Panel id="result4" class="SearchResultDotaShopResult"/>
-						<Panel id="result5" class="SearchResultDotaShopResult"/>
-						<Panel id="result6" class="SearchResultDotaShopResult"/>
-						<Panel id="result7" class="SearchResultDotaShopResult"/>
-						<Panel id="result8" class="SearchResultDotaShopResult"/>
-						<Panel id="result9" class="SearchResultDotaShopResult"/>
-						<Panel id="result10" class="SearchResultDotaShopResult"/>
-						<Panel id="result11" class="SearchResultDotaShopResult"/>
-						<Panel id="result12" class="SearchResultDotaShopResult"/>
-					</Panel> -->
 					<Panel id="SearchResultDotaShop" hittest="false">
 						<Label id="SearchResultsTitle" text="#DOTA_Shop_Search_Results_Title" />
 						<Panel id="SearchResultsContents">
@@ -1413,5 +1478,25 @@
 				</Panel>
 			</Panel>
 		</Panel>
+
+		<Panel id="CreepAndHeroesContainerMain" class="CreepAndHeroesContainer" >
+			<Panel id="CreepAndHeroesContainer" >
+				<Panel class="CreepAndHeroes" >
+					<Image src="file://{images}/war_of_kings/heroes_icon.png" />
+					<Panel class="AmountAndIcons" >
+						<Label text="{s:HeroesAmount} / {s:HeroesAmountMax}" />
+						<Panel id="HeroesContainer" />
+					</Panel>
+				</Panel>
+				<Panel class="CreepAndHeroes" >
+					<Image src="file://{images}/war_of_kings/creep_icon.png" />
+					<Panel class="AmountAndIcons" >
+						<Label text="{s:CreepAmount} / {s:CreepAmountMax}" />
+						<Panel id="CreepContainer" />
+					</Panel>
+				</Panel>
+			</Panel>
+			<Button id="OpenClose" onactivate="$('#CreepAndHeroesContainerMain').ToggleClass('Hide')" />
+		</Panel> 
 	</Panel> 
 </root> 

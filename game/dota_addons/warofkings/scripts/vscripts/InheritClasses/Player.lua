@@ -124,6 +124,7 @@ function Player:constructor(PlayerID)
 	self.iMode = ROUND_MODE_NORMAL
 	self.iUnique = UNIQUE_BONUS_CLOSE
 	self.hspawnerCreep = round.spawners[self.iPlayerID]
+	self.sTowerDefault = 'npc_war_of_kings_default_silencer'
 	--self.hPlayerSpawner = Entities:FindByName(nil, 'player_spawner_' .. SpawnedUnit:GetPlayerID() )
 	self:UpdateClientData()
 	Player.PlayerHandles[self:GetPlayerID()] = self
@@ -143,14 +144,14 @@ function Player:OnSelectCourierModel(index)
 	self:SetModel(data[tostring(index)].model,true)
 end
 
+function Player:OnSelectDefaultTower(towerName)
+	local startingData = CARD_DATA.CARDS.Starting_towers
+	if startingData[towerName] and (startingData[towerName].lvl or 0) <= self.ExpAndOst.Level then 
+		self.sTowerDefault = towerName
+	end
+end
+
 function Player:RequestInfo(Towers)
-	-- if Player.flagIsRequestion then 
-	-- 	Timers:CreateTimer(0.1,function()
-	-- 		self:RequestInfo(Towers)
-	-- 	end)
-	-- 	return 
-	-- end
-	-- if self:IsSandBoxMode() then return end
 	lastSelectedCourier = 0;
 	for k,v in pairs(self.tInventory) do
 		if v.selected then 
@@ -159,8 +160,6 @@ function Player:RequestInfo(Towers)
 	end
 	Player.flagIsRequestion = true
 	request:RequestData('POST','player_save',function(obj)
-		-- PrintTable(obj)
-		-- Player.flagIsRequestion = false
 	end,{
 		MatchID = tostring(GameRules:GetMatchID()),
 		SteamID = PlayerResource:GetRealSteamID(self.iPlayerID),

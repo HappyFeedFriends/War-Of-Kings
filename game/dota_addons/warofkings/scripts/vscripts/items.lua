@@ -16,16 +16,49 @@ function item_card_base_class:CastFilterResultLocation(vLocation)
 			self.error = "dota_hud_error_cant_build_at_location"
 			return UF_FAIL_CUSTOM
 		end
-		if self:GetCaster().GetPlayerID and  not GetPlayerCustom(self:GetCaster():GetPlayerID()):IsValidIsland(vLocation) then 
+		local pID = self:GetCaster().GetPlayerID and self:GetCaster():GetPlayerID()
+		if pID and  not GetPlayerCustom(pID):IsValidIsland(vLocation) then 
 			self.error = "dota_hud_error_cant_build_at_location"
 			return UF_FAIL_CUSTOM
 		end
+		local creepName = string.gsub(self:GetAbilityName(), 'item_card_', 'npc_')
+		local creepCount = BuildSystem:GetCountBuild(pID,Building.IsCreep)
+		local heroCount = BuildSystem:GetCountBuild(pID,Building.IsHero)
+		local IsCreep = Building:IsCreepByName(creepName)
+		local myCreep = BuildSystem:FindBuildByName(pID,creepName)
+		for k,v in pairs(myCreep) do
+			if v:GetGrade() < CARD_DATA.MAX_GRADE[v:GetRariry()] then 
+				if v:IsHero() then 
+					heroCount = heroCount - 1
+				else 
+					creepCount = creepCount - 1
+				end
+				break
+			end
+		end
+ 
+		if not IsCreep and heroCount >= CARD_DATA.HEROES_MAX then 
+			self.error = "dota_hud_error_heroes_max"
+			return UF_FAIL_CUSTOM
+		end
+		if IsCreep and creepCount >= CARD_DATA.CREEP_MAX then 
+			self.error = "dota_hud_error_creep_max"
+			return UF_FAIL_CUSTOM
+		end
+
+
 	end
 	return UF_SUCCESS
 end
 function item_card_base_class:GetCustomCastErrorLocation(vLocation)
 	return self.error
 end
+
+item_card_war_of_kings_default_silencer = class(item_card_base_class or {}) 
+item_card_war_of_kings_default_drow_ranger = class(item_card_base_class or {}) 
+item_card_war_of_kings_default_dragon_knight = class(item_card_base_class or {}) 
+item_card_war_of_kings_default_doom = class(item_card_base_class or {}) 
+
 item_card_war_of_kings_thunder_lizard = class(item_card_base_class or {}) 
 item_card_war_of_kings_harpy = class(item_card_base_class or {}) 
 item_card_war_of_kings_shadow_fiend = class(item_card_base_class or {}) 

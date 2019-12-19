@@ -103,6 +103,16 @@ function CDOTA_BaseNPC:Midas(gold,mult_xp,caster,ability)
 	self:KillTarget(caster, ability)
 end
 
+function CDOTA_BaseNPC:TrueKill(caster, ability)
+	self:Kill(ability, caster)
+	if not self:IsNull() and self:IsAlive() then
+		
+		for k,v in pairs(self:FindAllModifiers()) do
+			v:Destroy()
+		end
+		self:Kill(ability, caster)
+	end	
+end
 function CDOTA_BaseNPC:KillTarget(caster, ability)
 	self:Kill(ability, caster)
 	if self:IsAlive() then
@@ -857,6 +867,7 @@ function CDOTA_BaseNPC:AddStackModifier(data)
 		self:AddNewModifier(data.caster or self, data.ability,data.modifier,data.data)
 		self:SetModifierStackCount( data.modifier, data.ability, (data.count or 1) )
 	end
+	return self:GetModifierStackCount( data.modifier, data.ability )
 end
 
 function CDOTA_BaseNPC:Refreshing()
@@ -956,9 +967,9 @@ function CDOTA_BaseNPC:CreateParticleRage()
 	ParticleManager:ReleaseParticleIndex(fx)
 	return fx
 end
-
-function CreateTxt()
-	local file = io.open("D:/Steam/SteamApps/common/dota 2 beta/game/dota_addons/warofkings_test/scripts/vscripts/util/test.txt",'r+')
+-- local util
+function CreateTxt(path,text)
+	local file = io.open(path or "D:/Steam/SteamApps/common/dota 2 beta/game/dota_addons/warofkings/scripts/vscripts/util/test.txt",'r+')
 	local dataLocalization = {}
 	local tag = 'Dota_tooltip_ability_'
 	local tokens = LoadKeyValues('resource/addon_english.txt')['Tokens']
@@ -967,26 +978,93 @@ function CreateTxt()
 		rare = 		'#4573D5',
 		mythical = 	'#9933ff',
 		legendary = '#FF7C00',
+		Starting_towers = '#E92D19'
 
 	}
 
 	local nameCard = {
-		uncommon = 	'Uncommon',
-		rare = 		'Rare',
-		mythical = 	'Mythical',
-		legendary = 'Legendary',
+		uncommon = 	'Uncommon ★☆☆☆☆',
+		rare = 		'Rare ★★☆☆☆',
+		mythical = 	'Mythical ★★★☆☆',
+		legendary = 'Legendary ★★★★☆',
+		Starting_towers = 'Default ★★★★★'
 	}
 	local allStr = ''
+	
+
 	for rarity,dataRarity in pairs(CARD_DATA.CARDS) do
 		for npc_name,_ in pairs(dataRarity) do
 			local cardName = npc_name:gsub('npc_','item_card_')
-			
 			local cardName_localization = "[<font color='".. color[rarity] .. "'>".. nameCard[rarity] .. "</font>] " .. tokens[npc_name]
 			local strLocalization = (string.gsub('"{cardName}"  "{cardName_localization}"\n"{cardName_description}" "{cardName_description_localization}"\n','{cardName}',tag .. cardName)):gsub('{cardName_localization}',cardName_localization)
-			strLocalization = strLocalization:gsub('{cardName_description}',tag .. cardName .. '_description'):gsub('{cardName_description_localization}','<h1> Activated: Create Tower </h1> Puts on a given point tower, which can be improved and pumped.')
+			strLocalization = strLocalization:gsub('{cardName_description}',tag .. cardName .. '_description'):gsub('{cardName_description_localization}',text or '<h1> Activated: Create Tower </h1> Puts on a given point tower, which can be improved and pumped.')
 			file:write(strLocalization)
 		end
 	end
 	file:close()
 
 end
+-- local util
+function CreateTxt_NoteItems(path,text)
+	local file = io.open("D:/Steam/SteamApps/common/dota 2 beta/game/dota_addons/warofkings/scripts/vscripts/util/test.txt",'r+')
+	local _tag = 'Dota_tooltip_ability_'
+	local _tokens = LoadKeyValues('resource/addon_english.txt')['Tokens']
+	local tokens = {}
+	for k,v in pairs(_tokens) do
+		k = k:upper()
+		tokens[k] = v
+	end
+	local color = {
+		Mage = 		'#3F84F3',
+		Rogue = 	'#4573D5',
+		Warrior = 	'#ff2e2e',
+		Guardian = 	'#00ABE4',
+		Archer = 	'#66F940',
+		Rogue = 	'#53B82D',
+
+	}
+	for tag,dataTag in pairs(SHOP_ITEMS.UniqueItems) do
+		for _,name in pairs(dataTag) do
+			local itemName = '"' .. _tag .. name .. '"'
+			local itemNote = '"' .. _tag .. name .. '_Lore"' 
+			local classToken = tag:gsub('tag_',''):gsub("(%l)(%w*)", function(a,b) return string.upper(a)..b end)
+			local _color = "<font color='" .. color[classToken] .. "'>"
+			local localizationItemNote = '"' .. _color .. text .. '{className}</font>"\n'
+			-- print(itemNote .. " " .. localizationItemNote)
+			localizationItemNote = localizationItemNote:gsub('{className}',classToken)
+
+			local item_star = itemName .. ' "' .. _color .. (tokens[(_tag .. name):upper()] or 'undefined') .. ' ★★★"\n'
+			-- file:write(itemNote .. " " .. localizationItemNote)
+			file:write(item_star)
+		end
+	end
+	file:close()
+
+end
+-- Create kv file + lua file + (ability and lua ability files). Warning: Not Finish
+function CreateCardByName(sCardName,AI,tAttributes)
+	sCardNameKV = 'item_card_war_of_kings_' .. sCardName
+	local file = io.open("D:/Steam/SteamApps/common/dota 2 beta/game/dota_addons/warofkings/scripts/vscripts/util/test.txt",'r+')
+
+
+	-- kv file
+	local kvFile = '"{cardName}"\n{\n\t"BaseClass"					"item_lua"\n\t"ScriptFile"				"items"\n\t"AbilityBehavior"       	"DOTA_ABILITY_BEHAVIOR_POINT"\n\t"AbilityCooldown"       	"1"\n\t"AbilityTextureName" 		"card_icon/{cardName}"\n\t"Model" "models/props_gameplay/tpscroll01.vmdl"\n\t"ItemCost"					"400"\n\t"ItemPurchasable"			"0"\n}'
+	kvFile = kvFile:gsub('{cardName}',sCardNameKV)
+	file:write(kvFile)
+
+	kvFile = kvFile:gsub('{cardName}',sCardNameKV)
+	file:write(kvFile)
+
+	-- lua AI create
+	if (AI) then
+		local file_lua = io.open("D:/Steam/SteamApps/common/dota 2 beta/game/dota_addons/warofkings/scripts/vscripts/AI/Towers/AI_" .. sCardName .. '.lua' ,'w')
+		file_lua:write('function Spawn( entityKeyValues ) \n\t if not IsServer() or not thisEntity then \n\t\treturn\n\tend\n\tif not thisEntity:GetPlayerOwnerID() then \n\t\treturn 0\n\tend\n\tthisEntity:SetContextThink( "Think", ThinkEntity, 1 ) \nend')
+		file_lua:close()
+	end
+
+	file:close()
+end
+
+-- CreateTxt(nil,'<h1> Активируемая: Поставить башню </h1> Устанавливает башню на месте курсора')
+-- CreateTxt_NoteItems(nil,'Can only be used by hero Towers ')
+-- CreateCardByName('tinker',true)

@@ -5572,7 +5572,7 @@
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"corruption_armor"		"-25"
+				"corruption_armor"		"-65"
 			}
 			"03"
 			{

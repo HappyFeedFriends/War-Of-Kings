@@ -2310,86 +2310,6 @@
 			}
 		}
 	}
-	"npc_war_of_kings_drow_ranged"	
-	{
-		"ConsideredHero"			"1"
-		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
-		// General
-		//----------------------------------------------------------------
-		"Model"						"models/heroes/drow/drow_base.vmdl"	// Model.
-		"BaseClass"					"npc_dota_creature"
-		"SoundSet"					"Hero_Bounty_hunter"
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
-		"Level"						"1"
-
-		// Abilities
-		//----------------------------------------------------------------
-		"Ability1"					"drow_ranger_marksmanship"	
-
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"3"			// Physical protection.
-
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"200"		// Damage range min.
-		"AttackDamageMax"			"230"		// Damage range max.
-		"AttackRate"				"1.25"		// Speed of attack.
-		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
-		"AttackRange"				"750"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/units/heroes/hero_drow/drow_base_attack.vpcf" // Particle system model for projectile.
-		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
-
-		// Bounds
-		//----------------------------------------------------------------
-		"RingRadius"				"40"
-		"HealthBarOffset"			"170"
-
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"24"		// Experience earn.
-		"BountyGoldMin"				"21"		// Gold earned min.
-		"BountyGoldMax"				"29"		// Gold earned max.
-
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
-		"MovementSpeed"				"270"		// Speed.			
-
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"450"		// Base health.
-		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
-		"StatusMana"				"1250"			// Base mana.
-		"StatusManaRegen"			"4"		// Mana regeneration rate.		 
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
-
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-		"Creature"
-		{
-			"AttachWearables"
-			{
-			    "Wearable1" { "ItemDef" "75" } 
-				"Wearable2" { "ItemDef" "76" } 
-				"Wearable3" { "ItemDef" "77" } 
-				"Wearable4" { "ItemDef" "78" } 
-				"Wearable5" { "ItemDef" "79" } 
-				"Wearable6" { "ItemDef" "80" } 
-				"Wearable7" { "ItemDef" "267" }
-			}
-		}
-	}
 	"npc_war_of_kings_centaur_warruner"	
 	{
 		"ConsideredHero"			"1"
@@ -3285,7 +3205,7 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
-	"npc_war_of_Kings_special_boss_guardian_building"	
+	"npc_war_of_kings_default_dragon_knight"	
 	{
 		"ConsideredHero"			"1"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
@@ -5208,6 +5128,272 @@
 				"Wearable5" { "ItemDef" "72" } 
 				"Wearable6" { "ItemDef" "73" } 
 				"Wearable7" { "ItemDef" "74" } 
+			}
+		}
+	}
+
+	"npc_war_of_kings_default_silencer"	
+	{
+		"ConsideredHero"			"1"
+		"vscripts"					"AI/Towers/AI_silencer.lua"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_INTELLECT"
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/heroes/silencer/silencer.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"1"
+
+		"AttributeBaseStrength"		"21"
+		"AttributeStrengthGain"		"1"
+		"AttributeBaseIntelligence"		"33"
+		"AttributeIntelligenceGain"		"4"
+		"AttributeBaseAgility"		"13"
+		"AttributeAgilityGain"		"1"
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"silencer_1"	
+		"Ability2"					"silencer_2"
+		"Ability3"					"silencer_3"
+		"Ability4"					"silencer_4"
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"3"			// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"175"		// Damage range min.
+		"AttackDamageMax"			"200"		// Damage range max.
+		"AttackRate"				"1.5"		// Speed of attack.
+		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
+		"AttackRange"				"750"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_lion/lion_base_attack.vpcf" // Particle system model for projectile.
+		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"170"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"24"		// Experience earn.
+		"BountyGoldMin"				"21"		// Gold earned min.
+		"BountyGoldMax"				"29"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"				"270"		// Speed.			
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"450"		// Base health.
+		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusMana"				"1250"			// Base mana.
+		"StatusManaRegen"			"4"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		"Creature"
+		{
+			"AttachWearables"
+			{
+			    "Wearable1" { "ItemDef" "302" } 
+				"Wearable2" { "ItemDef" "301" } 
+				"Wearable3" { "ItemDef" "303" } 
+				"Wearable4" { "ItemDef" "304" } 
+				"Wearable5" { "ItemDef" "27" } 
+			}
+		}
+	}
+
+	"npc_war_of_kings_default_doom"	
+	{
+		"ConsideredHero"			"1"
+		"vscripts"					"AI/Towers/AI_doom.lua"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/heroes/doom/doom.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"1"
+
+		"AttributeBaseStrength"		"35"
+		"AttributeStrengthGain"		"2.6"
+		"AttributeBaseIntelligence"		"15"
+		"AttributeIntelligenceGain"		"2.5"
+		"AttributeBaseAgility"		"13"
+		"AttributeAgilityGain"		"1"
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"doom_1"	
+		"Ability2"					"doom_2"
+		"Ability3"					"doom_3"
+		"Ability4"					"doom_4"
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"3"			// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"250"		// Damage range min.
+		"AttackDamageMax"			"300"		// Damage range max.
+		"AttackRate"				"1.5"		// Speed of attack.
+		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
+		"AttackRange"				"750"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_lion/lion_base_attack.vpcf" // Particle system model for projectile.
+		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"170"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"24"		// Experience earn.
+		"BountyGoldMin"				"21"		// Gold earned min.
+		"BountyGoldMax"				"29"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"				"270"		// Speed.			
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"450"		// Base health.
+		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusMana"				"1250"			// Base mana.
+		"StatusManaRegen"			"4"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		"Creature"
+		{
+			"AttachWearables"
+			{
+			    "Wearable1" { "ItemDef" "236" } 
+				"Wearable2" { "ItemDef" "233" } 
+				"Wearable3" { "ItemDef" "234" } 
+				"Wearable4" { "ItemDef" "235" } 
+				"Wearable5" { "ItemDef" "237" } 
+				"Wearable6" { "ItemDef" "238" } 
+				"Wearable8" { "ItemDef" "232" } 
+			}
+		}
+	}
+
+	"npc_war_of_kings_default_drow_ranger"	
+	{
+		"ConsideredHero"			"1"
+		"vscripts"					"AI/Towers/AI_doom.lua"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/heroes/drow/drow_base.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"1"
+
+		"AttributeBaseStrength"		"35"
+		"AttributeStrengthGain"		"2.6"
+		"AttributeBaseIntelligence"		"15"
+		"AttributeIntelligenceGain"		"2.5"
+		"AttributeBaseAgility"		"42"
+		"AttributeAgilityGain"		"2.8"
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					""	
+		"Ability2"					""
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"3"			// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"250"		// Damage range min.
+		"AttackDamageMax"			"300"		// Damage range max.
+		"AttackRate"				"1.5"		// Speed of attack.
+		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
+		"AttackRange"				"750"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/units/heroes/hero_lion/lion_base_attack.vpcf" // Particle system model for projectile.
+		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"170"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"24"		// Experience earn.
+		"BountyGoldMin"				"21"		// Gold earned min.
+		"BountyGoldMax"				"29"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementSpeed"				"270"		// Speed.			
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"450"		// Base health.
+		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusMana"				"1250"			// Base mana.
+		"StatusManaRegen"			"4"		// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1250"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1250"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		"Creature"
+		{
+			"AttachWearables"
+			{
+			    "Wearable1" { "ItemDef" "80" } 
+				"Wearable2" { "ItemDef" "79" } 
+				"Wearable3" { "ItemDef" "78" } 
+				"Wearable4" { "ItemDef" "77" } 
+				"Wearable5" { "ItemDef" "76" } 
+				"Wearable6" { "ItemDef" "75" } 
+				"Wearable7" { "ItemDef" "267" } 
 			}
 		}
 	}

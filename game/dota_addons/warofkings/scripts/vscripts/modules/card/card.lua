@@ -11,17 +11,10 @@ function card:OnPreLoad()
 	card:LoadDataAllCard()
 	BuildSystem:init()
 	CustomNetTables:SetTableValue("PlayerData", "GLOBAL_SETTING", {
-		-- NEED_CARD_UPGRADE = CARD_DATA.COUNT_CARD_BY_UPGRADE,
-		-- GOLD_COST_REFRESHING = CARD_DATA.GOLD_COST_REFRESHING_CARD,
-		-- MAX_CARD_PER_PLAYER = CARD_DATA.MAX_CARD,
 		ROUND_DIFFICUILT_DATA = ROUND_DIFFICUILT_DATA,
 		PickTime = -1,
 		RoundNumber = 0,
-		-- STATS_BONUS_PER_GRADE = CARD_DATA.DAMAGE_PER_LEVEL,
-		-- MAX_GRADE = CARD_DATA.MAX_GRADE,
-		-- CLASS_DATA = CLASS_DATA,
 		CUSTOM_SHOP_DATA = CUSTOM_SHOP_DATA,
-		-- CREEP_DATA = CREEP_DATA,
 		SHOP_DATA = {},
 		LeaderboardGlobal = {},
 	})
@@ -65,6 +58,7 @@ function card:LoadDataAllCard()
 
 					IntellectGain = (GetKeyValueByHeroName(unit, 'AttributeIntelligenceGain') or 0),
 					IntellectBase = (GetKeyValueByHeroName(unit, 'AttributeBaseIntelligence') or 0),
+
 			}
 			CustomNetTables:SetTableValue("CardInfoUnits", unit, card.AllCards[unit])
 		end
@@ -83,7 +77,6 @@ function card:PlayerDataLoad()
 	end)
 	request:RequestData('GET','player',function(obj)
 		request.IsServerConnection = true
-		-- PrintTable(obj.PlayerData)
 		for k,v in pairs(obj.PlayerData) do
 			local pID = k - 1
 			local __Player = GetPlayerCustom(pID)
@@ -97,7 +90,6 @@ function card:PlayerDataLoad()
 			__Player.ExpAndOst = __Player:GetXpAndOst()
 			__Player.tFriendLeaderboard = v.FriendList
 			__Player.iAmountGame = v.CountGame
-			-- print('count = ',v.CountGame)
 			__Player:SetQuests(quest:GenerationAllQuest(pID))
 			for keyData,data in pairs(v.Inventory or {}) do
 				if data.selected  then 
@@ -147,14 +139,13 @@ end
 function card:GetRandomCards(chances,IsDonate)
 	local dataAllDropCard = {}
 	local chanceDropped = chances or {
-		common = 45,
 		uncommon = 50,
 		rare = 25,
 		mythical = 35,
 		legendary = 25,
 	}
 	local max = 0
-	local maxchanceBy = 'common'
+	local maxchanceBy = 'uncommon'
 	for k,v in pairs(chanceDropped) do
 		if max < v then
 			max = v
@@ -172,20 +163,6 @@ function card:GetRandomCards(chances,IsDonate)
 		end
 		local tables = CARD_DATA.CARDS[typeCard]
 		local countIterate = 0;
-		-- for k,_ in pairs(tables) do
-		-- 	countIterate = countIterate + 1
-		-- 	if RollPercentage(100/table.length(tables)) then
-		-- 		table.insert(dataAllDropCard,k)
-		-- 		break
-		-- 	end
-		-- 	if table.length(tables) < countIterate + 1 then
-		-- 		for k1,_1 in pairs(tables) do
-		-- 				table.insert(dataAllDropCard,k1)
-		-- 				break
-		-- 		end
-		-- 		break
-		-- 	end
-		-- end
 		local tables2 = {}
 		for k,v in pairs(tables) do
 			table.insert(tables2,k)
@@ -200,7 +177,7 @@ function CDOTABaseAbility:GetSpecialValueFor_Custom(key,keyUpgrade,upgradeValueS
 	local bonus = 0
 	local upgradeValue = upgradeValueStr or 'value'
 	if keyUpgrade and caster:GetOwner() then
-		local isAssembly = caster:IsAssembly(keyUpgrade) --card:IsAssemblyCard(caster:GetUnitName(),keyUpgrade,caster:GetOwner():GetPlayerID())
+		local isAssembly = caster:IsAssembly(keyUpgrade)
 		local dataCard = card:GetDataCard(caster:GetUnitName())
 		bonus = isAssembly and 
 		dataCard and 

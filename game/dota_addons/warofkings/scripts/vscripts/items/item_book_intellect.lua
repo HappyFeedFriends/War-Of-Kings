@@ -1,7 +1,11 @@
 item_book_intellect = class({
 	OnSpellStart = function(self)
 		local target = self:GetCursorTarget() or self:GetCaster()
-		target:ModifyIntellect(self:GetSpecialValueFor('value'))
+		local value = self:GetSpecialValueFor('value')
+		target:ModifyIntellect(value)
+		if target.fIntellectBook then 
+			target.fIntellectBook = target.fIntellectBook + value
+		end
 		self:UpdateCharge()
 	end,
 })

@@ -15,15 +15,7 @@ function BuildSystem:init(bReload)
 		self.hBlockers = {}
 		self.cardBuildingInfo = {}
 		for cardName,data in pairs(card.AllCards) do
-			-- local unit = CreateUnitByName(cardName, Vector(11000, 11000, 0), false, nil, nil, DOTA_TEAM_NOTEAM)
-			-- unit:SetAngles(0, BUILDING_ANGLE, 0)
 			self.cardBuildingInfo[cardName] = {
-				-- entindex = unit:entindex(),
-				-- size = BUILDING_SIZE,
-				-- scale = unit:GetModelScale(),
-				-- grid_alpha = GRID_ALPHA,
-				-- model_alpha = MODEL_ALPHA,
-				-- recolor_ghost = RECOLOR_GHOST_MODEL,
 				attack_range = data.BaseStats.AttackRange,
 				abilityName = string.gsub(cardName,'npc_','item_card_')
 			}			
@@ -71,12 +63,26 @@ function BuildSystem:GetMaxGrade(pID)
 	return star
 end
 
-function BuildSystem:GetCountBuild(pID)
+function BuildSystem:GetCountBuild(pID,fn)
 	local value = 0
 	BuildSystem:EachBuilding(pID, function(building)
-		value = value + 1
+		if fn then 
+			value = value + (fn(building) and 1 or 0)
+		else
+			value = value + 1
+		end
 	end)
 	return value	
+end
+
+function BuildSystem:FindBuildByName(pID,name)
+	local data = {}
+	BuildSystem:EachBuilding(pID, function(building)
+		if building:GetUnitEntityName() == name then 
+			table.insert(data,building)
+		end
+	end)
+	return data
 end
 
 function BuildSystem:PlaceBuilding(hero, name, location, angle,cost)

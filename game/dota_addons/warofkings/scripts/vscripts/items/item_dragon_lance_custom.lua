@@ -2,15 +2,9 @@ item_dragon_lance_custom = class({
 	GetIntrinsicModifierName = function(self) return 'modifier_item_dragon_lance_custom' end,
 })
 LinkLuaModifier('modifier_item_dragon_lance_custom', 'items/item_dragon_lance_custom.lua', LUA_MODIFIER_MOTION_NONE)
-item_dragon_lance_2 = = class({
-	GetIntrinsicModifierName = function(self) return 'modifier_item_dragon_lance_custom' end,
-})
-item_dragon_lance_3 = = class({
-	GetIntrinsicModifierName = function(self) return 'modifier_item_dragon_lance_custom' end,
-})
-item_dragon_lance_godness = = class({
-	GetIntrinsicModifierName = function(self) return 'modifier_item_dragon_lance_custom' end,
-})
+item_dragon_lance_2 = item_dragon_lance_custom
+item_dragon_lance_3 = item_dragon_lance_custom
+item_dragon_lance_godness = item_dragon_lance_custom
 
 modifier_item_dragon_lance_custom = class({
 	IsHidden 				= function(self) return true end,

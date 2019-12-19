@@ -1,7 +1,11 @@
 item_book_agility = class({
 	OnSpellStart = function(self)
 		local target = self:GetCursorTarget() or self:GetCaster()
-		target:ModifyAgility(self:GetSpecialValueFor('value'))
+		local value = self:GetSpecialValueFor('value')
+		target:ModifyAgility(value)
+		if target.fAgilityBook then 
+			target.fAgilityBook = target.fAgilityBook + value
+		end
 		self:UpdateCharge()
 	end,
 })

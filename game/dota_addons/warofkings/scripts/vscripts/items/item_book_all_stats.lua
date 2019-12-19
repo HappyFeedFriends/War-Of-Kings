@@ -1,9 +1,21 @@
 item_book_all_stats = class({
 	OnSpellStart = function(self)
 		local target = self:GetCursorTarget() or self:GetCaster()
-		target:ModifyIntellect(self:GetSpecialValueFor('value'))
-		target:ModifyStrength(self:GetSpecialValueFor('value'))
-		target:ModifyAgility(self:GetSpecialValueFor('value'))
+		local value = self:GetSpecialValueFor('value')
+		target:ModifyIntellect(value)
+		target:ModifyStrength(value)
+		target:ModifyAgility(value)
+
+		if target.fIntellectBook then 
+			target.fIntellectBook = target.fIntellectBook + value
+		end
+		if target.fStrengthBook then 
+			target.fStrengthBook = target.fStrengthBook + value
+		end
+		if target.fAgilityBook then 
+			target.fAgilityBook = target.fAgilityBook + value
+		end
+
 		self:UpdateCharge()
 	end,
 })

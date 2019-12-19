@@ -26,6 +26,16 @@ var RoundBoard = $("#RoundBoard")
 
 var attributes = GetDotaHud().FindChildTraverse('stragiint')
 
+var rangeParticle2
+
+// let defaultPickArr = [
+// 	[1,2,3],
+// 	[7,5,6,4],
+// 	[8,9,-1,10,11],
+// 	[12,13,14,15],
+// 	[16,17,18],
+// ]
+
 var colors = {
 	common:'#7d7f7d',
 	uncommon:'#b1b3b1',
@@ -36,11 +46,17 @@ var colors = {
 }   
 var pickdiff = $('#PickDifficulty')
 var openNew = $('#PickUniqueBonus')
-// var openNew2 = $('#SelectedUniqueCards')
+var openNew2 = $('#SelectedUniqueCards')
 var toggle1 = $('#Toggle-1')
 var toggle2 = $('#Toggle-2')
 var goldButton = GetDotaHud().FindChildTraverse('ShopButton').FindChildTraverse('GoldLabel')
-//var toggle3 = $('#Toggle-3')
+var toggle3 = $('#Toggle-3')
+
+const CREEP_MAX = 6
+const HEROES_MAX = 4
+
+const heroesContainer = $('#HeroesContainer')
+const creepContainer =  $('#CreepContainer')
 
 function UpdateInfoPanel(){
 	var parent = $('#ContainerMenu')
@@ -56,6 +72,7 @@ function UpdateInfoPanel(){
 		var dataNettables = dataCard[k];
 		var unitName = dataNettables.key;
 		var dataUnit = dataNettables.value;
+		if (dataUnit.type == 'Starting_towers') continue
 		data[dataUnit.type].push({
 			unitName:unitName,
 			racial:dataUnit.racial,
@@ -200,11 +217,12 @@ function OnUpdateSelectionButton(){
 	}
 	$("#XpPlayerContainer").SetDialogVariable('player_level', ExpData.Level);
 	var Xpb = $("#XpBar");
-	Xpb.value = ExpData.Exp; 
+	Xpb.value = Number(ExpData.Exp); 
 	Xpb.max = ExpData.ExpMax;
 	Xpb.SetDialogVariable('xp_level', Xpb.value)
 	Xpb.SetDialogVariable('xp_max_level', Xpb.max)
 }
+
 
 function SelectionUnique(iUnique,panel){
 	return function(){
@@ -214,6 +232,12 @@ function SelectionUnique(iUnique,panel){
 		GameEvents.SendCustomGameEventToServer('OnSelectionUnique', {
 			iUnique:iUnique,
 		})
+		pickdiff.SetHasClass('hidden', true)
+		openNew.SetHasClass('Visible', false)
+		openNew2.SetHasClass('Visible', true)
+		toggle3.AddClass('IsOpen')
+		toggle2.RemoveClass('IsOpen')
+		toggle1.RemoveClass('IsOpen')
 	}
 }
 
@@ -424,6 +448,7 @@ function UpdateSetting(){
 	})
 }
 
+
 function OnUpdateCardSelection(data){
 	for (k in toggleList)
 		$('#' + toggleList[k]).RemoveClass('Visible')
@@ -561,12 +586,24 @@ function AutoUpdatePlayerData(){
 		if (name == 'modifier_attributes_custom_base_intellect')
 			dataAttributes.baseIntellect = Buffs.GetStackCount( unit, buff);
     }
-    attributes.SetHasClass('ShowStrAgiInt', dataAttributes.fStrength > -1)
+    attributes.style.visibility =  dataAttributes.fStrength > -1 ? 'visible' : 'collapse';
     if (dataAttributes.fStrength > -1){
-
-    	attributes.FindChildTraverse('StrengthLabel').text = dataAttributes.baseStrength
-    	attributes.FindChildTraverse('AgilityLabel').text = dataAttributes.baseAgility
-    	attributes.FindChildTraverse('IntelligenceLabel').text = dataAttributes.baseIntellect
+    	let unitName = Entities.GetUnitName(unit)
+    	let BaseStats = CustomNetTables.GetTableValue("CardInfoUnits", unitName) && CustomNetTables.GetTableValue("CardInfoUnits", unitName).BaseStats || {}
+    	let attack_range = Entities.GetAttackRange( unit )
+    	
+    	let IsAlt = GameUI.IsAltDown()
+    	attributes.FindChildTraverse('StrengthLabel').text = dataAttributes.baseStrength + (IsAlt ? " +" + BaseStats.StrengthGain.toFixed(1) : "")
+    	attributes.FindChildTraverse('AgilityLabel').text = dataAttributes.baseAgility + (IsAlt ? " +" + BaseStats.AgilityGain.toFixed(1) : "")
+    	attributes.FindChildTraverse('IntelligenceLabel').text = dataAttributes.baseIntellect + (IsAlt ? " +" + BaseStats.IntellectGain.toFixed(1) : "")
+    	if (IsAlt && !rangeParticle2){
+	    	rangeParticle2 = Particles.CreateParticle("particles/ui_mouseactions/range_display.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, -1);
+	        Particles.SetParticleControl(rangeParticle2, 1, [attack_range, attack_range, attack_range]);
+	        Particles.SetParticleControl(rangeParticle2, 0, Entities.GetAbsOrigin(unit))
+    	}else if (!IsAlt && rangeParticle2){
+    		Particles.DestroyParticleEffect(rangeParticle2, false);
+    		rangeParticle2 = null;
+    	}
 
  		var greenStrength = dataAttributes.fStrength - dataAttributes.baseStrength
  		var greenAgility = dataAttributes.fAgility - dataAttributes.baseAgility
@@ -615,8 +652,8 @@ function AutoUpdatePlayerData(){
 		panel.SetHasClass('Premium_3', data.IsDonator == 3)
 		var towerData = data.amountTower.split('/')
 		panel.FindChildTraverse('Avatar').SetHasClass('IsDisconnect',Game.GetPlayerInfo(pID).player_connection_state >= DOTAConnectionState_t.DOTA_CONNECTION_STATE_DISCONNECTED)
-		panel.SetDialogVariable('towerAmount', towerData[0])
-		panel.SetDialogVariable('towerMax', towerData[1])
+		// panel.SetDialogVariable('towerAmount', towerData[0])
+		// panel.SetDialogVariable('towerMax', towerData[1])
 		var panelWidth = panel.FindChildTraverse('ProgressBarDamageAllPlayer')
 		var pct = maxDamage == 0 
 		? 100
@@ -789,7 +826,7 @@ function OnPickDifficuilt(panel){
 		openNew.SetHasClass('Visible', !openNew.BHasClass('Visible'))
 		toggle1.SetHasClass('IsOpen', !pickdiff.BHasClass('hidden'))
 		toggle2.SetHasClass('IsOpen', openNew.BHasClass('Visible'))
-		//toggle3.SetHasClass('IsOpen', false)
+		toggle3.SetHasClass('IsOpen', false)
 	}
 }
  
@@ -1534,7 +1571,100 @@ function OnUpdateQueryUnit(){
 	}
 }
 
+
+function _UpdateCreepAndHeroes(){
+	heroesContainer.RemoveAndDeleteChildren()
+	creepContainer.RemoveAndDeleteChildren()
+	let nettables = CustomNetTables.GetTableValue('PlayerData', "player_" + GetPlayerID()).BuildingsCardsindexID
+	let amount = [0,0]
+	for (var i in nettables){
+		let proto = GetPrototypeUnitBuilding(i)
+		if (!proto) continue
+		let IsBuilding = IsCreepBuilding(i)
+		amount[IsBuilding ? 1 : 0]++
+		let panel = $.CreatePanel('Panel',(!IsBuilding ? heroesContainer : creepContainer),'')
+		panel.style.backgroundImage = `url("file://{images}/heroes/${proto}.png")`
+
+	}
+	heroesContainer.GetParent().SetDialogVariable('HeroesAmount', amount[0])
+	heroesContainer.GetParent().SetDialogVariable('HeroesAmountMax', HEROES_MAX)
+
+	creepContainer.GetParent().SetDialogVariable('CreepAmount', amount[1])
+	creepContainer.GetParent().SetDialogVariable('CreepAmountMax', CREEP_MAX)
+}
+
+function UpdateDefaultTowerPicker(){
+	let allDefault = []
+
+	var dataCard = CustomNetTables.GetAllTableValues('CardInfoUnits')
+	for (k in dataCard){
+		var dataNettables = dataCard[k];
+		var unitName = dataNettables.key;
+		var dataUnit = dataNettables.value;
+		if (dataUnit.type != 'Starting_towers') continue
+		allDefault.push({
+			UnitName: unitName,
+			lvlNeed:dataUnit.lvl || 0,
+			model:dataUnit.prototype_model,
+			abilities:dataUnit.BaseStats.Ability,
+		});
+	} 	
+	let Level = GetXpAndOst().Level
+	allDefault.sort(function(a,b){
+		return a.lvlNeed > b.lvlNeed ? 1 
+		: a.lvlNeed < b.lvlNeed ? -1 : 0
+	})
+	for (let i = 0; i < 18;++i){
+		let panel = $(`#hexagon_` + (i + 1))
+		panel.enabled = !!allDefault[i]
+
+		if (panel.enabled){
+			panel.SetHasClass('Locked',Level < allDefault[i].lvlNeed)
+			let childPanel = panel.GetChild(1) 
+			childPanel.style.backgroundImage = `url('file://{images}/war_of_kings/CardDefault/${allDefault[i].UnitName}.png')`
+			childPanel.style.backgroundSize = "100%";
+			panel.__data__ = allDefault[i]
+			panel.SetPanelEvent('onactivate', __PickingDefaultTower(panel))
+		}
+	}
+} 
+
+function __PickingDefaultTower(panel){
+	return function(){
+		let Level = GetXpAndOst().Level
+		let data = panel.__data__
+		let modelContainer = $("#ModelInfoContainer")
+		modelContainer.RemoveAndDeleteChildren()
+
+		modelContainer.BCreateChildren(`<DOTAScenePanel antialias="true" hittest="false" unit="${data.model}" particleonly="false" />`); 
+		$("#LockedAndInfo").SetHasClass('Visible', data.lvlNeed > Level)
+		$("#LockedAndInfo").GetChild(0).SetDialogVariable('lvl', data.lvlNeed)
+		
+		let container = $("#AbilityListByHero")
+		container.RemoveAndDeleteChildren()
+
+		_.each(data.abilities,function(ability){
+			let panelAbility = $.CreatePanel('DOTAAbilityImage',container,'')
+			panelAbility.abilityname = ability
+			panelAbility.enabled = !panel.BHasClass('Locked')
+			panelAbility.SetPanelEvent( "onmouseover", ShowAbilityTooltip(panelAbility));  
+			panelAbility.SetPanelEvent( "onmouseout",HideAbilityTooltip(panelAbility));
+			if (!panelAbility.enabled)
+				$.CreatePanel('Panel',panelAbility,'').AddClass('LockedIcon')
+		})
+
+		if (data.lvlNeed <= Level){
+			GameEvents.SendCustomGameEventToServer('OnSelectDefaultTower', {
+				TowerName:data.UnitName,
+			})
+		}
+
+	}
+}
+
 (function(){ 
+	UpdateDefaultTowerPicker()
+	_UpdateCreepAndHeroes();
 	UploadRanking();
 	I__OnLoadInventory__I();
 	OnUploadShop();
@@ -1561,33 +1691,34 @@ function OnUpdateQueryUnit(){
 	toggle1.SetPanelEvent('onactivate', function(){
 		pickdiff.SetHasClass('hidden', false)
 		openNew.SetHasClass('Visible', false)
-		// openNew2.SetHasClass('Visible', false)
+		openNew2.SetHasClass('Visible', false)
 		toggle1.AddClass('IsOpen')
 		toggle2.RemoveClass('IsOpen')
-		// toggle3.RemoveClass('IsOpen')
+		toggle3.RemoveClass('IsOpen')
 	})
 	toggle2.SetPanelEvent('onactivate', function(){
 		pickdiff.SetHasClass('hidden', true)
-		// openNew2.SetHasClass('Visible', false)
+		openNew2.SetHasClass('Visible', false)
 		openNew.SetHasClass('Visible', true)
 		toggle2.AddClass('IsOpen')
 		toggle1.RemoveClass('IsOpen')
-		//toggle3.RemoveClass('IsOpen')
+		toggle3.RemoveClass('IsOpen')
+	}) 
+	toggle3.SetPanelEvent('onactivate', function(){
+		pickdiff.SetHasClass('hidden', true)
+		openNew.SetHasClass('Visible', false)
+		openNew2.SetHasClass('Visible', true)
+		toggle3.AddClass('IsOpen')
+		toggle2.RemoveClass('IsOpen')
+		toggle1.RemoveClass('IsOpen')
 	})
-	// toggle3.SetPanelEvent('onactivate', function(){
-	// 	pickdiff.SetHasClass('hidden', true)
-	// 	openNew.SetHasClass('Visible', false)
-	// 	openNew2.SetHasClass('Visible', true)
-	// 	toggle3.AddClass('IsOpen')
-	// 	toggle2.RemoveClass('IsOpen')
-	// 	toggle1.RemoveClass('IsOpen')
-	// })
 	GameEvents.Subscribe("OnUpdateCards", function(data){
 		$('#GlobalBgDark').AddClass('Visible')
 		$('#PickedCardContainer').AddClass('Visible')
 		OnUpdateCardSelection(data.data);
 	});
 	GameEvents.Subscribe("OnCreateNewQuests", UpdateQuestion);
+	GameEvents.Subscribe("RemoveAndCreateBuilding", _UpdateCreepAndHeroes);
 	GameEvents.Subscribe("OnDiscard", function(){
 		var container = $('#MainContainerSelectCard')
 		container.RemoveAndDeleteChildren()

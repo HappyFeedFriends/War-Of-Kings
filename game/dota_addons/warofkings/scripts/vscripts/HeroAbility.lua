@@ -159,6 +159,12 @@ function modifier_obsidian_destroyer_arcane_orb_custom:OnAttackLanded(params)
 			count = self:GetAbility():GetSpecialValueFor_Custom("damage_bonus"), 
 			caster = self:GetCaster(),
 		})
+		if params.attacker:IsAssembly('devourer_upgrade_3') then 
+			local pct = params.attacker:GetSpecialValueForBuilding('devourer_upgrade_3','chance')
+			if RollPercentage(pct) then
+				params.attacker:ModifyIntellect(params.attacker:GetSpecialValueForBuilding('devourer_upgrade_3'))
+			end
+		end
 		DoCleaveAttack(self:GetParent(), params.target,self:GetAbility(), damage, 128.0, 128.0, self:GetAbility():GetSpecialValueFor_Custom("radius"), "particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf")
 	end
 end

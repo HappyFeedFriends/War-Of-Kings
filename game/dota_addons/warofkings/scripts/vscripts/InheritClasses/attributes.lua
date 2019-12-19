@@ -11,16 +11,7 @@ LinkLuaModifier("modifier_attributes_custom_base_intellect", 'InheritClasses/mod
 LinkLuaModifier("modifier_attributes_custom_primary_0", 'InheritClasses/modifier_attributes.lua', LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_attributes_custom_primary_1", 'InheritClasses/modifier_attributes.lua', LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_attributes_custom_primary_2", 'InheritClasses/modifier_attributes.lua', LUA_MODIFIER_MOTION_NONE)
---[[
-	0 - STR
-	1 - AGI
-	2 - INT
-]]
-local attributesKV = {
-	DOTA_ATTRIBUTE_STRENGTH = DOTA_ATTRIBUTE_STRENGTH,
-	DOTA_ATTRIBUTE_AGILITY = DOTA_ATTRIBUTE_AGILITY,
-	DOTA_ATTRIBUTE_INTELLECT = DOTA_ATTRIBUTE_INTELLECT,
-}
+
 ModuleRequire(...,'modifier_attributes')
 --[[
 	Taken from 
@@ -35,7 +26,7 @@ function attributes:Create(mBuilding)
 		return 
 	end
 
-	hUnit.iPrimaryAttribute = tData.AttributePrimary and attributesKV[tData.AttributePrimary] or DOTA_ATTRIBUTE_INVALID
+	hUnit.iPrimaryAttribute = tData.AttributePrimary and _G[tData.AttributePrimary] or DOTA_ATTRIBUTE_INVALID
 
 	if hUnit.iPrimaryAttribute == DOTA_ATTRIBUTE_INVALID then
 		print('[Attributes] PrimaryAttribute = null, unit name = ' .. hUnit:GetUnitName())
@@ -45,14 +36,20 @@ function attributes:Create(mBuilding)
 	hUnit.fBaseStrength = tData.AttributeBaseStrength or 0
 	hUnit.fStrength = self.fBaseStrength
 	hUnit.fStrengthGain = tData.AttributeStrengthGain or 0
+	hUnit.fStrengthBook = 0
+	hUnit.fStrength_bonus = 0
 
 	hUnit.fBaseAgility = tData.AttributeBaseAgility or 0
 	hUnit.fAgility = self.fBaseAgility
 	hUnit.fAgilityGain = tData.AttributeAgilityGain or 0
+	hUnit.fAgilityBook = 0
+	hUnit.fAgility_bonus = 0
 
 	hUnit.fBaseIntellect = tData.AttributeBaseIntelligence or 0
 	hUnit.fIntellect = self.fBaseIntellect
 	hUnit.fIntellectGain = tData.AttributeIntelligenceGain or 0
+	hUnit.fIntellectBook = 0
+	hUnit.fIntellect_bonus = 0
 
 	hUnit.hStrModifier = hUnit:AddNewModifier(hUnit, nil, "modifier_attributes_custom_strength", {duration=-1})
 	hUnit.hAgiModifier = hUnit:AddNewModifier(hUnit, nil, "modifier_attributes_custom_agility", {duration=-1})
@@ -148,9 +145,9 @@ function attributes:Create(mBuilding)
 		attribute.fStrength = attribute.fStrength + self.fBaseStrength
 		attribute.fAgility = attribute.fAgility + self.fBaseAgility
 		attribute.fIntellect = attribute.fIntellect + self.fBaseIntellect
-		self.fIntellect = attribute.fIntellect 
-		self.fAgility = attribute.fAgility
-		self.fStrength = attribute.fStrength
+		self.fIntellect = attribute.fIntellect  + self.fIntellectBook + self.fIntellect_bonus
+		self.fAgility = attribute.fAgility + self.fAgilityBook + self.fAgility_bonus
+		self.fStrength = attribute.fStrength + self.fStrengthBook + self.fStrength_bonus
 
 		self:_updateIntellect()
 		self:_updateAgility()

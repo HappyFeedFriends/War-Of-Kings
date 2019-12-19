@@ -13,6 +13,54 @@
 		"ItemPurchasable"			"0"
 	}
 
+	"item_card_war_of_kings_default_silencer"
+	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"items"
+		"AbilityBehavior"       	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityCooldown"       	"1"
+		"AbilityTextureName" 		"card_icon/item_card_war_of_kings_default_silencer"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"ItemCost"					"400"
+		"ItemPurchasable"			"0"
+	}
+
+	"item_card_war_of_kings_default_drow_ranger"
+	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"items"
+		"AbilityBehavior"       	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityCooldown"       	"1"
+		"AbilityTextureName" 		"card_icon/item_card_war_of_kings_default_drow_ranger"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"ItemCost"					"400"
+		"ItemPurchasable"			"0"
+	}
+
+	"item_card_war_of_kings_default_dragon_knight"
+	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"items"
+		"AbilityBehavior"       	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityCooldown"       	"1"
+		"AbilityTextureName" 		"card_icon/item_card_war_of_kings_default_dragon_knight"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"ItemCost"					"400"
+		"ItemPurchasable"			"0"
+	}
+
+	"item_card_war_of_kings_default_doom"
+	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"items"
+		"AbilityBehavior"       	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityCooldown"       	"1"
+		"AbilityTextureName" 		"card_icon/item_card_war_of_kings_default_doom"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"ItemCost"					"400"
+		"ItemPurchasable"			"0"
+	}
+
 	"item_card_war_of_kings_thunder_lizard"
 	{
 		"BaseClass"					"item_lua"
@@ -395,18 +443,6 @@
 		"AbilityTextureName" 		"card_icon/item_card_war_of_kings_centaur_warruner"
 		"Model" "models/props_gameplay/tpscroll01.vmdl"
 		"ItemCost"					"300"
-		"ItemPurchasable"			"0"
-	}
-	"item_card_war_of_kings_drow_ranged"
-	{
-		"BaseClass"					"item_lua"
-		"ScriptFile"				"items"
-		"AbilityBehavior"       	"DOTA_ABILITY_BEHAVIOR_POINT"
-		"AbilityCooldown"       	"1"
-		//"AbilityCastRange"			"400"
-		"AbilityTextureName" 		"card_icon/item_card_war_of_kings_drow_ranged"
-		"Model" "models/props_gameplay/tpscroll01.vmdl"
-		"ItemCost"					"200"
 		"ItemPurchasable"			"0"
 	}
 	"item_card_war_of_kings_templar_assasin"
