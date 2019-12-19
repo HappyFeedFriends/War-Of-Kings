@@ -969,7 +969,7 @@ function CDOTA_BaseNPC:CreateParticleRage()
 end
 -- local util
 function CreateTxt(path,text)
-	local file = io.open(path or "D:/Steam/SteamApps/common/dota 2 beta/game/dota_addons/warofkings/scripts/vscripts/util/test.txt",'r+')
+	local file = io.open(path,'r+')
 	local dataLocalization = {}
 	local tag = 'Dota_tooltip_ability_'
 	local tokens = LoadKeyValues('resource/addon_english.txt')['Tokens']
@@ -1006,7 +1006,7 @@ function CreateTxt(path,text)
 end
 -- local util
 function CreateTxt_NoteItems(path,text)
-	local file = io.open("D:/Steam/SteamApps/common/dota 2 beta/game/dota_addons/warofkings/scripts/vscripts/util/test.txt",'r+')
+	local file = io.open(path,'r+')
 	local _tag = 'Dota_tooltip_ability_'
 	local _tokens = LoadKeyValues('resource/addon_english.txt')['Tokens']
 	local tokens = {}
@@ -1042,9 +1042,9 @@ function CreateTxt_NoteItems(path,text)
 
 end
 -- Create kv file + lua file + (ability and lua ability files). Warning: Not Finish
-function CreateCardByName(sCardName,AI,tAttributes)
+function CreateCardByName(path,sCardName,AI,tAttributes)
 	sCardNameKV = 'item_card_war_of_kings_' .. sCardName
-	local file = io.open("D:/Steam/SteamApps/common/dota 2 beta/game/dota_addons/warofkings/scripts/vscripts/util/test.txt",'r+')
+	local file = io.open(path,'r+')
 
 
 	-- kv file
