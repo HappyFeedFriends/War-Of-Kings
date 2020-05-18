@@ -1085,31 +1085,5 @@ function Player:GetDamageBuildings(iRound)
 end
 
 function Player:GetRandomGodnessSpecial()
-	local dataCountBuilds = {}
-	local units = ROUND_DATA.ROUNDS.Special[2]
-	BuildSystem:EachBuilding(self.iPlayerID,function(building)
-		dataCountBuilds[building:GetClass()] = (dataCountBuilds[building:GetClass()] or 0 ) + 1
-	end)
-	local chanceDrop = {}
-	local MaxCount = 0
-	for class,count in pairs(dataCountBuilds) do
-		MaxCount = math.max(MaxCount,count)
-	end
-	for class,count in pairs(dataCountBuilds) do
-		chanceDrop[class] = 100*(count/MaxCount)
-	end
-	for class,chance in pairs(chanceDrop) do
-		if RollPercentage(chance) then
-			return units[class]
-		end
-	end
-	local maxChance = 0
-	local classMaxChance = 0
-	for class,chance in pairs(chanceDrop) do
-		if maxChance < chance then
-			maxChance = chance
-			classMaxChance = class
-		end
-	end
-	return units[classMaxChance] or 'npc_war_of_Kings_special_boss_warrior'
+	return 'npc_war_of_Kings_special_boss_warrior'
 end

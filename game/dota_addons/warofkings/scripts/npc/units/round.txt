@@ -3833,10 +3833,10 @@
 	{
 		// General
 		//----------------------------------------------------------------
-		"Model"						"models/items/courier/starladder_grillhound/starladder_grillhound.vmdl"	// Model.
+		"Model"						"models/items/lone_druid/true_form/tarzan_and_kingkong_trueform/tarzan_and_kingkong_trueform.vmdl"	// Model.
 		"BaseClass"					"npc_dota_creature"
 		"Level"						"1"
-		"ModelScale"				"4"
+		"ModelScale"				"2.5"
 		// Armor
 		//----------------------------------------------------------------
 		"ArmorPhysical"				"160"			// Physical protection.

@@ -746,6 +746,21 @@ CARD_DATA = {
 			npc_war_of_kings_default_drow_ranger = {
 				class = 'archer',
 				lvl = 40,
+				Assemblies = {
+					['drow_ranger_1'] = {
+						assembliesNeed = 'npc_war_of_kings_phantom_assasin',
+						data = {
+							value = 1,
+						},
+					},
+					['drow_ranger_2'] = {
+						AssemblyAbility = 'drow_ranger_4',
+						assembliesNeed = 'npc_war_of_kings_bear',
+						data = {
+							value = 700,
+						},
+					},
+				},
 			},	
 
 		},

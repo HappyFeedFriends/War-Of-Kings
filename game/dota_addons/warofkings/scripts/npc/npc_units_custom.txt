@@ -5170,7 +5170,7 @@
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"750"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/units/heroes/hero_lion/lion_base_attack.vpcf" // Particle system model for projectile.
+		"ProjectileModel"			"particles/units/heroes/hero_silencer/silencer_base_attack.vpcf" // Particle system model for projectile.
 		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
 
 		// Bounds
@@ -5313,7 +5313,6 @@
 	"npc_war_of_kings_default_drow_ranger"	
 	{
 		"ConsideredHero"			"1"
-		"vscripts"					"AI/Towers/AI_doom.lua"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
 		// General
 		//----------------------------------------------------------------
@@ -5330,8 +5329,10 @@
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	
-		"Ability2"					""
+		"Ability1"					"drow_ranger_1"	
+		"Ability2"					"drow_ranger_2"
+		"Ability3"					"drow_ranger_3"
+		"Ability4"					"drow_ranger_4"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -5346,7 +5347,7 @@
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
 		"AttackRange"				"750"		// Range within a target can be attacked.
-		"ProjectileModel"			"particles/units/heroes/hero_lion/lion_base_attack.vpcf" // Particle system model for projectile.
+		"ProjectileModel"			"particles/econ/items/drow/drow_ti9_immortal/drow_ti9_base_attack.vpcf" // Particle system model for projectile.
 		"ProjectileSpeed"			"2000"		// Speed of projectile.		     
 
 		// Bounds

@@ -196,6 +196,10 @@ function Building:AddExperience(amount)
 	end
 end
 
+function Building:IsMaxGrade()
+	return self.iGrade == CARD_DATA.MAX_GRADE[self:GetRariry()]
+end
+
 function Building:IsGodness(class)
 	if not class then 
 		return self:GetRariry() == 'Godness'
@@ -241,7 +245,7 @@ end
 
 -- add star 
 function Building:UpgradeBuilding(iBonus)
-	if self.iGrade == CARD_DATA.MAX_GRADE[self:GetRariry()] then return end
+	if self:IsMaxGrade() then return end
 	self.iGrade = math.min(self.iGrade + (iBonus or 1),CARD_DATA.MAX_GRADE[self:GetRariry()])
 	local iPlayerID = self.hOwner:GetPlayerOwnerID()
 	local __Player = GetPlayerCustom(iPlayerID)
@@ -250,8 +254,10 @@ function Building:UpgradeBuilding(iBonus)
 	nettables.BuildingsCardsindexID[tostring(self.hUnit:GetEntityIndex())].Grade = self.iGrade
 	CustomNetTables:SetTableValue("PlayerData", "player_" .. iPlayerID, nettables)
 	local unit = self.hUnit
-	unit:SetBaseDamageMax(unit:GetBaseDamageMax() + (self.MaxDamage * 0.25))
-	unit:SetBaseDamageMin(unit:GetBaseDamageMin() + (self.MinDamage * 0.25))
+	if not self:IsCreep() then 
+		unit:SetBaseDamageMax(unit:GetBaseDamageMax() + (self.MaxDamage * 0.25))
+		unit:SetBaseDamageMin(unit:GetBaseDamageMin() + (self.MinDamage * 0.25))
+	end
 	local particle = ParticleManager:CreateParticle('particles/econ/events/ti7/hero_levelup_ti7_godray.vpcf', PATTACH_ABSORIGIN_FOLLOW, unit)
 	ParticleManager:SetParticleControl(particle, 0, unit:GetAbsOrigin())
 	ParticleManager:ReleaseParticleIndex(particle)
@@ -262,7 +268,7 @@ function Building:UpgradeBuilding(iBonus)
 			ability:SetLevel(self.iGrade)
 		end
 	end
-	if self.iGrade == CARD_DATA.MAX_GRADE[self:GetRariry()] then
+	if self:IsMaxGrade() then
 		self.particleMaxGrade = ParticleManager:CreateParticle('particles/econ/events/fall_major_2016/teleport_end_fm06_glow.vpcf', PATTACH_ABSORIGIN_FOLLOW, unit)
 		ParticleManager:SetParticleControl(self.particleMaxGrade, 0, unit:GetAbsOrigin())
 	end

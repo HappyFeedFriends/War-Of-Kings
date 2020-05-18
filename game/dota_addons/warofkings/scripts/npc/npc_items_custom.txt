@@ -2,6 +2,21 @@
 "DOTAAbilities"
 {
 
+	"item_hero_essence"
+	{
+		"BaseClass"					"item_lua"
+		"ScriptFile"				"items/item_hero_essence"
+		"AbilityBehavior"       	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+		"AbilityCooldown"       	"1"
+		"AbilityTextureName" 		"items/item_hero_essence"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"ItemSellable"				"0"
+		"ItemPurchasable"			"0"
+	}
+
 	"item_essence_scepter_custom"
 	{
 		"BaseClass"						"item_lua"

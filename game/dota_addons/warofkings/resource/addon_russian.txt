@@ -10,7 +10,7 @@
 		"UI_mutant_spawn"							"Появляются только перед волной с боссом/Мини - Боссом и после"
 		"UI_champion_bonus_damage"					"Дополнительный урон по вашим башням +{s:champion_bonus_damage}"
 		"UI_champion_unique"						"Любой крип может превратиться в Champion, кроме Mini - Boss и Boss"
-		"UI_champion_unique_2"						"При появлении получает щит поглощающий до {s:shield}% от максимального здоровья"
+		"UI_champion_unique_2"						"При появлении получает щит поглощающий до {s:shield}% от максимального здоровья" 
 		"UI_health_bonus_creep"						"Здоровье увеличивается на {s:health}%"
 		"UI_bonus_movespeed_creep"					"Скорость передвижения +{s:movespeed_bonus}%"
 		"UI_bonus_crystal_and_gold"					"+{s:crystal_drop} кристаллов за убийство и +{s:gold_drop}% золота"
@@ -185,6 +185,9 @@
 		"silencer_4"					"При убийстве крипа башня навсегда получает {value} интеллекта"
 		"silencer_5"					"+{value} к базовому урону от {ability}"
 
+		"drow_ranger_1"					"MARKSMANSHIP PHYSICAL и MARKSMANSHIP MAGICAL можно использовать вместе"
+		"drow_ranger_2"					"+{value} к урону от срабатывания {ability}"
+
 		"necrophos_upgrade_1"			"Если у Necrophos полное здоровье, то он будет восстанавливать до {value} целей возле себя, в размере {heal}% от базового значения способности"
 		"necrophos_upgrade_2"			"Увеличивает наносимый урон от {ability} на {value}%"
 
@@ -350,7 +353,32 @@
 		"Dota_tooltip_ability_silencer_1_description"							"Каждая атака поглощает интеллект жертвы на небольшое время, а также наносит дополнительный урон зависящий от интеллекта"
 		"Dota_tooltip_ability_silencer_1_int_mult"								"%ИНТЕЛЛЕКТ В УРОН:"
 		"Dota_tooltip_ability_silencer_1_int_steal"								"ПОГЛОЩАЕМЫЙ ИНТЕЛЛЕКТ:"
-		"Dota_tooltip_ability_silencer_1_duration"								"ДЛИТЕЛЬНОСТЬ ЭФФЕКТА:"           
+		"Dota_tooltip_ability_silencer_1_duration"								"ДЛИТЕЛЬНОСТЬ ЭФФЕКТА:"   
+
+		"Dota_tooltip_ability_drow_ranger_1"									"ICE ARROW"
+		"Dota_tooltip_ability_drow_ranger_1_description"						"Атаки башни наносят дополнительный урон, а также замедляют цель атаки"  
+		"Dota_tooltip_ability_drow_ranger_1_movespeed" 							"%ЗАМЕДЛЕНИЕ:" 
+		"Dota_tooltip_ability_drow_ranger_1_damage" 							"УРОН:" 
+
+		"Dota_tooltip_ability_drow_ranger_2"									"TRUESHOT AURA" 
+		"Dota_tooltip_ability_drow_ranger_2_description"						"Увеличивает скорость атаки и урон ближайших башен в радиусе %radius%. Действует на 30%   эффективней на владельце способности"  
+		"Dota_tooltip_ability_drow_ranger_2_atk_speed"							"БОНУС СКОРОСТИ АТАКИ:" 
+		"Dota_tooltip_ability_drow_ranger_2_damage"								"БОНУСНЫЙ УРОН:"
+
+		"Dota_tooltip_ability_drow_ranger_3"									"MARKSMANSHIP PHYSICAL"
+		"Dota_tooltip_ability_drow_ranger_3_description"						"С шансом %chance%%%  владелец способности может нанести дополнительный урон по цели атаки, а также получить временный бонус к урону и скорости атаки\n Нельзя использовать вместе со способностью <font color='#A32222'>MARKSMANSHIP MAGICAL</font>"
+		"Dota_tooltip_ability_drow_ranger_3_chance_bonus_dmg"					"УРОН ПРИ СРАБАТЫВАНИИ:"
+		"Dota_tooltip_ability_drow_ranger_3_bonus_atk"							"ДОП. УРОН ПРИ СРАБАТЫВАНИИ:"
+		"Dota_tooltip_ability_drow_ranger_3_bonus_atk_speed"					"ДОП. СКОРОСТЬ АТАКИ ПРИ СРАБАТЫВАНИИ:"
+		"Dota_tooltip_ability_drow_ranger_3_duration"							"ДЛИТЕЛЬНОСТЬ ЭФФЕКТА:"
+
+		"Dota_tooltip_modifier_drow_ranger_3_buff_dur"							"MARKSMANSHIP PHYSICAL"
+		"Dota_tooltip_modifier_drow_ranger_3_buff_dur_description"				"Урон и скорость атаки увеличены"
+
+		"Dota_tooltip_ability_drow_ranger_4"									"MARKSMANSHIP MAGICAL"
+		"Dota_tooltip_ability_drow_ranger_4_description"						"С шансом %chance%%%  владелец способности может нанести дополнительный урон по цели атаки расчитываемый по формуле <font color='skyblue'> [ БАЗОВЫЙ УРОН ] + [ %ЗАМЕДЛЕНИЯ ОТ СПОСОБНОСТИ ICE ARROW ] </font>, а также оглушая цель. \n Нельзя использовать вместе со способностью <font color='#A32222'>MARKSMANSHIP PHYSCAL</font>"
+		"Dota_tooltip_ability_drow_ranger_4_chance_bonus_dmg"					"ДОП. УРОН ПРИ СРАБАТЫВАНИИ:"
+		"Dota_tooltip_ability_drow_ranger_4_duration"							"ДЛИТЕЛЬНОСТЬ ОГЛУШЕНИЯ:"
 
 		"Dota_tooltip_ability_silencer_2"										"ARCANE CURSED"
 		"Dota_tooltip_ability_silencer_2_description"							"Весь исходящий физический урон наносится в виде магического, но каждое нанесении физического урона потребляет ману"

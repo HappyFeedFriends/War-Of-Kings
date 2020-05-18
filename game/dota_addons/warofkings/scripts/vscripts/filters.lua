@@ -116,6 +116,16 @@ function GameMode:ExecuteOrderFilter(filterTable)
 			DisplayError(playerId,'#dota_hud_error_item_not_available')
 			return false
 		end
+
+		if BuildSystem:IsBuilding(target) then 
+			local building = target:GetBuilding()
+
+			if building:IsCreep() then 
+				DisplayError(playerId,'#dota_hud_error_building_creep_item')
+				return false
+			end
+		end
+
 		local item = target:AddItemByName(abilityname)
 		local cooldown = ability:GetCooldownTimeRemaining()
 		item:StartCooldown(cooldown)

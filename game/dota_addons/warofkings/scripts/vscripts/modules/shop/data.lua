@@ -1,22 +1,7 @@
 CUSTOM_SHOP_DATA = {
 	GodnessHeroes = {
-		item_card_war_of_Kings_special_boss_archer_building = {
-			crystalCost = 800,
-		},
-		item_card_war_of_Kings_special_boss_shaman_building = {
-			crystalCost = 800,
-		},
-		item_card_war_of_Kings_special_boss_rogue_building = {
-			crystalCost = 800,
-		},
-		item_card_war_of_Kings_special_boss_guardian_building = {
-			crystalCost = 800,
-		},
-		item_card_war_of_Kings_special_boss_warrior_building = {
-			crystalCost = 800,
-		},
-		item_card_war_of_Kings_special_boss_mage_building = {
-			crystalCost = 800,
+		item_hero_essence = {
+			crystalCost = 1000,
 		},
 	}
 }

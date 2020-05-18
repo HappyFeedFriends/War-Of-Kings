@@ -1,0 +1,21 @@
+#Contents
+{
+	background-color: black;
+	flow-children: down;
+	padding: 0px;
+	border: 0px;
+}
+
+#AttackDefenseContainer{
+	height: 140px;
+}
+
+#AttributesContainer{
+	height: 300px;
+}
+.NegativeValue{
+	color: red;
+}
+.NoBonus{
+	visibility: collapse;
+}

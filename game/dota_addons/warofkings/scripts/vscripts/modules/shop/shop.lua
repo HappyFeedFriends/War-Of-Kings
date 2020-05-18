@@ -43,7 +43,7 @@ function CustomShop:ItemRecipe(itemName)
 		items = {},
 		itemUsed = {},
 	}
-	for k,v in pairs(itemKv[recipeItem].ItemRequirements) do
+	for k,v in pairs(itemKv[recipeItem].ItemRequirements or {}) do
 		data.items = {}
 		local items = string.split(v,';')
 		for _k,_v in pairs(items) do
@@ -158,31 +158,16 @@ function CustomShop:OnBuyItem(data)
 			end
 			local IsItemUniqueClass = hero == ent
 			if not IsItemUniqueClass and ent.GetBuilding then 
-				IsItemUniqueClass = CustomShop:IsAccesitemByUnit(data.PlayerID,data.itemName,ent)
-				-- local IsGodnessItem  = false
-				-- for k,v in pairs(SHOP_ITEMS['UniqueItems']) do
-				-- 	for _,_v in pairs(v) do
-				-- 		if _v:lower() == data.itemName:lower() then 
-				-- 			IsGodnessItem = true
-				-- 			break
-				-- 		end
-				-- 	end		
-				-- 	if IsGodnessItem then break end
-				-- end
-				-- if IsGodnessItem then 
-				-- 	local __k = 'tag_' .. ent:GetBuilding():GetClass()
-				-- 	for k,v in pairs(SHOP_ITEMS['UniqueItems'][__k] or {}) do
-				-- 		if v:lower() == data.itemName:lower() then 
-				-- 			IsItemUniqueClass = true
-				-- 			break
-				-- 		end				
-				-- 	end
-				-- else
-				-- 	IsItemUniqueClass = not IsGodnessItem
-				-- end		
+				IsItemUniqueClass = CustomShop:IsAccesitemByUnit(data.PlayerID,data.itemName,ent)	
 				if not IsItemUniqueClass then 
 					DisplayError(data.PlayerID, "#dota_hud_error_item_not_available")
 					return 
+				end
+			end
+			if BuildSystem:IsBuilding(ent) then
+				if ent:GetBuilding():IsCreep() then 
+					DisplayError(data.PlayerID,'#dota_hud_error_building_creep_item')
+					return false
 				end
 			end
 			itemsHasInventory[data.itemName] = nil
@@ -288,6 +273,4 @@ function CustomShop:SellItem(playerId, unit, item)
 	end
 	GetPlayerCustom(playerId):ModifyGold(cost)
 end
-
--- PrintTable(CustomShop)
 

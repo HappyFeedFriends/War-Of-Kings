@@ -2284,4 +2284,163 @@
 			}		
 		}
 	}
+
+	"drow_ranger_1"
+	{
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityTextureName"			"drow_ranger_frost_arrows"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilityHero/drow_ranger/drow_ranger_1.lua"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"20"
+		"MaxLevel"						"7"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"movespeed"				"-14 -16 -19 -28 -35 -42 -50"
+			}	
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"duration"				"2"
+			}	
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"damage"			"60 70 80 90 100 140 170"
+			}		
+		}
+	}
+
+	"drow_ranger_2"
+	{
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"drow_ranger_trueshot"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilityHero/drow_ranger/drow_ranger_2.lua"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"						"7"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"atk_speed"				"40 70 80 90 100 120 150"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"				"1400"
+			}		
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"damage"			"25 50 75 150 200 240 290"
+			}		
+		}
+	}
+
+	"drow_ranger_3"
+	{
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_ATTACK | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"AbilityTextureName"			"drow_ranger_marksmanship"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilityHero/drow_ranger/drow_ranger_3.lua"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"						"7"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"chance_bonus_dmg"			"140 180 250 300 350 450 800"
+			}	
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"bonus_atk"					"140 180 250 300 350 450 600"
+			}	
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"bonus_atk_speed"			"160"
+			}	
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"duration"			"2"
+			}
+			"05"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"chance"					"20"
+			}		
+		}
+	}
+
+	"drow_ranger_4"
+	{
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_ATTACK | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"AbilityTextureName"			"drow_ranger_4"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilityHero/drow_ranger/drow_ranger_4.lua"
+		"AbilityManaCost"				"80"
+		"AbilityCooldown"				"1.3"
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"						"7"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"chance_bonus_dmg"			"200 240 300 400 450 550 900"
+			}		
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"0.15"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"chance"					"15"
+			}		
+		}
+	}
 }

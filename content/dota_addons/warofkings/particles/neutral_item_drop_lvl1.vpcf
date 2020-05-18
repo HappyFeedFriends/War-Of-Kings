@@ -1,0 +1,90 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf25:version{7bca2d8d-3a14-4a76-bd41-f483fdf78d50} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_nBehaviorVersion = 10
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/neutral_fx/neutral_item_drop_ground_glow.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/neutral_fx/neutral_item_drop_ring.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/neutral_fx/neutral_item_drop_glow.vpcf"
+			m_flDelay = 0.25
+		},
+		{
+			m_ChildRef = resource:"particles/neutral_fx/neutral_item_drop_flash.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/neutral_fx/neutral_item_drop_beam_lvl2.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/neutral_fx/neutral_item_drop_magic.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/neutral_fx/neutral_item_drop_spiral_pnt.vpcf"
+		},
+	]
+	m_nMaxParticles = 0
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 0.0, 0.0, 0.0 ]
+					m_angOffset = [ 0.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 60
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 183.0, 246.0, 48.0 ]
+					m_angOffset = [ 0.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 61
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 1.0, 0.0, 0.0 ]
+					m_angOffset = [ 0.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 62
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 0.130808, -0.195122, -0.035294 ]
+					m_angOffset = [ 0.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+			]
+			m_previewState = 
+			{
+				m_hitboxSetName = "default"
+			}
+		},
+	]
+	m_PreEmissionOperators = 
+	[
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_nCP1 = 60
+			m_vecCP1Pos = [ 0.0, 200.0, 255.0 ]
+			m_bUseWorldLocation = true
+		},
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_nCP1 = 61
+			m_vecCP1Pos = [ 1.0, 0.0, 0.0 ]
+			m_bUseWorldLocation = true
+		},
+		{
+			_class = "C_OP_HSVShiftToCP"
+			m_DefaultHSVColor = [ 255, 136, 0, 255 ]
+		},
+	]
+}

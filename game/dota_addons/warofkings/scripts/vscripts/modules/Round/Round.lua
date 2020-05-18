@@ -122,11 +122,11 @@ function round:GetPathCornerUnit(unit,isGodness,isBossEnd)
 			unit.PathCorner = start
 			return unit.PathCorner
 		end
-		if isGodness and not unit.AllStop and tonumber(str) == 1 and unit.Corner1 and (not unit.Corner2 or unit.Corner2 < 2 ) then
+		if isGodness and not unit.AllStop and tonumber(str) == 1 and unit.Corner1 and (not unit.Corner2 or unit.Corner2 < 1 ) then
 			unit.Corner2 = (unit.Corner2 or 0) + 1
 			number = 'start'
 		end
-		if isGodness and not unit.AllStop and tonumber(str) == 2 and (not unit.Corner1 or unit.Corner1 < 2 ) then
+		if isGodness and not unit.AllStop and tonumber(str) == 2 and (not unit.Corner1 or unit.Corner1 < 1 ) then
 			unit.Corner1 = (unit.Corner1 or 0) + 1
 			number = 1
 		end
@@ -368,7 +368,6 @@ function OnThinkMiniBoss(unit)
 		if unit.PathCorner == 'path_corner_' ..unit.playerRound .. '_4'  then 
 			unit.IsSkip = true
 			unit:ForceKill(false)
-			local __Player = GetPlayerCustom(unit.playerRound)
 			return nil
 		end
 		unit:MoveToPosition(Entities:FindByName(nil, unit.PathCorner):GetOrigin())

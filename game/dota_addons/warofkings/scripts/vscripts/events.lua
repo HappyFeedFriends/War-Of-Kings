@@ -207,8 +207,7 @@ local damagebits = keys.damagebits
 			end)
 		end
 		if killedUnit.bIsGodness then
-			local item = string.gsub(unitName,'npc_','item_card_') .. "_building"
-			hero:AddItemByName(item)
+			hero:AddItemByName('item_hero_essence')
 			if __Player:EqualTargetGodness(QUEST_FOR_BATTLE_KILL_GODNESS_BY_NAME,unitName) then 
 				__Player:UpdateQuest(QUEST_FOR_BATTLE_KILL_GODNESS_BY_NAME,1)
 			end
