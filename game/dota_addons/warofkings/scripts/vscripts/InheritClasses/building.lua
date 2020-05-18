@@ -163,6 +163,10 @@ function Building:IsCreepByName(name)
 	return rarity == 'uncommon'
 end
 
+function Building:IsStartingTower()
+	return CARD_DATA.CARDS.Starting_towers[self:GetUnitEntityName()]
+end
+
 function Building:IsHero()
 	return not self:IsCreep()
 end
@@ -302,9 +306,6 @@ function Building:Replace(sName)
 	hUnit:SetControllableByPlayer(iPlayerID, false)
 	hUnit:SetAngles(0, fAngle, 0)
 	hUnit:SetHasInventory(true)
-	--[[hUnit.IsBuilding = function(self)
-		return self:IsCreature()
-	end]]
 	self.bIsCreep = self:GetRariry() == 'uncommon'
 	local particle = ParticleManager:CreateParticle('particles/econ/events/ti9/shovel/shovel_baby_roshan_spawn_burst.vpcf', PATTACH_ABSORIGIN_FOLLOW, hUnit)
 	ParticleManager:SetParticleControl(particle, 0, hUnit:GetAbsOrigin())

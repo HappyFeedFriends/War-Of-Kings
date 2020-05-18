@@ -22,8 +22,9 @@ function item_card_base_class:CastFilterResultLocation(vLocation)
 			return UF_FAIL_CUSTOM
 		end
 		local creepName = string.gsub(self:GetAbilityName(), 'item_card_', 'npc_')
-		local creepCount = BuildSystem:GetCountBuild(pID,Building.IsCreep)
-		local heroCount = BuildSystem:GetCountBuild(pID,Building.IsHero)
+		local creepCount = BuildSystem:GetCountBuild(pID,function(build) return build:IsCreep() end)
+		local heroCount = BuildSystem:GetCountBuild(pID,function(build) return build:IsHero() and not build:IsStartingTower() end)
+
 		local IsCreep = Building:IsCreepByName(creepName)
 		local myCreep = BuildSystem:FindBuildByName(pID,creepName)
 		for k,v in pairs(myCreep) do
