@@ -55,14 +55,6 @@ function BuildSystem:IsBuilding(unit)
 	return IsValid(unit) and unit.GetBuilding ~= nil
 end
 
-function BuildSystem:GetMaxGrade(pID)
-	local star = 0
-	BuildSystem:EachBuilding(pID, function(building)
-		star = math.max(building:GetGrade(),star)
-	end)
-	return star
-end
-
 function BuildSystem:GetCountBuild(pID,fn)
 	local value = 0
 	BuildSystem:EachBuilding(pID, function(building)
@@ -91,9 +83,6 @@ function BuildSystem:PlaceBuilding(hero, name, location, angle,cost)
 	local IsUpgrade = false
 	local countBuilds = 0
 	local countBonus = 0
-	if name == 'npc_war_of_Kings_special_boss_shaman_building' then
-		countBonus = countBonus + 1
-	end
 	BuildSystem:EachBuilding(playerID, function(building)
 		if building:GetUnitEntityName() == name and CARD_DATA.MAX_GRADE[building:GetRariry()]  and building.iGrade < CARD_DATA.MAX_GRADE[building:GetRariry()] then
 			building:UpgradeBuilding()
@@ -204,7 +193,8 @@ function BuildSystem:ReplaceBuilding( building, sName )
 	return hUnit
 end
 
-function BuildSystem:ValidPosition(size, location)
+function BuildSystem:ValidPosition(location,size)
+	size = (size or BUILDING_SIZE)
 	local halfSide = ((size-1)/2)*64
 	local leftBorderX = location.x-halfSide
 	local rightBorderX = location.x+halfSide
@@ -223,7 +213,8 @@ function BuildSystem:ValidPosition(size, location)
 	return true
 end
 
-function BuildSystem:GridNavSquare(size, location)
+function BuildSystem:GridNavSquare(location,size)
+	size = size or BUILDING_SIZE
 	SnapToGrid(size, location)
 
 	local halfSide = (size/2)*64
@@ -277,27 +268,6 @@ function BuildSystem:EachBuilding(iPlayerID, func)
 	end 
 end
 
-function BuildSystem:OnUpgradeBuilding( eventSourceIndex, events )
-	local playerID = events.PlayerID
-	local building = EntIndexToHScript(events.buildingEntIndex)
-	if building then
-		--self:UpgradeBuilding(building)
-	end
-end
-
-function BuildSystem:OnPlayerReconnected(events)
-	local iPlayerID = events.PlayerID
-
-	--[[self:EachBuilding(iPlayerID, function(hBuilding)
-		FireGameEvent("custom_update_player_building", {
-			iPlayerID = iPlayerID,
-			iUnitEntIndex = hBuilding:GetUnitEntityIndex(),
-			bIsHero = 0,
-			bIsRemove = 0,
-		})
-	end)]]
-end
-
 
 function Vector2D(vector)
 	return {x=vector.x,y=vector.y}
@@ -312,6 +282,7 @@ function Polygon2D(polygon)
 end
 
 function SnapToGrid( size, location )
+	size = size or BUILDING_SIZE
 	if size % 2 ~= 0 then
 		location.x = SnapToGrid32(location.x)
 		location.y = SnapToGrid32(location.y)
